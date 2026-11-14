@@ -1,5 +1,85 @@
+# 任务清单：tenny.py 的唯一事实来源。
+# script 为 bash 启动器（Windows 经 wsl.exe 调用）；args 中 {name} 取自 params。
+
 [[task]]
-id = "throughput"
+id = "web"
+name = "训练控制台"
+group = "训练"
+needs = "wsl"
+script = "experiments/torque200/web-preview-wsl.sh"
+args = ["--port", "{port}", "--mode", "{mode}"]
+url = "http://{wsl_ip}:{port}/"
+params = [
+  { name = "port", type = "int", default = 8770, min = 1024, max = 65535 },
+  { name = "mode", type = "choice", choices = ["selected", "original", "torque200"], default = "selected", label = "模式" },
+]
+
+[[task]]
+id = "train-timed"
+name = "定时训练（全扭矩）"
+group = "训练"
+needs = "wsl"
+script = "experiments/torque200/timed-train-wsl.sh"
+args = ["--duration", "{duration}"]
+params = [
+  { name = "duration", type = "int", default = 900, min = 1, max = 900, label = "秒" },
+  { name = "verify_only", type = "flag", flag = "--verify-only", default = false, label = "仅验证" },
+  { name = "self_test", type = "flag", flag = "--self-test", default = false, label = "自检" },
+]
+
+[[task]]
+id = "preview"
+name = "策略预览（全扭矩）"
+group = "预览与仿真"
+needs = "wsl"
+script = "experiments/torque200/preview-wsl.sh"
+args = ["--seconds", "{seconds}"]
+params = [{ name = "seconds", type = "float", default = 0, min = 0, max = 86400, label = "秒(0=不限)" }]
+
+[[task]]
+id = "sim"
+name = "原版仿真"
+group = "预览与仿真"
+needs = "wsl"
+script = "tasks/start-sim-wsl.sh"
+
+[[task]]
+id = "test-torque200"
+name = "全扭矩回归测试"
+group = "测试"
+needs = "wsl"
+script = "experiments/torque200/run-wsl.sh"
+args = ["--batch-size", "{batch_size}", "--steps", "{steps}", "--eval-envs", "{eval_envs}"]
+params = [
+  { name = "batch_size", type = "int", default = 2, min = 1, max = 1024 },
+  { name = "steps", type = "int", default = 16, min = 1, max = 10000000 },
+  { name = "eval_envs", type = "int", default = 2, min = 1, max = 128 },
+]
+
+[[task]]
+id = "test-original"
+name = "原版 GPU 测试"
+group = "测试"
+needs = "wsl"
+script = "tasks/run-gpu-wsl.sh"
+args = ["--batch-size", "{batch_size}", "--steps", "{steps}", "--eval-envs", "{eval_envs}"]
+params = [
+  { name = "batch_size", type = "int", default = 2, min = 1, max = 1024 },
+  { name = "steps", type = "int", default = 16, min = 1, max = 10000000 },
+  { name = "eval_envs", type = "int", default = 2, min = 1, max = 128 },
+]
+
+[[task]]
+id = "test-performance"
+name = "性能对比"
+group = "测试"
+needs = "wsl"
+script = "experiments/torque200/performance-wsl.sh"
+args = ["--web-url", "{web_url}"]
+params = [{ name = "web_url", type = "str", default = "http://127.0.0.1:8770" }]
+
+[[task]]
+id = "test-throughput"
 name = "吞吐探测"
 group = "测试"
 needs = "wsl"

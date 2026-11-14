@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 BASE=/home/jaccob/projects/tenny-torque200
 ORIGINAL=/home/jaccob/projects/tenny-reference
-WIN='/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200'
+WIN="$WINROOT/experiments/torque200"
 PY="$ORIGINAL/.venv-gpu/bin/python"
 test -x "$PY"
 test -d "$ORIGINAL/mujoco_legwheel_rl_public"

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 ROOT=/home/jaccob/projects/tenny-reference
-cp '/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/tasks/gpu-sim-verify.py' "$ROOT/gpu-sim-verify.py"
+cp "$WINROOT/tasks/gpu-sim-verify.py" "$ROOT/gpu-sim-verify.py"
 export JAX_PLATFORMS=cuda
 export CUDA_VISIBLE_DEVICES=0
 export XLA_PYTHON_CLIENT_PREALLOCATE=false

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 ROOT=/home/jaccob/projects/tenny-reference
 BACKEND=${1:?cpu or cuda}
@@ -8,7 +10,7 @@ case "$BACKEND" in
   *) exit 2 ;;
 esac
 shift
-cp '/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/tasks/device_benchmark.py' "$ROOT/device_benchmark.py"
+cp "$WINROOT/tasks/device_benchmark.py" "$ROOT/device_benchmark.py"
 export JAX_PLATFORMS="$BACKEND"
 export CUDA_VISIBLE_DEVICES=0
 export XLA_PYTHON_CLIENT_PREALLOCATE=false

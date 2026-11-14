@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 BASE=/home/jaccob/projects/tenny-torque200
-WIN='/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200'
+WIN="$WINROOT/experiments/torque200"
 PY=/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python
 cp "$WIN/throughput_probe.py" "$BASE/src/"
 export JAX_PLATFORMS=cuda CUDA_VISIBLE_DEVICES=0

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 ROOT=/home/jaccob/projects/tenny-reference
-SOURCE='/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/reference/'
+SOURCE="$WINROOT/reference/"
 mkdir -p "$ROOT" "$ROOT/logs"
 rsync -a --exclude=.pio/ --exclude=.codegraph/ "$SOURCE" "$ROOT/"
 cd "$ROOT/mujoco_esp32_robot_deploy_public"

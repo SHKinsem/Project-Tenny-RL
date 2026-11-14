@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 ROOT=/home/jaccob/projects/tenny-reference
-OUT='/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/tasks/results'
+OUT="$WINROOT/tasks/results"
 mkdir -p "$OUT"
 cp "$ROOT/logs/requirements-resolved.txt" "$ROOT/logs/unit-tests.log" "$ROOT/logs/sim-verify.log" "$OUT/"
 cp "$ROOT/mujoco_esp32_robot_deploy_public/tests/sim_verify_hold_obs_results.json" "$OUT/"

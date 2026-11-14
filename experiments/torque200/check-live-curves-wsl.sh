@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 BASE=/home/jaccob/projects/tenny-torque200
-WIN='/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200'
+WIN="$WINROOT/experiments/torque200"
 mkdir -p "$BASE/src/tests"
 cp "$WIN/tests/test_live_curves.py" "$BASE/src/tests/"
 cd "$BASE/src"

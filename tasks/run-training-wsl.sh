@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 ROOT=/home/jaccob/projects/tenny-reference
-cp '/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/tasks/training_smoke.py' "$ROOT/training_smoke.py"
+cp "$WINROOT/tasks/training_smoke.py" "$ROOT/training_smoke.py"
 export JAX_PLATFORMS=cpu
 export XLA_PYTHON_CLIENT_PREALLOCATE=false
 export JAX_COMPILATION_CACHE_DIR="$ROOT/jax-cache"

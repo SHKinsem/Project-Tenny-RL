@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export TENNY_ROOT="$WINROOT"
 set -euo pipefail
 shopt -s nullglob
 ROOT=/home/jaccob/projects/tenny-reference
-OUT='/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/tasks/results/gpu'
+OUT="$WINROOT/tasks/results/gpu"
 mkdir -p "$OUT"
 for file in "$ROOT"/artifacts/gpu-*.json "$ROOT"/artifacts/benchmark-*.json "$ROOT"/logs/*gpu*.csv "$ROOT"/logs/gpu-*.log "$ROOT"/logs/train-gpu-*.log "$ROOT"/logs/benchmark-*.log "$ROOT"/logs/requirements-gpu-resolved.txt "$ROOT"/logs/install-cuda12.log; do
   [ -f "$file" ] && cp "$file" "$OUT/"
