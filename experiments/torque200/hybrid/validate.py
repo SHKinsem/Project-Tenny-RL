@@ -9,6 +9,10 @@ import time
 
 from hybrid.core import (HIP_RANGE, XML, TORQUE_LIMITS, read_geometry,
                          scan_geometry, source_fingerprint, write_json)
+from hybrid.progress import ValidationProgress
+
+COMPILE_HINT = ("首次 JAX/XLA 编译或设备执行可能耗时数分钟；等待实际返回，"
+                "不估算编译百分比或剩余时间")
 
 
 def static_audit():
@@ -18,7 +22,8 @@ def static_audit():
                 scope="Pure source-model kinematics only; no compiled model or dynamics tested")
 
 
-def runtime_checks(report):
+def runtime_checks(report, progress):
+    progress.stage("加载 JAX / MuJoCo / 训练包装器", hint=COMPILE_HINT)
     import functools
     import importlib.metadata
     import inspect
@@ -32,6 +37,7 @@ def runtime_checks(report):
     from mujoco_playground import wrapper
     from legwheel.randomization import domain_randomize
 
+    progress.stage("核对依赖版本声明")
     # Strict dependency check, no --no-deps workaround or automatic installs.
     from packaging.requirements import Requirement
     packages = ("jax", "jaxlib", "mujoco", "mujoco-mjx", "brax", "playground", "flax")
@@ -42,6 +48,7 @@ def runtime_checks(report):
                 continue
             if req.specifier and importlib.metadata.version(req.name) not in req.specifier:
                 raise RuntimeError(f"Dependency conflict: {package} requires {req}; fix the local environment explicitly")
+    progress.stage("编译 MuJoCo 模型并核对关节和执行器")
     model = load_mj_model(XML, 0.0025)
     legs = read_geometry()
     active_names = [f"{p}_{s}_joint" for p in ("thigh", "wheel") for s in ("left", "right")]
@@ -65,6 +72,7 @@ def runtime_checks(report):
 
     max_l_error = max_j_error = max_fd_error = 0.0
     for leg in legs:
+        progress.stage(f"{leg.side} 腿 MuJoCo 几何 / Jacobian / 有限差分", total=81)
         hip = model.joint(f"thigh_{leg.side}_joint").id
         knee = model.joint(f"calf_{leg.side}_joint").id
         wheel = model.joint(f"wheel_{leg.side}_joint").id
@@ -104,12 +112,16 @@ def runtime_checks(report):
                         mujoco.mj_forward(model, dd)
                         lengths.append(np.linalg.norm(dd.site_xpos[cs]-dd.site_xpos[hs]))
                     max_fd_error = max(max_fd_error, abs((lengths[1]-lengths[0])/(2*eps)-j_ours))
+            progress.advance()
+        progress.stage(f"{leg.side} 腿 JAX JIT / vmap 一致性", hint=COMPILE_HINT)
         q = jp.linspace(*HIP_RANGE, 81)
         got = jax.jit(jax.vmap(lambda x: jp.asarray(leg.evaluate(x, trig=jp))))(q)
         expected = np.asarray([leg.evaluate(float(x)) for x in q])
         np.testing.assert_allclose(got, expected, atol=1e-6, rtol=1e-5)
+    progress.stage("汇总两腿几何误差阈值")
     assert max_l_error < 1e-7 and max_j_error < 1e-5 and max_fd_error < 1e-5
 
+    progress.stage("执行器增益与力矩限幅")
     # Static actual actuator output: gain randomization and force clipping.
     for gain in (0.9, 1.0, 1.1):
         model.actuator_gainprm[:, 0] = gain
@@ -128,22 +140,30 @@ def runtime_checks(report):
         c.action_delay_steps = delay
         return c
 
+    progress.stage("构造三种对照环境", hint=COMPILE_HINT)
     envs = {m: HybridLegWheelRobot(m, cfg()) for m in
             ("virtual_leg_force", "matched_envelope", "direct_torque")}
     steps = {m: jax.jit(e.step) for m, e in envs.items()}
-    states = {m: e.reset(jax.random.PRNGKey(3)) for m, e in envs.items()}
+    states = {}
+    for mode, env in envs.items():
+        progress.stage(f"{mode} 初始 reset", hint=COMPILE_HINT)
+        states[mode] = jax.block_until_ready(env.reset(jax.random.PRNGKey(3)))
     # Preserve original reset and its 0.0004 rad equality residual; never project
     # qk every step to manufacture ideal-constraint agreement.
     initial_residual = max(float(np.max(np.abs(e.geometry(states[m].data)[2]))) for m, e in envs.items())
+    progress.stage("原扭矩模式 reset", hint=COMPILE_HINT)
     old = LegWheelRobot(cfg())
     old_state, old_step = old.reset(jax.random.PRNGKey(3)), jax.jit(old.step)
+    jax.block_until_ready(old_state)
     max_residual = max_vel_residual = max_length_vel_residual = 0.0
     max_equivalence_error = 0.0
     for n in range(20):
         a = jp.asarray([.01*math.sin(n*.2), -.01*math.cos(n*.2), .01, -.01])
         for mode, env in envs.items():
+            if n == 0:
+                progress.stage(f"{mode} 首次 step 编译和执行", hint=COMPILE_HINT)
             cmd = a.at[:2].multiply(-1) if mode == "matched_envelope" else a
-            states[mode] = steps[mode](states[mode], cmd)
+            states[mode] = jax.block_until_ready(steps[mode](states[mode], cmd))
             s = states[mode]
             assert s.obs["state"].shape == (24,) and s.obs["privileged_state"].shape == (51,)
             assert np.isfinite(np.asarray(s.obs["state"])).all() and np.isfinite(float(s.reward))
@@ -162,11 +182,17 @@ def runtime_checks(report):
         np.testing.assert_allclose(vf.data.qpos, me.data.qpos, atol=2e-6, rtol=0)
         np.testing.assert_allclose(vf.reward, me.reward, atol=1e-5, rtol=0)
         # New direct_torque has revised costs/range, but identical raw physics in-range.
+        if n == 0:
+            progress.stage("原扭矩模式首次 step 编译和执行", hint=COMPILE_HINT)
         old_state = old_step(old_state, a)
         np.testing.assert_allclose(states["direct_torque"].data.qpos, old_state.data.qpos, atol=2e-6, rtol=0)
+        if n == 0:
+            progress.stage("20 步三模式动力学 / 观测 / 代价对照", total=20)
+        progress.advance()
     # Provisional diagnostic tolerances, not a physical safety certificate.
     assert max_residual < .01, "Equality error exceeds 0.01 rad diagnostic tolerance"
     assert max_length_vel_residual < .05, "Leg-length residual velocity exceeds 0.05 m/s"
+    progress.stage("动作延迟：reset / step 编译及三步验证", hint=COMPILE_HINT)
     delayed = HybridLegWheelRobot("virtual_leg_force", cfg(2))
     s, fn = delayed.reset(jax.random.PRNGKey(4)), jax.jit(delayed.step)
     for _ in range(2):
@@ -174,6 +200,7 @@ def runtime_checks(report):
         np.testing.assert_allclose(s.info["hybrid_command_substeps"], 0, atol=1e-7)
     s = fn(s, jp.ones(4)*.01)
     assert np.any(np.asarray(s.info["hybrid_command_substeps"]) != 0)
+    progress.stage("越界 / 约束失效 / 非有限动作保护", hint=COMPILE_HINT)
     # Outside envelope => no command; never silently clamp geometry.
     s = delayed.reset(jax.random.PRNGKey(4))
     s = s.replace(data=s.data.replace(qpos=s.data.qpos.at[delayed.hip_q[0]].set(HIP_RANGE[1]+.1)))
@@ -189,32 +216,38 @@ def runtime_checks(report):
         assert bool(s.done) and bool(s.info["hybrid_invalid"])
         np.testing.assert_allclose(s.info["hybrid_command_substeps"], 0, atol=1e-7)
 
+    progress.stage("核对 Brax 包装器接口")
     # Exercise exactly the batched/randomized/reset wrapper used by train_ppo.
     required = {"episode_length", "action_repeat", "randomization_fn"}
     if not required.issubset(inspect.signature(wrapper.wrap_for_brax_training).parameters):
         raise RuntimeError("Installed playground wrapper API differs; inspect before training")
     for mode in envs:
+        progress.stage(f"{mode} 批量 vmap reset", hint=COMPILE_HINT)
         wrapped_cfg = hybrid_config()
         wrapped_cfg.noise_config.level = 0.0  # Keep default command probability.
         e = HybridLegWheelRobot(mode, wrapped_cfg)
         keys = jax.random.split(jax.random.PRNGKey(100), 2)
-        batched = jax.jit(jax.vmap(e.reset))(keys)
+        batched = jax.block_until_ready(jax.jit(jax.vmap(e.reset))(keys))
+        progress.stage(f"{mode} 批量 vmap step", hint=COMPILE_HINT)
         bstep = jax.jit(jax.vmap(e.step))
-        batched = bstep(batched, jp.zeros((2, 4)))
+        batched = jax.block_until_ready(bstep(batched, jp.zeros((2, 4))))
         assert batched.obs["state"].shape == (2, 24)
+        progress.stage(f"{mode} 随机化包装器 reset", hint=COMPILE_HINT)
         wrapped = wrapper.wrap_for_brax_training(e, episode_length=2, action_repeat=1,
             randomization_fn=functools.partial(domain_randomize, rng=keys))
-        ws = jax.jit(wrapped.reset)(keys)
+        ws = jax.block_until_ready(jax.jit(wrapped.reset)(keys))
+        progress.stage(f"{mode} 包装器六步 scan 编译和执行", hint=COMPILE_HINT)
         wrapped_step = jax.jit(wrapped.step)
         def rollout(s, unused):
             s = wrapped_step(s, jp.ones((2, 4))*.001)
             return s, (s.obs["state"], s.reward, s.done, s.info["truncation"])
         ws, (observations, rewards, dones, truncations) = jax.jit(
             lambda s: jax.lax.scan(rollout, s, None, length=6))(ws)
-        jax.block_until_ready(ws)
+        jax.block_until_ready((ws, observations, rewards, dones, truncations))
         assert observations.shape == (6, 2, 24)
         assert np.isfinite(np.asarray(observations)).all() and np.isfinite(np.asarray(rewards)).all()
         assert np.any(np.asarray(dones)) and np.any(np.asarray(truncations)), "Time-limit truncation/reset was not exercised"
+        progress.stage(f"{mode} 包装器自动重置验证", hint=COMPILE_HINT)
         # First substep of an auto-reset episode must not inherit torque history.
         ws.info["command"] = jp.ones_like(ws.info["command"])*.123
         ws = ws.replace(done=jp.ones_like(ws.done))
@@ -223,6 +256,7 @@ def runtime_checks(report):
         np.testing.assert_allclose(ws.info["hybrid_action_rate"], 0, atol=1e-7)
         np.testing.assert_allclose(ws.info["command"], ws.info["hybrid_initial_command"], atol=1e-7)
 
+    progress.stage("汇总已经完成的检查")
     report.update(runtime_validated=True, scope="Local geometry / JIT-vmap-scan / training-wrapper plumbing; not balance or hardware",
                   runtime_packages={p: importlib.metadata.version(p) for p in
                                     ("jax", "jaxlib", "mujoco", "mujoco-mjx", "brax", "playground", "flax")},
@@ -249,19 +283,29 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output", required=True)
     p.add_argument("--static-only", action="store_true")
+    p.add_argument("--heartbeat-seconds", type=float, default=15.0,
+                   help="等待阶段的日志心跳间隔（秒，默认 15）；不是编译进度百分比")
     args = p.parse_args()
     start = time.monotonic()
-    report = static_audit()
+    progress = ValidationProgress(args.heartbeat_seconds)
+    report = dict(schema="hybrid-local-validation-v1", runtime_validated=False)
     try:
-        if not args.static_only:
-            runtime_checks(report)
-    except Exception as exc:
-        report.update(runtime_validated=False, error=f"{type(exc).__name__}: {exc}", elapsed_seconds=time.monotonic()-start)
+        with progress:
+            progress.stage("源码几何扫描和指纹")
+            report.update(static_audit())
+            if not args.static_only:
+                runtime_checks(report, progress)
+    except BaseException as exc:
+        report.update(stage_timings=progress.history, failed_stage=progress.failed_stage,
+                      progress_log_error=progress.log_error,
+                      runtime_validated=False, error=f"{type(exc).__name__}: {exc}", elapsed_seconds=time.monotonic()-start)
         write_json(args.output, report)
         raise
+    report["progress_log_error"] = progress.log_error
+    report["stage_timings"] = progress.history
     report["elapsed_seconds"] = time.monotonic()-start
     write_json(args.output, report)
-    print("HYBRID_LOCAL_VALIDATION_OK" if report["runtime_validated"] else "HYBRID_STATIC_ONLY_NOT_TRAINING_READY")
+    print("HYBRID_LOCAL_VALIDATION_OK" if report["runtime_validated"] else "HYBRID_STATIC_ONLY_NOT_TRAINING_READY", flush=True)
 
 
 if __name__ == "__main__":
