@@ -115,13 +115,12 @@ class RunnerTest(unittest.TestCase):
 
     def test_needs_wsl_missing(self):
         task = {"id": "w", "name": "w", "group": "t", "needs": "wsl", "script": "x.sh"}
-        orig = runner.wsl_available
-        runner.wsl_available = lambda: False
-        try:
+        from unittest import mock
+        # 只有 Windows 才需要 wsl.exe；Linux 上 needs=wsl 直接用 bash
+        with mock.patch.object(runner, "IS_WIN", True), \
+                mock.patch.object(runner, "wsl_available", lambda: False):
             with self.assertRaises(registry.TaskError):
                 runner.start("w", {}, {"w": task})
-        finally:
-            runner.wsl_available = orig
 
     def test_command_for_script(self):
         task = {"id": "s", "name": "s", "group": "t", "needs": "wsl",
