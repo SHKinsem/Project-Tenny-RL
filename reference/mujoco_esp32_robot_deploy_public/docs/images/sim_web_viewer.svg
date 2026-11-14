@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" role="img">
+  <title>MuJoCo window overlay and keys</title>
+  <rect width="960" height="560" fill="#F7F6F2"/>
+  <text x="48" y="40" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#1C1917">MuJoCo 窗口看什么</text>
+  <text x="48" y="64" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#78716C">标题 LegWheel Web + Sim。点一下窗口再按键。叠加层只有英文，避免乱码。</text>
+
+  <rect x="120" y="88" width="720" height="400" rx="8" fill="#1C1917"/>
+  <rect x="120" y="88" width="720" height="28" rx="8" fill="#292524"/>
+  <rect x="120" y="100" width="720" height="16" fill="#292524"/>
+  <text x="136" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#E7E5E4">LegWheel Web + Sim</text>
+  <circle cx="820" cy="102" r="5" fill="#A8A29E"/>
+
+  <ellipse cx="480" cy="430" rx="160" ry="18" fill="#44403C"/>
+  <rect x="430" y="250" width="100" height="140" rx="12" fill="#A8A29E"/>
+  <circle cx="448" cy="430" r="22" fill="#D6D3D1"/>
+  <circle cx="512" cy="430" r="22" fill="#D6D3D1"/>
+  <rect x="438" y="360" width="28" height="70" rx="4" fill="#78716C"/>
+  <rect x="494" y="360" width="28" height="70" rx="4" fill="#78716C"/>
+
+  <text x="140" y="140" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#FAFAF9">cmd  vx +0.00  yaw +0.00  h +0.00  roll +0.00</text>
+  <text x="140" y="158" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#86EFAC">switcher ON</text>
+  <text x="140" y="176" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#FAFAF9">pos s  act +0.00  des +0.00  err +0.00</text>
+
+  <text x="140" y="430" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#D6D3D1">hold W/S = vx   A/D = yaw (release = stop)</text>
+  <text x="140" y="446" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#D6D3D1">Q/E = height   B/N = roll</text>
+  <text x="140" y="462" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#D6D3D1">SPACE = reset   X = exit</text>
+
+  <rect x="24" y="128" width="84" height="56" rx="8" fill="#F0FDFA" stroke="#5EEAD4"/>
+  <text x="36" y="152" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="600" fill="#0F766E">左上</text>
+  <text x="36" y="172" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="11" fill="#134E4A">当前 command</text>
+
+  <rect x="24" y="400" width="84" height="56" rx="8" fill="#F0FDFA" stroke="#5EEAD4"/>
+  <text x="36" y="424" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="600" fill="#0F766E">左下</text>
+  <text x="36" y="444" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="11" fill="#134E4A">按键说明</text>
+
+  <rect x="852" y="240" width="84" height="72" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="864" y="264" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="600" fill="#B45309">机器人</text>
+  <text x="864" y="284" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="11" fill="#78350F">MJX 仿真</text>
+  <text x="864" y="300" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="11" fill="#78350F">不在网页里</text>
+
+  <text x="48" y="520" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">推杆时左上 vx 应变，松手应变回 0.00，机器人停车保持。switcher OFF (limp) 表示没开机。</text>
+  <text x="48" y="542" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">键盘与摇杆同一语义：W/S、A/D 按住才有速度，松开即停。高度 / 横滚是滑条，按一下保持。</text>
+</svg>

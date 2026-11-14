@@ -1,0 +1,19 @@
+digraph funnel {
+    rankdir=TB;
+    bgcolor="white";
+    node [fontname="PingFang SC", fontsize=11, margin="0.2,0.1", style=filled];
+    edge [fontname="PingFang SC", fontsize=10, color="#555555"];
+
+    l0 [label="全部可调参数 100+\nppo.py ~15 + config.py ~50 + randomization.py ~26", fillcolor="#F8F9FA"];
+    l1 [label="锁定层与 C 层排除\n锁定：部署接口/控制频率\nC 层：随机化/噪声/push（不按 reward 调）", fillcolor="#F1F3F4"];
+    l2 [label="进入搜索 35~40 个\nA 层训练超参 ~12 + B 层奖励/指令/PID ~25", fillcolor="#E8F0FE"];
+    l3 [label="阶段一 PB 筛选后 ~10 个\n按主效应排序（判据 2·SE，式 2）\n冻结底部 2/3（36 次 1e8 步短训）", fillcolor="#D2E3FC"];
+    l4 [label="阶段二 TPE top-k\n30~50 trials，Hyperband 剪枝\n（约 10~15 次完整训练当量）", fillcolor="#A8C7FA"];
+    l5 [label="阶段三确认 1~2 个最优组合\n3 seeds × 4e8 全量\n+ batch_test / visualize 闸口", fillcolor="#D9EAD3"];
+
+    l0 -> l1 [label="分层"];
+    l1 -> l2 [label="进入搜索"];
+    l2 -> l3 [label="主效应筛选"];
+    l3 -> l4 [label="gate-1 核准后"];
+    l4 -> l5 [label="gate-2 核准后"];
+}

@@ -1,0 +1,15 @@
+seed=7 res=1280x720 falls: 0
+pushes: 13
+  t=4.36s  0.38 m/s @ -102 deg
+  t=8.73s  0.27 m/s @ 4 deg
+  t=13.10s  0.42 m/s @ -99 deg
+  t=17.47s  0.16 m/s @ -101 deg
+  t=21.84s  0.12 m/s @ -98 deg
+  t=26.21s  0.27 m/s @ 76 deg
+  t=30.58s  0.16 m/s @ -149 deg
+  t=34.95s  0.02 m/s @ -49 deg
+  t=39.32s  0.36 m/s @ -68 deg
+  t=43.69s  0.18 m/s @ -116 deg
+  t=48.06s  0.33 m/s @ 139 deg
+  t=52.43s  0.43 m/s @ -14 deg
+  t=56.80s  0.15 m/s @ -146 deg

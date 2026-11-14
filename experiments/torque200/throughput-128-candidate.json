@@ -1,0 +1,17 @@
+{
+  "purpose": "Throughput candidate only; learning quality not validated",
+  "source_run": "throughput-20261114-163516",
+  "ppo_overrides": {
+    "batch_size": 128,
+    "num_minibatches": 1,
+    "unroll_length": 16,
+    "num_updates_per_batch": 1
+  },
+  "observed_sps": 9582.37386658144,
+  "baseline_sps": 1580.4501777341532,
+  "notes": [
+    "Changes SGD batch size together with num_envs",
+    "No evaluation rollout during throughput measurement",
+    "Keep original balance-training defaults until learning efficiency is checked"
+  ]
+}

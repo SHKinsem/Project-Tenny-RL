@@ -1,0 +1,46 @@
+# 训练/测试环境依赖(对应 Python 3.12 venv,见 README)
+# 2026-08-25 修订:升级到 brax v0.14.2(最新 tag)+ jax 0.9.2,已完整验证
+# (GPU 训练、std_episode_length 指标、checkpoint 保存/恢复、单元测试)。
+#
+# 2026-08-26 实测:下载用 uv + 阿里云镜像最快最稳(实测阿里云 ~20MB/s,
+# 华为 7.3 / 腾讯 6.7 / 中科大 5.0 / 清华 2.9 MB/s;pip 直连下大文件会反复停滞):
+#   uv venv --python 3.12 .venv
+#   uv pip install --python .venv/bin/python -r requirements.txt \
+#     --index-url https://mirrors.aliyun.com/pypi/simple/
+# 注:flax==0.12.9 元数据声明 jax>=0.11.1,与本文件 jax==0.9.2 冲突(运行
+# 时无碍,brax 0.14.2 不兼容 jax>=0.10 才是硬约束),严格解析器会拒绝整体
+# 安装;此时 flax 单独以 --no-deps 安装,再补装其依赖
+# (msgpack optax tensorstore rich PyYAML typing_extensions treescope)。
+#
+# GPU 训练需安装 CUDA 版 jax(单卡 NVIDIA,驱动 CUDA >= 12.x):
+#   pip install -r requirements.txt
+#   pip install "jax[cuda12]==0.9.2" "jaxlib==0.9.2" \
+#     jax-cuda12-plugin==0.9.2 jax-cuda12-pjrt==0.9.2
+#
+# 注意:brax 最新 tag v0.14.2 与 jax>=0.10 不兼容
+# (使用了已移除的 jax.device_put_replicated),因此锁定 jax 0.9.2;
+# 建议从 git tag 安装 brax:
+#   pip install "brax @ git+https://github.com/google/brax@v0.14.2"
+
+jax==0.9.2
+jaxlib==0.9.2
+flax==0.12.9
+# brax 优先从 git tag 安装(见文件头说明);PyPI 的 0.14.2 wheel 内容相同
+brax==0.14.2
+mujoco==3.12.0
+mujoco-mjx==3.12.0
+# 提供 mujoco_playground 模块
+playground==0.2.0
+ml_collections==1.1.0
+orbax-checkpoint==0.12.4
+etils==1.14.0
+jaxopt==0.8.5
+numpy==2.5.2
+scipy==1.18.1
+matplotlib==3.11.1
+mediapy==1.2.7
+ipython==9.16.1
+opencv-python==4.10.0.84
+# 调参流水线(scripts/tune.py,见 docs/hyperparam_tuning_plan.md)
+optuna==4.9.0
+pyDOE3==1.6.2

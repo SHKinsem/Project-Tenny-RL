@@ -1,0 +1,47 @@
+{
+  "0": {
+    "action_rate": 0.3550132215023041,
+    "attainment": {
+      "tracking_lin_vel": 0.8587657125780612,
+      "tracking_ang_vel": 0.8749005430382888,
+      "tracking_height_jnt": 0.6891098399707914,
+      "tracking_height_action": 0.8215617917664267,
+      "pitch_cost": 0.8613468637917181,
+      "roll_cost": 0.8678005534981377,
+      "tracking_sinyaw": 0.8375962980195754,
+      "tracking_wheels_sinposition": 0.5819801699170792
+    },
+    "avg_episode_length": 573.3388671875,
+    "nan_steps": 0
+  },
+  "1": {
+    "action_rate": 0.3540530204772949,
+    "attainment": {
+      "tracking_lin_vel": 0.8528622655016489,
+      "tracking_ang_vel": 0.8786569062526932,
+      "tracking_height_jnt": 0.6875131572158081,
+      "tracking_height_action": 0.8240519497094745,
+      "pitch_cost": 0.8597507117972185,
+      "roll_cost": 0.8688583591042884,
+      "tracking_sinyaw": 0.8003890426988721,
+      "tracking_wheels_sinposition": 0.5503008423886452
+    },
+    "avg_episode_length": 574.3642578125,
+    "nan_steps": 0
+  },
+  "2": {
+    "action_rate": 0.40419840812683105,
+    "attainment": {
+      "tracking_lin_vel": 0.8481516406936869,
+      "tracking_ang_vel": 0.8683882913372303,
+      "tracking_height_jnt": 0.6621150966477093,
+      "tracking_height_action": 0.8005741061831867,
+      "pitch_cost": 0.8633372185329102,
+      "roll_cost": 0.8715008599215449,
+      "tracking_sinyaw": 0.847711051409218,
+      "tracking_wheels_sinposition": 0.5679880512621955
+    },
+    "avg_episode_length": 575.3681640625,
+    "nan_steps": 0
+  }
+}

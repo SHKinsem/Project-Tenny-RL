@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" role="img">
+  <title>共享 Controller 的输入、状态和输出</title>
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 Z" fill="#57534E"/>
+    </marker>
+  </defs>
+  <rect width="960" height="560" fill="#F7F6F2"/>
+  <text x="48" y="44" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#1C1917">Controller 接口（两条支路必须对齐）</text>
+  <text x="48" y="68" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#78716C">哪条支路进来都是同一组仿真系量。Controller 看不见 IMU 安装方向，也看不见 MJX 的 qpos 下标。</text>
+
+  <rect x="48" y="92" width="200" height="196" rx="8" fill="#FFFFFF" stroke="#E7E5E4"/>
+  <text x="68" y="120" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" font-weight="600" fill="#1C1917">输入</text>
+  <text x="68" y="148" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">cmd[4]</text>
+  <text x="68" y="168" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">q_L  q_R</text>
+  <text x="68" y="188" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">yaw_rad</text>
+  <text x="68" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">pitch_rad</text>
+  <text x="68" y="228" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">turn_on</text>
+  <text x="68" y="260" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">弧度 · 未饱和累计角</text>
+
+  <line x1="248" y1="190" x2="284" y2="190" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <rect x="284" y="92" width="392" height="196" rx="8" fill="#F0FDFA" stroke="#5EEAD4"/>
+  <rect x="284" y="92" width="392" height="6" fill="#0F766E"/>
+  <text x="304" y="124" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" font-weight="600" fill="#134E4A">Controller</text>
+  <text x="304" y="148" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#3F3F46">1  死区清零 cmd</text>
+  <text x="304" y="168" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#3F3F46">2  |vx| 刷 s0 · |wz| 刷 psi0</text>
+  <text x="304" y="188" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#3F3F46">3  开机 / 摔倒重置双锚点</text>
+  <text x="304" y="208" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#3F3F46">4  ds / dpsi</text>
+  <text x="304" y="228" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#3F3F46">5  clip 观测，锚点不动</text>
+  <text x="304" y="260" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#0F766E">state: s0  psi0  inited</text>
+
+  <line x1="676" y1="190" x2="712" y2="190" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <rect x="712" y="92" width="200" height="196" rx="8" fill="#FFFFFF" stroke="#E7E5E4"/>
+  <text x="732" y="120" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" font-weight="600" fill="#1C1917">输出</text>
+  <text x="732" y="148" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">obs[7]  dpsi</text>
+  <text x="732" y="168" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">obs[11]=obs[13] ds</text>
+  <text x="732" y="188" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">ds_true  dpsi_true</text>
+  <text x="732" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">s0  yaw0</text>
+  <text x="732" y="244" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">再拼满 26 维</text>
+  <text x="732" y="264" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">送进策略网络</text>
+
+  <rect x="48" y="316" width="420" height="196" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="68" y="344" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#78350F">real I/O 怎么填输入</text>
+  <text x="68" y="372" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">IMU deg to rad</text>
+  <text x="68" y="394" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">轮角 / 轮速取负，对齐仿真铰链</text>
+  <text x="68" y="416" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">大腿舵机映射到弧度</text>
+  <text x="68" y="448" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#92400E">control.cpp 前半段</text>
+  <text x="68" y="480" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">仿真测不了符号。错了 Controller 仍算对。</text>
+
+  <rect x="492" y="316" width="420" height="196" rx="8" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <text x="512" y="344" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#4C1D95">sim I/O 怎么填输入</text>
+  <text x="512" y="372" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">q_L q_R = qpos[9], qpos[12]</text>
+  <text x="512" y="394" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">yaw = atan2(R10, R00)</text>
+  <text x="512" y="416" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">cmd = info.command</text>
+  <text x="512" y="448" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#6D28D9">sim_verify_hold_obs.py</text>
+  <text x="512" y="480" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">已是仿真系，直接接到 Controller。</text>
+</svg>

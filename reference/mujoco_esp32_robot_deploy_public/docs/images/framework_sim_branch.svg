@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" role="img">
+  <title>在 sim 支路上验证共享 Controller</title>
+  <defs>
+    <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 Z" fill="#57534E"/>
+    </marker>
+  </defs>
+  <rect width="960" height="560" fill="#F7F6F2"/>
+  <text x="48" y="44" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#1C1917">验证走 sim 支路</text>
+  <text x="48" y="68" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#78716C">Controller 是共享的，所以在 sim 上逐步对齐，就等于对齐了真机要用的那颗核。</text>
+
+  <rect x="48" y="92" width="420" height="220" rx="8" fill="#FFFFFF" stroke="#E7E5E4"/>
+  <rect x="48" y="92" width="6" height="220" fill="#A8A29E"/>
+  <text x="72" y="120" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#A8A29E">LEVEL 1</text>
+  <text x="72" y="144" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="16" font-weight="600" fill="#1C1917">运动学探针</text>
+  <text x="72" y="166" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">不跑策略。改状态，锁 Controller 定义。</text>
+  <text x="72" y="196" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">reset_matches_env</text>
+  <text x="72" y="216" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">common_mode_ds · differential_ds_zero</text>
+  <text x="72" y="236" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">vx_freezes_heading · yaw_freezes_position</text>
+  <text x="72" y="256" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">clip_obs_not_anchor</text>
+  <text x="72" y="288" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">旧三锚点会被差动 / yaw 探针打掉</text>
+
+  <rect x="492" y="92" width="420" height="220" rx="8" fill="#F0FDFA" stroke="#99F6E4"/>
+  <rect x="492" y="92" width="6" height="220" fill="#0F766E"/>
+  <text x="516" y="120" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#0F766E">LEVEL 2</text>
+  <text x="516" y="144" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="16" font-weight="600" fill="#134E4A">策略闭环</text>
+  <text x="516" y="166" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#3F3F46">跑策略。sim 支路接到同一颗核。</text>
+  <text x="516" y="196" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#3F3F46">sim I/O 抽输入 → Controller.step</text>
+  <text x="516" y="220" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#3F3F46">与训练 _get_obs / 锚点 info 逐项比</text>
+  <text x="516" y="252" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#0F766E">600 / 600 步 · 0 次摔倒</text>
+  <text x="516" y="276" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#3F3F46">最大 |ds| 约 1.8e-7，|dpsi| 约 2.1e-8</text>
+
+  <text x="48" y="348" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#1C1917">sim 支路一步</text>
+
+  <rect x="48" y="368" width="168" height="72" rx="8" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <text x="64" y="396" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#6D28D9">SIM I/O</text>
+  <text x="64" y="418" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#1C1917">抽仿真系输入</text>
+  <line x1="216" y1="404" x2="240" y2="404" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <rect x="240" y="368" width="200" height="72" rx="8" fill="#F0FDFA" stroke="#99F6E4"/>
+  <text x="256" y="396" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#0F766E">CONTROLLER</text>
+  <text x="256" y="418" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#134E4A">FirmwareHoldObs</text>
+  <line x1="440" y1="404" x2="464" y2="404" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <rect x="464" y="368" width="200" height="72" rx="8" fill="#FFFFFF" stroke="#E7E5E4"/>
+  <text x="480" y="396" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#A8A29E">COMPARE</text>
+  <text x="480" y="418" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#1C1917">vs 训练观测槽</text>
+  <line x1="664" y1="404" x2="688" y2="404" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <rect x="688" y="368" width="224" height="72" rx="8" fill="#F0FDFA" stroke="#99F6E4"/>
+  <text x="704" y="396" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#0F766E">PASS</text>
+  <text x="704" y="418" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#134E4A">容差 1e-4</text>
+
+  <text x="48" y="472" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">dpsi vs obs[7]</text>
+  <text x="240" y="472" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">ds vs obs[11] [13]</text>
+  <text x="464" y="472" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#44403C">s0 / yaw0 vs info</text>
+  <text x="688" y="472" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">real 支路不在这一步</text>
+
+  <text x="48" y="516" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">噪声、推力、随机命令会让训练观测带 RNG，必须关掉才能逐步比。观感走 viewer。real I/O 的符号只能上真机。</text>
+  <text x="48" y="536" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">主机上的 Controller 实现是 FirmwareHoldObs；固件里是 align_sensors 的后半段。二者对照着写，单测锁不变量。</text>
+</svg>

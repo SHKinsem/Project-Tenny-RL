@@ -1,0 +1,3922 @@
+[
+  {
+    "elapsed_seconds": 0.0014213719999816021,
+    "cpu_seconds": 0.0,
+    "rss_mib": 3.875,
+    "gpu_util_percent": 14.0,
+    "gpu_memory_mib": 2877.0,
+    "gpu_power_w": 57.03,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 1.0695544089999771,
+    "cpu_seconds": 0.97,
+    "rss_mib": 648.828125,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2993.0,
+    "gpu_power_w": 60.73,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 2.1256608690000007,
+    "cpu_seconds": 2.08,
+    "rss_mib": 736.828125,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2985.0,
+    "gpu_power_w": 61.35,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 3.17506367499999,
+    "cpu_seconds": 2.67,
+    "rss_mib": 816.953125,
+    "gpu_util_percent": 11.0,
+    "gpu_memory_mib": 2941.0,
+    "gpu_power_w": 63.31,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 4.2253287789999945,
+    "cpu_seconds": 3.53,
+    "rss_mib": 1087.109375,
+    "gpu_util_percent": 12.0,
+    "gpu_memory_mib": 2928.0,
+    "gpu_power_w": 63.03,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 5.268023466999978,
+    "cpu_seconds": 4.57,
+    "rss_mib": 1160.33984375,
+    "gpu_util_percent": 13.0,
+    "gpu_memory_mib": 2939.0,
+    "gpu_power_w": 62.93,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 6.328821226999992,
+    "cpu_seconds": 5.47,
+    "rss_mib": 1201.58984375,
+    "gpu_util_percent": 25.0,
+    "gpu_memory_mib": 3011.0,
+    "gpu_power_w": 64.86,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 7.3785343480000165,
+    "cpu_seconds": 6.37,
+    "rss_mib": 1250.83984375,
+    "gpu_util_percent": 20.0,
+    "gpu_memory_mib": 3019.0,
+    "gpu_power_w": 57.95,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 8.425040067999987,
+    "cpu_seconds": 7.41,
+    "rss_mib": 1317.21484375,
+    "gpu_util_percent": 17.0,
+    "gpu_memory_mib": 3019.0,
+    "gpu_power_w": 53.62,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 9.468719183000019,
+    "cpu_seconds": 8.42,
+    "rss_mib": 1334.58984375,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 3018.0,
+    "gpu_power_w": 54.44,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 10.513271047999979,
+    "cpu_seconds": 9.36,
+    "rss_mib": 1386.33984375,
+    "gpu_util_percent": 18.0,
+    "gpu_memory_mib": 3046.0,
+    "gpu_power_w": 56.43,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 11.563442617000021,
+    "cpu_seconds": 10.28,
+    "rss_mib": 1434.46484375,
+    "gpu_util_percent": 18.0,
+    "gpu_memory_mib": 3018.0,
+    "gpu_power_w": 58.38,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 12.609153373000026,
+    "cpu_seconds": 11.17,
+    "rss_mib": 1475.83984375,
+    "gpu_util_percent": 21.0,
+    "gpu_memory_mib": 2993.0,
+    "gpu_power_w": 55.42,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 13.656939912999974,
+    "cpu_seconds": 12.14,
+    "rss_mib": 1529.46484375,
+    "gpu_util_percent": 17.0,
+    "gpu_memory_mib": 2982.0,
+    "gpu_power_w": 55.45,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 14.711594365999986,
+    "cpu_seconds": 13.24,
+    "rss_mib": 1537.21484375,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 3004.0,
+    "gpu_power_w": 56.3,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 15.755559414000004,
+    "cpu_seconds": 14.35,
+    "rss_mib": 1545.33984375,
+    "gpu_util_percent": 25.0,
+    "gpu_memory_mib": 3037.0,
+    "gpu_power_w": 59.23,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 16.807213307999973,
+    "cpu_seconds": 15.46,
+    "rss_mib": 1549.83984375,
+    "gpu_util_percent": 28.0,
+    "gpu_memory_mib": 3036.0,
+    "gpu_power_w": 55.81,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 17.844468880000022,
+    "cpu_seconds": 16.56,
+    "rss_mib": 1558.96484375,
+    "gpu_util_percent": 13.0,
+    "gpu_memory_mib": 3036.0,
+    "gpu_power_w": 55.85,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 18.893082444000015,
+    "cpu_seconds": 17.62,
+    "rss_mib": 1559.21484375,
+    "gpu_util_percent": 13.0,
+    "gpu_memory_mib": 3015.0,
+    "gpu_power_w": 56.05,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 19.93784125899998,
+    "cpu_seconds": 18.7,
+    "rss_mib": 1737.83984375,
+    "gpu_util_percent": 13.0,
+    "gpu_memory_mib": 3006.0,
+    "gpu_power_w": 53.36,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 20.98755891000002,
+    "cpu_seconds": 19.75,
+    "rss_mib": 1741.71484375,
+    "gpu_util_percent": 17.0,
+    "gpu_memory_mib": 3005.0,
+    "gpu_power_w": 53.27,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 22.030053977000023,
+    "cpu_seconds": 20.81,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 24.0,
+    "gpu_memory_mib": 3051.0,
+    "gpu_power_w": 88.37,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 23.07742696600002,
+    "cpu_seconds": 21.94,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 3044.0,
+    "gpu_power_w": 92.93,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 24.123131477000015,
+    "cpu_seconds": 23.06,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 3011.0,
+    "gpu_power_w": 90.46,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 25.177555100000006,
+    "cpu_seconds": 24.2,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2987.0,
+    "gpu_power_w": 92.68,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 26.22005925100001,
+    "cpu_seconds": 25.32,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 3060.0,
+    "gpu_power_w": 94.04,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 27.27020612299998,
+    "cpu_seconds": 26.41,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 77.0,
+    "gpu_memory_mib": 3182.0,
+    "gpu_power_w": 93.42,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 28.31517789999998,
+    "cpu_seconds": 27.45,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 77.0,
+    "gpu_memory_mib": 3210.0,
+    "gpu_power_w": 96.33,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 29.37096769300001,
+    "cpu_seconds": 28.51,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 77.0,
+    "gpu_memory_mib": 3211.0,
+    "gpu_power_w": 93.57,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 30.421373399999993,
+    "cpu_seconds": 29.6,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 3124.0,
+    "gpu_power_w": 94.66,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 31.485502337000014,
+    "cpu_seconds": 30.74,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 3102.0,
+    "gpu_power_w": 94.97,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 32.52972637200003,
+    "cpu_seconds": 31.84,
+    "rss_mib": 1752.08984375,
+    "gpu_util_percent": 76.0,
+    "gpu_memory_mib": 3119.0,
+    "gpu_power_w": 93.82,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 33.58231404100002,
+    "cpu_seconds": 32.95,
+    "rss_mib": 1752.46484375,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 3213.0,
+    "gpu_power_w": 85.52,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 34.62768985700001,
+    "cpu_seconds": 34.07,
+    "rss_mib": 1757.33984375,
+    "gpu_util_percent": 20.0,
+    "gpu_memory_mib": 3289.0,
+    "gpu_power_w": 78.8,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 35.67750912399998,
+    "cpu_seconds": 35.14,
+    "rss_mib": 1764.58984375,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 3281.0,
+    "gpu_power_w": 56.47,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 36.725554235000004,
+    "cpu_seconds": 36.18,
+    "rss_mib": 1773.83984375,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 2957.0,
+    "gpu_power_w": 54.38,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 37.773744548000025,
+    "cpu_seconds": 37.2,
+    "rss_mib": 1775.71484375,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 2968.0,
+    "gpu_power_w": 55.44,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 38.817370294,
+    "cpu_seconds": 38.29,
+    "rss_mib": 1781.83984375,
+    "gpu_util_percent": 19.0,
+    "gpu_memory_mib": 2937.0,
+    "gpu_power_w": 57.49,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 39.864751954999974,
+    "cpu_seconds": 39.75,
+    "rss_mib": 1861.46484375,
+    "gpu_util_percent": 20.0,
+    "gpu_memory_mib": 2909.0,
+    "gpu_power_w": 56.36,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 40.91256133799999,
+    "cpu_seconds": 40.87,
+    "rss_mib": 1932.96484375,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2894.0,
+    "gpu_power_w": 54.35,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 41.96054873700001,
+    "cpu_seconds": 41.98,
+    "rss_mib": 1933.08984375,
+    "gpu_util_percent": 21.0,
+    "gpu_memory_mib": 2878.0,
+    "gpu_power_w": 56.86,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 43.002888996000024,
+    "cpu_seconds": 44.07,
+    "rss_mib": 1941.21484375,
+    "gpu_util_percent": 19.0,
+    "gpu_memory_mib": 2941.0,
+    "gpu_power_w": 56.27,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 44.057099943000026,
+    "cpu_seconds": 46.69,
+    "rss_mib": 1952.46484375,
+    "gpu_util_percent": 20.0,
+    "gpu_memory_mib": 2958.0,
+    "gpu_power_w": 57.21,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 45.113139011000044,
+    "cpu_seconds": 48.71,
+    "rss_mib": 1992.33984375,
+    "gpu_util_percent": 21.0,
+    "gpu_memory_mib": 2982.0,
+    "gpu_power_w": 57.42,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 46.17074193899998,
+    "cpu_seconds": 51.46,
+    "rss_mib": 2010.71484375,
+    "gpu_util_percent": 20.0,
+    "gpu_memory_mib": 2943.0,
+    "gpu_power_w": 57.22,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 47.225281042000006,
+    "cpu_seconds": 53.57,
+    "rss_mib": 2113.96484375,
+    "gpu_util_percent": 22.0,
+    "gpu_memory_mib": 2890.0,
+    "gpu_power_w": 57.94,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 48.28134190499998,
+    "cpu_seconds": 55.08,
+    "rss_mib": 2272.3125,
+    "gpu_util_percent": 22.0,
+    "gpu_memory_mib": 2880.0,
+    "gpu_power_w": 56.5,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 49.331933272000015,
+    "cpu_seconds": 56.19,
+    "rss_mib": 2280.8125,
+    "gpu_util_percent": 20.0,
+    "gpu_memory_mib": 2863.0,
+    "gpu_power_w": 56.58,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 50.382366686999944,
+    "cpu_seconds": 57.3,
+    "rss_mib": 2281.05078125,
+    "gpu_util_percent": 22.0,
+    "gpu_memory_mib": 2869.0,
+    "gpu_power_w": 54.13,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 51.42516398500004,
+    "cpu_seconds": 58.4,
+    "rss_mib": 2281.05078125,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2868.0,
+    "gpu_power_w": 57.41,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 52.479029706999995,
+    "cpu_seconds": 59.46,
+    "rss_mib": 2281.05078125,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2847.0,
+    "gpu_power_w": 54.71,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 53.52287163599999,
+    "cpu_seconds": 60.5,
+    "rss_mib": 2281.05078125,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2847.0,
+    "gpu_power_w": 53.98,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 54.57242876400005,
+    "cpu_seconds": 61.6,
+    "rss_mib": 2281.05078125,
+    "gpu_util_percent": 14.0,
+    "gpu_memory_mib": 2847.0,
+    "gpu_power_w": 57.12,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 55.610758433,
+    "cpu_seconds": 62.71,
+    "rss_mib": 2281.30078125,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2847.0,
+    "gpu_power_w": 53.56,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 56.65515355100001,
+    "cpu_seconds": 63.82,
+    "rss_mib": 2281.67578125,
+    "gpu_util_percent": 14.0,
+    "gpu_memory_mib": 2879.0,
+    "gpu_power_w": 55.35,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 57.695729436999954,
+    "cpu_seconds": 64.93,
+    "rss_mib": 2281.67578125,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 2875.0,
+    "gpu_power_w": 56.29,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 58.74208487299995,
+    "cpu_seconds": 66.01,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 14.0,
+    "gpu_memory_mib": 2860.0,
+    "gpu_power_w": 56.28,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 59.79099988099995,
+    "cpu_seconds": 66.01,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 2860.0,
+    "gpu_power_w": 54.1,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 60.84418870000002,
+    "cpu_seconds": 66.29,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 14.0,
+    "gpu_memory_mib": 2854.0,
+    "gpu_power_w": 55.81,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 61.88370763399996,
+    "cpu_seconds": 67.33,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 2868.0,
+    "gpu_power_w": 57.73,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 62.93159222999998,
+    "cpu_seconds": 68.44,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 24.0,
+    "gpu_memory_mib": 2914.0,
+    "gpu_power_w": 55.92,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 63.97158679200004,
+    "cpu_seconds": 69.53,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 27.0,
+    "gpu_memory_mib": 2910.0,
+    "gpu_power_w": 85.38,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 65.02636616999996,
+    "cpu_seconds": 70.65,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 47.0,
+    "gpu_memory_mib": 2900.0,
+    "gpu_power_w": 92.11,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 66.07368637299999,
+    "cpu_seconds": 71.76,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2900.0,
+    "gpu_power_w": 96.97,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 67.14619584299999,
+    "cpu_seconds": 72.88,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2899.0,
+    "gpu_power_w": 91.12,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 68.18927526699997,
+    "cpu_seconds": 73.97,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2893.0,
+    "gpu_power_w": 91.58,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 69.24301065199995,
+    "cpu_seconds": 75.03,
+    "rss_mib": 2281.80078125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2890.0,
+    "gpu_power_w": 95.88,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 70.28590575199996,
+    "cpu_seconds": 76.11,
+    "rss_mib": 2295.17578125,
+    "gpu_util_percent": 38.0,
+    "gpu_memory_mib": 2886.0,
+    "gpu_power_w": 81.92,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 71.33385690199998,
+    "cpu_seconds": 77.2,
+    "rss_mib": 2299.92578125,
+    "gpu_util_percent": 13.0,
+    "gpu_memory_mib": 2947.0,
+    "gpu_power_w": 67.99,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 72.37335581000002,
+    "cpu_seconds": 78.29,
+    "rss_mib": 2300.17578125,
+    "gpu_util_percent": 19.0,
+    "gpu_memory_mib": 2959.0,
+    "gpu_power_w": 56.01,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 73.42199871000003,
+    "cpu_seconds": 79.38,
+    "rss_mib": 2306.30078125,
+    "gpu_util_percent": 22.0,
+    "gpu_memory_mib": 2911.0,
+    "gpu_power_w": 57.9,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 74.47273710399998,
+    "cpu_seconds": 80.52,
+    "rss_mib": 2307.05078125,
+    "gpu_util_percent": 19.0,
+    "gpu_memory_mib": 2908.0,
+    "gpu_power_w": 58.37,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 75.52945634800005,
+    "cpu_seconds": 81.65,
+    "rss_mib": 2310.92578125,
+    "gpu_util_percent": 23.0,
+    "gpu_memory_mib": 2911.0,
+    "gpu_power_w": 53.74,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 76.57185945100002,
+    "cpu_seconds": 82.72,
+    "rss_mib": 2310.92578125,
+    "gpu_util_percent": 18.0,
+    "gpu_memory_mib": 2914.0,
+    "gpu_power_w": 57.19,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 77.62208972999997,
+    "cpu_seconds": 83.76,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 24.0,
+    "gpu_memory_mib": 2937.0,
+    "gpu_power_w": 92.77,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 78.67909055899997,
+    "cpu_seconds": 84.86,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 71.0,
+    "gpu_memory_mib": 2947.0,
+    "gpu_power_w": 89.04,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 79.74417216999996,
+    "cpu_seconds": 85.98,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2949.0,
+    "gpu_power_w": 89.51,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 80.78570598399995,
+    "cpu_seconds": 87.08,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2944.0,
+    "gpu_power_w": 88.67,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 81.846841036,
+    "cpu_seconds": 88.19,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2934.0,
+    "gpu_power_w": 91.16,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 82.89232510700003,
+    "cpu_seconds": 89.28,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 76.0,
+    "gpu_memory_mib": 2934.0,
+    "gpu_power_w": 89.19,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 83.94351652399996,
+    "cpu_seconds": 90.39,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2892.0,
+    "gpu_power_w": 95.7,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 84.98875997899995,
+    "cpu_seconds": 91.46,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 2906.0,
+    "gpu_power_w": 88.76,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 86.04158577600003,
+    "cpu_seconds": 92.52,
+    "rss_mib": 2318.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2969.0,
+    "gpu_power_w": 92.04,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 87.09093770799996,
+    "cpu_seconds": 93.6,
+    "rss_mib": 2319.05078125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2964.0,
+    "gpu_power_w": 82.75,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 88.13780493399997,
+    "cpu_seconds": 94.7,
+    "rss_mib": 2321.05078125,
+    "gpu_util_percent": 38.0,
+    "gpu_memory_mib": 2935.0,
+    "gpu_power_w": 84.01,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 89.18853523899998,
+    "cpu_seconds": 95.84,
+    "rss_mib": 2325.17578125,
+    "gpu_util_percent": 18.0,
+    "gpu_memory_mib": 2937.0,
+    "gpu_power_w": 55.32,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 90.24029979600004,
+    "cpu_seconds": 96.95,
+    "rss_mib": 2325.17578125,
+    "gpu_util_percent": 16.0,
+    "gpu_memory_mib": 2929.0,
+    "gpu_power_w": 57.34,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 91.28039634200002,
+    "cpu_seconds": 98.04,
+    "rss_mib": 2337.92578125,
+    "gpu_util_percent": 18.0,
+    "gpu_memory_mib": 2925.0,
+    "gpu_power_w": 64.15,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 92.33452706100002,
+    "cpu_seconds": 99.1,
+    "rss_mib": 2337.92578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2926.0,
+    "gpu_power_w": 91.67,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 93.38381353,
+    "cpu_seconds": 100.15,
+    "rss_mib": 2337.92578125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2934.0,
+    "gpu_power_w": 92.44,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 94.44055899900002,
+    "cpu_seconds": 101.23,
+    "rss_mib": 2337.92578125,
+    "gpu_util_percent": 71.0,
+    "gpu_memory_mib": 2984.0,
+    "gpu_power_w": 93.35,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 95.49520618500003,
+    "cpu_seconds": 102.34,
+    "rss_mib": 2337.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2981.0,
+    "gpu_power_w": 96.11,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 96.54391465900005,
+    "cpu_seconds": 103.45,
+    "rss_mib": 2337.92578125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2955.0,
+    "gpu_power_w": 90.86,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 97.58674263199998,
+    "cpu_seconds": 104.56,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 67.0,
+    "gpu_memory_mib": 2924.0,
+    "gpu_power_w": 96.04,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 98.63527263699996,
+    "cpu_seconds": 105.66,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 2924.0,
+    "gpu_power_w": 93.93,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 99.691323055,
+    "cpu_seconds": 106.77,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2885.0,
+    "gpu_power_w": 90.36,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 100.74385031899999,
+    "cpu_seconds": 107.88,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2879.0,
+    "gpu_power_w": 93.25,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 101.79401403099996,
+    "cpu_seconds": 108.95,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 2882.0,
+    "gpu_power_w": 90.42,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 102.846287652,
+    "cpu_seconds": 110.04,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2882.0,
+    "gpu_power_w": 94.93,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 103.88991477900004,
+    "cpu_seconds": 111.14,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 2883.0,
+    "gpu_power_w": 91.69,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 104.93879145899996,
+    "cpu_seconds": 112.23,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2934.0,
+    "gpu_power_w": 95.11,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 105.98086519100002,
+    "cpu_seconds": 113.31,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2935.0,
+    "gpu_power_w": 90.18,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 107.029962135,
+    "cpu_seconds": 114.4,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 71.0,
+    "gpu_memory_mib": 2931.0,
+    "gpu_power_w": 92.52,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 108.07566179699995,
+    "cpu_seconds": 115.49,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 71.0,
+    "gpu_memory_mib": 2927.0,
+    "gpu_power_w": 97.78,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 109.13325650000002,
+    "cpu_seconds": 116.59,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2933.0,
+    "gpu_power_w": 91.38,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 110.178021908,
+    "cpu_seconds": 117.66,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2915.0,
+    "gpu_power_w": 92.25,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 111.22855299699995,
+    "cpu_seconds": 118.75,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2943.0,
+    "gpu_power_w": 99.96,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 112.27424366399998,
+    "cpu_seconds": 119.86,
+    "rss_mib": 2339.92578125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 2959.0,
+    "gpu_power_w": 85.41,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 113.32199192600001,
+    "cpu_seconds": 120.95,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 51.0,
+    "gpu_memory_mib": 3004.0,
+    "gpu_power_w": 90.01,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 114.36784350200003,
+    "cpu_seconds": 122.05,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 76.0,
+    "gpu_memory_mib": 3003.0,
+    "gpu_power_w": 95.16,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 115.42234364199999,
+    "cpu_seconds": 123.15,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2999.0,
+    "gpu_power_w": 94.05,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 116.46578849100001,
+    "cpu_seconds": 124.24,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 2990.0,
+    "gpu_power_w": 94.33,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 117.51350213,
+    "cpu_seconds": 125.33,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 3004.0,
+    "gpu_power_w": 97.22,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 118.55985279499998,
+    "cpu_seconds": 126.39,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 77.0,
+    "gpu_memory_mib": 2976.0,
+    "gpu_power_w": 99.16,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 119.61355169399997,
+    "cpu_seconds": 127.5,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 76.0,
+    "gpu_memory_mib": 2976.0,
+    "gpu_power_w": 90.57,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 120.65771708900002,
+    "cpu_seconds": 128.58,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2973.0,
+    "gpu_power_w": 95.44,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 121.70804277499997,
+    "cpu_seconds": 129.68,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 76.0,
+    "gpu_memory_mib": 2988.0,
+    "gpu_power_w": 99.72,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 122.754479393,
+    "cpu_seconds": 130.75,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 3042.0,
+    "gpu_power_w": 93.93,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 123.80757198799995,
+    "cpu_seconds": 131.84,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 3035.0,
+    "gpu_power_w": 97.01,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 124.85122597199995,
+    "cpu_seconds": 132.91,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 3024.0,
+    "gpu_power_w": 97.06,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 125.90309029900004,
+    "cpu_seconds": 133.97,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 3017.0,
+    "gpu_power_w": 97.24,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 126.94809172600003,
+    "cpu_seconds": 135.05,
+    "rss_mib": 2343.67578125,
+    "gpu_util_percent": 72.0,
+    "gpu_memory_mib": 2982.0,
+    "gpu_power_w": 92.75,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 127.99462934799999,
+    "cpu_seconds": 136.17,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 66.0,
+    "gpu_memory_mib": 2976.0,
+    "gpu_power_w": 95.2,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 129.043667271,
+    "cpu_seconds": 137.26,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 2976.0,
+    "gpu_power_w": 96.16,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 130.08932435099996,
+    "cpu_seconds": 138.36,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2976.0,
+    "gpu_power_w": 95.74,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 131.129350338,
+    "cpu_seconds": 139.45,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 73.0,
+    "gpu_memory_mib": 2976.0,
+    "gpu_power_w": 91.64,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 132.17958361599995,
+    "cpu_seconds": 140.54,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 3016.0,
+    "gpu_power_w": 95.95,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 133.22228911399998,
+    "cpu_seconds": 141.64,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 75.0,
+    "gpu_memory_mib": 3011.0,
+    "gpu_power_w": 91.67,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 134.26912169599996,
+    "cpu_seconds": 142.72,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 74.0,
+    "gpu_memory_mib": 3048.0,
+    "gpu_power_w": 99.14,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 135.31577541399997,
+    "cpu_seconds": 143.82,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 76.0,
+    "gpu_memory_mib": 3097.0,
+    "gpu_power_w": 99.42,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 136.364934403,
+    "cpu_seconds": 144.91,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 77.0,
+    "gpu_memory_mib": 3090.0,
+    "gpu_power_w": 92.69,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 137.40812162199995,
+    "cpu_seconds": 146.0,
+    "rss_mib": 2345.80078125,
+    "gpu_util_percent": 77.0,
+    "gpu_memory_mib": 3077.0,
+    "gpu_power_w": 92.03,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 138.45623003499998,
+    "cpu_seconds": 147.05,
+    "rss_mib": 2331.84765625,
+    "gpu_util_percent": 78.0,
+    "gpu_memory_mib": 3092.0,
+    "gpu_power_w": 81.46,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 139.49552931000005,
+    "cpu_seconds": 148.11,
+    "rss_mib": 2343.22265625,
+    "gpu_util_percent": 18.0,
+    "gpu_memory_mib": 3102.0,
+    "gpu_power_w": 90.82,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 140.54421529599995,
+    "cpu_seconds": 149.19,
+    "rss_mib": 2343.22265625,
+    "gpu_util_percent": 19.0,
+    "gpu_memory_mib": 3105.0,
+    "gpu_power_w": 58.48,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 141.58268948900002,
+    "cpu_seconds": 150.3,
+    "rss_mib": 2343.22265625,
+    "gpu_util_percent": 18.0,
+    "gpu_memory_mib": 3044.0,
+    "gpu_power_w": 58.78,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 142.63015934999999,
+    "cpu_seconds": 151.38,
+    "rss_mib": 2346.22265625,
+    "gpu_util_percent": 25.0,
+    "gpu_memory_mib": 3060.0,
+    "gpu_power_w": 58.97,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 143.66915492700002,
+    "cpu_seconds": 152.45,
+    "rss_mib": 2346.22265625,
+    "gpu_util_percent": 21.0,
+    "gpu_memory_mib": 3059.0,
+    "gpu_power_w": 59.05,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 144.71465833699995,
+    "cpu_seconds": 153.55,
+    "rss_mib": 2346.22265625,
+    "gpu_util_percent": 15.0,
+    "gpu_memory_mib": 3059.0,
+    "gpu_power_w": 58.76,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  },
+  {
+    "elapsed_seconds": 145.755906783,
+    "cpu_seconds": 154.63,
+    "rss_mib": 2326.96484375,
+    "gpu_util_percent": 21.0,
+    "gpu_memory_mib": 3058.0,
+    "gpu_power_w": 56.66,
+    "web": {
+      "frames": 4474,
+      "clients": 1,
+      "suspended": true,
+      "paused": false,
+      "steps": 5478,
+      "episode_seconds": 0.10999996215105057,
+      "resets": 248,
+      "fps": 0.0,
+      "terminal": true,
+      "torques": [
+        -1.0,
+        -1.0,
+        0.02949816733598709,
+        0.029500000178813934
+      ],
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+      "policy_export_error": 3.993511199951172e-06,
+      "error": null
+    }
+  }
+]

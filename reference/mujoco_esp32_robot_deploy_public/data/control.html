@@ -1,0 +1,192 @@
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 80vmin; margin: 0 auto; padding: 2vmin; text-align: center; }
+    .button {
+      padding: 1vmin 2vmin;
+      margin: 1vmin 0;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 2vmin;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      border-radius: 1vmin;
+      box-shadow: 0 0.4vmin #999;
+    }
+    .button:hover {
+      background-color: #45a049;
+      cursor: hand;
+    }
+    .button:active {
+      background-color: #3e8e41;
+      box-shadow: 0 0.2vmin #666;
+      transform: translateY(0.2vmin);
+    }
+    canvas { border: 0.1vmin solid black; }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 15vmin; /* 增加滑动开关的长度 */
+      height: 5vmin;
+    }
+    .switch input { display: none; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 4vmin;
+      box-shadow: 0 0.4vmin #999;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 4vmin;
+      width: 4vmin;
+      left: 0.5vmin;
+      bottom: 0.5vmin;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      box-shadow: 0 0.4vmin #999;
+    }
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    input:checked + .slider:before {
+      transform: translateX(10vmin); /* 调整滑动距离以适应新的长度 */
+    }
+    .switch-label {
+      display: inline-block;
+      width: 4vmin;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 4vmin;
+      font-size: 1.5vmin;
+    }
+    .connection-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5vmin;
+      margin: 1vmin 0;
+      padding: 0.8vmin 1.5vmin;
+      border: 1px solid #d7dde5;
+      border-radius: 1vmin;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 1.8vmin;
+    }
+    .connection-status strong { color: #0f172a; }
+    #connectionMode[data-state="online"] { color: #16803c; }
+    #connectionMode[data-state="fallback"] { color: #b45309; }
+    .http-fallback-toggle {
+      display: block;
+      margin: 0.5vmin 0 1vmin;
+      color: #64748b;
+      font-size: 1.6vmin;
+    }
+    .http-fallback-toggle input { vertical-align: middle; }
+    #joystick {
+      width: 60vmin;
+      height: 60vmin;
+      max-width: 60vmin;
+      max-height: 60vmin;
+      background: radial-gradient(circle, #ffffff, #cccccc);
+      border-radius: 50%;
+      box-shadow: inset 0 0.4vmin #999, 0 0.4vmin #999;
+      aspect-ratio: 1 / 1; /* 确保宽高比为1:1 */
+    }
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* 调整为center */
+      height: 100%; /* 确保容器高度为100% */
+      margin-left: 2vmin;
+    }
+    .vertical-slider {
+      width: 4vmin; /* 调整宽度 */
+      height: 50vmin; /* 调整高度 */
+      margin-top: auto; /* 向下对齐 */
+      writing-mode: bt-lr; /* 使滑条竖直显示 */
+      -webkit-appearance: slider-vertical; /* 使滑条竖直显示 */
+    }
+    .horizontal-slider {
+      width: 20vmin; /* 调整宽度 */
+      height: 4vmin; /* 调整高度 */
+      margin-bottom: 5vmin; /* 向上对齐 */
+    }
+    .vertical-slider::-webkit-slider-thumb {
+      width: 4vmin; /* 调整按钮宽度 */
+      height: 4vmin; /* 调整按钮高度 */
+      background: #54409f;
+      cursor: pointer;
+      border-radius: 50%;
+      transform: scale(3); /* 放大按钮 */
+    }
+    .horizontal-slider::-webkit-slider-thumb {
+      width: 4vmin; /* 调整按钮宽度 */
+      height: 4vmin; /* 调整按钮高度 */
+      background: #4CAF50;
+      cursor: pointer;
+      border-radius: 50%;
+      transform: scale(3); /* 放大按钮 */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Control Page</h1>
+    <button class="button" onclick="goToMainPage()">Go to Main Page</button>
+    <br>
+    <div class="connection-status">
+      <span>Connection: <strong id="connectionMode">Connecting...</strong></span>
+      <span>RTT: <strong id="connectionLatency">--</strong></span>
+    </div>
+    <label class="http-fallback-toggle">
+      <input type="checkbox" id="httpFallback" onchange="httpFallbackChanged()"> Allow HTTP fallback
+    </label>
+    <div class="connection-status">
+      <span>Yaw: <strong id="imuYaw">--</strong> rad</span>
+      <span>Pitch: <strong id="imuPitch">--</strong> rad</span>
+      <span>Roll: <strong id="imuRoll">--</strong> rad</span>
+    </div>
+    <table style="width: 100%; text-align: center;">
+      <tr>
+        <td>
+          <p>Joystick X: <span id="joystickX">0</span>,  Joystick Y: <span id="joystickY">0</span></p>
+          <canvas id="joystick"></canvas>
+          <br><br>
+          <div>
+            <p>Switch State: <span id="switchState">OFF</span></p>
+            <span class="switch-label">OFF</span>
+            <label class="switch">
+              <input type="checkbox" id="toggleSwitch" onchange="toggleSwitchChanged()">
+              <span class="slider"></span>
+            </label>
+            <span class="switch-label">ON</span>
+          </div>
+        </td>
+        <td>
+          <div class="slider-container">
+            <p>oscillation:<span id="oscillation_value">0</span><br><br></p>
+            <input type="range" class="horizontal-slider" min="-50" max="50" value="0" id="oscillation_bar" oninput="updateSliderValues()">
+            <p>height:<span id="height_value">0</span><br><br></p>
+            <input type="range" class="vertical-slider" min="0" max="100" value="0" id="height_bar" orient="vertical" oninput="updateSliderValues()">
+            
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <script src="control.js?v=stick4"></script>
+</body>
+</html>

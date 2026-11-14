@@ -1,0 +1,207 @@
+<mujoco model="legwheel6_stl">
+    <!-- <include file="fractal.xml" /> -->
+    <include file="./common/skybox.xml" />
+    <include file="./common/visual.xml" />
+    <include file="./common/materials.xml" />
+    <visual>
+        <global offwidth="1920" offheight="1080" />
+    </visual>
+    <compiler angle="radian" eulerseq="XYZ" />
+    <asset>
+        <mesh name="thigh_left" file="meshes6/thigh_left.stl" scale="0.001 0.001 0.001" />
+        <mesh name="thigh_right" file="meshes6/thigh_right.stl" scale="0.001 0.001 0.001" />
+        <mesh name="root" file="meshes6/root.stl" scale="0.001 0.001 0.001" />
+        <mesh name="calf_left" file="meshes6/calf_left.stl" scale="0.001 0.001 0.001" />
+        <mesh name="calf_right" file="meshes6/calf_right.stl" scale="0.001 0.001 0.001" />
+        <mesh name="wheel_right" file="meshes6/wheel_right.stl" scale="0.001 0.001 0.001" />
+        <mesh name="wheel_left" file="meshes6/wheel_left.stl" scale="0.001 0.001 0.001" />
+        <!-- <texture name="martian" type="2d" file="martian.png"/> -->
+        <!-- <material name="martian" texture="martian"/> -->
+        <hfield name="fractal_noise" file="martian_gray_100x100_bndblur.png" size="4 4 0.3 0.1" />
+        <hfield name="fractal_noise2" file="martian_gray_100x100_bndblur.png" size="4 4 0.2 0.1" />
+    </asset>
+    <option gravity="0 0 -9.81" timestep="0.004" wind="0 0 0" integrator="implicitfast" />
+    <default>
+        <geom condim="3" contype="0" conaffinity="0"/>
+        <default class="visual">
+            <geom type="mesh" contype="0" conaffinity="0" />
+        </default>
+        <default class="visualforce">
+            <geom type="mesh" contype="0" conaffinity="0" />
+            <!-- <geom type="mesh" contype="0" conaffinity="1" /> -->
+        </default>
+        <default class="hip">
+            <!-- <joint damping="82" stiffness="39" armature="53" frictionloss="0." /> -->
+            <joint damping="1" stiffness="1" armature="20" frictionloss="0." />
+        </default>
+        <default class="leg">
+            <joint damping="0.001" stiffness="0.001" armature="0.001" frictionloss="0.0" />
+        </default>
+        <default class="wheel">
+            <!-- <joint armature="0.000243" damping="0.0102" stiffness="0" frictionloss="1.0" /> -->
+            <!-- <joint armature="0.00243" damping="0.0102" stiffness="0" frictionloss="1.0" /> -->
+            <!-- <joint armature="0.0002" damping="0.010" stiffness="0" frictionloss="1.0" /> -->
+            <!-- <joint armature="0.001" damping="0.0102" stiffness="0" frictionloss="1.0" /> -->
+            <!-- <joint armature="0.0005" damping="0.0102" stiffness="0" frictionloss="1.0" /> -->
+            <!-- <joint armature="0.000441" damping="0.025837" stiffness="0.000093" frictionloss="0.0" /> -->
+            <!-- <joint armature="0.000476" damping="0.026901" stiffness="0.002161" frictionloss="0.009990" /> -->
+            <!-- <joint armature="0.00" damping="0.000373" stiffness="0.00" frictionloss="0.0" /> -->
+            <!-- <joint armature="0.0000049958" damping="0.0004097420" stiffness="0.00" frictionloss="0.0000443927" /> -->
+            <joint armature="0.0000054595" damping="0.0004495230" stiffness="0.00" frictionloss="0.0002593389" />
+        </default>
+        <default class="wheel2">
+            <!-- <joint armature="0.000476" damping="0.026901" stiffness="0.002161" frictionloss="0.009990" /> -->
+            <!-- <joint armature="0.000441" damping="0.025837" stiffness="0.000093" frictionloss="0.0" /> -->
+            <!-- <joint armature="0.00" damping="0.000373" stiffness="0.00" frictionloss="0.0" /> -->
+            <!-- <joint armature="0.0000049958" damping="0.0004097420" stiffness="0.00" frictionloss="0.0000443927" /> -->
+            <joint armature="0.0000054595" damping="0.0004495230" stiffness="0.00" frictionloss="0.0002593389" />
+        </default>
+        <default class="essence">
+            <geom rgba="1 0 0 0.0"  contype="0" conaffinity="1" />
+        </default>
+    </default>
+    <worldbody>
+        <geom name="floor" contype='1' conaffinity='0' pos="0.00000 0.00000 -0.00100" size="40 40 .001" type="plane" material="grid" />
+        <!-- <geom name="terrain_geom" contype='1' conaffinity='0' type="hfield" hfield="fractal_noise" pos="-4 -4 -0.05"  />
+        <geom name="terrain_geom2" contype='1' conaffinity='0' type="hfield" hfield="fractal_noise2" pos="4 4 -0.02"  />
+        <geom name="terrain_geom3" contype='1' conaffinity='0' type="hfield" hfield="fractal_noise" pos="-4 4 -0.05"  />
+        <geom name="terrain_geom4" contype='1' conaffinity='0' type="hfield" hfield="fractal_noise2" pos="4 -4 -0.02"  /> -->
+        <!-- <geom name="slope0" pos="0.12000 0.07000 -0.0700" size="0.1 0.05" type="cylinder" euler="1.57 0. 0.00000" material="grid" /> -->
+        <!-- <geom name="hurdle0" pos="0.4000 0.0000 0.000" size="0.006 0.5" type="cylinder" euler="1.57 0. 0.00000" rgba="1 0 0 0.5" /> -->
+        <!-- <body name="cliff" pos="0.2700 0.1800 0.000" euler="0. 0. 0.9000">
+            <geom name="cliff0" pos="0.00000 0.00000 0.00000" size="0.15 0.15 0.001" type="box" euler="0.52359 0. 0.0000" rgba="0 1 0 1.0" />
+            <geom name="cliff1" pos="0.00000 0.128900 0.00000" size="0.15 0.074 0.001" type="box" euler="1.57079 0. 0.0000" rgba="0 1 0 1.0" />
+        </body> -->
+        <body name="root" pos="-0.00000 0.00000 0.09" euler="0.00000 0.00000 0.0000">
+            <freejoint name="root_joint" />
+            <site name="root" pos="0.00000 0.00000 0.00000" size="0.001" rgba="1 0 0 1" />
+            <geom class="visual" name="root_geom" type="mesh" mesh="root" pos="0.00000 0.00000 0.00000" euler="0.00000 0.00000 0.00000" rgba="0.2 0.2 0.8 1.0" />
+            <!-- <inertial mass="0.19480" pos="-0.00375 -0.00000 -0.02172" diaginertia="8.9369e-05 7.6437e-05 0.00013182" /> -->
+            <inertial mass="0.19480" pos="-0.00375 -0.00000 -0.02172" diaginertia="8.753e-05 6.837e-05 1.138e-04" />
+            <geom name="root_geom_shell" size="0.027 0.032 0.018" pos="-0.00100 0.00000 -0.018" type="box" class="essence" />
+            <body name="thigh_left" pos="-0.00129 0.02960 -0.02220" euler="0.00000 1.26187 0.00000">
+                <site name="thigh_left_site" pos="0.00000 0.00000 0.00000" size="0.001" rgba="1 0 0 1" />
+                <joint name="thigh_left_joint" class="hip" type="hinge" axis="-0.00000 1.00000 -0.00000" pos="-0.00000 -0.00000 0.00000" />
+                <geom class="visual" name="thigh_left_geom" type="mesh" mesh="thigh_left" pos="0.00000 0.00000 0.00000" euler="0.00000 0.00000 0.00000" rgba="0.3 0.8 0.3 1." />
+                <inertial mass="0.01767" pos="-0.00078 0.00703 -0.01305" diaginertia="6.0728e-06 6.3479e-06 9.067e-07" />
+                <geom name="thigh_left_geom_shell" size="0.005 0.006 0.026" pos="0.00000 0.0100 -0.026" type="box" class="essence" />
+                <!-- <inertial mass="0.01767" pos="-0.00078 0.00703 -0.01305" fullinertia="6.0728e-06 6.3479e-06 9.0666e-07 1.7264e-09 -6.9052e-08 5.0268e-08" /> -->
+                <body name="calf_left" pos="0.00300 0.01272 -0.05200" euler="-3.14159 -0.69813 3.14159">
+                    <joint name="calf_left_joint" class="leg" type="hinge" axis="-0.00000 1.00000 0.00000" pos="0.00000 -0.00300 -0.00000" />
+                    <geom class="visual" name="calf_left_geom" type="mesh" mesh="calf_left" pos="0.00000 0.00000 0.00000" euler="0.00000 0.00000 0.00000" rgba="0.8 0.8 0. 1." />
+                    <inertial mass="0.02350" pos="-0.00035 -0.00685 -0.04334" diaginertia="1.15e-05 1.14e-05 5.0e-07" />
+                    <!-- <inertial mass="0.02350" pos="-0.00035 -0.00685 -0.04334" diaginertia="6.0443e-06 5.9063e-06 1.7677e-06" /> -->
+                    <!-- <inertial mass="0.04560" pos="-0.00035 -0.00685 -0.04334" diaginertia="1.173e-05 1.146e-05 3.430e-06" /> -->
+                    <geom name="calf_left_geom_shell" size="0.005 0.006 0.035" pos="0.00000 -0.002 -0.020" type="box" class="essence"  />
+                    <body name="calf_wheel_left" pos="-0.00049 -0.00625 -0.05000" euler="1.57080 -0.00000 0.00000">
+                        <inertial mass="0.0110" pos="0.00000 0.00000 -0.00706" diaginertia="1.9236e-06 1.9236e-06 3.3103e-06" />
+                    </body>
+                    <body name="wheel_left" pos="-0.00049 -0.00625 -0.05000" euler="1.57080 -0.00000 0.00000">
+                        <site name="wheel_left_site" pos="0.00000 0.00000 0.00000" size="0.001" rgba="1 0 0 1" />
+                        <joint name="wheel_left_joint" class="wheel" type="hinge" axis="-0.00000 0.00000 -1.00000" pos="0.00000 -0.00000 -0.00000" />
+                        <geom class="visualforce" name="wheel_left_geom" type="mesh" mesh="wheel_left" pos="0.00000 0.00000 0.00000" euler="0.00000 0.00000 0.00000" rgba="0.2 0.2 0.2 1." />
+                        <!-- <inertial mass="0.02931" pos="0.00000 0.00000 -0.00706" fullinertia="3.8236e-06 3.8236e-06 6.6103e-06 3.7106e-16 3.8004e-18 1.2688e-18" /> -->
+                        <inertial mass="0.0072" pos="0.00000 0.00000 -0.00706" diaginertia="1.455e-6 1.455e-6 2.738e-6" />
+                        <geom name="wheel_left_geom_shell" size="0.0195 0.006" pos="0.00000 0.00000 -0.00630" type="cylinder" class="essence" />
+                        <!-- <geom name="wheel_left_geom_shell" size="0.0195 0.001" pos="0.00000 0.00000 -0.00630" type="capsule" class="essence" /> -->
+                    </body>
+                </body>
+            </body>
+            <body name="thigh_right" pos="-0.00129 -0.02960 -0.02220" euler="-0.00000 1.26187 -0.00000">
+                <site name="thigh_right_site" pos="0.00000 0.00000 0.00000" size="0.001" rgba="1 0 0 1" />
+                <joint name="thigh_right_joint" class="hip" type="hinge" axis="-0.00000 1.00000 -0.00000" pos="-0.00000 0.00000 0.00000" />
+                <geom class="visual" name="thigh_right_geom" type="mesh" mesh="thigh_right" pos="0.00000 0.00000 0.00000" euler="0.00000 0.00000 0.00000" rgba="0.3 0.8 0.3 1." />
+                <inertial mass="0.01767" pos="-0.00078 -0.00703 -0.01305" diaginertia="6.0728e-06 6.3479e-06 9.0666e-07" />
+                <geom name="thigh_right_geom_shell" size="0.005 0.006 0.026" pos="0.00000 -0.0100 -0.026" type="box" class="essence" />
+                <body name="calf_right" pos="0.00300 -0.01272 -0.05200" euler="-3.14159 -0.69813 3.14159">
+                    <joint name="calf_right_joint" class="leg" type="hinge" axis="0.00000 1.00000 -0.00000" pos="0.00000 0.00300 -0.00000" />
+                    <geom class="visual" name="calf_right_geom" type="mesh" mesh="calf_right" pos="0.00000 0.00000 0.00000" euler="0.00000 0.00000 0.00000" rgba="0.8 0.8 0. 1." />
+                    <inertial mass="0.02350" pos="-0.00035 0.00685 -0.04334" diaginertia="1.15e-05 1.14e-05 5.0e-07" />
+                    <!-- <inertial mass="0.02350" pos="-0.00035 0.00685 -0.04334" diaginertia="6.0443e-06 5.9062e-06 1.7676e-06" /> -->
+                    <!-- <inertial mass="0.04560" pos="-0.00035 0.00685 -0.04334" diaginertia="1.173e-05 1.146e-05 3.430e-06" /> -->
+                    <geom name="calf_right_geom_shell" size="0.005 0.006 0.035" pos="0.00000 0.002 -0.020" type="box" class="essence" />
+                    <body name="calf_wheel_right" pos="-0.00049 0.00625 -0.05000" euler="1.57080 -0.00000 0.00000">
+                        <inertial mass="0.0110" pos="0.00000 0.00000 0.00706" diaginertia="1.9236e-06 1.9236e-06 3.3103e-06" />
+                    </body>
+                    <body name="wheel_right" pos="-0.00049 0.00625 -0.05000" euler="1.57080 -0.00000 -0.00000">
+                        <site name="wheel_right_site" pos="0.00000 0.00000 0.00000" size="0.001" rgba="1 0 0 1" />
+                        <joint name="wheel_right_joint" class="wheel2" type="hinge" axis="0.00000 -0.00000 -1.00000" pos="0.00000 -0.00000 -0.00000" />
+                        <geom class="visualforce" name="wheel_right_geom" type="mesh" mesh="wheel_right" pos="0.00000 0.00000 0.00000" euler="0.00000 0.00000 0.00000" rgba="0.2 0.2 0.2 1." />
+                        <!-- <inertial mass="0.02931" pos="0.00000 0.00000 0.00706" fullinertia="3.8236e-06 3.8236e-06 6.6103e-06 3.7123e-16 -3.6663e-18 -1.1251e-18" /> -->
+                        <inertial mass="0.0072" pos="0.00000 0.00000 0.00706" diaginertia="1.455e-6 1.455e-6 2.738e-6" />
+                        <geom name="wheel_right_geom_shell" size="0.0195 0.006" pos="0.00000 0.00000 0.00630" type="cylinder" class="essence" />
+                        <!-- <geom name="wheel_right_geom_shell" size="0.0195 0.001" pos="0.00000 0.00000 0.00630" type="capsule" class="essence" /> -->
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+    <equality>
+        <joint joint1="calf_left_joint" joint2="thigh_left_joint" polycoef="-0.0004 -2.1405 0.2637 -1.2386 -0.3494" />
+        <joint joint1="calf_right_joint" joint2="thigh_right_joint" polycoef="-0.0004 -2.1405 0.2637 -1.2386 -0.3494" />
+        <!-- <joint joint1="calf_left_joint" joint2="thigh_left_joint" polycoef="0 -2 0 0 0" /> -->
+        <!-- <joint joint1="calf_right_joint" joint2="thigh_right_joint" polycoef="0 -2 0 0 0" /> -->
+    </equality>
+    <actuator>
+        <position name="thigh_left_pos" joint="thigh_left_joint" kp="120" kv="80" gear="1" ctrllimited="true" ctrlrange="-0.5 0." forcelimited="true" forcerange="-24 24" />
+        <position name="thigh_right_pos" joint="thigh_right_joint" kp="120" kv="80" gear="1" ctrllimited="true" ctrlrange="-0.5 0." forcelimited="true" forcerange="-24 24" />
+        
+        <motor name="wheel_left_motor" joint="wheel_left_joint" gear="1." ctrllimited="true" ctrlrange="-0.04 0.04" forcelimited="true" forcerange="-0.04 0.04" />
+        <motor name="wheel_right_motor" joint="wheel_right_joint" gear="1." ctrllimited="true" ctrlrange="-0.04 0.04" forcelimited="true" forcerange="-0.04 0.04" />
+        
+        <!-- <motor name="wheel_left_motor" joint="wheel_left_joint" gear="1." ctrllimited="true" ctrlrange="-0.0295 0.0295" forcelimited="true" forcerange="-0.0295 0.0295" /> -->
+        <!-- <motor name="wheel_right_motor" joint="wheel_right_joint" gear="1." ctrllimited="true" ctrlrange="-0.0295 0.0295" forcelimited="true" forcerange="-0.0295 0.0295" /> -->
+        <!-- <motor name="wheel_left_motor" joint="wheel_left_joint" gear="1." ctrllimited="true" ctrlrange="-1.24 1.24" forcelimited="true" forcerange="-1.24 1.24" />
+        <motor name="wheel_right_motor" joint="wheel_right_joint" gear="1." ctrllimited="true" ctrlrange="-1.24 1.24" forcelimited="true" forcerange="-1.24 1.24" /> -->
+
+        <!-- <velocity name="thigh_left_vel" joint="thigh_left_joint" kv="10" gear="1"  /> -->
+        <!-- <velocity name="thigh_right_vel" joint="thigh_right_joint" kv="10" gear="1"  /> -->
+    </actuator>
+    <sensor>
+        <!-- <framequat name="root_quat" objtype="site" objname="root" /> -->
+        <!-- <framequat name="root_quat_wheelleft" objtype="site" objname="root" reftype="site" refname="wheel_left_site" /> -->
+        <!-- <framequat name="wheelleft_root_quat" objtype="site" objname="wheel_left_site" reftype="site" refname="root" /> -->
+        <accelerometer name="root_accel" site="root" />
+        <gyro name="root_gyro" site="root" />
+        <framezaxis objtype="site" objname="root" name="root_upvector"/>
+        <velocimeter site="root" name="root_local_linvel"/>
+        <framelinvel name="root_linvel" objtype="site" objname="root" />
+        <frameangvel name="root_angvel" objtype="site" objname="root" />
+        <!-- <framepos name="root_pos" objtype="site" objname="root" /> -->
+        <!-- <framepos name="root_wheelleft" objtype="site" objname="root" reftype="site" refname="wheel_left_site" /> -->
+        <!-- <framepos name="root_wheelright" objtype="site" objname="root" reftype="site" refname="wheel_right_site" /> -->
+
+        <!-- <framepos name="wheelleft_pos_root" objtype="site" objname="wheel_left_site" reftype="site" refname="root" /> -->
+        <!-- <framepos name="wheelright_pos_root" objtype="site" objname="wheel_right_site" reftype="site" refname="root" /> -->
+
+        <jointpos name="thigh_left_jointpos" joint="thigh_left_joint" />
+        <jointpos name="thigh_right_jointpos" joint="thigh_right_joint" />
+        <jointvel name="thigh_left_jointvel" joint="thigh_left_joint" />
+        <jointvel name="thigh_right_jointvel" joint="thigh_right_joint" />
+        <!-- <framepos name="thigh_left_site_framepos" objtype="site" objname="thigh_left_site" /> -->
+        <!-- <framepos name="thigh_right_site_framepos" objtype="site" objname="thigh_right_site" /> -->
+        <!-- <framepos name="thigh_left_site_framepos" objtype="site" objname="thigh_left_site" reftype="site" refname="wheel_left_site" /> -->
+        <!-- <framepos name="thigh_right_site_framepos" objtype="site" objname="thigh_right_site" reftype="site" refname="wheel_right_site" /> -->
+
+        <!-- <jointpos name="calf_left_jointpos" joint="calf_left_joint" /> -->
+        <!-- <jointpos name="calf_right_jointpos" joint="calf_right_joint" /> -->
+        <!-- <jointvel name="calf_left_jointvel" joint="calf_left_joint" /> -->
+        <!-- <jointvel name="calf_right_jointvel" joint="calf_right_joint" /> -->
+
+        <jointpos name="wheel_left_jointpos" joint="wheel_left_joint" />
+        <jointpos name="wheel_right_jointpos" joint="wheel_right_joint" />
+        <!-- <framepos name="wheel_left_site_framepos" objtype="site" objname="wheel_left_site" /> -->
+        <!-- <framepos name="wheel_right_site_framepos" objtype="site" objname="wheel_right_site" /> -->
+        <jointvel name="wheel_left_jointvel" joint="wheel_left_joint" />
+        <jointvel name="wheel_right_jointvel" joint="wheel_right_joint" />
+        <velocimeter name="wheel_left_site_linvel" site="wheel_left_site" />
+        <velocimeter name="wheel_right_site_linvel" site="wheel_right_site" />
+    </sensor>
+    <!-- <keyframe> -->
+        <!-- <key qpos="0.0 0.0 0.099 1.0 0.0 0.0 0.0 -0.21041 0.46120 0 -0.21041 0.46120 0" ctrl="-0.21041 -0.21041 0 0 " /> -->
+        <!-- <key qpos="0 0 0.07875 1 0 0 0 0 0 0 0 0 0" ctrl="0. 0. 0 0 " /> -->
+        <!-- <key qpos="0.00000  0.00000  0.09910 -0.74164 -0.05619  0.06263 -0.66550 -0.34218  0.46120 29.43372 -0.34042  0.46120 116.97570" ctrl="-0 -0 0.0000 0.0000 " /> -->
+        <!-- <key qpos="0.0 0.0 0.099 1.0 0.0 0.0 0.0 -0.21041 0 0 -0.21041 0 0" ctrl="-0.21041 -0.21041 0.0000 0.0000 " /> -->
+        <!-- <key qpos="0.0 0.0 0.126 1.0 0.0 0.0 0.0 -0.49729 1.25947 0 -0.49729 1.25947 0" ctrl="-0.49729 -0.49729 0.0000 0.0000 " /> -->
+    <!-- </keyframe> -->
+</mujoco>

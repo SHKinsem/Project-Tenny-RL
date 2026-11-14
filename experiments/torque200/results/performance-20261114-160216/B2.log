@@ -1,0 +1,5 @@
+E1114 16:06:11.469179    2511 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+E1114 16:06:11.490774    2503 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+W1114 16:06:20.378001    2503 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 16:06:26.061186    2503 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 16:06:32.336955    2503 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.

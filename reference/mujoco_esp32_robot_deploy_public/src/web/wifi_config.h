@@ -1,0 +1,6 @@
+#pragma once
+
+#define WIFI_STA_SSID "YOUR_WIFI_SSID"
+#define WIFI_STA_PASSWORD "YOUR_WIFI_PASSWORD"
+#define WIFI_AP_SSID "ESP32-Access-Point"
+#define WIFI_AP_PASSWORD "CHANGE_ME_123"

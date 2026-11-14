@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520" role="img">
+  <title>bash sim_web.sh opens Control page and MuJoCo</title>
+  <defs>
+    <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 Z" fill="#57534E"/>
+    </marker>
+  </defs>
+  <rect width="960" height="520" fill="#F7F6F2"/>
+  <text x="48" y="40" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#1C1917">启动 sim_web.sh 之后</text>
+  <text x="48" y="64" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#78716C">同一套 Web 接到 sim。浏览器是真机 Control 页；机器人在独立 GLFW 窗口，不画进网页。</text>
+
+  <rect x="48" y="88" width="864" height="56" rx="8" fill="#FFFFFF" stroke="#E7E5E4"/>
+  <text x="480" y="124" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#1C1917">cd $FW &amp;&amp; bash sim_web.sh</text>
+
+  <line x1="480" y1="144" x2="480" y2="176" stroke="#57534E" stroke-width="1.5" marker-end="url(#arrw)"/>
+
+  <rect x="48" y="184" width="412" height="248" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <rect x="48" y="184" width="412" height="8" fill="#1D4ED8"/>
+  <text x="68" y="220" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#1D4ED8">窗口 1 · 浏览器</text>
+  <text x="68" y="248" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="600" fill="#1E3A8A">Control Page</text>
+  <text x="68" y="276" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#1D4ED8">http://127.0.0.1:8765/</text>
+  <text x="68" y="312" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#1E40AF">与真机同一套 data/control.html</text>
+  <text x="68" y="336" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">1  把开关拨到 ON（打开会 reset）</text>
+  <text x="68" y="360" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">2  按住摇杆才有 vx / yaw，松手即停</text>
+  <text x="68" y="384" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">3  高度 / 横滚滑条拨一下保持</text>
+  <text x="68" y="408" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#78716C">OFF = 零动作，机器人软倒</text>
+
+  <rect x="500" y="184" width="412" height="248" rx="8" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <rect x="500" y="184" width="412" height="8" fill="#6D28D9"/>
+  <text x="520" y="220" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#6D28D9">窗口 2 · MuJoCo GLFW</text>
+  <text x="520" y="248" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="600" fill="#4C1D95">LegWheel Web + Sim</text>
+  <text x="520" y="276" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#6D28D9">看机器人，不画进网页</text>
+  <text x="520" y="312" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">点一下窗口再按键（要焦点）</text>
+  <text x="520" y="336" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">按住 W/S、A/D，松开即停</text>
+  <text x="520" y="360" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">Q/E 高度 · B/N 横滚 · SPACE 重置</text>
+  <text x="520" y="384" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#44403C">左上 cmd / switcher，核对命令</text>
+  <text x="520" y="408" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#78716C">X 或关窗口退出</text>
+
+  <text x="48" y="468" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">首次 JIT 大约几十秒后才弹出 GLFW。macOS 不要设 MUJOCO_GL=egl，否则没有窗口。</text>
+  <text x="48" y="490" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">配置写在 sim_web.sh 顶部：端口、hold clip。本体在 vendor/，策略在 src/policy/rl_policy.cpp。</text>
+</svg>

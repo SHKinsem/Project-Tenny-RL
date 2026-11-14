@@ -1,0 +1,24 @@
+E1114 14:58:55.061592     438 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+E1114 14:58:55.076054     431 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+GPU SIM devices: [CudaDevice(id=0)]
+[sim] plant=/home/jaccob/projects/tenny-reference/mujoco_esp32_robot_deploy_public/vendor
+[sim] building env...
+[sim] kinematic probes...
+W1114 14:59:23.481255     431 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+  PASS reset_matches_env
+  PASS common_mode_ds
+  PASS differential_ds_zero
+  PASS vx_freezes_heading
+  PASS yaw_freezes_position
+  PASS clip_obs_not_anchor
+[sim] closed-loop with shared policy ckpts/newobs-norecovery/000403660800 ...
+[sim] t= 0.00s stand [0.0, 0.0, -0.25, 0.0]
+W1114 14:59:50.178880     431 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+[sim] t= 1.00s forward [0.2, 0.0, -0.25, 0.0]
+[sim] t= 2.00s backward [-0.2, 0.0, -0.25, 0.0]
+[sim] t= 3.00s yaw_left [0.0, 1.5, -0.25, 0.0]
+[sim] t= 4.00s yaw_right [0.0, -1.5, -0.25, 0.0]
+[sim] t= 5.00s stand2 [0.0, 0.0, -0.25, 0.0]
+  PASS closed_loop_policy_vs_env {'steps_compared': 600, 'n_ok': 600, 'n_fail': 0, 'n_reset': 0, 'max_err': {'dpsi': 3.1794610139135315e-08, 'ds_l': 1.7881393432617188e-07, 'ds_r': 1.7881393432617188e-07, 's0': 4.76837158203125e-07, 'yaw0': 1.5871755798535503e-07, 'slots_equal': 0.0}, 'ckpt': 'ckpts/newobs-norecovery/000403660800'}
+[sim] wrote /home/jaccob/projects/tenny-reference/artifacts/gpu-sim-verify.json
+ALL PASS

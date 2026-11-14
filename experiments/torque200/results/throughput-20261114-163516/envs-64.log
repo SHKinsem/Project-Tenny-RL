@@ -1,0 +1,248 @@
+E1114 16:36:21.323465    7077 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+E1114 16:36:21.336947    7055 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+W1114 16:36:35.075666    7055 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+{"steps": 0, "metrics": {}}
+{"steps": 8192, "metrics": {"training/sps": 230.97935479916472, "training/walltime": 35.46637320518494, "training/entropy_loss": -0.019976813346147537, "training/kl_mean": 0.552876889705658, "training/learning_rate": 9.999999747378752e-05, "training/policy_dist_max_loc": 2.1436541080474854, "training/policy_dist_max_std": 3.3874764442443848, "training/policy_dist_mean_loc": 0.05451495945453644, "training/policy_dist_mean_std": 0.8340972065925598, "training/policy_dist_min_loc": -3.1547727584838867, "training/policy_dist_min_std": 0.04467082768678665, "training/policy_loss": 0.008353283628821373, "training/total_loss": 0.5048506855964661, "training/v_loss": 0.516474187374115}}
+W1114 16:37:12.991107    7055 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+{"steps": 16384, "metrics": {"training/sps": 1307.4014732883022, "training/walltime": 41.732237339019775, "training/entropy_loss": -0.02148899994790554, "training/kl_mean": 0.00026257731951773167, "training/learning_rate": 9.999999747378752e-05, "training/policy_dist_max_loc": 1.702712893486023, "training/policy_dist_max_std": 2.504138946533203, "training/policy_dist_mean_loc": 0.058895472437143326, "training/policy_dist_mean_std": 0.8114402890205383, "training/policy_dist_min_loc": -2.3455758094787598, "training/policy_dist_min_std": 0.06691295653581619, "training/policy_loss": -0.00010343396570533514, "training/total_loss": 0.6325279474258423, "training/v_loss": 0.6541203856468201}}
+{"steps": 24576, "metrics": {"training/sps": 2526.9740254362905, "training/walltime": 44.97405934333801, "training/entropy_loss": -0.02214593067765236, "training/kl_mean": 7.680366979911923e-05, "training/learning_rate": 9.999999747378752e-05, "training/policy_dist_max_loc": 1.5618669986724854, "training/policy_dist_max_std": 2.0923655033111572, "training/policy_dist_mean_loc": 0.06247067451477051, "training/policy_dist_mean_std": 0.8015124797821045, "training/policy_dist_min_loc": -1.7789790630340576, "training/policy_dist_min_std": 0.1068112924695015, "training/policy_loss": -5.203124601393938e-05, "training/total_loss": 0.6457957625389099, "training/v_loss": 0.6679937243461609}}
+{"steps": 32768, "metrics": {"training/sps": 6244.453755705877, "training/walltime": 46.28594350814819, "training/entropy_loss": -0.022036325186491013, "training/kl_mean": 5.431918543763459e-05, "training/learning_rate": 9.999999747378752e-05, "training/policy_dist_max_loc": 1.4709603786468506, "training/policy_dist_max_std": 2.4266762733459473, "training/policy_dist_mean_loc": 0.05036093294620514, "training/policy_dist_mean_std": 0.7995420694351196, "training/policy_dist_min_loc": -2.009019136428833, "training/policy_dist_min_std": 0.09618160128593445, "training/policy_loss": 3.566805389709771e-05, "training/total_loss": 0.511207640171051, "training/v_loss": 0.5332083106040955}}
+time to jit+train: 0:01:00.515186
+[gpu-mem:train done, iter 0] nvidia-smi gpu0 NVIDIA GeForce RTX 2080 SUPER: used 3401/8192 MiB, util 67%
+[gpu-mem:train done, iter 0] jax cuda:0: pool 0.1/2.8 GiB (reserved/limit), in_use 0.00 GiB, peak_in_use 0.08 GiB, peak_pool 0.1 GiB
+Saved CPU checkpoint to /home/jaccob/projects/tenny-torque200/artifacts/throughput-20261114-163516/envs-64/params_cpu.pkl
+extract parameters from /home/jaccob/projects/tenny-torque200/artifacts/throughput-20261114-163516/envs-64/checkpoints/000000032768
+hidden_0 dict_keys(['bias', 'kernel']) (24, 64)
+hidden_1 dict_keys(['bias', 'kernel']) (64, 64)
+hidden_2 dict_keys(['bias', 'kernel']) (64, 8)
+hidden_0 dict_keys(['bias', 'kernel']) (64,)
+hidden_1 dict_keys(['bias', 'kernel']) (64,)
+hidden_2 dict_keys(['bias', 'kernel']) (8,)
+参数已按列格式保存到 /home/jaccob/projects/tenny-torque200/artifacts/throughput-20261114-163516/envs-64/smoke_params.cpp.txt
+W1114 16:37:23.042013    7055 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 16:37:25.805461    7055 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 16:37:28.676536    7055 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+{
+  "purpose": "bounded throughput comparison; not a converged balancing policy",
+  "source": "/home/jaccob/projects/tenny-torque200/src/legwheel/__init__.py",
+  "control_hz": 200.0,
+  "sim_dt": 0.0025,
+  "episode_length": 1200,
+  "observation_sizes": {
+    "privileged_state": [
+      51
+    ],
+    "state": [
+      24
+    ]
+  },
+  "torque_scales_nm": [
+    1.0,
+    1.0,
+    0.0295,
+    0.0295
+  ],
+  "devices": [
+    "cuda:0"
+  ],
+  "parameter_platforms": [
+    "gpu"
+  ],
+  "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/throughput-20261114-163516/envs-64/checkpoints/000000032768",
+  "restored_training_from": "/home/jaccob/projects/tenny-torque200/artifacts/performance-20261114-160724/B1/checkpoints/000000032768",
+  "elapsed_seconds": 64.48256638099974,
+  "actual_timesteps": 32768,
+  "num_envs": 64,
+  "num_eval_envs": 2,
+  "requested_timesteps": 32768,
+  "observed_progress_steps": [
+    0,
+    8192,
+    16384,
+    24576,
+    32768
+  ],
+  "restore_max_abs_error": 0.0,
+  "export_max_abs_error": 7.96094536781311e-06,
+  "export_atol": 0.001,
+  "actions": [
+    {
+      "seed": 0,
+      "jax": [
+        -0.08796438574790955,
+        -0.034266576170921326,
+        -0.11963064968585968,
+        -0.0549335777759552
+      ],
+      "restored": [
+        -0.08796438574790955,
+        -0.034266576170921326,
+        -0.11963064968585968,
+        -0.0549335777759552
+      ],
+      "exported_numpy": [
+        -0.08796463906764984,
+        -0.03426709026098251,
+        -0.11963188648223877,
+        -0.05494153872132301
+      ]
+    },
+    {
+      "seed": 1,
+      "jax": [
+        -0.14264355599880219,
+        -0.1690877079963684,
+        0.21210305392742157,
+        -0.10031868517398834
+      ],
+      "restored": [
+        -0.14264355599880219,
+        -0.1690877079963684,
+        0.21210305392742157,
+        -0.10031868517398834
+      ],
+      "exported_numpy": [
+        -0.14264366030693054,
+        -0.16908808052539825,
+        0.21210289001464844,
+        -0.10032165050506592
+      ]
+    },
+    {
+      "seed": 2,
+      "jax": [
+        -0.05224773287773132,
+        0.16724568605422974,
+        -0.10900330543518066,
+        0.15349003672599792
+      ],
+      "restored": [
+        -0.05224773287773132,
+        0.16724568605422974,
+        -0.10900330543518066,
+        0.15349003672599792
+      ],
+      "exported_numpy": [
+        -0.05224870517849922,
+        0.16724611818790436,
+        -0.10900404304265976,
+        0.15348424017429352
+      ]
+    },
+    {
+      "seed": 3,
+      "jax": [
+        -0.32160961627960205,
+        0.13032196462154388,
+        -0.054253023117780685,
+        0.21459685266017914
+      ],
+      "restored": [
+        -0.32160961627960205,
+        0.13032196462154388,
+        -0.054253023117780685,
+        0.21459685266017914
+      ],
+      "exported_numpy": [
+        -0.32161056995391846,
+        0.130323126912117,
+        -0.054253000766038895,
+        0.21459466218948364
+      ]
+    },
+    {
+      "seed": 4,
+      "jax": [
+        0.0169111005961895,
+        0.167097270488739,
+        0.04648622125387192,
+        0.1667938232421875
+      ],
+      "restored": [
+        0.0169111005961895,
+        0.167097270488739,
+        0.04648622125387192,
+        0.1667938232421875
+      ],
+      "exported_numpy": [
+        0.016910726204514503,
+        0.1670984923839569,
+        0.046485546976327896,
+        0.16679050028324127
+      ]
+    },
+    {
+      "seed": 5,
+      "jax": [
+        0.04738200455904007,
+        -0.2612417936325073,
+        0.028236299753189087,
+        0.13011126220226288
+      ],
+      "restored": [
+        0.04738200455904007,
+        -0.2612417936325073,
+        0.028236299753189087,
+        0.13011126220226288
+      ],
+      "exported_numpy": [
+        0.04738302901387215,
+        -0.26124057173728943,
+        0.02823461964726448,
+        0.13010939955711365
+      ]
+    },
+    {
+      "seed": 6,
+      "jax": [
+        0.1756598949432373,
+        -0.20518836379051208,
+        -0.2547180652618408,
+        0.4068547189235687
+      ],
+      "restored": [
+        0.1756598949432373,
+        -0.20518836379051208,
+        -0.2547180652618408,
+        0.4068547189235687
+      ],
+      "exported_numpy": [
+        0.17565710842609406,
+        -0.20518450438976288,
+        -0.25471922755241394,
+        0.4068520665168762
+      ]
+    },
+    {
+      "seed": 7,
+      "jax": [
+        0.16230037808418274,
+        0.0015343996929004788,
+        0.015569712966680527,
+        0.34127599000930786
+      ],
+      "restored": [
+        0.16230037808418274,
+        0.0015343996929004788,
+        0.015569712966680527,
+        0.34127599000930786
+      ],
+      "exported_numpy": [
+        0.16229674220085144,
+        0.0015374033246189356,
+        0.01556847058236599,
+        0.3412730097770691
+      ]
+    }
+  ],
+  "parameter_leaves_checked": 25,
+  "parameter_tree_max_abs_error": 0.0,
+  "all_parameters_finite": true,
+  "finite_training_losses_checked": [
+    "training/entropy_loss",
+    "training/policy_loss",
+    "training/total_loss",
+    "training/v_loss"
+  ]
+}
+TORQUE200_PERFORMANCE_ROUND_OK

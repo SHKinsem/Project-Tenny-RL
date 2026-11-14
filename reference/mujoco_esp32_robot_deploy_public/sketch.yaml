@@ -1,0 +1,14 @@
+default_profile: esp32
+profiles:
+  esp32:
+    fqbn: esp32:esp32:esp32
+    platforms:
+      - platform: esp32:esp32
+    libraries:
+      - Simple FOC (2.4.0)
+      - WebSockets (2.7.2)
+      - ArduinoJson (6.21.0)
+      - Eigen (0.3.2)
+      - ArxTypeTraits (0.3.2)
+      - NeuralNetwork (4.1.9)
+default_fqbn: esp32:esp32:esp32:UploadSpeed=115200

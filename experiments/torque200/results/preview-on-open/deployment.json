@@ -1,0 +1,51 @@
+{
+  "web_pid": 21249,
+  "mode": "original",
+  "suspended": true,
+  "training_before": [
+    [
+      19890,
+      [
+        "/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python",
+        "/home/jaccob/projects/tenny-torque200/src/console_train.py",
+        "--mode",
+        "original",
+        "--run-dir",
+        "/home/jaccob/projects/tenny-torque200/artifacts/console/original/20261114T100255.234118Z_ccc3739b",
+        "--original-root",
+        "/home/jaccob/projects/tenny-reference",
+        "--torque-root",
+        "/home/jaccob/projects/tenny-torque200",
+        "--duration-seconds",
+        "900",
+        "--seed",
+        "0",
+        "--restore",
+        "/home/jaccob/projects/tenny-torque200/artifacts/console/original/20261114T094733.864594Z_863c67ae/checkpoints/000004089600"
+      ]
+    ]
+  ],
+  "training_after": [
+    [
+      19890,
+      [
+        "/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python",
+        "/home/jaccob/projects/tenny-torque200/src/console_train.py",
+        "--mode",
+        "original",
+        "--run-dir",
+        "/home/jaccob/projects/tenny-torque200/artifacts/console/original/20261114T100255.234118Z_ccc3739b",
+        "--original-root",
+        "/home/jaccob/projects/tenny-reference",
+        "--torque-root",
+        "/home/jaccob/projects/tenny-torque200",
+        "--duration-seconds",
+        "900",
+        "--seed",
+        "0",
+        "--restore",
+        "/home/jaccob/projects/tenny-torque200/artifacts/console/original/20261114T094733.864594Z_863c67ae/checkpoints/000004089600"
+      ]
+    ]
+  ]
+}

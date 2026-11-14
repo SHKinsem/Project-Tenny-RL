@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Large downloads / training artifacts
+download/
+*.zip
+runs/
+logs/
+checkpoints/
+*.pt
+*.pth
+*.onnx
+
+# Build / tooling
+.pio/
+.codegraph/
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini

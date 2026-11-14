@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>训练曲线 · Torque200</title>
+<style>
+:root{font-family:system-ui,"Microsoft YaHei",sans-serif;color:#172b27;background:#f2f5f4}*{box-sizing:border-box}body{margin:0}main{max-width:1220px;margin:32px auto;padding:0 22px}a{color:#176349}header{display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:28px;margin:12px 0}p{line-height:1.7}small,.muted{color:#5d6d66}.notice{background:#e7eeea;border-left:4px solid #468169;padding:14px 18px;border-radius:6px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:22px 0}.card{background:white;border:1px solid #d9e3de;border-radius:12px;padding:20px;min-width:0}.card:last-child{grid-column:1/-1}h2{font-size:18px;margin:0 0 8px}.summary{min-height:26px;font-size:14px}.chart svg{width:100%;height:auto;display:block}.chart text{font:12px system-ui,sans-serif;fill:#596b62}.chart .axis{stroke:#cfdbd4}.chart .target{stroke:#bd743b;stroke-dasharray:5 5}.legend{font-size:13px;color:#576b60}#status{font-size:13px}.details{font-size:14px;line-height:1.7;overflow-wrap:anywhere}ul{padding-left:20px}li{margin:6px 0}@media(max-width:750px){.grid{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column;gap:0}main{margin-top:18px}}
+</style></head><body><main>
+<header><div><a href="/">← 返回实时机器人</a><h1>训练曲线</h1></div><span id="status">正在读取已保存记录…</span></header>
+<p class="muted">看回合持续时间、奖励和 Loss 的变化。这里展示真实记录，不把 Loss 下降直接当作学会平衡。</p>
+<div class="notice" id="context">加载中</div>
+<div class="grid">
+<section class="card"><h2>平均回合持续时间</h2><div class="summary" id="episode-summary"></div><div class="chart" id="episode-chart"></div><p class="legend">越接近 6 秒完整回合越好。触发失衡终止会缩短回合；这不是成功率。</p></section>
+<section class="card"><h2>平均回合奖励</h2><div class="summary" id="reward-summary"></div><div class="chart" id="reward-chart"></div><p class="legend">在相同奖励定义下比较。回合长度和随机指令也会影响总奖励。</p></section>
+<section class="card"><h2>训练 Loss</h2><div class="summary" id="loss-summary"></div><div class="chart" id="loss-chart"></div><p class="legend">两种 Loss 使用独立纵轴。Value Loss 衡量价值预测误差；Policy Loss 是 PPO 优化目标，可能为负、上下波动。</p></section>
+</div>
+<section class="details"><strong>如何读这些记录</strong><ul id="limits"></ul><div id="source"></div></section>
+</main><script>
+const $=id=>document.getElementById(id);
+const fmt=n=>Number.isFinite(n)?Number(n).toLocaleString('zh-CN',{maximumFractionDigits:4}):'缺失';
+function describe(points,key,unit=''){
+ const values=points.filter(p=>Number.isFinite(p[key]));if(!values.length)return '暂无记录';
+ const first=values[0],last=values.at(-1),change=last[key]-first[key];
+ return `首个有效点（${first.steps} 步）：${fmt(first[key])}${unit}　→　最新（${last.steps} 步）：${fmt(last[key])}${unit}　变化：${change>0?'+':''}${fmt(change)}${unit}`;
+}
+function plot(points,key,{width=560,height=270,color='#267b58',target=null,title=''}={}){
+ const left=64,right=20,top=title?32:18,bottom=42,w=width-left-right,h=height-top-bottom;
+ const values=points.map(p=>p[key]).filter(Number.isFinite);if(!values.length)return `<text x="${left}" y="50">暂无有效数据</text>`;
+ let lo=Math.min(...values),hi=Math.max(...values);if(target!==null){lo=Math.min(0,lo);hi=Math.max(target,hi)}
+ const pad=Math.max((hi-lo)*0.1,Math.abs(hi)*0.04,0.0001);if(target===null){lo-=pad;hi+=pad}else hi+=pad;
+ const xmin=points[0].steps,xmax=Math.max(xmin+1,points.at(-1).steps),x=n=>left+(n-xmin)/(xmax-xmin)*w,y=n=>top+h-(n-lo)/(hi-lo)*h;
+ let s=title?`<text x="${left}" y="17" style="font-weight:600">${title}</text>`:'';
+ for(let i=0;i<=4;i++){const val=lo+(hi-lo)*i/4,yy=y(val);s+=`<line class="axis" x1="${left}" y1="${yy}" x2="${left+w}" y2="${yy}"/><text x="${left-8}" y="${yy+4}" text-anchor="end">${fmt(val)}</text>`;}
+ for(let i=0;i<=4;i++){const val=xmin+(xmax-xmin)*i/4;s+=`<text x="${x(val)}" y="${height-21}" text-anchor="middle">${Math.round(val).toLocaleString()}</text>`;}
+ s+=`<text x="${left+w/2}" y="${height-3}" text-anchor="middle">累计环境步（本轮）</text>`;
+ if(target!==null)s+=`<line class="target" x1="${left}" y1="${y(target)}" x2="${left+w}" y2="${y(target)}"/><text x="${left+w-3}" y="${y(target)-7}" text-anchor="end">完整回合 ${fmt(target)} 秒</text>`;
+ let path='',open=false;for(const p of points){if(!Number.isFinite(p[key])){open=false;continue;}path+=`${open?'L':'M'}${x(p.steps)},${y(p[key])} `;open=true;}
+ s+=`<path d="${path}" fill="none" stroke="${color}" stroke-width="2.5"/>`;
+ for(const p of points){if(Number.isFinite(p[key]))s+=`<circle cx="${x(p.steps)}" cy="${y(p[key])}" r="4" fill="${color}"><title>${p.steps} 步：${fmt(p[key])}</title></circle>`;}
+ return s;
+}
+function render(data){
+ if(!data.available){$('context').textContent=data.metadata.message;for(const id of ['episode-chart','reward-chart','loss-chart','episode-summary','reward-summary','loss-summary','limits','source'])$(id).replaceChildren();return;}
+ const m=data.metadata,p=data.points;
+ $('context').textContent=`记录：${m.run} · ${m.point_count} 个保存点 · 每次仅 ${m.eval_envs} 个评估环境。均值波动可能较大；连线只是连接观测点，不是中间测量。`;
+ $('episode-summary').textContent=describe(p,'episode_seconds',' 秒');$('reward-summary').textContent=describe(p,'episode_reward');
+ $('loss-summary').textContent=`Value：${describe(p,'value_loss')}。Policy：${describe(p,'policy_loss')}。`;
+ $('episode-chart').innerHTML=`<svg viewBox="0 0 560 270" role="img" aria-label="平均回合持续时间曲线">${plot(p,'episode_seconds',{target:m.episode_target_seconds})}</svg>`;
+ $('reward-chart').innerHTML=`<svg viewBox="0 0 560 270" role="img" aria-label="平均回合奖励曲线">${plot(p,'episode_reward',{color:'#357ca4'})}</svg>`;
+ $('loss-chart').innerHTML=`<svg viewBox="0 0 1120 270" role="img" aria-label="Value Loss与Policy Loss曲线，各用独立纵轴"><g>${plot(p,'value_loss',{color:'#7560a0',title:'Value Loss'})}</g><g transform="translate(560,0)">${plot(p,'policy_loss',{color:'#b16a3d',title:'Policy Loss'})}</g></svg>`;
+ $('limits').replaceChildren(...m.limitations.map(t=>{const li=document.createElement('li');li.textContent=t;return li;}));
+ $('source').textContent=`数据文件：${m.progress_file}`;
+}
+async function update(){try{const response=await fetch('/learning-data',{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);render(await response.json());$('status').textContent='已读取保存记录 · '+new Date().toLocaleTimeString();}catch(error){$('status').textContent='读取失败：'+error.message;}}
+update();setInterval(update,10000);
+</script></body></html>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "淘宝商品图文归档"
+  short_description: "由 Terra 使用独立 Edge 插件采集淘宝商品，生成精简本地图文档案"
+  default_prompt: "使用 $taobao-product-archive，将这个淘宝商品链接交给 Terra，通过独立 Edge 插件保存为便于 Agent 阅读的图文档案。"

@@ -1,0 +1,45 @@
+digraph tuning_pipeline {
+    rankdir=TB;
+    bgcolor="white";
+    node [fontname="PingFang SC", fontsize=11, margin="0.15,0.08"];
+    edge [fontname="PingFang SC", fontsize=10, color="#555555"];
+
+    // 样式：蓝=自动阶段，黄=人工核准门，绿=痕迹/报告，红=剪枝
+    node [shape=box, style="rounded,filled", fillcolor="#E8F0FE"];
+
+    start [label="参数盘点与分层\nppo.py / config.py / randomization.py\n（锁定层 / C层不参与搜索）"];
+    proto [label="评估协议固定\n筛选 1e8 步 · 单 seed\n主指标 eval return + 存活约束 ≥550"];
+
+    s1 [label="阶段一 tune.py screen\nPlackett-Burman 筛选\n35 因子 ≈ 36 次短训", fillcolor="#D2E3FC"];
+    r1  [label="reports/stage1_screening.md\n主效应排序 + stage1_space.yaml", shape=note, fillcolor="#E6F4EA"];
+    g1  [label="gate-1 人工核准\n编辑/确认搜索空间", shape=diamond, fillcolor="#FCE8B2"];
+
+    s2 [label="阶段二 tune.py search\nOptuna TPE 30~50 trials\nHyperband 按 eval 曲线剪枝", fillcolor="#D2E3FC"];
+    prune [label="尾部 1/3 提前终止\n（25% / 50% 进度处）", shape=box, fillcolor="#FDE7E9", style="rounded,filled"];
+    r2 [label="reports/stage2_topk.md\ntop-k 组合 + reward 分项对比\n（正项/负项分组，2.6 节）\n+ 异常标记 / Pareto 前沿", shape=note, fillcolor="#E6F4EA"];
+    g2 [label="gate-2 人工核准\n排除可疑组合\n（多目标时从前沿选点）", shape=diamond, fillcolor="#FCE8B2"];
+
+    s3 [label="阶段三 tune.py confirm\n(top-2 + baseline) × 3 seeds × 4e8 全量\n提升须 > 2×σ_pool（式 3）", fillcolor="#D2E3FC"];
+    verify [label="自动验证\nbatch_test 回放 + visualize 指令跟踪", fillcolor="#D2E3FC"];
+    g3 [label="gate-3 人工签字", shape=diamond, fillcolor="#FCE8B2"];
+    deploy [label="实机部署流程\n（先处理固件待对齐项）", shape=box, style="rounded,filled", fillcolor="#D9EAD3"];
+
+    trace [label="每 trial 痕迹落盘 tuning/<study>/\n解析后全量配置 JSON · eval 曲线\nreward 分项 · git hash · ckpt 路径\n（可精确复跑任何 trial）", shape=note, fillcolor="#E6F4EA"];
+
+    start -> proto -> s1;
+    s1 -> r1 -> g1;
+    g1 -> s2 [label="核准"];
+    g1 -> s1 [label="空间需重筛", style=dashed, constraint=false];
+    s2 -> prune [label="每次 eval 上报"];
+    prune -> s2 [label="释放资源给新 trial", style=dashed];
+    s2 -> r2 -> g2;
+    g2 -> s3 [label="核准"];
+    g2 -> s2 [label="加跑 trial", style=dashed, constraint=false];
+    s3 -> verify -> g3;
+    g3 -> deploy [label="通过"];
+    g3 -> s2 [label="不通过：回炉重搜", style=dashed, constraint=false];
+
+    trace -> s1 [style=dotted, arrowhead=none, constraint=false];
+    trace -> s2 [style=dotted, arrowhead=none, constraint=false];
+    trace -> s3 [style=dotted, arrowhead=none, constraint=false];
+}

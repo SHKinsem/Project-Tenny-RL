@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 900" width="960" height="900" role="img">
+  <title>Web 与 Controller 都是 sim / real 共用的共享模块</title>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 Z" fill="#57534E"/>
+    </marker>
+  </defs>
+  <rect width="960" height="900" fill="#F7F6F2"/>
+  <text x="48" y="40" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#1C1917">两块共享，两条支路</text>
+  <text x="48" y="64" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#78716C">Web 和 Controller 一样：sim 与 real 共用。换本体支路，不换页面映射，也不换核。不是三列。</text>
+
+  <!-- SHARED WEB：与 Controller 同一套「横跨全宽」画法 -->
+  <rect x="48" y="84" width="864" height="120" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <rect x="48" y="84" width="864" height="8" fill="#1D4ED8"/>
+  <text x="480" y="118" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#1D4ED8">SHARED · 与 Controller 同级 · sim 与 real 共用</text>
+  <text x="480" y="146" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="600" fill="#1E3A8A">Web</text>
+  <text x="480" y="172" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#1E40AF">同一套 data/ 页面  +  同一套 command 映射  →  command[4]</text>
+  <text x="480" y="192" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#1D4ED8">src/web  ↔  host/web    传输才分家，映射不分家</text>
+
+  <!-- Web 分叉接到两条本体，而不是只垂到核 -->
+  <line x1="178" y1="204" x2="178" y2="236" stroke="#1D4ED8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="782" y1="204" x2="782" y2="236" stroke="#1D4ED8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="190" y="226" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="11" fill="#1D4ED8">接 real · ESP32 HTTP</text>
+  <text x="794" y="226" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="11" fill="#1D4ED8">接 sim · Python HTTP</text>
+
+  <text x="178" y="258" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" font-weight="600" fill="#B45309">REAL 本体</text>
+  <text x="782" y="258" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" font-weight="600" fill="#6D28D9">SIM 本体</text>
+
+  <rect x="48" y="268" width="260" height="88" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="68" y="296" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#78350F">真机传感器</text>
+  <text x="68" y="318" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#92400E">IMU · FOC · 舵机</text>
+  <text x="68" y="340" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">服同一套 data/ 页面</text>
+
+  <rect x="652" y="268" width="260" height="88" rx="8" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <text x="672" y="296" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#4C1D95">MJX 状态</text>
+  <text x="672" y="318" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#6D28D9">qpos · xmat yaw</text>
+  <text x="672" y="340" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">服同一套 data/ 页面</text>
+
+  <line x1="178" y1="356" x2="178" y2="380" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="782" y1="356" x2="782" y2="380" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="48" y="380" width="260" height="64" rx="8" fill="#FFFFFF" stroke="#E7E5E4"/>
+  <text x="68" y="406" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#1C1917">real I/O</text>
+  <text x="68" y="426" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">deg→rad · 轮角取负 · 大腿映射</text>
+
+  <rect x="652" y="380" width="260" height="64" rx="8" fill="#FFFFFF" stroke="#E7E5E4"/>
+  <text x="672" y="406" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#1C1917">sim I/O</text>
+  <text x="672" y="426" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">抽出 q_L q_R yaw，不再改符号</text>
+
+  <!-- 两条支路汇入共享 Controller -->
+  <line x1="178" y1="444" x2="178" y2="476" stroke="#57534E" stroke-width="1.5"/>
+  <line x1="782" y1="444" x2="782" y2="476" stroke="#57534E" stroke-width="1.5"/>
+  <line x1="178" y1="476" x2="782" y2="476" stroke="#57534E" stroke-width="1.5"/>
+  <line x1="480" y1="476" x2="480" y2="500" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="196" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#78716C">SimFrame + cmd</text>
+  <text x="640" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#78716C">SimFrame + cmd</text>
+
+  <rect x="48" y="500" width="864" height="132" rx="8" fill="#F0FDFA" stroke="#5EEAD4"/>
+  <rect x="48" y="500" width="864" height="8" fill="#0F766E"/>
+  <text x="480" y="534" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#0F766E">SHARED · 与 Web 同级 · sim 与 real 共用</text>
+  <text x="480" y="562" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="600" fill="#134E4A">Controller</text>
+  <text x="480" y="588" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#0F766E">cmd（来自 Web）  +  SimFrame（来自 sim 或 real）  →  锚点 / ds / dpsi</text>
+  <text x="480" y="612" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#0F766E">src/controller  ↔  host/controller</text>
+
+  <line x1="480" y1="632" x2="480" y2="656" stroke="#57534E" stroke-width="1.5"/>
+  <line x1="178" y1="656" x2="782" y2="656" stroke="#57534E" stroke-width="1.5"/>
+  <line x1="178" y1="656" x2="178" y2="676" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="782" y1="656" x2="782" y2="676" stroke="#57534E" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="48" y="676" width="260" height="72" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+  <text x="68" y="704" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#78350F">真机执行器</text>
+  <text x="68" y="726" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">轮扭矩 · 大腿舵机</text>
+
+  <rect x="652" y="676" width="260" height="72" rx="8" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <text x="672" y="704" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#4C1D95">MuJoCo GLFW 窗口</text>
+  <text x="672" y="726" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#6D28D9">env.step · mjx ctrl</text>
+
+  <text x="48" y="780" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">读图：蓝条 Web、青条 Controller 都是横跨模块，左右只是本体。不要把 Web 画成第三列，也不要只接到 sim。</text>
+  <text x="48" y="802" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">核对齐可以不接 Web（脚本 / 训练 command）。要测摇杆，同一套 Web 接到 sim；上机换 real I/O，映射不用改。</text>
+  <text x="48" y="824" font-family="PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716C">仿真观感不画在网页里：浏览器仍是真机那套 Control 页，机器人在独立的 MuJoCo viewer 里。</text>
+</svg>

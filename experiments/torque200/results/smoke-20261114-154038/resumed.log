@@ -1,0 +1,244 @@
+E1114 15:42:12.802218    1105 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+E1114 15:42:12.815004    1098 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+W1114 15:42:19.578273    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 15:42:22.347644    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 15:42:27.792933    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+{"steps": 0, "metrics": {"eval/walltime": 17.689910173416138, "eval/episode_reward": -60.77778625488281, "eval/episode_reward/action_rate": 225.67242431640625, "eval/episode_reward/energy_cost": 33.69932556152344, "eval/episode_reward/pitch_cost": 13.124305725097656, "eval/episode_reward/pitch_velocity_penalty": 189.37362670898438, "eval/episode_reward/roll_cost": 7.882026672363281, "eval/episode_reward/termination_penalty": 0.0, "eval/episode_reward/tracking_ang_vel": 16.154386520385742, "eval/episode_reward/tracking_height_jnt": 3.610588550567627, "eval/episode_reward/tracking_lin_vel": 23.993419647216797, "eval/episode_reward/tracking_sinyaw": 0.0621911995112896, "eval/episode_reward/tracking_wheels_sinposition": 0.0, "eval/episode_track/active_steps_sinpos": 0.0, "eval/episode_track/active_steps_sinyaw": 20.0, "eval/episode_track/err2_ang_vel": 30.459224700927734, "eval/episode_track/err2_lin_vel": 12.185196876525879, "eval/episode_reward_std": 7.123510360717773, "eval/episode_reward/action_rate_std": 123.0322036743164, "eval/episode_reward/energy_cost_std": 7.710683822631836, "eval/episode_reward/pitch_cost_std": 6.918015003204346, "eval/episode_reward/pitch_velocity_penalty_std": 1.9536819458007812, "eval/episode_reward/roll_cost_std": 3.1928482055664062, "eval/episode_reward/termination_penalty_std": 0.0, "eval/episode_reward/tracking_ang_vel_std": 9.155296325683594, "eval/episode_reward/tracking_height_jnt_std": 2.685877799987793, "eval/episode_reward/tracking_lin_vel_std": 9.440484046936035, "eval/episode_reward/tracking_sinyaw_std": 0.0621911995112896, "eval/episode_reward/tracking_wheels_sinposition_std": 0.0, "eval/episode_track/active_steps_sinpos_std": 0.0, "eval/episode_track/active_steps_sinyaw_std": 20.0, "eval/episode_track/err2_ang_vel_std": 0.806915283203125, "eval/episode_track/err2_lin_vel_std": 4.882803916931152, "eval/avg_episode_length": 40.0, "eval/std_episode_length": 12.0, "eval/epoch_eval_time": 17.689910173416138, "eval/sps": 135.6705588933203}}
+W1114 15:42:45.718198    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 15:42:52.807271    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+{"steps": 16, "metrics": {"eval/walltime": 32.76201772689819, "training/sps": 1.9995995965692595, "training/walltime": 8.001601934432983, "training/entropy_loss": -0.024364512413740158, "training/kl_mean": 0.01657383143901825, "training/learning_rate": 9.999999747378752e-05, "training/policy_dist_max_loc": 0.7755436897277832, "training/policy_dist_max_std": 1.1701515913009644, "training/policy_dist_mean_loc": -0.06386896967887878, "training/policy_dist_mean_std": 0.7366068363189697, "training/policy_dist_min_loc": -0.6885497570037842, "training/policy_dist_min_std": 0.38891059160232544, "training/policy_loss": 0.07502216100692749, "training/total_loss": 0.4915642738342285, "training/v_loss": 0.4409066438674927, "eval/episode_reward": -39.58399963378906, "eval/episode_reward/action_rate": 382.16998291015625, "eval/episode_reward/energy_cost": 47.95922088623047, "eval/episode_reward/pitch_cost": 10.691129684448242, "eval/episode_reward/pitch_velocity_penalty": 211.29714965820312, "eval/episode_reward/roll_cost": 35.2957878112793, "eval/episode_reward/termination_penalty": 0.0, "eval/episode_reward/tracking_ang_vel": 17.118915557861328, "eval/episode_reward/tracking_height_jnt": 17.92217254638672, "eval/episode_reward/tracking_lin_vel": 27.129722595214844, "eval/episode_reward/tracking_sinyaw": 0.0, "eval/episode_reward/tracking_wheels_sinposition": 0.0, "eval/episode_track/active_steps_sinpos": 0.0, "eval/episode_track/active_steps_sinyaw": 0.0, "eval/episode_track/err2_ang_vel": 46.165382385253906, "eval/episode_track/err2_lin_vel": 18.64890480041504, "eval/episode_reward_std": 15.110023498535156, "eval/episode_reward/action_rate_std": 124.38786315917969, "eval/episode_reward/energy_cost_std": 14.927202224731445, "eval/episode_reward/pitch_cost_std": 4.171178817749023, "eval/episode_reward/pitch_velocity_penalty_std": 12.965065002441406, "eval/episode_reward/roll_cost_std": 15.753738403320312, "eval/episode_reward/termination_penalty_std": 0.0, "eval/episode_reward/tracking_ang_vel_std": 0.13944625854492188, "eval/episode_reward/tracking_height_jnt_std": 11.524726867675781, "eval/episode_reward/tracking_lin_vel_std": 6.848514556884766, "eval/episode_reward/tracking_sinyaw_std": 0.0, "eval/episode_reward/tracking_wheels_sinposition_std": 0.0, "eval/episode_track/active_steps_sinpos_std": 0.0, "eval/episode_track/active_steps_sinyaw_std": 0.0, "eval/episode_track/err2_ang_vel_std": 28.069190979003906, "eval/episode_track/err2_lin_vel_std": 4.454343795776367, "eval/avg_episode_length": 57.0, "eval/std_episode_length": 18.0, "eval/epoch_eval_time": 15.072107553482056, "eval/sps": 159.23453249545958}}
+time to jit+train: 0:00:48.029523
+[gpu-mem:train done, iter 0] nvidia-smi gpu0 NVIDIA GeForce RTX 2080 SUPER: used 2302/8192 MiB, util 51%
+[gpu-mem:train done, iter 0] jax cuda:0: pool 0.0/2.8 GiB (reserved/limit), in_use 0.00 GiB, peak_in_use 0.02 GiB, peak_pool 0.0 GiB
+Saved CPU checkpoint to /home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/params_cpu.pkl
+extract parameters from /home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016
+hidden_0 dict_keys(['bias', 'kernel']) (24, 64)
+hidden_1 dict_keys(['bias', 'kernel']) (64, 64)
+hidden_2 dict_keys(['bias', 'kernel']) (64, 8)
+hidden_0 dict_keys(['bias', 'kernel']) (64,)
+hidden_1 dict_keys(['bias', 'kernel']) (64,)
+hidden_2 dict_keys(['bias', 'kernel']) (8,)
+参数已按列格式保存到 /home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/smoke_params.cpp.txt
+W1114 15:43:04.562142    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 15:43:07.746101    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 15:43:10.038323    1098 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+{
+  "purpose": "torque200 plumbing only; not a converged balancing policy",
+  "source": "/home/jaccob/projects/tenny-torque200/src/legwheel/__init__.py",
+  "control_hz": 200.0,
+  "sim_dt": 0.0025,
+  "episode_length": 1200,
+  "observation_sizes": {
+    "privileged_state": [
+      51
+    ],
+    "state": [
+      24
+    ]
+  },
+  "torque_scales_nm": [
+    1.0,
+    1.0,
+    0.0295,
+    0.0295
+  ],
+  "devices": [
+    "cuda:0"
+  ],
+  "parameter_platforms": [
+    "gpu"
+  ],
+  "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+  "restored_training_from": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/first/checkpoints/000000000016",
+  "elapsed_seconds": 53.22898428899998,
+  "num_envs": 2,
+  "num_eval_envs": 2,
+  "requested_timesteps": 16,
+  "observed_progress_steps": [
+    0,
+    16
+  ],
+  "restore_max_abs_error": 0.0,
+  "export_max_abs_error": 1.3709068298339844e-05,
+  "export_atol": 0.001,
+  "actions": [
+    {
+      "seed": 0,
+      "jax": [
+        -0.5375298857688904,
+        -0.5519892573356628,
+        0.558459460735321,
+        0.660795271396637
+      ],
+      "restored": [
+        -0.5375298857688904,
+        -0.5519892573356628,
+        0.558459460735321,
+        0.660795271396637
+      ],
+      "exported_numpy": [
+        -0.5375409126281738,
+        -0.551989734172821,
+        0.5584681034088135,
+        0.6608089804649353
+      ]
+    },
+    {
+      "seed": 1,
+      "jax": [
+        -0.5532041788101196,
+        -0.1974969506263733,
+        0.7408105731010437,
+        -0.10597015172243118
+      ],
+      "restored": [
+        -0.5532041788101196,
+        -0.1974969506263733,
+        0.7408105731010437,
+        -0.10597015172243118
+      ],
+      "exported_numpy": [
+        -0.5531947612762451,
+        -0.1974894255399704,
+        0.7408055067062378,
+        -0.10597306489944458
+      ]
+    },
+    {
+      "seed": 2,
+      "jax": [
+        -0.7054209113121033,
+        0.10882846266031265,
+        -0.015733541920781136,
+        0.7966047525405884
+      ],
+      "restored": [
+        -0.7054209113121033,
+        0.10882846266031265,
+        -0.015733541920781136,
+        0.7966047525405884
+      ],
+      "exported_numpy": [
+        -0.705430805683136,
+        0.10883999615907669,
+        -0.01572721265256405,
+        0.7966182827949524
+      ]
+    },
+    {
+      "seed": 3,
+      "jax": [
+        -0.9335945844650269,
+        -0.2156081646680832,
+        0.5066232681274414,
+        0.8533580899238586
+      ],
+      "restored": [
+        -0.9335945844650269,
+        -0.2156081646680832,
+        0.5066232681274414,
+        0.8533580899238586
+      ],
+      "exported_numpy": [
+        -0.9335967302322388,
+        -0.2155950367450714,
+        0.5066275000572205,
+        0.8533716797828674
+      ]
+    },
+    {
+      "seed": 4,
+      "jax": [
+        -0.2679577171802521,
+        0.26477760076522827,
+        0.036435019224882126,
+        0.19402237236499786
+      ],
+      "restored": [
+        -0.2679577171802521,
+        0.26477760076522827,
+        0.036435019224882126,
+        0.19402237236499786
+      ],
+      "exported_numpy": [
+        -0.26796388626098633,
+        0.2647872865200043,
+        0.03643210977315903,
+        0.19402649998664856
+      ]
+    },
+    {
+      "seed": 5,
+      "jax": [
+        -0.7203925251960754,
+        -0.520959734916687,
+        0.797231912612915,
+        0.619238555431366
+      ],
+      "restored": [
+        -0.7203925251960754,
+        -0.520959734916687,
+        0.797231912612915,
+        0.619238555431366
+      ],
+      "exported_numpy": [
+        -0.7203898429870605,
+        -0.5209712982177734,
+        0.7972248196601868,
+        0.6192470788955688
+      ]
+    },
+    {
+      "seed": 6,
+      "jax": [
+        -0.3577814996242523,
+        -0.7235429883003235,
+        0.15997464954853058,
+        0.8086187839508057
+      ],
+      "restored": [
+        -0.3577814996242523,
+        -0.7235429883003235,
+        0.15997464954853058,
+        0.8086187839508057
+      ],
+      "exported_numpy": [
+        -0.35779181122779846,
+        -0.7235555648803711,
+        0.15997980535030365,
+        0.8086274266242981
+      ]
+    },
+    {
+      "seed": 7,
+      "jax": [
+        -0.49162083864212036,
+        -0.4339309632778168,
+        0.6262800693511963,
+        0.9130498766899109
+      ],
+      "restored": [
+        -0.49162083864212036,
+        -0.4339309632778168,
+        0.6262800693511963,
+        0.9130498766899109
+      ],
+      "exported_numpy": [
+        -0.49163302779197693,
+        -0.43394193053245544,
+        0.626283586025238,
+        0.9130518436431885
+      ]
+    }
+  ],
+  "parameter_leaves_checked": 25,
+  "parameter_tree_max_abs_error": 0.0,
+  "all_parameters_finite": true,
+  "finite_training_losses_checked": [
+    "training/entropy_loss",
+    "training/policy_loss",
+    "training/total_loss",
+    "training/v_loss"
+  ]
+}
+TORQUE200_TRAIN_RESTORE_EXPORT_SMOKE_OK

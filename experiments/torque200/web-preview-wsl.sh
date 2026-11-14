@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+BASE=/home/jaccob/projects/tenny-torque200
+WIN='/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200'
+PY=/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python
+test -x "$PY"
+test -d "$BASE/src/legwheel"
+cp "$WIN/web_preview.py" "$WIN/preview.py" "$WIN/learning_curves.py" "$WIN/dashboard.html" "$WIN/training_control.py" "$WIN/console_train.py" "$WIN/verify_artifacts.py" "$WIN/preview_sync.py" "$BASE/src/"
+export JAX_PLATFORMS=cpu
+export XLA_PYTHON_CLIENT_PREALLOCATE=false
+export JAX_COMPILATION_CACHE_DIR="$BASE/jax-cache"
+export OMP_NUM_THREADS=4
+export OPENBLAS_NUM_THREADS=1
+unset MUJOCO_GL
+cd "$BASE/src"
+exec "$PY" -u web_preview.py --host 0.0.0.0 --artifacts "$BASE/artifacts" "$@"

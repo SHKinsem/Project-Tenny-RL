@@ -1,0 +1,82 @@
+[
+  {
+    "steps": 0,
+    "metrics": {}
+  },
+  {
+    "steps": 8192,
+    "metrics": {
+      "training/sps": 249.29065977764046,
+      "training/walltime": 32.861239194869995,
+      "training/entropy_loss": -0.02072976902127266,
+      "training/kl_mean": 0.5813422799110413,
+      "training/learning_rate": 9.999999747378752e-05,
+      "training/policy_dist_max_loc": 2.2455663681030273,
+      "training/policy_dist_max_std": 4.047510147094727,
+      "training/policy_dist_mean_loc": 0.05991387367248535,
+      "training/policy_dist_mean_std": 0.8259521722793579,
+      "training/policy_dist_min_loc": -3.576991558074951,
+      "training/policy_dist_min_std": 0.02030312642455101,
+      "training/policy_loss": 0.015727449208498,
+      "training/total_loss": 0.37972331047058105,
+      "training/v_loss": 0.3847256302833557
+    }
+  },
+  {
+    "steps": 16384,
+    "metrics": {
+      "training/sps": 1520.8595652105594,
+      "training/walltime": 38.24766683578491,
+      "training/entropy_loss": -0.022123660892248154,
+      "training/kl_mean": 0.0009673692402429879,
+      "training/learning_rate": 9.999999747378752e-05,
+      "training/policy_dist_max_loc": 1.8287919759750366,
+      "training/policy_dist_max_std": 2.903144359588623,
+      "training/policy_dist_mean_loc": 0.06772024929523468,
+      "training/policy_dist_mean_std": 0.8042972087860107,
+      "training/policy_dist_min_loc": -2.5221798419952393,
+      "training/policy_dist_min_std": 0.09018604457378387,
+      "training/policy_loss": 0.00015660841017961502,
+      "training/total_loss": 0.47017303109169006,
+      "training/v_loss": 0.4921400845050812
+    }
+  },
+  {
+    "steps": 24576,
+    "metrics": {
+      "training/sps": 8632.232531403879,
+      "training/walltime": 39.19666814804077,
+      "training/entropy_loss": -0.022164236754179,
+      "training/kl_mean": 0.00010461815691087395,
+      "training/learning_rate": 9.999999747378752e-05,
+      "training/policy_dist_max_loc": 1.6158051490783691,
+      "training/policy_dist_max_std": 2.2459707260131836,
+      "training/policy_dist_mean_loc": 0.07148978859186172,
+      "training/policy_dist_mean_std": 0.7993303537368774,
+      "training/policy_dist_min_loc": -2.283388376235962,
+      "training/policy_dist_min_std": 0.059994131326675415,
+      "training/policy_loss": 3.810529597103596e-05,
+      "training/total_loss": 0.4338589608669281,
+      "training/v_loss": 0.45598506927490234
+    }
+  },
+  {
+    "steps": 32768,
+    "metrics": {
+      "training/sps": 10767.547182961323,
+      "training/walltime": 39.957472801208496,
+      "training/entropy_loss": -0.021962344646453857,
+      "training/kl_mean": 6.929977826075628e-05,
+      "training/learning_rate": 9.999999747378752e-05,
+      "training/policy_dist_max_loc": 1.7593556642532349,
+      "training/policy_dist_max_std": 2.5085344314575195,
+      "training/policy_dist_mean_loc": 0.06304633617401123,
+      "training/policy_dist_mean_std": 0.7988423109054565,
+      "training/policy_dist_min_loc": -2.4512853622436523,
+      "training/policy_dist_min_std": 0.07806955277919769,
+      "training/policy_loss": -0.00010206748265773058,
+      "training/total_loss": 0.5121105313301086,
+      "training/v_loss": 0.534174919128418
+    }
+  }
+]

@@ -1,0 +1,169 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .button {
+      padding: 1vmin 2vmin;
+      margin: 1vmin 0;
+      background-color: #af614c;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 2vmin;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      border-radius: 1vmin;
+      box-shadow: 0 0.4vmin #999;
+    }
+    .button:hover {
+      background-color: #a04845;
+      cursor: hand;
+    }
+    .button:active {
+      background-color: #3e8e41;
+      box-shadow: 0 0.2vmin #666;
+      transform: translateY(0.2vmin);
+    }
+    .submit-button {
+      margin: 0 14px 14px;
+      padding: 9px 24px;
+      background: #2563eb;
+      border-radius: 7px;
+      box-shadow: 0 2px 5px rgba(37, 99, 235, 0.25);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .submit-button:hover { background: #1d4ed8; cursor: pointer; }
+    .submit-button:active { background: #1e40af; box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2); }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #f4f6f8;
+      color: #1f2937;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 4px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f2f2f2; }
+    #kForm {
+      max-width: 1200px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #dbe2ea;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+    #kValues {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 14px;
+    }
+    .k-group { overflow: hidden; border: 1px solid #e2e8f0; border-radius: 9px; }
+    .k-group h2 {
+      margin: 0;
+      padding: 9px 12px;
+      background: #eef2f7;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 650;
+    }
+    .k-group-items { padding: 4px 12px; }
+    .k-item {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1.2fr) minmax(86px, 0.8fr) 108px;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid #edf1f5;
+    }
+    .k-item:last-child { border-bottom: none; }
+    #kForm .k-index { color: #94a3b8; font: 11px ui-monospace, monospace; }
+    #kForm .k-name { font: 12px ui-monospace, SFMono-Regular, Consolas, monospace; word-break: break-word; }
+    #kForm .k-desc { color: #64748b; font-size: 11px; line-height: 1.3; }
+    #kForm .k-value input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #fff;
+      color: #0f172a;
+      font: 13px ui-monospace, SFMono-Regular, Consolas, monospace;
+      text-align: right;
+    }
+    #kForm .k-value input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
+    }
+    #kForm .k-value input:disabled {
+      background: #e5e7eb;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+    #kForm > .button { margin: 0 14px 14px; }
+    @media (max-width: 900px) {
+      #kValues { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      body { padding: 12px; }
+      #kValues { padding: 10px; gap: 10px; }
+      .k-item { grid-template-columns: 22px minmax(0, 1fr) 96px; gap: 3px 6px; }
+      #kForm .k-index { grid-row: 1 / span 2; }
+      #kForm .k-name { font-size: 10px; }
+      #kForm .k-desc { grid-column: 2; font-size: 10px; }
+      #kForm .k-value { grid-column: 3; grid-row: 1 / span 2; }
+    }
+    #otherStringHistory { font-size: 12px; list-style-type: none; }
+  </style>
+</head>
+<body>
+  <button class="button" onclick="goToControlPage()">Go to Control Page</button>
+  <h1>Modify K Values</h1>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <form id="kForm">
+    <div id="kValues">
+      <!-- K values will be inserted here by the server -->
+    </div>
+    <button class="submit-button" type="button" onclick="submitForm()">Submit</button>
+  </form>
+
+  <h2>Modify MatrixXf</h2>
+  <form id="matrixForm">
+    <table id="matrixTable"></table>
+    <button type="button" onclick="submitMatrixForm()">Submit Matrix</button>
+  </form>
+
+  <h2>Modify Vectors</h2>
+  <div id="vectorsContainer"></div>
+  <button type="button" onclick="loadAllVectors()">Load All Vectors</button>
+
+  <h2>Other String0_</h2>
+  <pre id="otherString0_"></pre>
+  <button type="button" onclick="refreshOtherString0_()">Refresh</button>
+  <input type="number" id="refreshInterval0_" value="1000">
+  <button type="button" onclick="setRefreshInterval0_()">Set Interval</button>
+
+  <h2>Other String History (<span id="historyCount">0</span> items)</h2>
+  <button type="button" onclick="copyHistory()">Copy History</button>
+  <button type="button" onclick="saveHistory()">Save History</button>
+  <input type="checkbox" id="autoDownload" onclick="toggleAutoDownload()" checked disabled> Enable Auto Download
+  <select id="autoDownloadInterval" disabled>
+    <option value="10000" selected>10 seconds</option>
+    <option value="20000">20 seconds</option>
+    <option value="30000">30 seconds</option>
+    <option value="60000">60 seconds</option>
+    <option value="120000">120 seconds</option>
+    <option value="300000">300 seconds</option>
+  </select>
+  <input type="checkbox" id="receiveData"> Receive Data
+  <div style="height: 200px; overflow-y: scroll; border: 2px solid red;" id="historyContainer">
+    <ul id="otherStringHistory"></ul>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

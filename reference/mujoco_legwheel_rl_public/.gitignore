@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# 训练/评估产物
+logs/
+ckpts/
+.tools/
+tuning/*
+!tuning/run1/
+tuning/run1/*
+!tuning/run1/reports/
+!tuning/run2/
+tuning/run2/*
+!tuning/run2/reports/
+failures/
+test/
+videos/
+state_obs_output.txt
+state_normalization.csv
+
+# 输出
+*.mp4
+
+# 系统
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+.zcode/

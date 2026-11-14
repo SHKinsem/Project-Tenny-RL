@@ -1,0 +1,29 @@
+digraph objective_flow {
+    rankdir=LR;
+    bgcolor="white";
+    node [fontname="PingFang SC", fontsize=11, margin="0.15,0.08"];
+    edge [fontname="PingFang SC", fontsize=10, color="#555555"];
+
+    trial [label="Optuna trial\n采样参数向量 θ", shape=box, style="rounded,filled", fillcolor="#FCE8B2"];
+    override [label="--override key=value 注入\nenv config_overrides / ppo 参数\n/ randomization 参数", shape=box, style="rounded,filled", fillcolor="#E8F0FE"];
+    snap [label="落盘 config_resolved.json\n+ git hash + seed", shape=note, style=filled, fillcolor="#E6F4EA"];
+    train [label="brax PPO 训练\n（1e8 步筛选长度）", shape=box, style="rounded,filled", fillcolor="#D2E3FC"];
+    evalcb [label="每次 eval 回调\nreturn / episode_length / reward/*", shape=box, style="rounded,filled", fillcolor="#D2E3FC"];
+    pruner [label="Hyperband pruner\n尾部 1/3 在 25%/50% 进度处杀", shape=diamond, style=filled, fillcolor="#FDE7E9"];
+    metrics [label="落盘 metrics.csv\nreward_terms.json", shape=note, style=filled, fillcolor="#E6F4EA"];
+    fixed [label="主目标：跟踪 RMSE（尾部 3 eval 均值，取负最大化）\n硬约束：存活率 / 能耗预算\n（与 trial 训练权重解耦）", shape=box, style="rounded,filled", fillcolor="#E8F0FE"];
+    guard [label="硬约束检查\nepisode_length ≥ 550 且\n能耗 ≤ 预算 ?", shape=diamond, style=filled, fillcolor="#FCE8B2"];
+    worst [label="返回最差值\n（惩罚死亡刷分/超能耗）", shape=box, style="rounded,filled", fillcolor="#FDE7E9"];
+    report [label="trial.report(−RMSE)\n写入 study.db", shape=box, style="rounded,filled", fillcolor="#D9EAD3"];
+    sanity [label="辅助 sanity check\nS(θ) 与 return 交叉验证\n排名不一致 → gate-2 高亮", shape=note, style=filled, fillcolor="#E6F4EA"];
+
+    trial -> override -> train -> evalcb;
+    override -> snap [style=dotted];
+    evalcb -> pruner;
+    pruner -> train [label="继续", style=dashed];
+    pruner -> worst [label="剪枝"];
+    evalcb -> metrics -> fixed -> guard;
+    metrics -> sanity [style=dotted];
+    guard -> worst [label="否"];
+    guard -> report [label="是"];
+}

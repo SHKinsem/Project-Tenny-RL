@@ -1,0 +1,120 @@
+{
+  "run_id": "performance-20261114-160724",
+  "completed": true,
+  "completed_meaning": "Selected B1 model checkpoint/export validation completed; not full planned ABBA comparison",
+  "comparison_complete": false,
+  "stopped_by_user": true,
+  "completed_rounds": 2,
+  "planned_rounds": 4,
+  "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/performance-20261114-160724/B1/checkpoints/000000032768",
+  "export_path": "/home/jaccob/projects/tenny-torque200/artifacts/performance-20261114-160724/B1/smoke_params.cpp.txt",
+  "report_path": "/home/jaccob/projects/tenny-torque200/artifacts/performance-20261114-160724/comparison.json",
+  "control_hz": 200,
+  "total_environment_steps": 65536,
+  "total_environment_steps_scope": "Only completed A1/B1 rounds; interrupted B2 excluded",
+  "checkpoint_additional_training_steps": 32768,
+  "baseline_sps": 1509.0685617538197,
+  "web_sps": 1310.9150790299718,
+  "throughput_change_percent": -13.130846917489059,
+  "same_start_checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+  "seed_each_round": 0,
+  "runs": [
+    {
+      "name": "A1",
+      "web_active": false,
+      "actual_steps": 32768,
+      "steady_steps": 16384,
+      "steady_training_seconds": 10.857028245925903,
+      "steady_sps": 1509.0685617538197,
+      "steady_interval_sps": [
+        1458.2329107679436,
+        1563.5766135393933
+      ],
+      "first_two_training_intervals_excluded_steps": 16384,
+      "elapsed_seconds_including_startup_eval_export": 146.521372919,
+      "resources": {
+        "sample_count": 140,
+        "scope": "whole round incl. initial compile, evaluation, saving/export",
+        "gpu_util_percent": {
+          "mean": 45.84285714285714,
+          "max": 78.0
+        },
+        "gpu_memory_mib": {
+          "mean": 2973.6285714285714,
+          "max": 3289.0
+        },
+        "gpu_power_w": {
+          "mean": 76.64092857142857,
+          "max": 99.96
+        },
+        "rss_mib": {
+          "mean": 2075.3469029017856,
+          "max": 2346.22265625
+        },
+        "training_process_cpu_percent_one_core_100": 106.08935948967383
+      },
+      "web_frames": 0,
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/performance-20261114-160724/A1/checkpoints/000000032768",
+      "export_max_abs_error": 6.973743438720703e-06,
+      "parameter_tree_max_abs_error": 0.0,
+      "finite_training_losses_checked": [
+        "training/entropy_loss",
+        "training/policy_loss",
+        "training/total_loss",
+        "training/v_loss"
+      ],
+      "final_eval_avg_episode_length_steps": 68.5,
+      "final_eval_avg_episode_length_seconds": 0.3425,
+      "final_eval_episode_reward": -64.12937927246094
+    },
+    {
+      "name": "B1",
+      "web_active": true,
+      "actual_steps": 32768,
+      "steady_steps": 16384,
+      "steady_training_seconds": 12.49813985824585,
+      "steady_sps": 1310.9150790299718,
+      "steady_interval_sps": [
+        1510.232534858463,
+        1158.0747059593575
+      ],
+      "first_two_training_intervals_excluded_steps": 16384,
+      "elapsed_seconds_including_startup_eval_export": 132.70866660799993,
+      "resources": {
+        "sample_count": 126,
+        "scope": "whole round incl. initial compile, evaluation, saving/export",
+        "gpu_util_percent": {
+          "mean": 49.32539682539682,
+          "max": 76.0
+        },
+        "gpu_memory_mib": {
+          "mean": 3260.246031746032,
+          "max": 3542.0
+        },
+        "gpu_power_w": {
+          "mean": 81.15039682539683,
+          "max": 101.52
+        },
+        "rss_mib": {
+          "mean": 1909.228484623016,
+          "max": 2159.5078125
+        },
+        "training_process_cpu_percent_one_core_100": 101.42354947502962
+      },
+      "web_frames": 2650,
+      "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/performance-20261114-160724/B1/checkpoints/000000032768",
+      "export_max_abs_error": 3.56137752532959e-06,
+      "parameter_tree_max_abs_error": 0.0,
+      "finite_training_losses_checked": [
+        "training/entropy_loss",
+        "training/policy_loss",
+        "training/total_loss",
+        "training/v_loss"
+      ],
+      "final_eval_avg_episode_length_steps": 68.0,
+      "final_eval_avg_episode_length_seconds": 0.34,
+      "final_eval_episode_reward": -63.82354736328125
+    }
+  ],
+  "note": "Stopped immediately at user request during B2; A2 not started. A1/B1 are a single preliminary comparison, not completed ABBA. Each 32768-step run excludes its first two 8192-step training intervals; final 16384-step timing is used. A retains browser connection but suspends simulation/rendering. B renders to an actual browser. Roughly 13.1% lower throughput is preliminary, not a universal impact estimate. All incomplete B2 and earlier pilot outputs are retained and excluded. Model has only 32768 additional steps, not combined A1+B1 steps; no convergence claim."
+}

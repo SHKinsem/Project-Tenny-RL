@@ -1,0 +1,62 @@
+'# 说明': gate-1 人工核准后可编辑;search 列表内为阶段二搜索因子
+frozen:
+- num_minibatches
+- reward_config.pitch_velocity_penalty_scale
+- reward_config.action_rate_scale
+- cmd_roll_value_range
+- cmd_lin_vel_x_range
+- reward_config.energy_scale
+- cmd_height_value_range
+- half_life_s
+- reward_config.zero_keep_scale
+- reward_config.sigma_wheel
+- entropy_cost
+- unroll_length
+- cmd_ang_vel_yaw_range
+- cmd_config.cmd_prob
+- reward_config.sigma
+- reward_config.height_scale
+- reward_scaling
+- reward_config.roll_scale
+indistinguishable:
+- reward_scaling
+- reward_config.roll_scale
+search:
+- name: vel_pid.target_scale
+  low: 15.0
+  high: 45.0
+- name: learning_rate
+  low: 3.0e-05
+  high: 0.0003
+- name: action_scale.wheel
+  low: 0.01475
+  high: 0.04425
+- name: policy_net
+  choices:
+  - 64x64
+  - 128x128
+  - 128x64
+- name: vel_pid.notsmoothing
+  low: 0.25
+  high: 0.75
+- name: vel_pid.torque_limit
+  low: 0.01475
+  high: 0.04425
+- name: action_range_thigh_lo
+  low: -0.75
+  high: -0.25
+- name: num_updates_per_batch
+  choices:
+  - 2
+  - 4
+  - 8
+- name: action_scale.thigh
+  low: 0.125
+  high: 0.375
+- name: value_net
+  choices:
+  - 512x512
+  - 512x512x512x512
+- name: vel_pid.kp
+  low: 0.0001
+  high: 0.0003

@@ -1,0 +1,43 @@
+[
+  {
+    "mode": "original",
+    "run_id": "20261114T093805.409628Z_62a9aa6c",
+    "phase": "completed",
+    "completed": true,
+    "stop_reason": "wall_budget",
+    "actual_timesteps": 9600,
+    "duration_seconds": 90.0,
+    "training_stop_elapsed_seconds": 101.36107376199925,
+    "finalization_seconds": 0.4997624610005005,
+    "elapsed_seconds": 101.86083685299946,
+    "restored_from": null,
+    "parameter_tree_max_abs_error": 0.0,
+    "export_max_abs_error": 6.584450602531433e-06,
+    "restore_max_abs_error": 0.0,
+    "all_parameters_finite": true,
+    "finite_training_losses_checked": []
+  },
+  {
+    "mode": "original",
+    "run_id": "20261114T094056.156670Z_851ae74e",
+    "phase": "completed",
+    "completed": true,
+    "stop_reason": "user_stop",
+    "actual_timesteps": 86400,
+    "duration_seconds": 0.0,
+    "training_stop_elapsed_seconds": 59.465106155000285,
+    "finalization_seconds": 0.3720226219993492,
+    "elapsed_seconds": 59.837129384000036,
+    "restored_from": "/home/jaccob/projects/tenny-torque200/artifacts/console/original/20261114T093805.409628Z_62a9aa6c/checkpoints/000000009600",
+    "parameter_tree_max_abs_error": 0.0,
+    "export_max_abs_error": 2.294778823852539e-06,
+    "restore_max_abs_error": 0.0,
+    "all_parameters_finite": true,
+    "finite_training_losses_checked": [
+      "training/entropy_loss",
+      "training/policy_loss",
+      "training/total_loss",
+      "training/v_loss"
+    ]
+  }
+]

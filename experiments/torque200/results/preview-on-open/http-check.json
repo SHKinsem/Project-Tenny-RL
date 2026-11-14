@@ -1,0 +1,11 @@
+{
+  "first_steps": 9800,
+  "second_steps": 11200,
+  "first_id": "848d5d60e70d4851ae015e8fc1318d20",
+  "second_id": "7b5606a9fc8043678f2de30ed462d984",
+  "jpeg_received": true,
+  "duplicate_open_unchanged": true,
+  "closed_frames_stopped": true,
+  "cancelled_open_stays_closed": true,
+  "validation_scope": "CPU actor publisher with real saved weights + real web simulator; no PPO training"
+}

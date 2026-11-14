@@ -1,0 +1,26 @@
+E1114 15:40:43.833117     516 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+E1114 15:40:43.845870     501 cuda_executor.cc:1743] Could not get kernel mode driver version: ( INVALID_ARGUMENT: Version does not match the format X.Y.Z )
+W1114 15:40:52.482931     501 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 15:40:54.999629     501 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+PASS test_absolute_torque_sign_scale_and_saturation
+PASS test_action_rate_matches_same_physical_linear_ramp
+PASS test_default_timing_and_shapes
+W1114 15:40:58.581622     501 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+W1114 15:41:01.183491     501 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+PASS test_delay_observation_describes_applied_not_requested_action
+PASS test_effort_penalty_uses_all_four_normalized_torques
+PASS test_height_reward_does_not_compare_torque_to_joint_target
+W1114 15:41:04.916186     501 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
+PASS test_hold_obs_clip_preserves_anchor
+PASS test_hold_position_wheel_signs_and_reward
+PASS test_no_obsolete_pid_state
+PASS test_position_anchor_frozen_on_yaw_command
+PASS test_randomization_preserves_torque_actuators
+PASS test_reset_clears_action_history_and_preserves_original_pose
+PASS test_reward_total_has_reference_time_scaling
+PASS test_sample_command_covers_negative_cmds
+PASS test_thigh_velocity_is_measured_not_replaced_with_noise
+PASS test_training_hold_observation_is_not_clipped
+PASS test_yaw_anchor_frozen_on_forward_command
+PASS test_zero_action_has_no_hidden_position_servo
+TORQUE200_ENV_TESTS 18/18 passed

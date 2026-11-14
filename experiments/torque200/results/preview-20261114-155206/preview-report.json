@@ -1,0 +1,54 @@
+{
+  "checkpoint": "/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016",
+  "devices": [
+    "TFRT_CPU_0"
+  ],
+  "control_hz_simulated": 200,
+  "display_target_fps": 30,
+  "wall_seconds_excluding_compile": 8.021428076999996,
+  "frames": 169,
+  "steps": 154,
+  "resets": 6,
+  "physics_seconds": 2.5034959410000397,
+  "render_seconds": 2.419365886999927,
+  "completed_episodes": [
+    {
+      "steps": 22,
+      "seconds": 0.11,
+      "terminated": true
+    },
+    {
+      "steps": 22,
+      "seconds": 0.11,
+      "terminated": true
+    },
+    {
+      "steps": 22,
+      "seconds": 0.11,
+      "terminated": true
+    },
+    {
+      "steps": 22,
+      "seconds": 0.11,
+      "terminated": true
+    },
+    {
+      "steps": 22,
+      "seconds": 0.11,
+      "terminated": true
+    },
+    {
+      "steps": 22,
+      "seconds": 0.11,
+      "terminated": true
+    },
+    {
+      "steps": 22,
+      "seconds": 0.11,
+      "terminated": true
+    }
+  ],
+  "screenshot_saved": true,
+  "evaluation": "deterministic mean action; zero command; no noise/push/domain randomization",
+  "note": "Compute capacity excludes rendering, deliberate waits and resets; not training throughput"
+}

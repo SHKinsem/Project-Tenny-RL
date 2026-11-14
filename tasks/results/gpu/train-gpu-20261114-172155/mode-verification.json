@@ -1,0 +1,20 @@
+{
+  "run": "train-gpu-20261114-172155",
+  "original_environment_matches_previous_verified_run": true,
+  "source_sha256_windows_and_wsl": {
+    "legwheel/config.py": "e928e5b72a8be8365e50d2045f2b4bda4b577a7726f887b411788ac1e3dc18ba",
+    "legwheel/env.py": "091b3211fee92849226e2f2a047012634d8f1169a2f1aac3dad065c4a9a1b643",
+    "legwheel/training/ppo.py": "0b263dd83ca5048d9d9a30e8b62bbd20d3a59febd06aaaf76fe677ea11dea36d"
+  },
+  "control_hz": 100.0,
+  "actor_observation_size": 26,
+  "restore_max_abs_error": 0.0,
+  "export_max_abs_error": 1.609325408935547e-05,
+  "elapsed_seconds": 56.18959647600059,
+  "observed_progress_steps": [
+    0,
+    16
+  ],
+  "output": "/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/tasks/results/gpu/train-gpu-20261114-172155",
+  "checkpoint": "/home/jaccob/projects/tenny-reference/artifacts/train-gpu-20261114-172155/checkpoints/000000000016"
+}

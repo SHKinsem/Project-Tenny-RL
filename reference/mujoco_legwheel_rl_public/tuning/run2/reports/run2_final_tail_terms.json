@@ -1,0 +1,202 @@
+{
+  "run1-baseline": {
+    "tracking_lin_vel": {
+      "mean": 445.7824401855469,
+      "std": 4.84556994272305
+    },
+    "tracking_ang_vel": {
+      "mean": 343.27979532877606,
+      "std": 1.5884197710993209
+    },
+    "tracking_height_jnt": {
+      "mean": 336.39881388346356,
+      "std": 4.201651161207692
+    },
+    "tracking_height_action": {
+      "mean": 341.40356106228296,
+      "std": 2.371448525106485
+    },
+    "tracking_sinyaw": {
+      "mean": 52.434468587239586,
+      "std": 5.267544926833402
+    },
+    "tracking_wheels_sinposition": {
+      "mean": 32.0876587761773,
+      "std": 3.252916039185454
+    },
+    "pitch_cost": {
+      "mean": 430.5796712239583,
+      "std": 5.923246237932854
+    },
+    "roll_cost": {
+      "mean": 467.34546915690106,
+      "std": 4.3492497031114645
+    },
+    "energy_cost": {
+      "mean": 22.072595172458225,
+      "std": 0.3712780544899534
+    },
+    "action_rate": {
+      "mean": 820.2004123263888,
+      "std": 13.531767709589532
+    },
+    "pitch_velocity_penalty": {
+      "mean": 375.72143215603296,
+      "std": 8.310383871514833
+    },
+    "termination_penalty": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "base2": {
+    "tracking_lin_vel": {
+      "mean": 426.10177273220484,
+      "std": 9.759448854560242
+    },
+    "tracking_ang_vel": {
+      "mean": 357.68499755859375,
+      "std": 6.20769329320673
+    },
+    "tracking_height_jnt": {
+      "mean": 337.5435282389323,
+      "std": 9.065905069729201
+    },
+    "tracking_height_action": {
+      "mean": 342.00463528103296,
+      "std": 8.883824141765695
+    },
+    "tracking_sinyaw": {
+      "mean": 54.41033766004774,
+      "std": 6.4793312337772315
+    },
+    "tracking_wheels_sinposition": {
+      "mean": 31.82556978861491,
+      "std": 4.0945332611622645
+    },
+    "pitch_cost": {
+      "mean": 402.9031168619792,
+      "std": 5.133576701627828
+    },
+    "roll_cost": {
+      "mean": 458.7694498697917,
+      "std": 6.733250726059063
+    },
+    "energy_cost": {
+      "mean": 21.01693047417535,
+      "std": 0.45525597809476276
+    },
+    "action_rate": {
+      "mean": 722.7622951931422,
+      "std": 13.084431778693066
+    },
+    "pitch_velocity_penalty": {
+      "mean": 352.3638034396701,
+      "std": 8.327271553564108
+    },
+    "termination_penalty": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "cand000": {
+    "tracking_lin_vel": {
+      "mean": 458.39425320095484,
+      "std": 11.311376591801974
+    },
+    "tracking_ang_vel": {
+      "mean": 388.24124823676215,
+      "std": 3.327152686150982
+    },
+    "tracking_height_jnt": {
+      "mean": 404.57679239908856,
+      "std": 7.442265470312987
+    },
+    "tracking_height_action": {
+      "mean": 410.76470947265625,
+      "std": 7.5733927813637445
+    },
+    "tracking_sinyaw": {
+      "mean": 55.165774451361756,
+      "std": 6.153565717877945
+    },
+    "tracking_wheels_sinposition": {
+      "mean": 38.306356006198456,
+      "std": 3.7714136904078486
+    },
+    "pitch_cost": {
+      "mean": 433.143798828125,
+      "std": 6.912490151092703
+    },
+    "roll_cost": {
+      "mean": 485.6630350748698,
+      "std": 6.601291282447759
+    },
+    "energy_cost": {
+      "mean": 21.536887486775715,
+      "std": 0.5728838799525906
+    },
+    "action_rate": {
+      "mean": 787.7870551215278,
+      "std": 17.234882027732088
+    },
+    "pitch_velocity_penalty": {
+      "mean": 465.5640801323784,
+      "std": 17.65728264923767
+    },
+    "termination_penalty": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "cand026": {
+    "tracking_lin_vel": {
+      "mean": 465.7938741048177,
+      "std": 7.308382468341472
+    },
+    "tracking_ang_vel": {
+      "mean": 380.05061170789935,
+      "std": 5.898187415259748
+    },
+    "tracking_height_jnt": {
+      "mean": 396.67102389865454,
+      "std": 7.111851841529414
+    },
+    "tracking_height_action": {
+      "mean": 411.5003153483073,
+      "std": 6.765040945329181
+    },
+    "tracking_sinyaw": {
+      "mean": 56.35413911607531,
+      "std": 6.817573796936758
+    },
+    "tracking_wheels_sinposition": {
+      "mean": 36.237038718329536,
+      "std": 4.557717358135895
+    },
+    "pitch_cost": {
+      "mean": 445.1157938639323,
+      "std": 7.955328429212048
+    },
+    "roll_cost": {
+      "mean": 475.1738145616319,
+      "std": 5.015517560162375
+    },
+    "energy_cost": {
+      "mean": 20.821702109442814,
+      "std": 0.6607652280164722
+    },
+    "action_rate": {
+      "mean": 688.0217013888888,
+      "std": 11.859677680516485
+    },
+    "pitch_velocity_penalty": {
+      "mean": 460.16402859157984,
+      "std": 6.7841509503354125
+    },
+    "termination_penalty": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  }
+}

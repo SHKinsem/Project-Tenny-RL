@@ -1,0 +1,37 @@
+{
+ "note": "\u6df1\u526a\u679d trial(0.86e8)\u5b58\u6863 ckpt \u7684 deploy_evaluate \u8865\u6d4b",
+ "021": {
+  "steps": 86016000,
+  "action_rate": 0.3919951319694519,
+  "avg_episode_length": 535.5595703125,
+  "unweighted_sum_per_step": 5.024796968576118,
+  "nan_steps": 0,
+  "attainment": {
+   "tracking_lin_vel": 0.7225101453828835,
+   "tracking_ang_vel": 0.7987582251537618,
+   "tracking_height_jnt": 0.5278501060313571,
+   "tracking_height_action": 0.5564563070371812,
+   "pitch_cost": 0.837309101236613,
+   "roll_cost": 0.8159337989510294,
+   "tracking_sinyaw": 0.7053445290081168,
+   "tracking_wheels_sinposition": 0.45262988774462715
+  }
+ },
+ "025": {
+  "steps": 86016000,
+  "action_rate": 0.42316073179244995,
+  "avg_episode_length": 566.0439453125,
+  "unweighted_sum_per_step": 5.022330295679905,
+  "nan_steps": 0,
+  "attainment": {
+   "tracking_lin_vel": 0.749311593369591,
+   "tracking_ang_vel": 0.8532797545618552,
+   "tracking_height_jnt": 0.5231767127532021,
+   "tracking_height_action": 0.5527221211943194,
+   "pitch_cost": 0.8417283374019942,
+   "roll_cost": 0.7826601703164465,
+   "tracking_sinyaw": 0.7180077232431843,
+   "tracking_wheels_sinposition": 0.42460461463176186
+  }
+ }
+}
