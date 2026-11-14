@@ -22,6 +22,15 @@ TASKS = {
 }
 
 
+from tenny import runner  # noqa: E402
+
+
+def wait(job, timeout=15):
+    end = time.time() + timeout
+    while job.status == "running" and time.time() < end:
+        time.sleep(0.05)
+
+
 class RegistryTest(unittest.TestCase):
     def test_defaults_and_coercion(self):
         v = registry.resolve_params(TASKS["num"], {"n": "3", "fast": True})
@@ -49,6 +58,78 @@ class RegistryTest(unittest.TestCase):
             if "script" in t:
                 self.assertTrue((registry.ROOT / t["script"]).is_file(), t["script"])
             registry.resolve_params(t, {})  # 默认值必须自身合法
+
+
+class RunnerTest(unittest.TestCase):
+    def tearDown(self):
+        runner.stop_all()
+
+    def test_runs_and_captures_output(self):
+        job = runner.start("echo", {"word": "tenny"}, TASKS)
+        wait(job)
+        self.assertEqual(job.status, "ok")
+        self.assertEqual(job.snapshot(0)["lines"], ["hi tenny"])
+
+    def test_unknown_task(self):
+        with self.assertRaises(registry.UnknownTask):
+            runner.start("nope", {}, TASKS)
+
+    def test_bad_param_starts_nothing(self):
+        with self.assertRaises(registry.TaskError):
+            runner.start("num", {"n": 99}, TASKS)
+        self.assertEqual(runner._jobs, {})
+
+    def test_duplicate_run_rejected(self):
+        job = runner.start("sleep", {}, TASKS)
+        with self.assertRaises(registry.Busy):
+            runner.start("sleep", {}, TASKS)
+        self.assertEqual(len(runner._jobs), 1)
+        job.stop()
+
+    def test_stop_kills_process(self):
+        job = runner.start("sleep", {}, TASKS)
+        end = time.time() + 10
+        while "go" not in job.snapshot(0)["lines"] and time.time() < end:
+            time.sleep(0.05)
+        job.stop()
+        wait(job)
+        self.assertEqual(job.status, "stopped")
+        self.assertIsNotNone(job.returncode)
+
+    def test_log_is_capped_and_cursor_is_absolute(self):
+        job = runner.start("noisy", {}, TASKS)
+        wait(job)
+        snap = job.snapshot(0)
+        self.assertEqual(snap["next"], 6000)
+        self.assertEqual(len(snap["lines"]), runner.MAX_LINES)
+        self.assertEqual(snap["lines"][-1], "5999")
+        self.assertEqual(job.snapshot(5990)["lines"][0], "5990")
+        self.assertEqual(job.snapshot(6000)["lines"], [])
+
+    def test_needs_wsl_missing(self):
+        task = {"id": "w", "name": "w", "group": "t", "needs": "wsl", "script": "x.sh"}
+        orig = runner.wsl_available
+        runner.wsl_available = lambda: False
+        try:
+            with self.assertRaises(registry.TaskError):
+                runner.start("w", {}, {"w": task})
+        finally:
+            runner.wsl_available = orig
+
+    def test_command_for_script(self):
+        task = {"id": "s", "name": "s", "group": "t", "needs": "wsl",
+                "script": "tasks/start-sim-wsl.sh", "args": ["--x", "{n}"],
+                "params": [{"name": "n", "type": "int", "default": 1}]}
+        orig = runner.to_linux_path
+        runner.to_linux_path = lambda p: "/linux/" + p.name
+        try:
+            cmd = runner.build_command(task, {"n": 1})
+        finally:
+            runner.to_linux_path = orig
+        tail = ["/bin/bash", "/linux/start-sim-wsl.sh", "--x", "1"]
+        self.assertEqual(cmd[-4:], tail)
+        if runner.IS_WIN:
+            self.assertEqual(cmd[:4], ["wsl.exe", "-d", runner.DISTRO, "--exec"])
 
 
 if __name__ == "__main__":
