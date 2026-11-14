@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TORQUE = ROOT/'experiments'/'torque200'
 
 
-@unittest.skipUnless(shutil.which('bash') and shutil.which('flock'), 'POSIX bash/flock required')
+@unittest.skipUnless(os.name == 'posix' and shutil.which('bash') and shutil.which('flock'), 'POSIX bash/flock required')
 class RunnerTimingTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
@@ -46,6 +46,32 @@ args = sys.argv[1:]
 if '-m' in args:
     index = args.index('-m')
     module = args[index+1]
+    if module == 'hybrid.readiness':
+        # The readiness module has its own evidence-integrity tests. This fake
+        # models its subprocess contract to test real shell argument transport.
+        import subprocess, uuid
+        argv = args[index+2:]
+        root = Path(argv[argv.index('--runtime-root')+1])
+        mode = argv[argv.index('--mode')+1]
+        hz = argv[argv.index('--control-hz')+1]
+        result_path = Path(argv[argv.index('--result')+1])
+        cached = root/('fake-ready-'+mode+'-'+hz+'.json')
+        if '--force' not in argv and cached.exists():
+            result = json.loads(cached.read_text()); result['cache_hit'] = True
+            result_path.write_text(json.dumps(result)); sys.exit(0)
+        out = root/'artifacts'/('readiness-'+uuid.uuid4().hex); out.mkdir(parents=True)
+        result = dict(validation_path=str(out/'validation.json'), evidence_dir=str(out), cache_hit=False)
+        result_path.write_text(json.dumps(result))
+        common = ['--mode', mode, '--control-hz', hz, '--validation', str(out/'validation.json'),
+                  '--steps', '16', '--num-envs', '2', '--eval-envs', '2', '--unroll-length', '4']
+        commands = [
+            ['hybrid.validate', '--output', str(out/'validation.json'), '--control-hz', hz],
+            ['hybrid.train', *common, '--output', str(out/'first')],
+            ['hybrid.train', *common, '--output', str(out/'restart'), '--restore', str(out/'first/checkpoints/16')]]
+        for command in commands:
+            code = subprocess.run([sys.argv[0], '-m', *command]).returncode
+            if code: sys.exit(code)
+        cached.write_text(json.dumps(result)); sys.exit(0)
     if module in ('hybrid.validate', 'hybrid.train'):
         argv = args[index+2:]
         with open(os.environ['TENNY_TEST_CALLS'], 'a') as f:
@@ -102,9 +128,22 @@ os.execv(sys.executable, [sys.executable]+args)
                 self.assertIn('--restore', calls[2]['argv'])
                 self.assertNotIn('--restore', calls[3]['argv'])
                 syncs = [json.loads(v) for v in self.sync_calls.read_text().splitlines()]
-                self.assertEqual(len(syncs), 2)
+                self.assertEqual(len(syncs), 3)
                 self.assertEqual(syncs[0][-1], str(self.base/'src')+'/')
-                self.assertIn('/results/hybrid-', syncs[1][-1])
+                self.assertTrue(syncs[1][-1].endswith('/preparation/'))
+                self.assertIn('/results/hybrid-', syncs[2][-1])
+
+    def test_formal_training_reuses_ready_result_but_explicit_recheck_runs_gate(self):
+        first = self.run_script('--mode', 'virtual_leg_force', '--control-hz', '100', '--steps', '32')
+        self.assertEqual(first.returncode, 0, first.stdout)
+        self.calls.unlink()
+        second = self.run_script('--reuse-ready', '--mode', 'virtual_leg_force', '--control-hz', '100', '--steps', '32')
+        self.assertEqual(second.returncode, 0, second.stdout)
+        self.assertEqual([c['module'] for c in self.read_calls()], ['hybrid.train'])
+        self.calls.unlink()
+        third = self.run_script('--reuse-ready', '--force-prepare', '--mode', 'virtual_leg_force', '--control-hz', '100')
+        self.assertEqual(third.returncode, 0, third.stdout)
+        self.assertEqual([c['module'] for c in self.read_calls()], ['hybrid.validate']+['hybrid.train']*2)
 
     def test_validation_failure_preserves_exit_code_and_never_trains(self):
         self.env['TENNY_TEST_FAIL_VALIDATION']='1'

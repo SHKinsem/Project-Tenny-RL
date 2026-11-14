@@ -254,7 +254,8 @@ class ConsoleTests(unittest.TestCase):
     def test_shell_pipeline_retains_producer_failure(self):
         # Execute the ACTUAL shell helper, no training or dependency imports.
         script = (TORQUE/'hybrid-wsl.sh').read_text()
-        helper = script[script.index('run_logged() {'):script.index('echo "[$(date +%H:%M:%S)] 开始预检')]
+        start = script.index('run_logged() {')
+        helper = script[start:script.index('\n}', start) + 2]
         with tempfile.TemporaryDirectory() as d:
             logfile = Path(d)/'failure.log'
             code = 'print("HYBRID_TRAIN_RESTORE_EXPORT_OK"); print("RuntimeError: preserved failure"); raise SystemExit(7)'
@@ -270,7 +271,8 @@ class ConsoleTests(unittest.TestCase):
 
     def test_shell_success_requires_report_and_sink_success(self):
         script = (TORQUE/'hybrid-wsl.sh').read_text()
-        helper = script[script.index('run_logged() {'):script.index('echo "[$(date +%H:%M:%S)] 开始预检')]
+        start = script.index('run_logged() {')
+        helper = script[start:script.index('\n}', start) + 2]
         with tempfile.TemporaryDirectory() as d:
             for exists in (False, True):
                 logfile = Path(d)/str(exists)

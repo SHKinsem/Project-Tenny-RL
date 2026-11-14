@@ -19,6 +19,9 @@ from hybrid.timing import Timing, SUPPORTED_CONTROL_HZ, DEFAULT_CONTROL_HZ
 
 def check_validation(path, control_hz=DEFAULT_CONTROL_HZ):
     check = json.loads(Path(path).read_text(encoding="utf8"))
+    if check.get("schema") == "hybrid-stage-success-v1":
+        from hybrid.stage_evidence import load_validation_reference
+        return load_validation_reference(path, control_hz)
     if (check.get("schema") != "hybrid-local-validation-v1" or
             check.get("runtime_validated") is not True or
             check.get("source_fingerprint") != source_fingerprint()):
@@ -27,7 +30,10 @@ def check_validation(path, control_hz=DEFAULT_CONTROL_HZ):
     return check
 
 
-def restore_guard(checkpoint, expected):
+def restore_guard(checkpoint, expected, stage_reference=None):
+    if stage_reference is not None:
+        from hybrid.stage_evidence import check_restore_reference
+        return check_restore_reference(stage_reference, checkpoint, expected)
     checkpoint = Path(checkpoint)
     root = checkpoint.parent.parent
     require_metadata(json.loads((root/"policy_metadata.json").read_text(encoding="utf8")), expected)
@@ -46,6 +52,8 @@ def parser():
     p.add_argument("--validation", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--restore", type=Path)
+    p.add_argument("--restore-stage-reference", type=Path,
+                   help="Explicit verified first-stage source/artifact evidence for readiness restart")
     p.add_argument("--steps", type=int, default=16)
     p.add_argument("--num-envs", type=int, default=2)
     p.add_argument("--eval-envs", type=int, default=2)
@@ -64,7 +72,9 @@ def main():
     check_validation(args.validation, args.control_hz)
     contract = metadata(args.mode, scan_geometry(read_geometry()), args.control_hz)
     if args.restore:
-        restore_guard(args.restore, contract)
+        restore_guard(args.restore, contract, args.restore_stage_reference)
+    elif args.restore_stage_reference:
+        raise ValueError("--restore-stage-reference requires --restore")
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     write_json(output/"policy_metadata.json", contract)

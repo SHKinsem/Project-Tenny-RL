@@ -5,6 +5,7 @@ from pathlib import Path
 import time
 import uuid
 import numpy as np
+from control_modes import mode_spec
 
 
 def utc_now():
@@ -13,7 +14,7 @@ def utc_now():
 
 class SnapshotPolicy:
     def __init__(self, arrays, mode):
-        size = {"original": 26, "torque200": 24}[mode]
+        size = mode_spec(mode)["obs_dim"]
         shapes = {"mean": (size,), "std": (size,)}
         for i, (a, b) in enumerate(zip((size, 64, 64), (64, 64, 8))):
             shapes[f"w{i}"] = (a, b)
@@ -65,6 +66,10 @@ def read_snapshot(path, mode, request_id):
             return None  # An older request must never satisfy a new open.
         if metadata.get("mode") != mode:
             raise ValueError("Preview snapshot mode mismatch")
+        if mode_spec(mode)["hybrid"]:
+            from hybrid.core import source_fingerprint
+            if metadata.get("source_fingerprint") != source_fingerprint():
+                raise ValueError("Preview snapshot source fingerprint mismatch")
         return SnapshotPolicy(data, mode), metadata
 
 
@@ -86,6 +91,11 @@ class SnapshotPublisher:
         started = time.perf_counter()
         response = {"request_id": request_id, "mode": self.mode,
                     "run_id": self.run_dir.name, "steps": int(steps), "synced_at": utc_now()}
+        if mode_spec(self.mode)["hybrid"]:
+            from hybrid.core import source_fingerprint
+            response["source_fingerprint"] = source_fingerprint()
+            response.update(action_mode=mode_spec(self.mode)["action_mode"],
+                            control_hz=mode_spec(self.mode)["control_hz"])
         temporary = self.run_dir / ("preview-" + uuid.uuid4().hex + ".tmp")
         try:
             actor = SnapshotPolicy.from_params(params, self.mode)

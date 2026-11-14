@@ -43,6 +43,8 @@ def make_server(tasks, host="127.0.0.1", port=8800):
                 return self._send(200, UI.read_bytes(), "text/html")
             if path == "/api/tasks":
                 return self._send(200, [public(t) for t in tasks.values()])
+            if path == "/api/jobs":
+                return self._send(200, runner.snapshots())
             if path.startswith("/api/jobs/"):
                 job = runner.get(path.rsplit("/", 1)[1])
                 if job is None:

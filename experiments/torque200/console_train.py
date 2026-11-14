@@ -13,6 +13,10 @@ import math
 from pathlib import Path
 import sys
 import time
+# Also support the existing file-based host test/import entry, not only python script.py.
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+from control_modes import MODES, mode_spec
 
 
 class StopRequested(Exception):
@@ -38,6 +42,7 @@ class RunMonitor:
         self.events = deque(maxlen=2000)
         self.total_events = 0
         self.loss_names = set()
+        self.training_clock_started = not mode_spec(args.mode)["hybrid"]
         started = datetime.now(timezone.utc)
         self.state = dict(
             mode=args.mode, run_id=self.output.name, run_dir=str(self.output),
@@ -53,6 +58,8 @@ class RunMonitor:
             metrics_file=str(self.output / "metrics.jsonl"),
             progress_window_limit=2000, progress_window_truncated=False,
             total_progress_events=0, eval_interval_seconds=45,
+            training_clock_started=self.training_clock_started,
+            preparation_seconds=0,
             optimizer_semantics="Single continuous PPO call; resume resets optimizer",
             resume_restores=["network_parameters", "observation_normalization"]
                             if args.restore else [],
@@ -67,6 +74,8 @@ class RunMonitor:
 
     @property
     def remaining(self):
+        if not self.training_clock_started:
+            return self.args.duration_seconds if self.args.duration_seconds else math.inf
         return max(0.0, self.args.duration_seconds - self.elapsed) \
             if self.args.duration_seconds else math.inf
 
@@ -80,11 +89,22 @@ class RunMonitor:
         reason = None
         if (self.output / "stop.request").exists():
             reason = "user_stop"
-        elif self.remaining <= 0:
+        elif self.training_clock_started and self.remaining <= 0:
             reason = "wall_budget"
         if reason:
             self.publish(phase="stopping", stage="safe_boundary", stop_reason=reason)
             raise StopRequested(reason)
+
+    def begin_training_clock(self):
+        """Hybrid preflight is separately timed; its cache miss cannot eat training budget."""
+        preparation = self.elapsed
+        self.start = self.clock()
+        self.training_clock_started = True
+        started = datetime.now(timezone.utc)
+        self.publish(training_clock_started=True, preparation_seconds=preparation,
+                     started_at=started.isoformat(),
+                     deadline_at=(started + timedelta(seconds=self.args.duration_seconds)).isoformat()
+                                 if self.args.duration_seconds else None)
 
     def event(self, steps, metrics):
         steps = int(steps)
@@ -126,6 +146,7 @@ def validate_restore_metadata(checkpoint, mode, obs_dim):
 
 
 def run_training(args, monitor):
+    spec = mode_spec(args.mode)
     # Select source before the first ML import; the web server's CPU env is not used.
     source = (args.original_root / "mujoco_legwheel_rl_public"
               if args.mode == "original" else args.torque_root / "src")
@@ -159,7 +180,17 @@ def run_training(args, monitor):
     monitor.publish(stage="environment_setup", devices=[str(d) for d in devices],
                     source=str(Path(legwheel.__file__).resolve()))
     monitor.check_stop()
-    cfg = default_config()  # Preserve the original environment semantics.
+    if spec["hybrid"]:
+        from hybrid.env import HybridLegWheelRobot, hybrid_config
+        from hybrid.core import metadata, read_geometry, scan_geometry, write_json
+        cfg = hybrid_config(spec["control_hz"])
+        contract = metadata(spec["action_mode"], scan_geometry(read_geometry()), spec["control_hz"])
+        write_json(args.run_dir / "policy_metadata.json", contract)
+        if args.restore:
+            from hybrid.train import restore_guard
+            restore_guard(args.restore, contract)
+    else:
+        cfg = default_config()  # Preserve the original environment semantics.
     overrides = (dict(batch_size=8, num_minibatches=16, unroll_length=75,
                       num_updates_per_batch=4) if args.mode == "original" else
                  dict(batch_size=128, num_minibatches=1, unroll_length=16,
@@ -178,6 +209,8 @@ def run_training(args, monitor):
     ppo_cfg.reward_scaling = 0.1
     ppo_cfg.entropy_cost = 1e-2
     ppo_cfg.discounting = compute_discounting(cfg.ctrl_dt, 0.5)
+    if spec["hybrid"]:
+        ppo_cfg.gae_lambda = contract["gae_lambda"]
     ppo_cfg.network_factory.policy_hidden_layer_sizes = [64, 64]
     ppo_cfg.network_factory.value_hidden_layer_sizes = [512, 512, 512, 512]
     ppo_cfg.num_eval_envs = 2
@@ -188,7 +221,13 @@ def run_training(args, monitor):
         raise AssertionError("Expected exactly 128 training environments")
     atomic_json(args.run_dir / "env_config.json", json.loads(cfg.to_json_best_effort()))
     atomic_json(args.run_dir / "ppo_config.json", json.loads(ppo_cfg.to_json_best_effort()))
-    env = LegWheelRobot(config=cfg)
+    if spec["hybrid"]:
+        from hybrid.managed_training import environment_pair
+        environments = environment_pair(args.mode, cfg, LegWheelRobot,
+                                        HybridLegWheelRobot, hybrid_config)
+    else:
+        environments = {"env": LegWheelRobot(config=cfg), "eval_env": None}
+    env = environments["env"]
     monitor.publish(stage="observation_shape")
     sample = jax.jit(env.reset)(jax.random.PRNGKey(args.seed))
     observation_sizes = {key: int(value.shape[-1]) for key, value in sample.obs.items()}
@@ -197,7 +236,7 @@ def run_training(args, monitor):
     if obs_dim != expected_dim:
         raise ValueError(f"Unexpected actual actor observation dimension {obs_dim}")
     monitor.publish(control_hz=1.0 / cfg.ctrl_dt, obs_dim=obs_dim,
-                    observation_sizes=observation_sizes)
+                    observation_sizes=observation_sizes, action_mode=spec["action_mode"])
     monitor.check_stop()
     network_factory = partial(ppo_networks.make_ppo_networks, **dict(ppo_cfg.network_factory))
     # Do not call load_config: its optional initializer=None decoding is broken.
@@ -299,7 +338,7 @@ def run_training(args, monitor):
         monitor.publish(phase="training", stage="compiling")
         with patch.object(acting.Evaluator, "run_evaluation", scheduled_eval):
             factory, params, _ = train_ppo(
-                env=env, env_cfg=cfg, ppo_params=ppo_cfg, progress_fn=progress)
+                **environments, env_cfg=cfg, ppo_params=ppo_cfg, progress_fn=progress)
         capture(monitor.state["steps"], factory, params)
         stop_reason = "step_limit"
     except StopRequested as exc:
@@ -330,11 +369,19 @@ def run_training(args, monitor):
     checks["finite_training_losses_checked"] = sorted(monitor.loss_names)
     export_path = args.run_dir / "policy.cpp.txt"
     export_params(str(checkpoint), export_path)
-    if args.mode == "original":
+    if spec["hybrid"]:
+        from hybrid.core import digest_file, digest_tree
+        from hybrid.deployment import HybridPolicy
+        contract["export_sha256"] = digest_file(export_path)
+        write_json(args.run_dir / "policy_metadata.json", contract)
+        deployed = HybridPolicy(export_path, args.run_dir / "policy_metadata.json",
+                                expected_mode=spec["action_mode"], expected_control_hz=spec["control_hz"])
+    elif args.mode == "original":
         from host.policy.rl_policy import RL_Policy
     else:
         from legwheel.deployment.numpy_policy import RL_Policy
-    deployed = RL_Policy(path=export_path)
+    if not spec["hybrid"]:
+        deployed = RL_Policy(path=export_path)
     before = jax.jit(factory(params, deterministic=True))
     after = jax.jit(factory(recovered, deterministic=True))
     mean = np.asarray(params[0].mean["state"])
@@ -346,8 +393,11 @@ def run_training(args, monitor):
         key = jax.random.PRNGKey(index)
         a = np.asarray(before({"state": obs}, key)[0])
         b = np.asarray(after({"state": obs}, key)[0])
-        deployed.clean_history()
-        c = deployed.run(obs)
+        if spec["hybrid"]:
+            c = deployed.action(obs)
+        else:
+            deployed.clean_history()
+            c = deployed.run(obs)
         if not all(np.isfinite(x).all() for x in (a, b, c)):
             raise FloatingPointError("Non-finite exported policy action")
         restore_errors.append(float(np.max(np.abs(a - b))))
@@ -367,6 +417,13 @@ def run_training(args, monitor):
                   export_observations="8 seeded synthetic observations around saved mean/std",
                   deadline_semantics="Cooperative Python boundaries; includes setup/JIT/evaluation; finalization separate",
                   **checks)
+    if spec["hybrid"]:
+        report.update(checkpoint_validated=failure is None, action_mode=spec["action_mode"],
+                      control_hz=spec["control_hz"], source_fingerprint=contract["source_fingerprint"],
+                      checkpoint_name=checkpoint.name, checkpoint_sha256=digest_tree(checkpoint),
+                      export_sha256=contract["export_sha256"],
+                      optimizer_resume="Network and normalization restored; optimizer reinitialized",
+                      deadline_semantics="Readiness excluded; training setup/JIT/evaluation included; finalization separate")
     atomic_json(args.run_dir / "report.json", report)
     monitor.publish(phase="failed" if failure else "completed",
                     stage="saved_previous_snapshot" if failure else "verified",
@@ -380,7 +437,8 @@ def run_training(args, monitor):
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=("original", "torque200"), required=True)
+    parser.add_argument("--mode", choices=MODES, required=True)
+    parser.add_argument("--force-revalidate", action="store_true")
     parser.add_argument("--run-dir", type=Path, required=True)
     parser.add_argument("--original-root", type=Path,
                         default=(Path.home() / "projects/tenny-reference"))
@@ -406,7 +464,11 @@ def main(argv=None):
     args = parse_args(argv)
     monitor = RunMonitor(args)  # Publish BEFORE any ML imports.
     try:
-        run_training(args, monitor)
+        if mode_spec(args.mode)["hybrid"]:
+            from hybrid.managed_training import run_managed
+            run_managed(args, monitor, run_training)
+        else:
+            run_training(args, monitor)
     except StopRequested as exc:
         monitor.publish(phase="cancelled", stage="no_model_initialized",
                         stop_reason=str(exc), completed=False)

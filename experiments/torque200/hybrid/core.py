@@ -220,7 +220,8 @@ def source_fingerprint():
     paths = sorted([*ROOT.joinpath("assets").rglob("*"),
                     *ROOT.joinpath("hybrid").glob("*.py"),
                     *ROOT.joinpath("legwheel").rglob("*.py"),
-                    ROOT/"verify_artifacts.py", ROOT/"hybrid-wsl.sh"])
+                    ROOT/"verify_artifacts.py", ROOT/"hybrid-wsl.sh",
+                    ROOT/"console_train.py", ROOT/"control_modes.py", ROOT/"preview_sync.py"])
     digest = hashlib.sha256()
     for path in paths:
         if path.is_file():

@@ -11,7 +11,7 @@ args = ["--port", "{port}", "--mode", "{mode}"]
 url = "http://{wsl_ip}:{port}/"
 params = [
   { name = "port", type = "int", default = 8770, min = 1024, max = 65535 },
-  { name = "mode", type = "choice", choices = ["selected", "original", "torque200"], default = "selected", label = "模式" },
+  { name = "mode", type = "choice", choices = ["selected", "original", "torque200", "hybrid_virtual_leg_force_100", "hybrid_virtual_leg_force_200", "hybrid_matched_envelope_100", "hybrid_matched_envelope_200", "hybrid_direct_torque_100", "hybrid_direct_torque_200"], default = "selected", label = "模式" },
 ]
 
 [[task]]
@@ -102,11 +102,11 @@ params = [
 
 [[task]]
 id = "train-hybrid"
-name = "腿力＋轮扭矩训练（先校验）"
+name = "腿力＋轮扭矩训练（复用已通过检查）"
 group = "训练"
 needs = "wsl"
 script = "experiments/torque200/hybrid-wsl.sh"
-args = ["--mode", "{mode}", "--control-hz", "{control_hz}", "--steps", "{steps}", "--num-envs", "{num_envs}", "--unroll-length", "16", "--seed", "{seed}"]
+args = ["--reuse-ready", "--mode", "{mode}", "--control-hz", "{control_hz}", "--steps", "{steps}", "--num-envs", "{num_envs}", "--unroll-length", "16", "--seed", "{seed}"]
 params = [
   { name = "mode", type = "choice", choices = ["virtual_leg_force", "matched_envelope", "direct_torque"], default = "virtual_leg_force" },
   { name = "control_hz", type = "choice", choices = ["100", "200"], default = "200", label = "控制频率 (Hz)" },

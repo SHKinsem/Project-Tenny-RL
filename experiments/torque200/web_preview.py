@@ -8,9 +8,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import threading
 import time
-from preview_sync import read_snapshot, utc_now
+from control_modes import MODES, mode_spec
 
-MODES = ("original", "torque200")
 
 
 def persist_mode(artifacts, mode):
@@ -40,6 +39,10 @@ def main():
     parser.add_argument("--original-root", type=Path, default=(Path.home() / "projects/tenny-reference"))
     args = parser.parse_args()
     persist_mode(args.artifacts, args.mode)
+    if mode_spec(args.mode)["hybrid"]:
+        from hybrid_web import main as hybrid_main
+        return hybrid_main(args)
+    from preview_sync import read_snapshot, utc_now
     from training_control import TrainingController, ControlError
     controller = TrainingController(args.artifacts, args.original_root, args.artifacts.parent)
     console_model = controller.latest(args.mode)

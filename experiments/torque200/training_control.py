@@ -15,6 +15,7 @@ import subprocess
 import sys
 from typing import Any
 import uuid
+from control_modes import MODES as CONTROL_MODES, mode_spec
 
 try:
     import fcntl
@@ -26,7 +27,7 @@ class ControlError(RuntimeError):
     """The requested control operation conflicts with the current job."""
 
 
-MODES = frozenset({"original", "torque200"})
+MODES = frozenset(CONTROL_MODES)
 TERMINAL = frozenset({"completed", "stopped", "cancelled", "failed", "interrupted"})
 
 
@@ -52,7 +53,7 @@ def _write(path: Path, value: dict[str, Any]) -> None:
 
 def _mode(mode: str) -> str:
     if not isinstance(mode, str) or mode not in MODES:
-        raise ValueError("mode must be original or torque200")
+        raise ValueError("Unknown control mode")
     return mode
 
 
@@ -78,6 +79,7 @@ class TrainingController:
         self._children: dict[int, subprocess.Popen] = {}
         self._latest_cache: dict[str, tuple[Any, Any]] = {}
         self._recent_cache: dict[str, tuple[int, Path | None]] = {}
+        self._hybrid_validation_cache: dict[tuple[str, str], tuple] = {}
 
     @contextmanager
     def _locked(self):
@@ -179,6 +181,13 @@ class TrainingController:
             export = _within(report["export_path"], run)
             if not checkpoint.exists() or not export.exists():
                 return None
+            if mode_spec(mode)["hybrid"]:
+                from hybrid.managed_training import verified_report, verification_signature
+                signature = verification_signature(run)
+                key = (str(run), mode)
+                if self._hybrid_validation_cache.get(key) != signature:
+                    verified_report(run, mode, report)
+                    self._hybrid_validation_cache[key] = signature
             return {**report, "mode": mode, "run_dir": str(run),
                     "run_id": run.name, "report_path": str(run / "report.json"),
                     "checkpoint": str(checkpoint), "export_path": str(export), "verified": True}
@@ -206,7 +215,12 @@ class TrainingController:
         # New runs change the directory mtime; active exit changes the record.
         # No full directory scan is needed for each one-second dashboard poll.
         fingerprint = (directory_mtime, record.get("run_dir"), record.get("ended_at"), alive)
-        cached = self._latest_cache.get(mode)
+        # Hybrid contracts and artifact hashes must remain valid after source/file edits.
+        # These checks happen only when selecting a saved model, not in training callbacks.
+        if mode_spec(mode)["hybrid"]:
+            cached = None
+        else:
+            cached = self._latest_cache.get(mode)
         if cached and cached[0] == fingerprint:
             return cached[1]
         valid = self._runs(mode, record if alive else None)
@@ -279,13 +293,16 @@ class TrainingController:
             record, _, alive = self._current()
             return self._runs(mode, record if alive else None)
 
-    def start(self, mode: str, duration_seconds: float = 0, resume: bool = False) -> dict:
+    def start(self, mode: str, duration_seconds: float = 0, resume: bool = False,
+              force_revalidate: bool = False) -> dict:
         _mode(mode)
         if (isinstance(duration_seconds, bool) or not isinstance(duration_seconds, (float, int))
                 or not math.isfinite(duration_seconds) or not 0 <= duration_seconds <= 7 * 86400):
             raise ValueError("duration_seconds must be 0 (unlimited) or at most seven days")
         if not isinstance(resume, bool):
             raise ValueError("resume must be a boolean")
+        if not isinstance(force_revalidate, bool):
+            raise ValueError("force_revalidate must be a boolean")
         if not self.script.is_file() or self.script.name != "console_train.py":
             raise ValueError("training script must be an existing console_train.py")
         with self._locked():
@@ -301,6 +318,7 @@ class TrainingController:
             run = self.root / mode / (datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ") + "_" + uuid.uuid4().hex[:8])
             run.mkdir(parents=True)
             request = {"mode": mode, "duration_seconds": duration_seconds, "resume": resume,
+                       "force_revalidate": force_revalidate,
                        "restore": restore["checkpoint"] if restore else None, "seed": 0, "preview_protocol": 1,
                        "created_at": datetime.now(timezone.utc).isoformat(), "run_dir": str(run)}
             _write(run / "request.json", request)
@@ -310,11 +328,22 @@ class TrainingController:
                     "--duration-seconds", str(duration_seconds), "--seed", "0"]
             if restore:
                 argv += ["--restore", restore["checkpoint"]]
+            if force_revalidate:
+                argv += ["--force-revalidate"]
             env = os.environ.copy()
             env.pop("LD_LIBRARY_PATH", None)
             env.update(JAX_PLATFORMS="cuda", CUDA_VISIBLE_DEVICES="0", XLA_PYTHON_CLIENT_PREALLOCATE="false",
                        XLA_PYTHON_CLIENT_MEM_FRACTION="0.35", OMP_NUM_THREADS="4", OPENBLAS_NUM_THREADS="1",
                        JAX_COMPILATION_CACHE_DIR=str(self.torque_root / "jax-cache"), PYTHONUNBUFFERED="1")
+            if mode_spec(mode)["hybrid"]:
+                from hybrid.managed_training import runtime_root
+                from hybrid.readiness import prepare_environment
+                # The web preview itself is CPU-only; training uses the GPU.
+                # Start from the inherited settings so explicit GPU selection and
+                # memory limits survive, using exactly the CLI normalization.
+                source = os.environ.copy()
+                source["JAX_PLATFORMS"] = "cuda"
+                env = prepare_environment(runtime_root(), source)
             record = {**request, "phase": "preparing", "script": str(self.script)}
             try:
                 with (run / "train.log").open("ab", buffering=0) as log:

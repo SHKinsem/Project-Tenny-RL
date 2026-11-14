@@ -1,5 +1,6 @@
 """运行器：按系统构造命令，管理后台任务及其日志。"""
 import os
+import json
 import shutil
 import signal
 import subprocess
@@ -51,13 +52,27 @@ def to_linux_path(path: Path) -> str:
 
 
 def read_selected_mode():
-    if not IS_WIN:
-        return "original"  # ponytail: Linux 下无 WSL 约定路径，回退原版；需要时再读 SELECTED_MODE_FILE
-    r = _wsl("/usr/bin/python3", "-c", _SELECTED_CODE, SELECTED_MODE_FILE)
-    mode = r.stdout.strip()
-    if r.returncode or mode not in ("original", "torque200"):
-        raise registry.TaskError("读不到选中的模式，未启动任务")
+    try:
+        if IS_WIN:
+            r = _wsl("/usr/bin/python3", "-c", _SELECTED_CODE, SELECTED_MODE_FILE)
+            if r.returncode:
+                raise ValueError("WSL selection read failed")
+            mode = r.stdout.strip()
+        else:
+            selected = Path(SELECTED_MODE_FILE).expanduser()
+            mode = json.loads(selected.read_text(encoding="utf8"))["mode"] if selected.exists() else "original"
+        choices = next(p["choices"] for p in registry.load()["web"]["params"] if p["name"] == "mode")
+        if mode not in choices or mode == "selected":
+            raise ValueError("Unknown selected mode")
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise registry.TaskError("读不到选中的模式，未启动任务") from exc
     return mode
+
+
+def snapshots():
+    """Recover launched jobs after a page reload without starting another job."""
+    with _lock:
+        return [job.snapshot() for job in _jobs.values()]
 
 
 def wsl_ip():
@@ -82,14 +97,24 @@ class Job:
         self.id = uuid.uuid4().hex[:8]
         self.task_id = task["id"]
         self.url = url
+        self.bridge = None
+        if IS_WIN and task['id'] == 'web' and url:
+            from .proxy import ConsoleBridge
+            self.bridge = ConsoleBridge(url)
+            self.url = self.bridge.url
         self.returncode = None
         self.stopped = False
         self._lines, self._dropped = [], 0
         self._lock = threading.Lock()
         kw = ({"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP} if IS_WIN
               else {"start_new_session": True})
-        self.proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                     cwd=registry.ROOT, **kw)
+        try:
+            self.proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                         cwd=registry.ROOT, **kw)
+        except BaseException:
+            if self.bridge:
+                self.bridge.close()
+            raise
         threading.Thread(target=self._pump, daemon=True).start()
 
     def _pump(self):
@@ -104,6 +129,8 @@ class Job:
         finally:
             self.proc.stdout.close()
         self.returncode = self.proc.wait()
+        if self.bridge:
+            self.bridge.close()
 
     @property
     def status(self):

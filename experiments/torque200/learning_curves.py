@@ -221,8 +221,8 @@ def load_console_learning_data(run_dir: Path, mode: str) -> dict:
     """Read the bounded live window; full history stays in metrics.jsonl."""
     waiting = {"available": False, "metadata": {"message": "本轮训练正在准备，等待首次记录。"}, "points": []}
     try:
-        if mode not in ("original", "torque200"):
-            raise ValueError("Unknown mode")
+        from control_modes import mode_spec
+        spec = mode_spec(mode)
         directory = Path(run_dir).resolve()
         def read(name):
             path = directory / name
@@ -231,8 +231,12 @@ def load_console_learning_data(run_dir: Path, mode: str) -> dict:
             return json.loads(path.read_text(encoding="utf8"), parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x)))
         config, ppo, events = read("env_config.json"), read("ppo_config.json"), read("progress.json")
         dt = config["ctrl_dt"]
-        if dt != (0.01 if mode == "original" else 0.005):
+        if dt != 1 / spec["control_hz"]:
             raise ValueError("Mode mismatch")
+        if spec["hybrid"]:
+            policy = read("policy_metadata.json")
+            if policy.get("action_mode") != spec["action_mode"] or policy.get("control_hz") != spec["control_hz"]:
+                raise ValueError("Hybrid action mode or frequency mismatch")
         if not isinstance(events, list) or len(events) > 2000:
             raise ValueError("Invalid progress window")
         def number(value):

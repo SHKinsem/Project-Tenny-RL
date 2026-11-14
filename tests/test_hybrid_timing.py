@@ -128,7 +128,10 @@ class FrequencyEntryTest(unittest.TestCase):
                 for hz in (100, 200):
                     values = registry.resolve_params(task, dict(mode=mode, control_hz=hz))
                     argv = registry.build_args(task, values)
-                    args = train.parser().parse_args(argv + ['--validation', 'check.json', '--output', 'run'])
+                    self.assertEqual('--reuse-ready' in argv, task_id == 'train-hybrid')
+                    # Preparation reuse belongs to the shell wrapper, not PPO.
+                    train_argv = [arg for arg in argv if arg != '--reuse-ready']
+                    args = train.parser().parse_args(train_argv + ['--validation', 'check.json', '--output', 'run'])
                     self.assertEqual((args.mode, args.control_hz), (mode, hz))
             for hz in ('50', '150', '400', 'nan', '100; echo wrong'):
                 with self.assertRaises(registry.TaskError):

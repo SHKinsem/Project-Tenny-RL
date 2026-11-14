@@ -17,12 +17,16 @@ pre{background:#08110b;padding:12px;border-radius:6px;height:42vh;overflow:auto;
 a{color:var(--gold)}
 </style>
 <h1>Project Tenny</h1>
+<p>日常训练请进入完整控制台：选择模式、开始或继续训练、停止并保存，以及查看学习曲线和仿真。</p>
+<p><button onclick="openConsole()">打开完整训练控制台</button> <span id="console-link"></span></p>
 <div id="tasks"></div>
 <h2>日志 <span id="cur"></span></h2>
+<label>已启动任务 <select id="jobs" onchange="selectJob(this.value)"><option value="">暂无任务</option></select></label>
 <pre id="log">选择上方任务并点击"运行"。</pre>
 <script>
 const $ = s => document.querySelector(s);
-let job = null, since = 0, timer = null;
+let job = null, since = 0, timer = null, knownJobs = [];
+const modeLabel = c => ({selected:'上次选择',original:'原版 · 100 Hz',torque200:'全扭矩 · 200 Hz',virtual_leg_force:'虚拟腿力',matched_envelope:'匹配包络对照',direct_torque:'直接扭矩对照'}[c] || c.replace(/^hybrid_(.*)_(100|200)$/, (_,mode,hz)=>modeLabel(mode)+' · '+hz+' Hz'));
 
 async function api(path, body) {
   const r = await fetch(path, body === undefined ? {} :
@@ -34,7 +38,7 @@ async function api(path, body) {
 
 function field(p) {
   if (p.type === 'choice')
-    return `<select name="${p.name}">${p.choices.map(c => `<option ${c == p.default ? 'selected' : ''}>${c}</option>`).join('')}</select>`;
+    return `<select name="${p.name}">${p.choices.map(c => `<option value="${c}" ${c == p.default ? 'selected' : ''}>${modeLabel(c)}</option>`).join('')}</select>`;
   if (p.type === 'flag') return `<input type="checkbox" name="${p.name}" ${p.default ? 'checked' : ''}>`;
   return `<input name="${p.name}" value="${p.default ?? ''}">`;
 }
@@ -46,6 +50,25 @@ async function init() {
     <div class="task" data-id="${t.id}"><b>${t.name}</b>
       ${(t.params || []).map(p => `<label>${p.label ?? p.name} ${field(p)}</label>`).join('')}
       <button onclick="run('${t.id}')">运行</button></div>`).join('')).join('');
+  await recoverJobs();
+}
+
+async function recoverJobs(selected) {
+  knownJobs = await api('/api/jobs');
+  $('#jobs').replaceChildren(...knownJobs.map(j => {
+    const o = document.createElement('option');o.value=j.id;o.textContent=j.task+' · '+j.status;return o;
+  }));
+  const activeWeb = knownJobs.find(j=>j.task==='web' && j.status==='running');
+  $('#console-link').replaceChildren();
+  if(activeWeb?.url){const a=document.createElement('a');a.href=activeWeb.url;a.target='_blank';a.textContent='进入已启动的训练控制台';$('#console-link').append(a);}
+  const chosen = knownJobs.find(j=>j.id===selected) || knownJobs.filter(j=>j.status==='running').at(-1) || knownJobs.at(-1);
+  if(chosen){$('#jobs').value=chosen.id;show(chosen);}
+}
+function selectJob(id){const selected=knownJobs.find(j=>j.id===id);if(selected)show(selected);}
+async function openConsole(){
+  const jobs=await api('/api/jobs'), active=jobs.find(j=>j.task==='web' && j.status==='running');
+  if(active){window.open(active.url,'_blank');await recoverJobs(active.id);}
+  else await run('web');
 }
 
 function collect(id) {
@@ -56,7 +79,7 @@ function collect(id) {
 }
 
 async function run(id) {
-  try { show(await api('/api/run/' + id, collect(id))); } catch (e) { alert(e.message); }
+  try { const started=await api('/api/run/' + id, collect(id));await recoverJobs(started.id); } catch (e) { alert(e.message); }
 }
 
 async function stopJob() { if (job) await api('/api/stop/' + job.id, {}); }
