@@ -7,7 +7,7 @@ from urllib.parse import parse_qsl
 from . import registry, runner
 
 UI = Path(__file__).with_name("ui") / "index.html"
-LOCAL_HOSTS = {"127.0.0.1", "localhost"}
+LOCAL_HOSTS = {"127.0.0.1", "localhost", "tenny.localhost"}  # *.localhost 浏览器内置解析到本机
 
 
 def public(task):

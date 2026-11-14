@@ -221,6 +221,7 @@ class ServerTest(unittest.TestCase):
 
     def test_rejects_foreign_host_and_form_posts(self):
         self.assertEqual(self.call("GET", "/api/tasks", host="evil.example")[0], 400)
+        self.assertEqual(self.call("GET", "/api/tasks", host="tenny.localhost:8800")[0], 200)
         self.assertEqual(self.call("POST", "/api/run/echo", {}, ctype="text/plain")[0], 400)
         self.assertEqual(runner._jobs, {})
 
@@ -289,6 +290,28 @@ class CliTest(unittest.TestCase):
         with contextlib.redirect_stderr(err):
             self.assertNotEqual(cli.main(["run", "nope"], TASKS), 0)
             self.assertNotEqual(cli.main(["run", "num", "n=99"], TASKS), 0)
+
+    def test_web_falls_back_to_any_port(self):
+        from unittest import mock
+        tried = []
+
+        class Fake:
+            server_address = ("127.0.0.1", 54321)
+
+            def serve_forever(self):
+                raise KeyboardInterrupt
+
+        def fake_make(tasks, port):
+            tried.append(port)
+            if port:
+                raise PermissionError(10013, "excluded port range")
+            return Fake()
+
+        out = io.StringIO()
+        with mock.patch.object(server, "make_server", fake_make), contextlib.redirect_stdout(out):
+            self.assertEqual(cli.main(["web", "--no-browser"], TASKS), 0)
+        self.assertEqual(tried, [*range(8800, 8810), 0])
+        self.assertIn(":54321/", out.getvalue())
 
 
 if __name__ == "__main__":

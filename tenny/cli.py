@@ -43,17 +43,18 @@ def _run(tasks, task_id, kv):
 
 
 def _web(tasks, port, open_browser):
-    for p in range(port, port + 10):
+    # 端口 0 兜底：Windows 的 Hyper-V/WSL 会动态保留整段端口（bind 报 WinError 10013）
+    for p in [*range(port, port + 10), 0]:
         try:
             srv = server.make_server(tasks, port=p)
             break
-        except OSError:
-            continue
+        except OSError as e:
+            err = e
     else:
-        print(f"端口 {port}-{port + 9} 都被占用", file=sys.stderr)
+        print(f"无法监听端口 {port}-{port + 9} 或任意端口: {err}", file=sys.stderr)
         return 1
-    url = f"http://127.0.0.1:{srv.server_address[1]}/"
-    print(f"Project Tenny 控制台: {url}  (Ctrl-C 退出)")
+    url = f"http://tenny.localhost:{srv.server_address[1]}/"
+    print(f"Project Tenny 控制台: {url}  (Ctrl-C 退出)", flush=True)
     if open_browser:
         webbrowser.open(url)
     try:
