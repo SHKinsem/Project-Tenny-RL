@@ -1,4 +1,4 @@
-"""Three comparable opt-in 200 Hz modes on the existing torque200 environment.
+"""Three comparable opt-in 100/200 Hz modes on the existing torque200 environment.
 
 Original torque200/default checkpoints remain separate. This family changes the
 previous-command/effort semantics for ALL three modes together, not only force.
@@ -14,12 +14,13 @@ from legwheel.env import LegWheelRobot
 from hybrid.core import (HIP_RANGE, MODES, TORQUE_LIMITS, read_geometry,
                          scan_geometry, metadata, XML, MAX_EQ_POSITION, MAX_LENGTH_VELOCITY,
                          MIN_JACOBIAN_RATIO)
+from hybrid.timing import configure_timing, validate_timing, DEFAULT_CONTROL_HZ
 
 
-def hybrid_config():
+def hybrid_config(control_hz=DEFAULT_CONTROL_HZ, action_delay_ms=0.0):
     cfg = default_config()
     cfg.push_config.enable = False  # First stage: flat ground, no added push curriculum.
-    return cfg
+    return configure_timing(cfg, control_hz, action_delay_ms)
 
 
 class HybridLegWheelRobot(LegWheelRobot):
@@ -32,13 +33,15 @@ class HybridLegWheelRobot(LegWheelRobot):
         self.force_scales = jp.asarray([r["force_scale_n"] for r in self.scan])
         self.jmax = jp.asarray([r["jmax_bound"] for r in self.scan])
         cfg = config if config is not None else hybrid_config()
-        if (cfg.ctrl_dt, cfg.sim_dt) != (0.005, 0.0025):
-            raise ValueError("hybrid-v1 requires 200 Hz policy / 400 Hz physics")
+        timing = validate_timing(cfg)
+        self.control_hz = timing.control_hz
         if tuple(cfg.torque_control.scales) != TORQUE_LIMITS:
             raise ValueError("Changed torque limits require explicit recalibration")
         if Path(cfg._XML_PATH).resolve() != XML.resolve():
             raise ValueError("Hybrid geometry must use the calibrated source XML")
         super().__init__(cfg)
+        if self.n_substeps != timing.n_substeps or self.dt != timing.ctrl_dt:
+            raise ValueError("Simulator timing differs from the hybrid timing contract")
         # All actuator/dof orders are checked again by validate.py on compiled model.
         self.hip_q = jp.asarray([self.mj_model.jnt_qposadr[self.mj_model.joint(f"thigh_{s}_joint").id]
                                  for s in ("left", "right")])
@@ -50,7 +53,7 @@ class HybridLegWheelRobot(LegWheelRobot):
                                   for s in ("left", "right")])
         self.act_v = jp.asarray([self.mj_model.jnt_dofadr[self.mj_model.joint(f"{part}_{s}_joint").id]
                                  for part in ("thigh", "wheel") for s in ("left", "right")])
-        self.policy_metadata = metadata(mode, self.scan)
+        self.policy_metadata = metadata(mode, self.scan, cfg.control_hz, cfg.action_delay_ms)
 
     def geometry(self, data):
         qh, qk = data.qpos[self.hip_q], data.qpos[self.knee_q]
@@ -74,7 +77,7 @@ class HybridLegWheelRobot(LegWheelRobot):
             hybrid_mean_actual_torque=jp.zeros(4), hybrid_effort=jp.zeros(()),
             hybrid_current_actual=jp.zeros(4), hybrid_last_actual=jp.zeros(4),
             hybrid_last_last_actual=jp.zeros(4), hybrid_action_rate=jp.zeros(()),
-            hybrid_command_substeps=jp.zeros((2, 4)), hybrid_actual_substeps=jp.zeros((2, 4)),
+            hybrid_command_substeps=jp.zeros((self.n_substeps, 4)), hybrid_actual_substeps=jp.zeros((self.n_substeps, 4)),
             hybrid_jacobian=jp.zeros(2), hybrid_invalid=jp.zeros((), dtype=bool),
             hybrid_bad_request=jp.zeros((), dtype=bool),
         )

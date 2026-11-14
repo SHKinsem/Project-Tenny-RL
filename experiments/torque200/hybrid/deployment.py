@@ -1,7 +1,7 @@
 """Validated host-side adapter, not an embedded firmware/real-motor deployment.
 
-Call torque at 400 Hz with fresh joint positions, holding action for 5 ms.
-Deployment must reproduce observation timing: mean of two FINAL SENT torques /
+Call torque at 400 Hz with fresh joint positions, holding action for the saved ctrl_dt (5 or 10 ms).
+Deployment must reproduce observation timing: mean of n_substeps FINAL SENT torques /
 TORQUE_LIMITS, after delay/filter/limit. No contact-force sensor is required.
 """
 import json
@@ -12,12 +12,20 @@ from hybrid.core import (HIP_RANGE, read_geometry, scan_geometry, metadata,
 
 
 class HybridPolicy:
-    def __init__(self, export_path, metadata_path, expected_mode):
+    def __init__(self, export_path, metadata_path, expected_mode, expected_control_hz=None):
         # Check semantics before importing or constructing the old NumPy kernel.
         self.legs = read_geometry()
         self.scan = scan_geometry(self.legs)
         self.meta = json.loads(Path(metadata_path).read_text(encoding="utf8"))
-        require_metadata(self.meta, metadata(expected_mode, self.scan))
+        if self.meta.get("action_delay_ms") != 0.0:
+            raise ValueError("HybridPolicy supports only the zero-delay training contract; no hidden delay queue")
+        # Default derives the rate from the saved contract, never a UI preset.
+        hz = self.meta.get("control_hz") if expected_control_hz is None else expected_control_hz
+        require_metadata(self.meta, metadata(expected_mode, self.scan, hz))
+        self.control_hz = self.meta["control_hz"]
+        self.ctrl_dt = self.meta["ctrl_dt"]
+        self.sim_dt = self.meta["sim_dt"]
+        self.n_substeps = self.meta["n_substeps"]
         if self.meta.get("export_sha256") != digest_file(export_path):
             raise ValueError("Export bytes are not bound to this policy metadata")
         from legwheel.deployment.numpy_policy import RL_Policy

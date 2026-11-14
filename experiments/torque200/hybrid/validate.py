@@ -10,20 +10,23 @@ import time
 from hybrid.core import (HIP_RANGE, XML, TORQUE_LIMITS, read_geometry,
                          scan_geometry, source_fingerprint, write_json)
 from hybrid.progress import ValidationProgress
+from hybrid.timing import Timing, SUPPORTED_CONTROL_HZ, DEFAULT_CONTROL_HZ
 
 COMPILE_HINT = ("首次 JAX/XLA 编译或设备执行可能耗时数分钟；等待实际返回，"
                 "不估算编译百分比或剩余时间")
 
 
-def static_audit():
+def static_audit(control_hz=DEFAULT_CONTROL_HZ):
     return dict(schema="hybrid-local-validation-v1", source_fingerprint=source_fingerprint(),
+                **Timing(control_hz).contract(),
                 runtime_validated=False, hip_range=list(HIP_RANGE),
                 scan=scan_geometry(read_geometry()),
                 scope="Pure source-model kinematics only; no compiled model or dynamics tested")
 
 
 def runtime_checks(report, progress):
-    progress.stage("加载 JAX / MuJoCo / 训练包装器", hint=COMPILE_HINT)
+    timing = Timing(report["control_hz"])
+    progress.stage(f"{timing.control_hz} Hz：加载 JAX / MuJoCo / 训练包装器", hint=COMPILE_HINT)
     import functools
     import importlib.metadata
     import inspect
@@ -133,11 +136,10 @@ def runtime_checks(report, progress):
             np.testing.assert_allclose(d.qfrc_actuator[dofs], expected, atol=1e-8)
     model.actuator_gainprm[:, 0] = 1
 
-    def cfg(delay=0):
-        c = hybrid_config()
+    def cfg(delay_ms=0.0):
+        c = hybrid_config(timing.control_hz, action_delay_ms=delay_ms)
         c.noise_config.level = 0.0
         c.cmd_config.cmd_prob = 0.0
-        c.action_delay_steps = delay
         return c
 
     progress.stage("构造三种对照环境", hint=COMPILE_HINT)
@@ -157,14 +159,19 @@ def runtime_checks(report, progress):
     jax.block_until_ready(old_state)
     max_residual = max_vel_residual = max_length_vel_residual = 0.0
     max_equivalence_error = 0.0
-    for n in range(20):
-        a = jp.asarray([.01*math.sin(n*.2), -.01*math.cos(n*.2), .01, -.01])
+    diagnostic_steps = timing.steps(0.1)
+    for n in range(diagnostic_steps):
+        phase = n * timing.ctrl_dt * 40.0
+        a = jp.asarray([.01*math.sin(phase), -.01*math.cos(phase), .01, -.01])
         for mode, env in envs.items():
             if n == 0:
                 progress.stage(f"{mode} 首次 step 编译和执行", hint=COMPILE_HINT)
             cmd = a.at[:2].multiply(-1) if mode == "matched_envelope" else a
             states[mode] = jax.block_until_ready(steps[mode](states[mode], cmd))
             s = states[mode]
+            assert env.n_substeps == timing.n_substeps
+            assert s.info["hybrid_command_substeps"].shape == (timing.n_substeps, 4)
+            assert abs(float(s.data.time)-(n+1)*timing.ctrl_dt) < 2e-6
             assert s.obs["state"].shape == (24,) and s.obs["privileged_state"].shape == (51,)
             assert np.isfinite(np.asarray(s.obs["state"])).all() and np.isfinite(float(s.reward))
             assert not bool(s.done), "Short diagnostic terminated; inspect before training"
@@ -187,15 +194,15 @@ def runtime_checks(report, progress):
         old_state = old_step(old_state, a)
         np.testing.assert_allclose(states["direct_torque"].data.qpos, old_state.data.qpos, atol=2e-6, rtol=0)
         if n == 0:
-            progress.stage("20 步三模式动力学 / 观测 / 代价对照", total=20)
+            progress.stage(f"{diagnostic_steps} 步三模式动力学 / 观测 / 代价对照（0.1 秒）", total=diagnostic_steps)
         progress.advance()
     # Provisional diagnostic tolerances, not a physical safety certificate.
     assert max_residual < .01, "Equality error exceeds 0.01 rad diagnostic tolerance"
     assert max_length_vel_residual < .05, "Leg-length residual velocity exceeds 0.05 m/s"
-    progress.stage("动作延迟：reset / step 编译及三步验证", hint=COMPILE_HINT)
-    delayed = HybridLegWheelRobot("virtual_leg_force", cfg(2))
+    progress.stage("10 ms 动作延迟：reset / step 编译与验证", hint=COMPILE_HINT)
+    delayed = HybridLegWheelRobot("virtual_leg_force", cfg(10.0))
     s, fn = delayed.reset(jax.random.PRNGKey(4)), jax.jit(delayed.step)
-    for _ in range(2):
+    for _ in range(timing.steps(0.01)):
         s = fn(s, jp.ones(4)*.01)
         np.testing.assert_allclose(s.info["hybrid_command_substeps"], 0, atol=1e-7)
     s = fn(s, jp.ones(4)*.01)
@@ -216,6 +223,33 @@ def runtime_checks(report, progress):
         assert bool(s.done) and bool(s.info["hybrid_invalid"])
         np.testing.assert_allclose(s.info["hybrid_command_substeps"], 0, atol=1e-7)
 
+    progress.stage("命令重采样与 3 秒周期的边界检查", hint=COMPILE_HINT)
+    clock_cfg = hybrid_config(timing.control_hz)
+    clock_cfg.noise_config.level = 0.0
+    clock_cfg.cmd_config.cmd_prob = 1.0
+    clock_env = HybridLegWheelRobot("direct_torque", clock_cfg)
+    clock_step = jax.jit(clock_env.step)
+    start_step = timing.steps(0.2)
+    period_steps = timing.steps(3.0)
+    # Inject only the integer counter near each boundary, keeping fresh reset
+    # physics. This tests scheduler transitions, NOT a 3-second stable rollout.
+    sentinel = jp.ones(4)*10.0
+    for counter, expected_counter, resample in (
+            (start_step-2, start_step-1, False),
+            (start_step-1, start_step, True),
+            (period_steps-2, period_steps-1, False),
+            (period_steps-1, 0, False)):
+        boundary = clock_env.reset(jax.random.PRNGKey(91))
+        boundary.info["step"] = jp.asarray(counter)
+        boundary.info["command"] = sentinel
+        boundary = jax.block_until_ready(clock_step(boundary, jp.zeros(4)))
+        assert not bool(boundary.done), "Scheduler boundary diagnostic terminated"
+        assert int(boundary.info["step"]) == expected_counter
+        if resample:
+            assert not np.array_equal(np.asarray(boundary.info["command"]), np.asarray(sentinel))
+        else:
+            np.testing.assert_array_equal(boundary.info["command"], sentinel)
+
     progress.stage("核对 Brax 包装器接口")
     # Exercise exactly the batched/randomized/reset wrapper used by train_ppo.
     required = {"episode_length", "action_repeat", "randomization_fn"}
@@ -223,7 +257,7 @@ def runtime_checks(report, progress):
         raise RuntimeError("Installed playground wrapper API differs; inspect before training")
     for mode in envs:
         progress.stage(f"{mode} 批量 vmap reset", hint=COMPILE_HINT)
-        wrapped_cfg = hybrid_config()
+        wrapped_cfg = hybrid_config(timing.control_hz)
         wrapped_cfg.noise_config.level = 0.0  # Keep default command probability.
         e = HybridLegWheelRobot(mode, wrapped_cfg)
         keys = jax.random.split(jax.random.PRNGKey(100), 2)
@@ -261,6 +295,7 @@ def runtime_checks(report, progress):
                   runtime_packages={p: importlib.metadata.version(p) for p in
                                     ("jax", "jaxlib", "mujoco", "mujoco-mjx", "brax", "playground", "flax")},
                   wrapper_randomization_reset_checked=True,
+                  command_schedule_boundaries_checked=True,
                   model_parameters=dict(mass_kg=float(np.sum(model.body_mass)),
                                         active_armature=model.dof_armature[dofs].tolist(),
                                         active_damping=model.dof_damping[dofs].tolist(),
@@ -271,7 +306,7 @@ def runtime_checks(report, progress):
                   compiled_geometry_max_jacobian_error=max_j_error,
                   compiled_finite_difference_error=max_fd_error,
                   initial_equality_residual_rad=initial_residual,
-                  short_diagnostic_seconds=.1, max_equality_residual_rad=max_residual,
+                  short_diagnostic_seconds=diagnostic_steps*timing.ctrl_dt, max_equality_residual_rad=max_residual,
                   max_equality_velocity_residual_rad_s=max_vel_residual,
                   max_length_velocity_residual_m_s=max_length_vel_residual,
                   equivalence_qpos_max_error=max_equivalence_error)
@@ -282,6 +317,7 @@ def main():
         raise RuntimeError("Do not disable assertions in the experimental acceptance pipeline")
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output", required=True)
+    p.add_argument("--control-hz", type=int, choices=SUPPORTED_CONTROL_HZ, default=DEFAULT_CONTROL_HZ)
     p.add_argument("--static-only", action="store_true")
     p.add_argument("--heartbeat-seconds", type=float, default=15.0,
                    help="等待阶段的日志心跳间隔（秒，默认 15）；不是编译进度百分比")
@@ -292,7 +328,7 @@ def main():
     try:
         with progress:
             progress.stage("源码几何扫描和指纹")
-            report.update(static_audit())
+            report.update(static_audit(args.control_hz))
             if not args.static_only:
                 runtime_checks(report, progress)
     except BaseException as exc:

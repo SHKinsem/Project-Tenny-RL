@@ -1,4 +1,4 @@
-# 单腿虚拟伸展力 + 独立轮扭矩（实验性，200 Hz）
+# 单腿虚拟伸展力 + 独立轮扭矩（实验性，100/200 Hz）
 
 ## 当前状态与入口
 
@@ -7,12 +7,13 @@
 在已经能运行原项目的本机 Linux / WSL ML 环境中，仓库根目录运行：
 
 ```bash
-python tenny.py run test-hybrid
+python tenny.py run test-hybrid control_hz=200
+python tenny.py run test-hybrid control_hz=100
 # 同一新实验族的两个对照
-python tenny.py run test-hybrid mode=matched_envelope
-python tenny.py run test-hybrid mode=direct_torque
+python tenny.py run test-hybrid mode=matched_envelope control_hz=200
+python tenny.py run test-hybrid mode=direct_torque control_hz=200
 # 三组预检通过后，可正式运行（本机 GPU，参数不是性能承诺）
-python tenny.py run train-hybrid mode=virtual_leg_force steps=1000000 num_envs=128 seed=0
+python tenny.py run train-hybrid mode=virtual_leg_force control_hz=200 steps=1000000 num_envs=128 seed=0
 ```
 
 - 脚本复用已有 `~/projects/tenny-reference/.venv-gpu/bin/python`，可用 `TENNY_PYTHON` 指定，不会下载依赖、自动升级或绕过网络限制。
@@ -22,9 +23,21 @@ python tenny.py run train-hybrid mode=virtual_leg_force steps=1000000 num_envs=1
 - 工作副本和训练产物放在 `~/projects/tenny-hybrid200`；日志、JSON 和导出文本回收到仓库已忽略的 `experiments/torque200/results/hybrid-*`。检查点保留在工作目录，不入 Git。每次产物独立，源码版本仅用 Git 管理。
 - 每轮记录编译+训练耗时、总耗时及带时间的进度日志。不能把第一次 JIT 耗时当作纯训练吞吐。
 
+### 模式与频率分开选择
+
+`virtual_leg_force`、`matched_envelope`、`direct_torque` 均可独立选 `control_hz=100` 或 `200`，默认仍 200。启动网页（8800）的这两项任务也有单独的频率下拉框。这里的“支持”表示接通配置与验证入口，不表示两种频率已通过本机动态测试或能够稳定平衡。50/150/400 Hz 等暂时明确拒绝，不静默取整或退回默认。
+
+- 物理与腿力映射固定 400 Hz。100 Hz 每个动作保持 4 个物理子步（10 ms），200 Hz 保持 2 个（5 ms）；每个物理子步重新计算几何，不把映射一起降频。
+- episode 保持 6 秒，命令的首次重采样保持 0.2 秒、之后每 3 秒。reset 时仍保留原随机初始命令，不等于最初 0.2 秒强制零命令。新实验修正了旧计数器 `>` 导致的周期多一控制步；旧 torque200 不变。
+- 默认动作延迟仍为 0。内部延迟测试固定 10 ms，分别是 1/2 个策略步，不把相同延迟步数误当相同延迟时间。非整策略周期的延迟拒绝，不做近似。`HybridPolicy` 主机适配器仅接受训练入口的零延迟模型，不隐藏增加一层延迟队列。
+- 奖励总和仍乘 `ctrl_dt / 10 ms`。实际扭矩能耗和一/二阶变化代价在 400 Hz 子步平均后积分；跟踪/姿态项仍为策略周期末采样，不声称是全子步积分或跨频率完全等价。折扣按 0.5 秒半衰期换算；GAE 的 λ 按 200 Hz 时 0.95 的同一时间衰减换算。
+- `steps` 和 `unroll_length` 仍明确表示策略 transition 数，不是秒。同样 16 步在 100/200 Hz 分别为每条序列 0.16/0.08 秒；PPO 总 steps 跨并行环境累计，报告另写累计仿真秒数和单条 rollout 秒数。跨频率对照应匹配实际时间和种子，不是仅用相同步数；优化器更新次数、熵系数及样本相关性仍需实验调参。
+- 每次 gate 只验证所选频率的三种模式，报告和训练要求一致。换频率必须重新运行完整 gate，并重新训练，不能加载另一频率或旧版本模型。checkpoint、导出和主机适配器都保存/核对频率、物理步长和子步数；适配器默认读取模型保存的频率，不套用界面默认值。
+- 原版预训练 `original` 仍固定 100 Hz，原 `torque200` 入口仍为 200 Hz。8770 旧仿真页未接入新混合模型，不显示无后端支持的频率选项；不要用旧预览器加载新模型。
+
 ### 预检日志怎么看
 
-新版预检会立即刷新阶段名称、阶段耗时和总耗时：源码扫描 → 依赖 → MuJoCo 模型 → 两腿几何与 JAX → 三模式首次 reset / step → 20 步对照 → 延迟/保护 → 各模式批量与随机化包装器 → 自动重置。已知总数的几何和 rollout 检查显示实际完成数量；每个阶段完成后单独记录耗时，JSON 中保存 `stage_timings`，失败时保存 `failed_stage`。
+新版预检会立即刷新阶段名称、阶段耗时和总耗时：源码扫描 → 依赖 → MuJoCo 模型 → 两腿几何与 JAX → 三模式首次 reset / step → 0.1 秒对照（100 Hz 为 10 步，200 Hz 为 20 步） → 延迟/保护 → 各模式批量与随机化包装器 → 自动重置。已知总数的几何和 rollout 检查显示实际完成数量；每个阶段完成后单独记录耗时，JSON 中保存 `stage_timings`，失败时保存 `failed_stage`。
 
 阶段未返回时默认每 15 秒输出“等待”心跳。首次 JAX/XLA 编译（可能包含 ptxas）和设备执行会一起计入该阶段；不显示无法测得的编译百分比、纯编译耗时或剩余时间。心跳只证明日志线程还在响应，不证明编译取得进展；原生调用若一直持有 Python GIL，心跳也可能延迟。没有心跳不能单独判断死锁，仍需结合进程/CPU/GPU 和错误日志。直接运行 `hybrid.validate` 时可用 `--heartbeat-seconds 30` 调整间隔。
 
@@ -58,7 +71,7 @@ python tenny.py run train-hybrid mode=virtual_leg_force steps=1000000 num_envs=1
 
 源码 XML 数学扫描给出两侧约 `Jl ∈ [-0.100444,-0.084491] m/rad`，长度约 33.7–87.1 mm。密集扫描再局部加密，采样最大 |Jl| 上浮 1%，以 `Fs=0.9*1 N·m/Jmax` 得到约 8.8715 N。它是保守数值候选，不是解析认证的全状态界限；模型或源码变化后必须重新验证。
 
-策略每 5 ms 给一次动作，400 Hz 的每个物理子步重新读取实际髋/膝角计算几何，再发送扭矩。保留原策略延迟队列，先延迟动作再在新状态映射。不会每步强制投影膝角来伪造理想约束。
+策略按所选频率每 5 或 10 ms 给一次动作，400 Hz 的每个物理子步重新读取实际髋/膝角计算几何，再发送扭矩。保留原策略延迟队列，先延迟动作再在新状态映射。不会每步强制投影膝角来伪造理想约束。
 
 以下任一条件会清零后续子步命令并锁存本步终止，即使下一子步回到区间也不恢复：
 - 髋角超实验区间、非有限动作/几何/状态；
@@ -74,7 +87,7 @@ python tenny.py run train-hybrid mode=virtual_leg_force steps=1000000 num_envs=1
 
 新三模式使用相同 24D actor / 51D critic、时间步、延迟、限幅、软件终止范围、网络、奖励与随机化配置。首阶段关闭额外推力课程，保留既有模型参数随机化。使用相同种子和时间步比较，后续应多种子验证。
 
-新观测末四维是刚结束控制周期两子步**最终发送扭矩的均值 / 各轴扭矩上限**，不是原始 Fv 动作。能耗项按子步实际 `qfrc_actuator` 归一化平方平均；变化率按实际扭矩的子步一/二阶差分计算后时间平均，参考时间为 10 ms。既不是 `ctrl` 原值，也不是含接触/重力/约束的总广义力。自动重置清空扭矩历史和延迟队列，避免跨 episode 污染。
+新观测末四维是刚结束控制周期全部子步**最终发送扭矩的均值 / 各轴扭矩上限**，不是原始 Fv 动作。能耗项按子步实际 `qfrc_actuator` 归一化平方平均；变化率按实际扭矩的子步一/二阶差分计算后时间平均，参考时间为 10 ms。既不是 `ctrl` 原值，也不是含接触/重力/约束的总广义力。自动重置清空扭矩历史和延迟队列，避免跨 episode 污染。
 
 因此新三模式可互相对照，但与旧 torque200 的奖励绝对值不能直接等同；应另外比较站立时长、跟踪误差、实际扭矩、失效比例。
 
@@ -93,11 +106,12 @@ python -m hybrid.validate --static-only --output results/hybrid-static.json
 2. 轮心位置、解析 Jl 与 MuJoCo site Jacobian、有限差分和 JAX vmap 的一致性；
 3. 三模式短 rollout、force/matched 等价、直接扭矩的原物理路径一致性；
 4. 实际扭矩/观测/代价、延迟、越界与约束无效清零；
-5. JIT reset/step、vmap、State scan、训练用 domain randomization + Brax wrapper + auto-reset 路径。
+5. JIT reset/step、vmap、State scan、训练用 domain randomization + Brax wrapper + auto-reset 路径；
+6. 所选频率的缓存形状、实际仿真时间步，以及命令重采样/计数器周期边界。边界检查注入计数器，不伪称机器人已稳定运行 3 秒。
 
 只有当前源码指纹的完整验证通过，训练入口才放行。训练后还会检查损失、参数有限性、检查点保存/重载、NumPy 导出与 JAX 输出及动作适配器一致性。热启动额外检查策略/价值网络权重确实改变，单独归一化统计变化不算继续学习。这里是权重与归一化恢复，优化器重新初始化，不宣称精确续训。
 
-检查点的模式、动作顺序、观测语义、维度、尺度、范围、源码指纹必须一致；检查点文件树和导出文件另用 SHA256 绑定。缺元数据、旧 24D 模型混入、错误模式、内容变化均拒绝。需要改模型或代码时，应显式重新校准/训练，不自动迁移旧权重。
+检查点的模式、控制频率、物理频率、子步数、动作顺序、观测语义、维度、尺度、范围、源码指纹必须一致；检查点文件树和导出文件另用 SHA256 绑定。缺元数据、旧 24D 模型混入、错误模式、内容变化均拒绝。需要改模型或代码时，应显式重新校准/训练，不自动迁移旧权重。
 
 `HybridPolicy` 只是主机验证适配器。调用 `torque` 必须传实际左右髋/膝角和速度，在 400 Hz 更新；它不直接操作硬件。导出的 C 数组不包含机器人控制、安全检查、传感器同步或完整 C 几何实现，**不能直接刷到真机驱动电机**。
 
@@ -114,3 +128,9 @@ Brax PPO 返回的最外层参数是 `(normalizer, policy, value)` 元组，而�
 ### 本修复版本尚未验证
 
 完整本机动态 gate、PPO 真正更新、warm restart、真实吞吐、稳定平衡、收敛、轮地接触效果、实机热/电流/机械边界。不得把静态差分通过或代码可导入当成这些结果。
+
+### 终端输出与并发保护
+
+启动脚本只显示阶段、实际计时/步数和必要错误，原始输出仍逐字节保存。失败保留退出码并停止后续阶段；详见 [终端日志说明](CONSOLE.md)。
+
+100/200 Hz 共用原有 `tenny-hybrid200` 运行目录（保留此旧名字以兼容现有路径，不表示频率固定200）。脚本持有目录互斥锁直到退出和结果收集结束，第二个任务会立即拒绝，不能在一个任务运行时同步覆盖它的源码。不同独立运行目录可用 `TENNY_HYBRID_ROOT` 指定；不会自动停止或修改当前已经运行的任务。

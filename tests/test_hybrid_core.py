@@ -313,7 +313,7 @@ class TrainingGateTest(unittest.TestCase):
 
     def test_only_successful_matching_runtime_report_passes_gate(self):
         valid = dict(schema="hybrid-local-validation-v1", runtime_validated=True,
-                     source_fingerprint="current-source")
+                     source_fingerprint="current-source", **core.Timing().contract())
         with mock.patch.object(train, "source_fingerprint", return_value="current-source"):
             self.write_report(valid)
             self.assertEqual(train.check_validation(self.validation_path), valid)

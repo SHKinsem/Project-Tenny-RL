@@ -11,6 +11,8 @@ import math
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
+from hybrid.timing import Timing, DEFAULT_CONTROL_HZ
+
 ROOT = Path(__file__).resolve().parents[1]
 XML = ROOT / "assets/legwheel_robot2_stl_nolinkage6_terrain.xml"
 MODES = ("virtual_leg_force", "matched_envelope", "direct_torque")
@@ -227,12 +229,12 @@ def source_fingerprint():
     return digest.hexdigest()
 
 
-def metadata(mode, scan):
+def metadata(mode, scan, control_hz=DEFAULT_CONTROL_HZ, action_delay_ms=0.0):
     if mode not in MODES:
         raise ValueError(mode)
     return dict(schema=SCHEMA, action_mode=mode, action_order=list(ACTION_ORDER),
                 observation_version=OBS_VERSION, actor_dim=24, critic_dim=51,
-                ctrl_dt=0.005, sim_dt=0.0025, force_bias_n=[0.0, 0.0],
+                **Timing(control_hz).contract(action_delay_ms), force_bias_n=[0.0, 0.0],
                 force_scales_n=[s["force_scale_n"] for s in scan],
                 torque_limits_nm=list(TORQUE_LIMITS), hip_range=list(HIP_RANGE),
                 validity=dict(equality_position_rad=MAX_EQ_POSITION,

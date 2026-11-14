@@ -14,14 +14,16 @@ os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")
 os.environ.setdefault("MPLBACKEND", "Agg")
 
 from hybrid.core import MODES, metadata, read_geometry, scan_geometry, source_fingerprint, require_metadata, write_json, digest_file, digest_tree
+from hybrid.timing import Timing, SUPPORTED_CONTROL_HZ, DEFAULT_CONTROL_HZ
 
 
-def check_validation(path):
+def check_validation(path, control_hz=DEFAULT_CONTROL_HZ):
     check = json.loads(Path(path).read_text(encoding="utf8"))
     if (check.get("schema") != "hybrid-local-validation-v1" or
             check.get("runtime_validated") is not True or
             check.get("source_fingerprint") != source_fingerprint()):
         raise ValueError("A successful full local hybrid.validate on this exact source is required")
+    require_metadata(check, Timing(control_hz).contract())
     return check
 
 
@@ -33,12 +35,14 @@ def restore_guard(checkpoint, expected):
     if (report.get("checkpoint_validated") is not True or
             report.get("checkpoint_name") != checkpoint.name or
             report.get("checkpoint_sha256") != digest_tree(checkpoint)):
-        raise ValueError("Restore only a completed, verified checkpoint of the SAME action mode")
+        raise ValueError("Restore only a completed, verified checkpoint of the SAME mode and control frequency")
 
 
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--mode", choices=MODES, default="virtual_leg_force")
+    p.add_argument("--control-hz", type=int, choices=SUPPORTED_CONTROL_HZ, default=DEFAULT_CONTROL_HZ,
+                   help="Policy frequency, independent of mode; physics remains 400 Hz")
     p.add_argument("--validation", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--restore", type=Path)
@@ -57,8 +61,8 @@ def main():
     args = parser().parse_args()
     if min(args.steps, args.num_envs, args.eval_envs, args.unroll_length) < 1:
         raise ValueError("Steps and environment/rollout counts must be positive")
-    check_validation(args.validation)
-    contract = metadata(args.mode, scan_geometry(read_geometry()))
+    check_validation(args.validation, args.control_hz)
+    contract = metadata(args.mode, scan_geometry(read_geometry()), args.control_hz)
     if args.restore:
         restore_guard(args.restore, contract)
     output = args.output.resolve()
@@ -81,10 +85,10 @@ def run(args, output, contract, started):
     from brax.training.agents.ppo import train as brax_ppo
     # Do not silently drop checkpoint options on unsupported Brax versions.
     supported = inspect.signature(brax_ppo.train).parameters
-    required = {"save_checkpoint_path"} | ({"restore_checkpoint_path"} if args.restore else set())
+    required = {"save_checkpoint_path", "gae_lambda"} | ({"restore_checkpoint_path"} if args.restore else set())
     if not required.issubset(supported):
-        raise RuntimeError("Installed Brax lacks required save/restore checkpoint support")
-    validation = check_validation(args.validation)
+        raise RuntimeError("Installed Brax lacks required save/restore checkpoint or gae_lambda support")
+    validation = check_validation(args.validation, args.control_hz)
     for package, version in validation["runtime_packages"].items():
         if importlib.metadata.version(package) != version:
             raise RuntimeError("Runtime packages changed after validation; rerun hybrid.validate")
@@ -97,7 +101,7 @@ def run(args, output, contract, started):
 
     if args.expected_platform and any(d.platform != args.expected_platform for d in jax.devices()):
         raise RuntimeError(f"Unexpected devices: {jax.devices()}")
-    cfg = hybrid_config()
+    cfg = hybrid_config(args.control_hz)
     params_cfg = get_ppo_config(cfg, num_evals=2, maxstep_candidate=args.steps,
         save_checkpoint_path=str(output/"checkpoints"), ppo_overrides=dict(
             batch_size=args.num_envs, num_minibatches=1, unroll_length=args.unroll_length, num_updates_per_batch=1))
@@ -107,6 +111,7 @@ def run(args, output, contract, started):
     params_cfg.reward_scaling = .1
     params_cfg.entropy_cost = 1e-2
     params_cfg.discounting = compute_discounting(cfg.ctrl_dt, .5)
+    params_cfg.gae_lambda = contract["gae_lambda"]
     params_cfg.network_factory.policy_hidden_layer_sizes = [64, 64]
     params_cfg.network_factory.value_hidden_layer_sizes = [512, 512, 512, 512]
     if args.restore:
@@ -117,6 +122,7 @@ def run(args, output, contract, started):
 
     def progress(steps, metrics):
         event = dict(steps=int(steps), elapsed_seconds=time.monotonic()-started,
+                     control_hz=args.control_hz, aggregate_simulated_seconds=int(steps)*cfg.ctrl_dt,
                      metrics={k: float(v) for k, v in metrics.items() if np.asarray(v).size == 1})
         events.append(event)
         write_json(output/"progress.json", events)
@@ -124,7 +130,7 @@ def run(args, output, contract, started):
         print(json.dumps(event), flush=True)
 
     env = HybridLegWheelRobot(args.mode, cfg)
-    eval_env = HybridLegWheelRobot(args.mode, hybrid_config())
+    eval_env = HybridLegWheelRobot(args.mode, hybrid_config(args.control_hz))
     training_started = time.monotonic()
     make_inference, params, _ = train_ppo(env=env, eval_env=eval_env, env_cfg=cfg,
                                         ppo_params=params_cfg, progress_fn=progress)
@@ -145,7 +151,8 @@ def run(args, output, contract, started):
     write_json(output/"policy_metadata.json", contract)
     before = jax.jit(make_inference(params, deterministic=True))
     after = jax.jit(make_inference(restored, deterministic=True))
-    deployed = HybridPolicy(export_path, output/"policy_metadata.json", expected_mode=args.mode)
+    deployed = HybridPolicy(export_path, output/"policy_metadata.json", expected_mode=args.mode,
+                            expected_control_hz=args.control_hz)
     step = jax.jit(env.step)
     restore_errors, export_errors, torque_errors = [], [], []
     dynamic_samples = 0
@@ -189,6 +196,11 @@ def run(args, output, contract, started):
             raise AssertionError("Restore network tree structure changed; see restore_network_check.json")
         checks.update(check_network_update(old, params))
     report = dict(checkpoint_validated=True, action_mode=args.mode, checkpoint=str(checkpoint),
+                  control_hz=args.control_hz, physics_hz=contract["physics_hz"],
+                  n_substeps=contract["n_substeps"], ctrl_dt=cfg.ctrl_dt, sim_dt=cfg.sim_dt,
+                  episode_seconds=cfg.episode_length*cfg.ctrl_dt,
+                  unroll_length=args.unroll_length, unroll_seconds=args.unroll_length*cfg.ctrl_dt,
+                  aggregate_simulated_seconds=events[-1]["steps"]*cfg.ctrl_dt,
                   checkpoint_name=checkpoint.name, checkpoint_sha256=digest_tree(checkpoint),
                   export_sha256=contract["export_sha256"], dynamic_adapter_samples=dynamic_samples,
                   requested_steps=args.steps, configured_steps=int(params_cfg.num_timesteps),
