@@ -13,6 +13,7 @@ from . import registry
 IS_WIN = os.name == "nt"
 DISTRO = os.environ.get("TENNY_WSL_DISTRO", "Ubuntu")
 MAX_LINES = 5000
+KILL_GRACE = 5  # seconds to wait before SIGKILL after SIGTERM on POSIX
 # WSL 侧保存"选中模式"的位置（~ 由 WSL 内的 python 展开）；与 experiments/torque200 的训练控制台约定一致
 SELECTED_MODE_FILE = "~/projects/tenny-torque200/artifacts/selected-mode.json"
 _SELECTED_CODE = ('import json,sys;from pathlib import Path;p=Path(sys.argv[1]).expanduser();'
@@ -92,13 +93,16 @@ class Job:
         threading.Thread(target=self._pump, daemon=True).start()
 
     def _pump(self):
-        for raw in self.proc.stdout:
-            line = raw.decode("utf-8", "replace").rstrip("\r\n")
-            with self._lock:
-                self._lines.append(line)
-                if len(self._lines) > MAX_LINES:
-                    del self._lines[0]
-                    self._dropped += 1
+        try:
+            for raw in self.proc.stdout:
+                line = raw.decode("utf-8", "replace").rstrip("\r\n")
+                with self._lock:
+                    self._lines.append(line)
+                    if len(self._lines) > MAX_LINES:
+                        del self._lines[0]
+                        self._dropped += 1
+        finally:
+            self.proc.stdout.close()
         self.returncode = self.proc.wait()
 
     @property
@@ -127,6 +131,14 @@ class Job:
                 os.killpg(self.proc.pid, signal.SIGTERM)
             except ProcessLookupError:
                 pass
+            # Escalate to SIGKILL if process ignores SIGTERM
+            def _escalate():
+                if self.returncode is None:
+                    try:
+                        os.killpg(self.proc.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+            threading.Timer(KILL_GRACE, _escalate).start()
 
 
 def start(task_id, given, tasks):
@@ -141,7 +153,10 @@ def start(task_id, given, tasks):
         if any(j.task_id == task_id and j.status == "running" for j in _jobs.values()):
             raise registry.Busy(f"{task_id} 已在运行")
         url = task["url"].format(wsl_ip=wsl_ip(), **values) if "url" in task else None
-        job = Job(task, build_command(task, values), url)
+        try:
+            job = Job(task, build_command(task, values), url)
+        except OSError as e:
+            raise registry.TaskError(f"无法启动 {task_id}: {e}")
         _jobs[job.id] = job
     return job
 

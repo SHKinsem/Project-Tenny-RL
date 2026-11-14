@@ -131,6 +131,36 @@ class RunnerTest(unittest.TestCase):
         if runner.IS_WIN:
             self.assertEqual(cmd[:4], ["wsl.exe", "-d", runner.DISTRO, "--exec"])
 
+    def test_stdout_closed_after_job_ends(self):
+        job = runner.start("echo", {"word": "x"}, TASKS)
+        wait(job)
+        self.assertTrue(job.proc.stdout.closed)
+
+    @unittest.skipIf(runner.IS_WIN, "POSIX-only test")
+    def test_sigterm_ignoring_process_killed(self):
+        # Task that ignores SIGTERM and exits on SIGKILL
+        task = {"id": "trap", "name": "trap", "group": "t",
+                "cmd": [PY, "-u", "-c",
+                        "import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);"
+                        "print('trapped',flush=True);time.sleep(60)"]}
+        job = runner.start("trap", {}, {"trap": task})
+        end = time.time() + 10
+        while "trapped" not in job.snapshot(0)["lines"] and time.time() < end:
+            time.sleep(0.05)
+        job.stop()
+        # Should be stopped within KILL_GRACE + grace for wait
+        end = time.time() + (runner.KILL_GRACE + 2)
+        while job.status == "running" and time.time() < end:
+            time.sleep(0.05)
+        self.assertEqual(job.status, "stopped")
+
+    def test_nonexistent_executable_raises_taskerror(self):
+        task = {"id": "bad", "name": "bad", "group": "t", "cmd": ["/nonexistent/exe"]}
+        with self.assertRaises(registry.TaskError) as cm:
+            runner.start("bad", {}, {"bad": task})
+        self.assertIn("无法启动", str(cm.exception))
+        self.assertEqual(runner._jobs, {})
+
 
 if __name__ == "__main__":
     unittest.main()
