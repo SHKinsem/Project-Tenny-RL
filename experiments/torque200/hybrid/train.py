@@ -180,12 +180,14 @@ def run(args, output, contract, started):
     if not events or events[-1]["steps"] < params_cfg.num_timesteps:
         raise AssertionError("Requested training progress not reached")
     if args.restore:
+        from hybrid.checkpoints import network_pair, network_diagnostics, check_network_update
         old = load(str(args.restore.resolve()))
-        if jax.tree.structure(old[1:]) != jax.tree.structure(params[1:]):
-            raise AssertionError("Restore network tree structure changed")
-        if not any(not np.array_equal(np.asarray(x), np.asarray(y)) for x, y in
-                   zip(jax.tree.leaves(old[1:]), jax.tree.leaves(params[1:]))):
-            raise AssertionError("Warm restart produced no changed policy/value network weights")
+        # Orbax's metadata-based loader returns a list, while Brax train returns
+        # a tuple. Normalize ONLY that bundle wrapper, not the network trees.
+        write_json(output/"restore_network_check.json", network_diagnostics(old, params))
+        if jax.tree.structure(network_pair(old)) != jax.tree.structure(network_pair(params)):
+            raise AssertionError("Restore network tree structure changed; see restore_network_check.json")
+        checks.update(check_network_update(old, params))
     report = dict(checkpoint_validated=True, action_mode=args.mode, checkpoint=str(checkpoint),
                   checkpoint_name=checkpoint.name, checkpoint_sha256=digest_tree(checkpoint),
                   export_sha256=contract["export_sha256"], dynamic_adapter_samples=dynamic_samples,
