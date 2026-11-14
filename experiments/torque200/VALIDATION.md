@@ -57,7 +57,7 @@
 两个计数字段均逐一比较，未跳过计数、Critic 或探索尺度。
 CUDA 驱动版本格式提示与 PjRt 缓存兼容提示仍可见，但本次实际 GPU 训练与验收均通过。
 
-原版演示继续使用原 `start-simulation.ps1`，不加载这些短训练权重。
+原版演示继续使用原版仿真（现为 `python tenny.py run sim`），不加载这些短训练权重。
 新入口和具体变更见 [README.md](README.md)。
 
 ## 独立实时窗口追加验收
