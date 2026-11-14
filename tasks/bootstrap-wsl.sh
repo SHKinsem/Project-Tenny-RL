@@ -2,7 +2,7 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=$HOME/projects/tenny-reference
 SOURCE="$WINROOT/reference/"
 mkdir -p "$ROOT" "$ROOT/logs"
 rsync -a --exclude=.pio/ --exclude=.codegraph/ "$SOURCE" "$ROOT/"

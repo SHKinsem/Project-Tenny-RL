@@ -6,7 +6,7 @@ WSL 的 RTX 2080 SUPER 8GB 已可被 JAX CUDA 后端实际使用。矩阵计算�
 
 ## 可复用环境与命令
 
-- GPU Python：`/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python`。
+- GPU Python：`~/projects/tenny-reference/.venv-gpu/bin/python`。
 - JAX/JAXLIB/CUDA12 plugin/PJRT：均为0.9.2；其余基础包保持先前通过的CPU版本。完整依赖见 `results/gpu/requirements-gpu-resolved.txt`，pip check通过。
 - 显卡：RTX 2080 SUPER，8192MiB；驱动610.74；Ubuntu Python3.12.3。
 - GPU测试设置：`JAX_PLATFORMS=cuda`、`CUDA_VISIBLE_DEVICES=0`、`XLA_PYTHON_CLIENT_PREALLOCATE=false`、`XLA_PYTHON_CLIENT_MEM_FRACTION=0.35`。实测JAX分配器limit为3006316492字节（约2.8GiB）；这不是整张卡的总显存限制。

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=$HOME/projects/tenny-reference
 cd "$ROOT/mujoco_esp32_robot_deploy_public"
 export JAX_PLATFORMS=cpu
 export XLA_PYTHON_CLIENT_PREALLOCATE=false

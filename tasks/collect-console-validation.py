@@ -1,7 +1,8 @@
 import json, shutil
+import os
 from pathlib import Path
-base=Path('/home/jaccob/projects/tenny-torque200/artifacts/console/original')
-win=Path('/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200/results/console-control')
+base=(Path.home() / "projects/tenny-torque200/artifacts/console/original")
+win=(Path(os.environ.get("TENNY_ROOT") or Path(__file__).resolve().parents[1]) / "experiments/torque200/results/console-control")
 win.mkdir(parents=True,exist_ok=True)
 rows=[]
 for run in sorted(base.iterdir()):

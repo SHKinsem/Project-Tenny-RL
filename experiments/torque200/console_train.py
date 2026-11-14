@@ -383,9 +383,9 @@ def parse_args(argv=None):
     parser.add_argument("--mode", choices=("original", "torque200"), required=True)
     parser.add_argument("--run-dir", type=Path, required=True)
     parser.add_argument("--original-root", type=Path,
-                        default=Path("/home/jaccob/projects/tenny-reference"))
+                        default=(Path.home() / "projects/tenny-reference"))
     parser.add_argument("--torque-root", type=Path,
-                        default=Path("/home/jaccob/projects/tenny-torque200"))
+                        default=(Path.home() / "projects/tenny-torque200"))
     parser.add_argument("--duration-seconds", type=float, default=0)
     parser.add_argument("--restore", type=Path)
     parser.add_argument("--seed", type=int, default=0)

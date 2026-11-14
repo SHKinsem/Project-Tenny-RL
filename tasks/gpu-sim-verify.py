@@ -3,7 +3,7 @@ import importlib.util
 from pathlib import Path
 import jax
 
-root = Path('/home/jaccob/projects/tenny-reference')
+root = (Path.home() / "projects/tenny-reference")
 assert jax.default_backend() == 'gpu', jax.devices()
 path = root / 'mujoco_esp32_robot_deploy_public/tests/sim_verify_hold_obs.py'
 spec = importlib.util.spec_from_file_location('original_sim_verify', path)

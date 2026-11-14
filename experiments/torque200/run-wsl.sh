@@ -2,8 +2,8 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-BASE=/home/jaccob/projects/tenny-torque200
-ORIGINAL=/home/jaccob/projects/tenny-reference
+BASE=$HOME/projects/tenny-torque200
+ORIGINAL=$HOME/projects/tenny-reference
 WIN="$WINROOT/experiments/torque200"
 PY="$ORIGINAL/.venv-gpu/bin/python"
 test -x "$PY"

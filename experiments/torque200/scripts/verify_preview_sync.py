@@ -9,8 +9,8 @@ import tempfile
 import json
 import time
 import numpy as np
-ROOT = Path('/home/jaccob/projects/tenny-torque200')
-WIN = Path('/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200')
+ROOT = (Path.home() / "projects/tenny-torque200")
+WIN = (Path(os.environ.get("TENNY_ROOT") or Path(__file__).resolve().parents[3]) / "experiments/torque200")
 sys.path[:0] = [str(WIN), str(ROOT / 'src')]
 import jax
 from brax.training.agents.ppo import networks
@@ -19,7 +19,7 @@ from legwheel.deployment.extract import load
 from preview import select_checkpoint
 from preview_sync import SnapshotPublisher, read_snapshot
 from training_control import TrainingController
-controller = TrainingController(ROOT/'artifacts', Path('/home/jaccob/projects/tenny-reference'), ROOT)
+controller = TrainingController(ROOT/'artifacts', (Path.home() / "projects/tenny-reference"), ROOT)
 results = {}
 for mode in ('original', 'torque200'):
     model = controller.latest(mode)

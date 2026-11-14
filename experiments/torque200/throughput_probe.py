@@ -50,7 +50,7 @@ def main():
     args = parser.parse_args()
     if args.child:
         return child(args)
-    base = Path("/home/jaccob/projects/tenny-torque200")
+    base = (Path.home() / "projects/tenny-torque200")
     latest = json.loads((base / "artifacts/performance-latest.json").read_text())
     restore = Path(latest["checkpoint"])
     output = base / "artifacts" / time.strftime("throughput-%Y%m%d-%H%M%S")

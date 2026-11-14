@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import sys
 
-ROOT = Path('/home/jaccob/projects/tenny-reference')
+ROOT = (Path.home() / "projects/tenny-reference")
 SKIP = {'.venv', '.git', '__pycache__', '.pio', '.codegraph'}
 
 

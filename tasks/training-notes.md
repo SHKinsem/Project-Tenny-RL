@@ -17,7 +17,7 @@
 WSL 示例（将脚本复制到 ext4；输出目录必须尚不存在）：
 
 ```bash
-BASE=/home/jaccob/projects/tenny-reference
+BASE=~/projects/tenny-reference
 RL="$BASE/mujoco_legwheel_rl_public"
 FW="$BASE/mujoco_esp32_robot_deploy_public"
 JAX_PLATFORMS=cpu "$FW/.venv/bin/python" "$BASE/training_smoke.py" \

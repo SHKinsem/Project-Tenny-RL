@@ -1,7 +1,0 @@
-CHECKPOINT /home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016
-WARNING:legwheel.evaluation.runner:ppo_checkpoint.load_policy 失败(KeyError(None)),回退到手动重建
-Compiling CPU simulation; the window opens after warm-up...
-W1114 15:54:41.336978     438 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
-W1114 15:54:43.752057     438 pjrt_executable.cc:642] Assume version compatibility. PjRt-IFRT does not track XLA executable versions.
-VIEWER_EXPORT_MAX_ERROR 3.993511199951172e-06
-PREVIEW_READY | SPACE pause | R reset | scroll zoom | X exit

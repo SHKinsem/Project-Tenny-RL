@@ -14,8 +14,8 @@
 
 - 原压缩包：`download/robot_repositories_source.zip`，SHA256 `4C10F258EC9B1AC333C854B122EE4E6038169A23BD097006AC8A7F43C227F29A`。
 - Windows 解压参考：`reference/`；原源码未改。
-- WSL 工作副本：`/home/jaccob/projects/tenny-reference/`。
-- 独立 Python：`/home/jaccob/projects/tenny-reference/mujoco_esp32_robot_deploy_public/.venv/bin/python`。
+- WSL 工作副本：`~/projects/tenny-reference/`。
+- 独立 Python：`~/projects/tenny-reference/mujoco_esp32_robot_deploy_public/.venv/bin/python`。
 - Python 3.12.3；JAX/JAXLIB 0.9.2；MuJoCo/MJX 3.12.0；playground 0.2.0；Brax 0.14.2；Flax 0.12.6；Orbax 0.12.10。完整版本见 `results/requirements-resolved.txt`；`pip check` 通过。
 - 安装使用仿真仓原 requirements-sim.txt。Flax 由解析器选取兼容版本0.12.6，未强装训练仓声明冲突的0.12.9。
 - 首轮复现仿真和训练均用 CPU。后续已完成独立 JAX GPU 环境与实际验证，见 `GPU-TEST.md`。
@@ -38,7 +38,7 @@
 - `tasks/bootstrap-wsl.sh`：首次复制源码并安装独立仿真环境。
 - `tasks/verify-sim-wsl.sh`：依赖检查、57项测试、600步闭环核对。
 - `tasks/run-training-wsl.sh`：新建带时间戳的短训练输出目录。
-- `tasks/run-training-wsl.sh --restore /home/jaccob/projects/tenny-reference/artifacts/train-smoke-20261114-143038/checkpoints/000000000016`：加载参数继续训练。
+- `tasks/run-training-wsl.sh --restore ~/projects/tenny-reference/artifacts/train-smoke-20261114-143038/checkpoints/000000000016`：加载参数继续训练。
 - `tasks/collect-results-wsl.sh`：将诊断报告复制回 Windows。
 
 独立诊断脚本 `tasks/training_smoke.py` 不改作者源码。初次运行曾因配置包含 Path 而无法JSON序列化，已改用 ConfigDict.to_json_best_effort 后完成两轮验证。

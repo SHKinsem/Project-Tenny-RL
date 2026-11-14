@@ -49,7 +49,7 @@ GPU Review：实际设备cuda:0、参数树gpu；从CPU checkpoint继续GPU16步
 | --- | --- | --- |
 | `wsl --status` | `Wsl/E_ACCESSDENIED`，退出码 -1 | 未测试 |
 | `wsl --list --verbose` | `Wsl/E_ACCESSDENIED`，退出码 -1 | Ubuntu / WSL 2，退出码 0 |
-| `wsl --distribution Ubuntu --exec /usr/bin/id` | 未测试 | uid=1000(jaccob)，退出码 0 |
+| `wsl --distribution Ubuntu --exec /usr/bin/id` | 未测试 | uid=1000(<用户>)，退出码 0 |
 | `wsl --distribution Ubuntu --exec /usr/bin/uname -sr` | 未测试 | Linux 6.6.87.2-microsoft-standard-WSL2，退出码 0 |
 
 判断依据：同一个 wsl.exe 在沙箱外可以查询并启动发行版，定位到当前 Windows 沙箱的访问限制；未进一步定位具体底层令牌、ACL 或服务端拒绝点。
@@ -111,7 +111,7 @@ GPU Review：实际设备cuda:0、参数树gpu；从CPU checkpoint继续GPU16步
 - [x] 执行格式验证与 Terra 真实链接试跑，修正断连诊断说明。
 - [x] 安装个人技能，记录验收范围及使用方法。
 
-淘宝归档技能 Review：已安装 C:/Users/xusen/.codex/skills/taobao-product-archive（SKILL.md、agents/openai.yaml、references/archive-format.md）。quick_validate 通过，安装内容与草稿核对一致。由 gpt-6.1-terra 独立试跑用户链接 item 982922509781、请求SKU 6163004979921；独立 Edge MCP connected=false/healthy=false，RPC status 报 Local broker failed to start。正确生成 reference/taobao/982922509781/product.md，状态 blocked；未访问商品页，无价格/实际SKU/图片/任务tabId。真实商品图文采集尚未验收，需插件恢复后续跑；已向用户提出恢复检查。未修改既有 taobao-edge 或浏览器插件。
+淘宝归档技能 Review：已安装 ~/.codex/skills/taobao-product-archive（SKILL.md、agents/openai.yaml、references/archive-format.md）。quick_validate 通过，安装内容与草稿核对一致。由 gpt-6.1-terra 独立试跑用户链接 item 982922509781、请求SKU 6163004979921；独立 Edge MCP connected=false/healthy=false，RPC status 报 Local broker failed to start。正确生成 reference/taobao/982922509781/product.md，状态 blocked；未访问商品页，无价格/实际SKU/图片/任务tabId。真实商品图文采集尚未验收，需插件恢复后续跑；已向用户提出恢复检查。未修改既有 taobao-edge 或浏览器插件。
 
 ### 用户检查插件后的重试
 

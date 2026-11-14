@@ -1,11 +1,12 @@
 """Publish already-verified A1/B1 artifacts after the user's early stop. No training."""
 import json
+import os
 from pathlib import Path
 import shutil
 
-BASE = Path('/home/jaccob/projects/tenny-torque200/artifacts')
+BASE = (Path.home() / "projects/tenny-torque200/artifacts")
 RUN = BASE / 'performance-20261114-160724'
-WIN = Path('/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200/results')
+WIN = (Path(os.environ.get("TENNY_ROOT") or Path(__file__).resolve().parents[2]) / "experiments/torque200/results")
 runs = json.loads((RUN / 'rounds.json').read_text())
 assert [r['name'] for r in runs] == ['A1', 'B1']
 baseline, web = (r['steady_sps'] for r in runs)

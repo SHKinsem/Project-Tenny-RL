@@ -37,7 +37,7 @@ def main():
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8770)
     parser.add_argument("--mode", choices=MODES, default="original")
-    parser.add_argument("--original-root", type=Path, default=Path("/home/jaccob/projects/tenny-reference"))
+    parser.add_argument("--original-root", type=Path, default=(Path.home() / "projects/tenny-reference"))
     args = parser.parse_args()
     persist_mode(args.artifacts, args.mode)
     from training_control import TrainingController, ControlError

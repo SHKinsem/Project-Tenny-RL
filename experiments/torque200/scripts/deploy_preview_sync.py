@@ -7,9 +7,9 @@ import signal
 import subprocess
 import time
 import urllib.request
-BASE = Path('/home/jaccob/projects/tenny-torque200')
-WIN = Path('/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200')
-PY = '/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python'
+BASE = (Path.home() / "projects/tenny-torque200")
+WIN = (Path(os.environ.get("TENNY_ROOT") or Path(__file__).resolve().parents[3]) / "experiments/torque200")
+PY = str(Path.home() / "projects/tenny-reference/.venv-gpu/bin/python")
 web = str(BASE/'src/web_preview.py')
 def processes(script):
     found = []

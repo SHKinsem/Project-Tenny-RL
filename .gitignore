@@ -23,3 +23,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# 训练/验证输出（含本机路径，可重新生成）
+experiments/torque200/results/
+tasks/results/

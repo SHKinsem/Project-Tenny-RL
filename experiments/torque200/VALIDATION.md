@@ -41,8 +41,8 @@
 实际 Orbax checkpoint 位于 WSL：
 
 ```text
-/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/first/checkpoints/000000000016
-/home/jaccob/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016
+~/projects/tenny-torque200/artifacts/smoke-20261114-154038/first/checkpoints/000000000016
+~/projects/tenny-torque200/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016
 ```
 
 ## 验证边界

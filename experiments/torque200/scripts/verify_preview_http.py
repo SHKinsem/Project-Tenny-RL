@@ -1,13 +1,13 @@
 """Isolated HTTP preview acceptance with an actor publisher, never runs PPO."""
 import os, sys, json, subprocess, tempfile, time, signal, urllib.request
 from pathlib import Path
-BASE=Path('/home/jaccob/projects/tenny-torque200')
-WIN=Path('/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny/experiments/torque200')
-PY='/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python'
+BASE=(Path.home() / "projects/tenny-torque200")
+WIN=(Path(os.environ.get("TENNY_ROOT") or Path(__file__).resolve().parents[3]) / "experiments/torque200")
+PY=str(Path.home() / "projects/tenny-reference/.venv-gpu/bin/python")
 URL='http://127.0.0.1:8771'
 sys.path.insert(0,str(BASE/'src'))
 from training_control import TrainingController, _write
-real=TrainingController(BASE/'artifacts',Path('/home/jaccob/projects/tenny-reference'),BASE)
+real=TrainingController(BASE/'artifacts',(Path.home() / "projects/tenny-reference"),BASE)
 model=real.latest('original')
 assert model
 PUBLISHER = '''import sys,time,json

@@ -17,9 +17,9 @@ pwsh -File .\test-torque200-training.ps1
 
 Windows 保存源码，执行时复制到 WSL ext4：
 
-- 实验源码：`/home/jaccob/projects/tenny-torque200/src`
-- 结果：`/home/jaccob/projects/tenny-torque200/artifacts/<运行时间>/`
-- 复用 GPU Python：`/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python`
+- 实验源码：`~/projects/tenny-torque200/src`
+- 结果：`~/projects/tenny-torque200/artifacts/<运行时间>/`
+- 复用 GPU Python：`~/projects/tenny-reference/.venv-gpu/bin/python`
 - Windows 报告：本目录 `results/<运行时间>/`
 
 Orbax checkpoint 保留在 WSL；报告、日志、CPU 参数快照及导出数组复制回 Windows。

@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-root=Path('/home/jaccob/projects/tenny-torque200/artifacts/console')
+root=(Path.home() / "projects/tenny-torque200/artifacts/console")
 a=json.loads((root/'active.json').read_text())
 r=Path(a['run_dir'])
 s=json.loads((r/'status.json').read_text())

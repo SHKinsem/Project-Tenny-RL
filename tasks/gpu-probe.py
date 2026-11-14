@@ -23,6 +23,6 @@ report = dict(jax=jax.__version__, backend=jax.default_backend(),
               array_devices=[str(d) for d in y.devices()],
               compile_and_first_seconds=first, warm_seconds=warm,
               memory_stats=device.memory_stats())
-out = Path('/home/jaccob/projects/tenny-reference/artifacts/gpu-probe.json')
+out = (Path.home() / "projects/tenny-reference/artifacts/gpu-probe.json")
 out.write_text(json.dumps(report, indent=2))
 print(json.dumps(report, indent=2), flush=True)

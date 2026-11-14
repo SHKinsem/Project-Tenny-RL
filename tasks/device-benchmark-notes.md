@@ -11,7 +11,7 @@
 WSL示例（先将脚本复制到ext4，具体GPU环境路径由主代理确定）：
 
 ```bash
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=~/projects/tenny-reference
 CPU="$ROOT/mujoco_esp32_robot_deploy_public/.venv/bin/python"
 "$CPU" "$ROOT/device_benchmark.py" --repo "$ROOT/mujoco_legwheel_rl_public" \
   --expected-backend cpu --batch-size 32 --steps 100 --output "$ROOT/artifacts/bench-cpu.json"

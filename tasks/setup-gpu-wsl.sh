@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=$HOME/projects/tenny-reference
 cd "$ROOT"
 if [ ! -x .venv-gpu/bin/python ]; then python3 -m venv .venv-gpu; fi
 .venv-gpu/bin/python -m pip install -r logs/requirements-resolved.txt 2>&1 | tee logs/install-gpu-base.log

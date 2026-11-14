@@ -2,7 +2,7 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=$HOME/projects/tenny-reference
 BACKEND=${1:?cpu or cuda}
 case "$BACKEND" in
   cpu) PYTHON="$ROOT/mujoco_esp32_robot_deploy_public/.venv/bin/python" ;;

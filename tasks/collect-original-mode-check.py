@@ -1,10 +1,11 @@
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 
-base = Path('/home/jaccob/projects/tenny-reference')
-win = Path('/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny')
+base = (Path.home() / "projects/tenny-reference")
+win = (Path(os.environ.get("TENNY_ROOT") or Path(__file__).resolve().parents[1]))
 report_path = max(base.glob('artifacts/train-gpu-*/report.json'), key=lambda p: p.stat().st_mtime)
 run = report_path.parent
 report = json.loads(report_path.read_text())

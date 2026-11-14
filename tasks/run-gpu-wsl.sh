@@ -2,7 +2,7 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=$HOME/projects/tenny-reference
 TASKS="$WINROOT/tasks"
 export JAX_PLATFORMS=cuda
 export CUDA_VISIBLE_DEVICES=0

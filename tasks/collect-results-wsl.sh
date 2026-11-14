@@ -2,7 +2,7 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=$HOME/projects/tenny-reference
 OUT="$WINROOT/tasks/results"
 mkdir -p "$OUT"
 cp "$ROOT/logs/requirements-resolved.txt" "$ROOT/logs/unit-tests.log" "$ROOT/logs/sim-verify.log" "$OUT/"

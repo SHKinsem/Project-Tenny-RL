@@ -87,7 +87,7 @@ def self_test():
 def main():
     global FAILURE_REPORT
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--base", type=Path, default=Path("/home/jaccob/projects/tenny-torque200"))
+    ap.add_argument("--base", type=Path, default=(Path.home() / "projects/tenny-torque200"))
     ap.add_argument("--duration", type=float, default=900)
     ap.add_argument("--verify-only", action="store_true", help="Save/verify existing B1 parameters; no training or live publication")
     ap.add_argument("--self-test", action="store_true")

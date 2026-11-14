@@ -36,6 +36,6 @@
 
 ## 保存与入口
 
-结果位于WSL /home/jaccob/projects/tenny-torque200/artifacts/console/<模式>/<运行ID>/。网页“保存位置与继续训练说明”显示当前路径。每轮包含request.json、env_config.json、ppo_config.json、status.json、progress.json、metrics.jsonl、train.log、checkpoint、CPU参数快照、policy.cpp.txt及report.json。只有保存验证通过的检查点才允许继续训练；按需预览可以使用本轮尚未保存的策略快照，两者在页面上注明来源。
+结果位于WSL ~/projects/tenny-torque200/artifacts/console/<模式>/<运行ID>/。网页“保存位置与继续训练说明”显示当前路径。每轮包含request.json、env_config.json、ppo_config.json、status.json、progress.json、metrics.jsonl、train.log、checkpoint、CPU参数快照、policy.cpp.txt及report.json。只有保存验证通过的检查点才允许继续训练；按需预览可以使用本轮尚未保存的策略快照，两者在页面上注明来源。
 
 原版参考源码及作者权重不改。旧test-robot-training.ps1、verify-selected-training.cmd等保留为开发诊断入口，已不作为日常训练入口。旧15分钟训练和性能记录独立保留。

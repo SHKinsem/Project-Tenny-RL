@@ -108,7 +108,7 @@ def summarize_resources(samples):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--base", type=Path, default=Path("/home/jaccob/projects/tenny-torque200"))
+    ap.add_argument("--base", type=Path, default=(Path.home() / "projects/tenny-torque200"))
     ap.add_argument("--web-url", default="http://127.0.0.1:8770")
     ap.add_argument("--restore", type=Path, required=True)
     args = ap.parse_args()

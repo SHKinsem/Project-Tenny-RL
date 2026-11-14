@@ -2,9 +2,9 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-BASE=/home/jaccob/projects/tenny-torque200
+BASE=$HOME/projects/tenny-torque200
 WIN="$WINROOT/experiments/torque200"
-PY=/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python
+PY=$HOME/projects/tenny-reference/.venv-gpu/bin/python
 test -x "$PY"
 cp "$WIN/performance.py" "$WIN/performance_train.py" "$BASE/src/"
 export JAX_PLATFORMS=cuda

@@ -2,7 +2,7 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-ROOT=/home/jaccob/projects/tenny-reference
+ROOT=$HOME/projects/tenny-reference
 cp "$WINROOT/tasks/training_smoke.py" "$ROOT/training_smoke.py"
 export JAX_PLATFORMS=cpu
 export XLA_PYTHON_CLIENT_PREALLOCATE=false

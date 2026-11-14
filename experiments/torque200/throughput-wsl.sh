@@ -2,9 +2,9 @@
 WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 export TENNY_ROOT="$WINROOT"
 set -euo pipefail
-BASE=/home/jaccob/projects/tenny-torque200
+BASE=$HOME/projects/tenny-torque200
 WIN="$WINROOT/experiments/torque200"
-PY=/home/jaccob/projects/tenny-reference/.venv-gpu/bin/python
+PY=$HOME/projects/tenny-reference/.venv-gpu/bin/python
 cp "$WIN/throughput_probe.py" "$BASE/src/"
 export JAX_PLATFORMS=cuda CUDA_VISIBLE_DEVICES=0
 export XLA_PYTHON_CLIENT_PREALLOCATE=false XLA_PYTHON_CLIENT_MEM_FRACTION=0.35
