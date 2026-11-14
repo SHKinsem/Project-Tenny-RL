@@ -1,0 +1,6 @@
+[[task]]
+id = "throughput"
+name = "吞吐探测"
+group = "测试"
+needs = "wsl"
+script = "experiments/torque200/throughput-wsl.sh"
