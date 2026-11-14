@@ -24,6 +24,9 @@ TASKS = {
 
 from tenny import runner  # noqa: E402
 
+import contextlib, http.client, io, json, threading  # noqa: E402
+from tenny import cli, server  # noqa: E402
+
 
 def wait(job, timeout=15):
     end = time.time() + timeout
@@ -160,6 +163,87 @@ class RunnerTest(unittest.TestCase):
             runner.start("bad", {}, {"bad": task})
         self.assertIn("无法启动", str(cm.exception))
         self.assertEqual(runner._jobs, {})
+
+
+class ServerTest(unittest.TestCase):
+    def setUp(self):
+        self.srv = server.make_server(TASKS, port=0)
+        self.port = self.srv.server_address[1]
+        threading.Thread(target=self.srv.serve_forever, daemon=True).start()
+
+    def tearDown(self):
+        runner.stop_all()
+        self.srv.shutdown()
+        self.srv.server_close()
+
+    def call(self, method, path, body=None, host=None, ctype="application/json"):
+        c = http.client.HTTPConnection("127.0.0.1", self.port, timeout=10)
+        headers = {"Content-Type": ctype}
+        if host:
+            headers["Host"] = host
+        c.request(method, path, json.dumps(body) if body is not None else None, headers)
+        r = c.getresponse()
+        data = r.read()
+        c.close()
+        try:
+            return r.status, json.loads(data)
+        except ValueError:
+            return r.status, data
+
+    def test_index_and_task_list(self):
+        status, html = self.call("GET", "/")
+        self.assertEqual(status, 200)
+        self.assertIn(b"Project Tenny", html)
+        status, tasks = self.call("GET", "/api/tasks")
+        self.assertEqual({t["id"] for t in tasks}, set(TASKS))
+        self.assertNotIn("cmd", tasks[0])
+        self.assertNotIn("script", tasks[0])
+
+    def test_run_poll_finish(self):
+        status, j = self.call("POST", "/api/run/echo", {"word": "web"})
+        self.assertEqual(status, 200)
+        job = runner.get(j["id"])
+        wait(job)
+        status, snap = self.call("GET", f"/api/jobs/{j['id']}?since=0")
+        self.assertEqual((snap["status"], snap["lines"]), ("ok", ["hi web"]))
+
+    def test_error_codes(self):
+        self.assertEqual(self.call("POST", "/api/run/nope", {})[0], 404)
+        self.assertEqual(self.call("GET", "/api/jobs/zzzz")[0], 404)
+        self.assertEqual(self.call("POST", "/api/run/num", {"n": 99})[0], 400)
+        self.assertEqual(self.call("POST", "/api/run/num", {"evil": 1})[0], 400)
+        self.assertEqual(self.call("POST", "/api/run/sleep", {})[0], 200)
+        self.assertEqual(self.call("POST", "/api/run/sleep", {})[0], 409)
+
+    def test_rejects_foreign_host_and_form_posts(self):
+        self.assertEqual(self.call("GET", "/api/tasks", host="evil.example")[0], 400)
+        self.assertEqual(self.call("POST", "/api/run/echo", {}, ctype="text/plain")[0], 400)
+        self.assertEqual(runner._jobs, {})
+
+    def test_stop_endpoint(self):
+        _, j = self.call("POST", "/api/run/sleep", {})
+        self.assertEqual(self.call("POST", f"/api/stop/{j['id']}", {})[0], 200)
+        wait(runner.get(j["id"]))
+        self.assertEqual(runner.get(j["id"]).status, "stopped")
+
+
+class CliTest(unittest.TestCase):
+    def tearDown(self):
+        runner.stop_all()
+
+    def test_list_and_run(self):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(cli.main(["list"], TASKS), 0)
+            self.assertEqual(cli.main(["run", "echo", "word=cli"], TASKS), 0)
+        self.assertIn("echo", out.getvalue())
+        self.assertIn("hi cli", out.getvalue())
+
+    def test_run_failure_and_unknown(self):
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            self.assertNotEqual(cli.main(["run", "nope"], TASKS), 0)
+            self.assertNotEqual(cli.main(["run", "num", "n=99"], TASKS), 0)
 
 
 if __name__ == "__main__":
