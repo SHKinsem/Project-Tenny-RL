@@ -40,9 +40,13 @@ class RegistryTest(unittest.TestCase):
         self.assertEqual(v, {"n": 3, "mode": "a", "fast": True})
 
     def test_bad_values_rejected(self):
-        for bad in ({"n": "abc"}, {"n": 0}, {"n": 6}, {"mode": "z"}, {"evil": "1"}):
+        for bad in ({"n": "abc"}, {"n": 0}, {"n": 6}, {"mode": "z"}, {"evil": "1"},
+                    {"n": float("inf")}, {"n": float("nan")}):
             with self.assertRaises(registry.TaskError, msg=bad):
                 registry.resolve_params(TASKS["num"], bad)
+        nan = {"name": "s", "type": "float", "min": 0, "max": 9}
+        with self.assertRaises(registry.TaskError):
+            registry.resolve_params({"params": [nan]}, {"s": "nan"})
 
     def test_build_args(self):
         v = registry.resolve_params(TASKS["num"], {"n": 4, "fast": True})

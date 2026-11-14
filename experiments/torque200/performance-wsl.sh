@@ -29,4 +29,8 @@ collect() {
 trap collect EXIT
 cd "$BASE/src"
 "$PY" -m py_compile performance.py performance_train.py
-"$PY" -u performance.py --base "$BASE" --restore "$BASE/artifacts/smoke-20261114-154038/resumed/checkpoints/000000000016" "$@"
+# 从最近一次 test-torque200 的 resumed checkpoint 开始
+REPORT=$(ls -d "$BASE"/artifacts/smoke-*/resumed/report.json 2>/dev/null | sort | tail -n 1 || true)
+test -n "$REPORT" || { echo "找不到 smoke-*/resumed/report.json，先运行 test-torque200" >&2; exit 1; }
+RESTORE=$("$PY" -c 'import json,sys; print(json.load(open(sys.argv[1]))["checkpoint"])' "$REPORT")
+"$PY" -u performance.py --base "$BASE" --restore "$RESTORE" "$@"

@@ -1,4 +1,5 @@
 """任务清单：加载 tasks.toml、校验参数、生成 argv。"""
+import math
 import tomllib
 from pathlib import Path
 
@@ -36,8 +37,10 @@ def _coerce(p, raw):
     if kind in ("int", "float"):
         try:
             v = int(raw) if kind == "int" else float(raw)
-        except (TypeError, ValueError):
+        except (TypeError, ValueError, OverflowError):
             raise TaskError(f"{name}: 需要{kind}")
+        if not math.isfinite(v):
+            raise TaskError(f"{name}: 需要有限数值")
         if v < p.get("min", v) or v > p.get("max", v):
             raise TaskError(f"{name}: 超出范围 [{p.get('min')}, {p.get('max')}]")
         return v
