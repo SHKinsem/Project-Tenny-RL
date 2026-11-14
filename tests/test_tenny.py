@@ -226,6 +226,34 @@ class ServerTest(unittest.TestCase):
         wait(runner.get(j["id"]))
         self.assertEqual(runner.get(j["id"]).status, "stopped")
 
+    def test_non_object_json_body_rejected(self):
+        # Non-object JSON values should be rejected before reaching runner
+        for body in [5, ["n"], "n", None]:
+            self.assertEqual(self.call("POST", "/api/run/num", body)[0], 400)
+        self.assertEqual(runner._jobs, {})
+
+    def test_bad_content_length_rejected(self):
+        import socket
+        import time
+        # Test negative Content-Length
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(5)
+        s.connect(("127.0.0.1", self.port))
+        s.sendall(b"POST /api/run/num HTTP/1.1\r\nHost: 127.0.0.1\r\nContent-Type: application/json\r\nContent-Length: -1\r\n\r\n")
+        response = s.recv(4096)
+        s.close()
+        self.assertIn(b"400", response)
+
+        # Test huge Content-Length
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(5)
+        s.connect(("127.0.0.1", self.port))
+        s.sendall(b"POST /api/run/num HTTP/1.1\r\nHost: 127.0.0.1\r\nContent-Type: application/json\r\nContent-Length: 70000\r\n\r\n")
+        response = s.recv(4096)
+        s.close()
+        self.assertIn(b"400", response)
+        self.assertEqual(runner._jobs, {})
+
 
 class CliTest(unittest.TestCase):
     def tearDown(self):

@@ -60,10 +60,20 @@ def make_server(tasks, host="127.0.0.1", port=8800):
             # 非 JSON 的 POST（如跨站表单）直接拒绝；fetch 发 JSON 会触发 CORS 预检，我们不应答
             if not self.headers.get("Content-Type", "").startswith("application/json"):
                 return self._send(400, {"error": "content-type must be application/json"})
+            # Validate Content-Length before reading
             try:
-                body = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)) or b"{}")
+                clen = int(self.headers.get("Content-Length") or 0)
+            except ValueError:
+                return self._send(400, {"error": "bad content-length"})
+            if clen < 0 or clen > 65536:
+                return self._send(400, {"error": "bad content-length"})
+            try:
+                body = json.loads(self.rfile.read(clen))
             except ValueError:
                 return self._send(400, {"error": "bad json"})
+            # Ensure body is a JSON object (dict), not array, string, number, null
+            if not isinstance(body, dict):
+                return self._send(400, {"error": "body must be a JSON object"})
             kind, _, ident = self.path.removeprefix("/api/").partition("/")
             try:
                 if kind == "run":
