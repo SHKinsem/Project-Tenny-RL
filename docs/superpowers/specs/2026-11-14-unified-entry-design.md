@@ -33,9 +33,11 @@ tasks/                   保持不动
 - 根目录 9 个 `.ps1` 和 1 个 `.cmd` 都只是"wslpath → wsl.exe → bash 启动器"的壳，由 `tenny/runner.py`
   取代并删除（不保留兼容壳），不再新建 `scripts/` 目录。`test-robot-training`（按选中模式分发）
   拆为 `test-original` 与 `test-torque200` 两个明确任务；"选中模式"仅 `web` 任务保留（`mode=selected`）。
-- 被任务清单调用的 13 个 `.sh` 启动器里写死的 `/mnt/c/Users/xusen/...` 改为由脚本自身位置推导；
-  另加 `.gitattributes` 固定 `*.sh` 为 LF。7 个一次性 Python 脚本里的同类路径本次不改（已知遗留）。
-- WSL 侧的 `/home/jaccob/...` 环境路径不在本次范围，README 标注。
+- 启动器里写死的 Windows 挂载路径改为由脚本自身位置推导，并导出 `TENNY_ROOT` 供 Python 脚本使用；
+  另加 `.gitattributes` 固定 `*.sh` 为 LF。
+- 当前跟踪文件中的本机用户名与绝对路径全部清除：WSL 家目录改用 `$HOME` / `Path.home()`，文档里用 `~`
+  与 `<项目根目录>`；训练输出目录（`experiments/torque200/results/`、`tasks/results/`）取消跟踪并忽略。
+  Git 历史不改写。
 - `CONTROL-MODES.md` 移入 `docs/`；README 更新为入口说明。
 
 ## 验证

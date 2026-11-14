@@ -19,7 +19,8 @@
 - `*-wsl.sh` 留在 `experiments/torque200/` 与 `tasks/` 原处。
 - 现有训练控制台（`experiments/torque200/web_preview.py`）不改，入口页只显示它的链接。
 - WSL 发行版默认 `Ubuntu`，可用环境变量 `TENNY_WSL_DISTRO` 覆盖。
-- 仓库是**公开**的：新文件里不得出现用户名、绝对路径、密钥。
+- 仓库是**公开**的：当前跟踪的文件里不得出现本机用户名、绝对路径、密钥（Git 历史不改写）。
+- 训练输出目录 `experiments/torque200/results/`、`tasks/results/` 取消跟踪并加入 `.gitignore`，本地文件保留。
 
 ## Review Focus
 
@@ -364,9 +365,9 @@ from . import registry
 IS_WIN = os.name == "nt"
 DISTRO = os.environ.get("TENNY_WSL_DISTRO", "Ubuntu")
 MAX_LINES = 5000
-# WSL 侧保存"选中模式"的位置；与 experiments/torque200 的训练控制台约定一致
-SELECTED_MODE_FILE = "/home/jaccob/projects/tenny-torque200/artifacts/selected-mode.json"
-_SELECTED_CODE = ('import json,sys;from pathlib import Path;p=Path(sys.argv[1]);'
+# WSL 侧保存"选中模式"的位置（~ 由 WSL 内的 python 展开）；与 experiments/torque200 的训练控制台约定一致
+SELECTED_MODE_FILE = "~/projects/tenny-torque200/artifacts/selected-mode.json"
+_SELECTED_CODE = ('import json,sys;from pathlib import Path;p=Path(sys.argv[1]).expanduser();'
                   'print(json.loads(p.read_text())["mode"] if p.exists() else "original")')
 
 _jobs = {}
@@ -1054,7 +1055,7 @@ Expected: OK（每个 `script` 文件存在，默认参数合法）。若 `start
 import re
 from pathlib import Path
 
-PAT = re.compile(rb"'/mnt/c/Users/xusen/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny(/[^']*)?'")
+PAT = re.compile(rb"'/mnt/c/Users/[^/]+/OneDrive - HKUST Connect/Workshop/Projects/Project Tenny(/[^']*)?'")
 files = ([(f, "../..") for f in Path("experiments/torque200").glob("*-wsl.sh")]
          + [(f, "..") for f in Path("tasks").glob("*-wsl.sh")])
 for f, up in files:
@@ -1063,10 +1064,11 @@ for f, up in files:
         continue
     data = PAT.sub(lambda m: b'"$WINROOT' + (m.group(1) or b"") + b'"', data)
     head, _, rest = data.partition(b"\n")
-    line = b'WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/' + up.encode() + b'" && pwd)"\n'
+    line = (b'WINROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/' + up.encode() + b'" && pwd)"\n'
+            b'export TENNY_ROOT="$WINROOT"\n')  # 供被调用的 python 脚本读取仓库根
     f.write_bytes(head + b"\n" + line + rest)
     print("fixed", f)
-left = [f for f, _ in files if b"Users/xusen" in f.read_bytes()]
+left = [f for f, _ in files if b"/mnt/c/Users/" in f.read_bytes()]
 assert not left, left
 ```
 
@@ -1095,7 +1097,107 @@ git commit -m "feat(tenny): real task list; derive launcher paths from script lo
 
 ---
 
-### Task 5: 删除旧脚本、整理文档、整体验证
+### Task 5: 隐藏本机信息（用户名与绝对路径）
+
+**Files:**
+- Modify: `.gitignore`
+- Untrack（`git rm -r --cached`，本地文件保留）：`experiments/torque200/results/`、`tasks/results/`
+- Modify: 仍含 `/home/<用户>/` 或 `/Users/<用户>/` 的已跟踪 `.sh`、`.py`、`.md`（见 Step 1 的清单命令）
+- 不改：`docs/superpowers/`（本计划与设计文档，其中的路径已是通配写法）
+
+**Interfaces:**
+- Consumes: Task 4 里启动器导出的环境变量 `TENNY_ROOT`（仓库根的 WSL 路径）
+- Produces: 无新接口；约定——WSL 内路径用 `$HOME`（bash）/ `Path.home()`（python），仓库根用 `TENNY_ROOT`，缺省时按 `__file__` 推导
+
+- [ ] **Step 1: 列出待处理文件**
+
+Run（PowerShell，仓库根目录）：
+
+```powershell
+git grep -n -E "/home/[a-z]+/|/Users/[A-Za-z]+/" -- . ':!experiments/torque200/results' ':!tasks/results' ':!docs/superpowers'
+```
+记录输出作为待办清单；处理完要求本命令无输出。
+
+- [ ] **Step 2: 取消跟踪训练输出**
+
+在 `.gitignore` 末尾追加：
+
+```
+# 训练/验证输出（含本机路径，可重新生成）
+experiments/torque200/results/
+tasks/results/
+```
+
+```bash
+git rm -r --cached -q experiments/torque200/results tasks/results
+```
+确认 `git status --short | head` 显示这些文件为 `D`（仅从索引移除），且磁盘上目录仍在。
+
+- [ ] **Step 3: `.sh` 与 `.md` 批量替换**
+
+保存为仓库外的临时文件运行（不提交）：
+
+```python
+import re, subprocess
+from pathlib import Path
+
+files = subprocess.run(["git", "ls-files", "*.sh", "*.md"], capture_output=True, text=True).stdout.split()
+for name in files:
+    if name.startswith(("docs/superpowers/", "experiments/torque200/results/", "tasks/results/")):
+        continue
+    f = Path(name)
+    b = f.read_bytes()
+    new = b
+    if name.endswith(".sh"):
+        new = re.sub(rb"/home/[a-z]+(?=/|\b)", b"$HOME", new)
+    else:  # .md：文档里用 ~ 表示 WSL 家目录，用 <项目根目录> 表示仓库根
+        new = re.sub(rb"/home/[a-z]+", b"~", new)
+        new = re.sub(rb"(?:/mnt/c|C:)[/\\]Users[/\\][^/\\]+[/\\]OneDrive - HKUST Connect[/\\]Workshop[/\\]Projects[/\\]Project Tenny",
+                     b"<项目根目录>", new)
+    if new != b:
+        f.write_bytes(new)
+        print("changed", name)
+```
+
+然后检查 `$HOME` 是否落进了单引号字符串（单引号内不会展开，必须改成双引号）：
+
+```bash
+git grep -n -E "'[^']*\\\$HOME[^']*'" -- '*.sh'
+```
+对每个命中手工改成双引号（注意转义其中其他 `$`）。`<<'EOF'` 形式的 here-doc 里若有 `$HOME` 同样不会展开，需改为非引号 here-doc 或另行传参。
+
+- [ ] **Step 4: `.py` 逐个修改**
+
+对 Step 1 清单里的每个 `.py` 文件：
+- WSL 家目录路径 `/home/<用户>/...` → `str(Path.home() / "...")`（需要时补 `from pathlib import Path`）。
+- Windows 挂载路径 `/mnt/c/Users/.../Project Tenny[/子目录]` → `Path(os.environ.get("TENNY_ROOT") or Path(__file__).resolve().parents[N]) / "子目录"`，`N` 取决于文件深度（`tasks/x.py` 为 1，`experiments/torque200/x.py` 为 2，`experiments/torque200/scripts/x.py` 为 3）；补 `import os`。
+- 这些脚本若在被 rsync 到 ext4 后运行，`__file__` 推导无效，此时必须依赖 `TENNY_ROOT`；确认调用它们的启动器已 `export TENNY_ROOT`（Task 4 已为 `*-wsl.sh` 加入），否则在启动器里补一行导出。
+
+每改一个文件立刻 `python -m py_compile <文件>`。
+
+- [ ] **Step 5: 验证**
+
+1. Step 1 的 `git grep` 命令 → **无输出**。
+2. 语法：
+
+```powershell
+git diff --name-only -- '*.sh' | ForEach-Object { $p = (wsl.exe -d Ubuntu --exec wslpath -a (Resolve-Path $_).Path).Trim(); wsl.exe -d Ubuntu --exec bash -n $p; "$_ -> $LASTEXITCODE" }
+```
+每行 `-> 0`。
+3. 全量测试 `python -m unittest discover -s tests -v` 全部 OK。
+4. 端到端：`python tenny.py run test-torque200 steps=16` → 输出含 `TORQUE200_ALL_CHECKS_OK`，退出码 0。再运行 `python tenny.py run test-throughput` 的前几十秒确认能起（可手动停止），验证 `$HOME` 展开无误。
+5. `git status --short` 中不应出现 `results/` 的新增文件（已被忽略）。
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add -A
+git commit -m "chore: remove local usernames/paths from tracked files; untrack run outputs"
+```
+
+---
+
+### Task 6: 删除旧脚本、整理文档、整体验证
 
 **Files:**
 - Delete: 根目录 `start-robot-web.ps1`、`start-simulation.ps1`、`start-torque200-preview.ps1`、`start-torque200-training.ps1`、`start-torque200-web.ps1`、`test-gpu-training.ps1`、`test-robot-training.ps1`、`test-torque200-performance.ps1`、`test-torque200-throughput.ps1`、`test-torque200-training.ps1`、`verify-selected-training.cmd`、`tasks/resolve-robot-mode.ps1`
@@ -1156,15 +1258,15 @@ Linux 下直接用 bash；macOS 不支持训练类任务。
 ## 已知限制
 
 - 训练依赖 GPU + JAX，只能在 Linux/WSL 中运行。
-- WSL 侧环境目录（`/home/jaccob/projects/...`）仍写死在启动器里，换机器需要改。
-- `experiments/torque200/scripts/` 与 `tasks/` 下的若干一次性 Python 脚本仍含本机路径。
+- 训练输出（`experiments/torque200/results/`、`tasks/results/`）不入库，只保存在本地。
+- 训练所需的 WSL 环境（`~/projects/tenny-reference` 等）需按 `tasks/REPRODUCTION.md` 自行搭建。
 ```
 
 - [ ] **Step 4: 全量测试 + 清单自检**
 
 Run: `python -m unittest discover -s tests -v` → 全部 OK。
 Run: `python tenny.py list` → 4 个分组、8 个任务。
-Run: `git grep -n "Users/xusen" -- tenny tests README.md docs/CONTROL-MODES.md` → 无输出（spec/plan 文档除外）。
+Run: `git grep -n -E "/home/[a-z]+/|/Users/[A-Za-z]+/" -- . ':!docs/superpowers'` → 无输出。
 
 - [ ] **Step 5: 浏览器端到端验证**
 
@@ -1192,4 +1294,4 @@ git push -u origin feat/unified-entry
 - **占位符扫描：** 无 TBD；所有代码步骤含完整代码。
 - **类型一致：** `snapshot(since)` 返回键 `lines/next/status/url/task/id/returncode` 在 runner、server、cli、UI、测试中一致；`TaskError/UnknownTask/Busy` 在 registry 定义、runner 抛出、server 映射 404/409/400；`MAX_LINES`、`stop_all`、`wsl_available`、`to_linux_path`、`build_command` 名称在 T2 定义并被测试按同名使用。
 - **Review Focus 对应：** 未知任务（`test_unknown_task`/`test_error_codes`）、参数越界与未登记（`test_bad_values_rejected`/`test_bad_param_starts_nothing`）、重复运行（`test_duplicate_run_rejected`）、跨站（`test_rejects_foreign_host_and_form_posts`）、大输出与停止（`test_log_is_capped_and_cursor_is_absolute`/`test_stop_kills_process`）。
-- **已知遗留：** 7 个一次性 Python 脚本里的本机路径、WSL 侧 `/home/jaccob` 路径，均写入 README"已知限制"。
+- **本机信息：** Task 5 清除当前跟踪文件中的用户名与绝对路径并取消跟踪训练输出；Git 历史不改写（用户已确认）。
