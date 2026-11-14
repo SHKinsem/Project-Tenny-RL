@@ -68,7 +68,8 @@ def make_server(tasks, host="127.0.0.1", port=8800):
             if clen < 0 or clen > 65536:
                 return self._send(400, {"error": "bad content-length"})
             try:
-                body = json.loads(self.rfile.read(clen))
+                # Empty body defaults to {}, allowing /api/stop/<id> with no params
+                body = json.loads(self.rfile.read(clen) or b"{}")
             except ValueError:
                 return self._send(400, {"error": "bad json"})
             # Ensure body is a JSON object (dict), not array, string, number, null

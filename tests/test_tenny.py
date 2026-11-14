@@ -176,12 +176,16 @@ class ServerTest(unittest.TestCase):
         self.srv.shutdown()
         self.srv.server_close()
 
-    def call(self, method, path, body=None, host=None, ctype="application/json"):
+    def call(self, method, path, body=None, host=None, ctype="application/json", raw=None):
         c = http.client.HTTPConnection("127.0.0.1", self.port, timeout=10)
         headers = {"Content-Type": ctype}
         if host:
             headers["Host"] = host
-        c.request(method, path, json.dumps(body) if body is not None else None, headers)
+        # Use raw bytes if provided, otherwise serialize body
+        if raw is not None:
+            c.request(method, path, raw, headers)
+        else:
+            c.request(method, path, json.dumps(body) if body is not None else None, headers)
         r = c.getresponse()
         data = r.read()
         c.close()
@@ -228,9 +232,22 @@ class ServerTest(unittest.TestCase):
 
     def test_non_object_json_body_rejected(self):
         # Non-object JSON values should be rejected before reaching runner
-        for body in [5, ["n"], "n", None]:
+        for body in [5, ["n"], "n"]:
             self.assertEqual(self.call("POST", "/api/run/num", body)[0], 400)
+        # Test literal null (4 bytes) - different from empty body
+        self.assertEqual(self.call("POST", "/api/run/num", raw=b"null")[0], 400)
         self.assertEqual(runner._jobs, {})
+
+    def test_empty_body_is_empty_dict(self):
+        # POST with no body (Content-Length 0) should be treated as {}
+        # This is used for /api/stop/<id> and /api/run/echo (word has default)
+        status, j = self.call("POST", "/api/run/echo", raw=b"")
+        self.assertEqual(status, 200)
+        job = runner.get(j["id"])
+        wait(job)
+        # echo with default word="x" should output "hi x"
+        self.assertEqual(job.status, "ok")
+        self.assertEqual(job.snapshot(0)["lines"], ["hi x"])
 
     def test_bad_content_length_rejected(self):
         import socket
