@@ -3,7 +3,7 @@
 ## 目标
 - 根目录只保留入口与文档，脚本按用途归类。
 - 一个 Python 入口 `tenny.py`：网页控制台（点按钮运行任务）+ CLI，共用同一份任务清单。
-- 能在 Windows、Linux 上使用同一入口；仅用 Python 标准库（3.9+）。
+- 能在 Windows、Linux 上使用同一入口；仅用 Python 标准库（3.11+，因 `tomllib`）。
 
 ## 非目标
 - 不重写训练代码；不让训练原生运行在 Windows/macOS（依赖 GPU+JAX，仍在 Linux/WSL 中执行）。
@@ -17,8 +17,8 @@ tenny/                   入口实现
   runner.py              按系统选命令、起子进程、收集日志、支持停止
   server.py              127.0.0.1 HTTP 服务（http.server）
   ui/index.html          控制台页面
-scripts/{train,preview,benchmark,verify}/   原根目录 12 个脚本归类
-experiments/torque200/   实验包（legwheel/ tests/ assets/ 与其 *-wsl.sh、*.py）
+experiments/torque200/   实验包（legwheel/ tests/ assets/ 与其 *-wsl.sh、*.py）；*-wsl.sh 留在原处，
+                         因为它们通过自身位置找到同目录源码
 docs/                    CONTROL-MODES.md 等
 tasks/                   保持不动
 ```
@@ -30,8 +30,13 @@ tasks/                   保持不动
 - `needs: wsl` 的任务：Windows 下经 `wsl.exe` 调用，Linux 直接 `bash`；不满足时提示而不是失败。
 
 ## 迁移
-- `git mv` 保留历史；修正脚本互相引用路径，去掉写死的 `C:\Users\xusen\...`，改为相对路径。
-- 根目录旧脚本删除（不保留兼容壳）；README 更新为入口说明。
+- 根目录 9 个 `.ps1` 和 1 个 `.cmd` 都只是"wslpath → wsl.exe → bash 启动器"的壳，由 `tenny/runner.py`
+  取代并删除（不保留兼容壳），不再新建 `scripts/` 目录。`test-robot-training`（按选中模式分发）
+  拆为 `test-original` 与 `test-torque200` 两个明确任务；"选中模式"仅 `web` 任务保留（`mode=selected`）。
+- 被任务清单调用的 13 个 `.sh` 启动器里写死的 `/mnt/c/Users/xusen/...` 改为由脚本自身位置推导；
+  另加 `.gitattributes` 固定 `*.sh` 为 LF。7 个一次性 Python 脚本里的同类路径本次不改（已知遗留）。
+- WSL 侧的 `/home/jaccob/...` 环境路径不在本次范围，README 标注。
+- `CONTROL-MODES.md` 移入 `docs/`；README 更新为入口说明。
 
 ## 验证
 1. `python tenny.py list` 列出全部任务。
