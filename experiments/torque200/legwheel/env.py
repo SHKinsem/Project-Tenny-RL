@@ -337,12 +337,7 @@ class LegWheelRobot(LegWheelRewardMixin, mjx_env.MjxEnv):
             state.info["act_delay_buffer"] = jp.vstack(
                 [state.info["act_delay_buffer"][1:], action[None, :]])
             action = delayed_act
-        state.info["current_act"] = action
-        state.info["last_torque_action"] = action
-        ctrl = action * self._torque_scales
-        state.info["applied_torque"] = ctrl
-        # Hold torque for two 2.5ms physics steps; no PD/velocity loop.
-        data = mjx_env.step(self.mjx_model, state.data, ctrl, self.n_substeps)
+        data, action, ctrl = self._step_control(state.data, action, state.info, state.metrics)
 
         # 计算奖励
         rewards = self._get_reward(data, ctrl, state.info, state.metrics)
@@ -409,6 +404,15 @@ class LegWheelRobot(LegWheelRewardMixin, mjx_env.MjxEnv):
 
         return mjx_env.State(data, obs, reward, done, state.metrics, state.info)
     
+    def _step_control(self, data, action, info, metrics):
+        """Default torque200 path, unchanged. Optional experiments override only this hook."""
+        info["current_act"] = action
+        info["last_torque_action"] = action
+        ctrl = action * self._torque_scales
+        info["applied_torque"] = ctrl
+        data = mjx_env.step(self.mjx_model, data, ctrl, self.n_substeps)
+        return data, action, ctrl
+
     def _is_termination(self, data: mjx.Data) -> jax.Array:
         # 判断是否终止
         done = jp.isnan(data.qpos).any() | jp.isnan(data.qvel).any()

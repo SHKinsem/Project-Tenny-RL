@@ -84,3 +84,31 @@ name = "吞吐探测"
 group = "测试"
 needs = "wsl"
 script = "experiments/torque200/throughput-wsl.sh"
+
+[[task]]
+id = "test-hybrid"
+name = "腿力＋轮扭矩本机验证"
+group = "测试"
+needs = "wsl"
+script = "experiments/torque200/hybrid-wsl.sh"
+args = ["--mode", "{mode}", "--steps", "{steps}", "--num-envs", "{num_envs}", "--unroll-length", "4", "--seed", "{seed}"]
+params = [
+  { name = "mode", type = "choice", choices = ["virtual_leg_force", "matched_envelope", "direct_torque"], default = "virtual_leg_force" },
+  { name = "steps", type = "int", default = 16, min = 1, max = 1000000 },
+  { name = "num_envs", type = "int", default = 2, min = 1, max = 1024 },
+  { name = "seed", type = "int", default = 0, min = 0, max = 2147483647 },
+]
+
+[[task]]
+id = "train-hybrid"
+name = "腿力＋轮扭矩训练（先校验）"
+group = "训练"
+needs = "wsl"
+script = "experiments/torque200/hybrid-wsl.sh"
+args = ["--mode", "{mode}", "--steps", "{steps}", "--num-envs", "{num_envs}", "--unroll-length", "16", "--seed", "{seed}"]
+params = [
+  { name = "mode", type = "choice", choices = ["virtual_leg_force", "matched_envelope", "direct_torque"], default = "virtual_leg_force" },
+  { name = "steps", type = "int", default = 1000000, min = 32, max = 1000000000 },
+  { name = "num_envs", type = "int", default = 128, min = 1, max = 1024 },
+  { name = "seed", type = "int", default = 0, min = 0, max = 2147483647 },
+]

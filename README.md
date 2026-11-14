@@ -28,6 +28,12 @@ Linux 下直接用 bash；macOS 不支持训练类任务。
 | `docs/` | 文档（控制模式 `docs/CONTROL-MODES.md` 等） |
 | `tasks/` | 过程记录与辅助脚本 |
 
+## 混合动作实验
+
+新增单主动腿关节轮心虚拟伸展力 + 独立轮扭矩模式，以及匹配包络和直接扭矩对照。原模式不变。
+先在本机运行 `python tenny.py run test-hybrid`，完整预检、短训练和热启动通过后再正式训练。
+实现与验证边界见 [hybrid/README.md](experiments/torque200/hybrid/README.md)。本轮云端未运行真实训练。
+
 ## 已知限制
 
 - 训练依赖 GPU + JAX，只能在 Linux/WSL 中运行。

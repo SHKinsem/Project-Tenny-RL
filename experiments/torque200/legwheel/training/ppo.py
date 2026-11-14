@@ -166,7 +166,7 @@ def get_ppo_config(
 
 
 def train_ppo(params=None, env=None, env_cfg=None, ppo_params=None, iter_now=0,
-              progress_fn=None, randomization_fn=None):
+              progress_fn=None, randomization_fn=None, eval_env=None):
     # 初始化环境
     if env is None:
         env = LegWheelRobot()
@@ -221,7 +221,7 @@ def train_ppo(params=None, env=None, env_cfg=None, ppo_params=None, iter_now=0,
 
     make_inference_fn, params, metrics = train_fn(
         environment=env,
-        eval_env=LegWheelRobot(config=env_cfg),
+        eval_env=eval_env if eval_env is not None else LegWheelRobot(config=env_cfg),
         wrap_env_fn=wrapper.wrap_for_brax_training,
         **restore_kwargs,
     )
