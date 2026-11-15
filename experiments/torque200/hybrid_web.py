@@ -99,6 +99,20 @@ class Simulator:
         self._render_key = None
         self._jpg = b""
 
+    def _low_cost_scene(self):
+        flags = self.mujoco.mjtRndFlag
+        self.renderer.scene.flags[flags.mjRND_SHADOW] = False
+        self.renderer.scene.flags[flags.mjRND_REFLECTION] = False
+
+    def configure_rendering(self, width, height):
+        """Worker-owned drawing changes leave the simulated world untouched."""
+        if (self.renderer.width, self.renderer.height) != (width, height):
+            replacement = self.mujoco.Renderer(self.env.mj_model, height=height, width=width)
+            previous, self.renderer = self.renderer, replacement
+            self._render_key = None
+            previous.close()
+        self._low_cost_scene()
+
     def _image_key(self):
         camera = self.camera
         return (self.data.qpos.tobytes(), self.data.qvel.tobytes(), self.data.ctrl.tobytes(),
@@ -143,17 +157,21 @@ class Simulator:
         self.data.qpos[:] = np.asarray(self.state.data.qpos)
         self.data.qvel[:] = np.asarray(self.state.data.qvel)
         self.data.ctrl[:] = np.asarray(self.state.data.ctrl)
+        self._low_cost_scene()
         key = self._image_key()
         rendered = key != self._render_key
         if rendered:
             self.mujoco.mj_forward(self.env.mj_model, self.data)
             self.renderer.update_scene(self.data, camera=self.camera)
+            self._low_cost_scene()
             buffer = io.BytesIO()
             self.Image.fromarray(self.renderer.render()).save(buffer, format="JPEG", quality=80)
             self._jpg, self._render_key = buffer.getvalue(), key
         return self._jpg, dict(episode_seconds=float(self.state.data.time),
             terminal=bool(self.terminal_until), actuator_inputs=self.data.ctrl.tolist(), reset_delta=reset,
-            rendered=rendered, advanced_seconds=advanced, lag_seconds=self._lag_seconds)
+            rendered=rendered, advanced_seconds=advanced, lag_seconds=self._lag_seconds,
+            render_width=self.renderer.width, render_height=self.renderer.height,
+            render_effects="no_shadows_or_reflections")
 
     def close(self):
         self.renderer.close()
@@ -225,6 +243,7 @@ class Preview:
         self.mode, self.controller = mode, controller
         self.factory = simulator_factory
         self.simulator_config = None
+        self.render_size = (800, 500)
         self.lock = threading.Condition()
         self.generation = 0
         self.pending = None
@@ -247,7 +266,8 @@ class Preview:
             preview_conditions="标称确定性预览 · 使用模型指令配置 · 训练扰动关闭" if mode == "leg_force_bc" else "零指令 · 无观测噪声 · 无外部推力",
             sync_status="idle", sync_error=None, error=None,
             loading={"active": False, "stage": "idle", "progress": None},
-            playback_rate=None, lag_seconds=0.)
+            playback_rate=None, lag_seconds=0., render_width=None, render_height=None,
+            render_effects=None)
 
     def reset_clock(self):
         """Idle, pause and reconnect never accumulate playback debt."""
@@ -404,6 +424,7 @@ class Preview:
                 if hasattr(self.actor, "clean_history"):
                     self.actor.clean_history()
                 self.reset_clock()
+            self.simulator.configure_rendering(*self.render_size)
             started = time.monotonic()
             interval = max(0., started - self._clock_at) if self._clock_at is not None and not paused else 0.
             self._clock_at = None if paused else started

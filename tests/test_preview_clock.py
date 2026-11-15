@@ -26,9 +26,12 @@ def make_simulator(dt=.01):
     simulator.data = SimpleNamespace(qpos=Vector([0.]), qvel=Vector([0.]), ctrl=Vector([0.]))
     simulator.camera = SimpleNamespace(type=0, fixedcamid=-1, trackbodyid=0, lookat=Vector([0., 0., 0.]),
         distance=1., azimuth=0., elevation=0., orthographic=False)
-    simulator.renderer = Mock(width=800, height=500, scene=SimpleNamespace(flags=[0]))
+    simulator.renderer = Mock(width=800, height=500, scene=SimpleNamespace(flags=[0, 0, 0]))
     simulator.renderer.render.return_value = b"pixels"
     simulator.mujoco = Mock()
+    simulator.mujoco.mjtRndFlag = SimpleNamespace(mjRND_SHADOW=0, mjRND_REFLECTION=1)
+    simulator.mujoco.Renderer.side_effect = lambda _model, *, width, height: Mock(
+        width=width, height=height, scene=SimpleNamespace(flags=[0, 0, 0]))
     simulator.env = SimpleNamespace(mj_model=object())
     simulator.np = SimpleNamespace(asarray=lambda value: value,
                                   isfinite=lambda value: SimpleNamespace(all=lambda: True))
@@ -46,6 +49,70 @@ def make_simulator(dt=.01):
 
 
 class PlaybackTests(unittest.TestCase):
+    def test_render_budget_counts_only_visible_worlds(self):
+        worlds = []
+
+        def factory(control):
+            preview = Preview("hybrid_virtual_leg_force_100", control)
+            world = make_simulator()
+            worlds.append(world)
+            preview.actor = SimpleNamespace(run=lambda _obs: [0.])
+            preview.simulator = world
+            preview.state.update(suspended=False, clients=1)
+            return preview
+
+        group = PreviewGroup("hybrid_virtual_leg_force_100", Mock(), factory)
+        self.addCleanup(group.close)
+        for _ in range(3):
+            group.control({"action": "create"})
+        for connected, size in ((4, (400, 250)), (2, (640, 400)), (1, (800, 500))):
+            for index, preview in enumerate(group.previews.values()):
+                preview.state["clients"] = int(index < connected)
+            with patch("hybrid_web.time.monotonic", return_value=0.):
+                group.tick()
+            for preview in list(group.previews.values())[:connected]:
+                self.assertEqual((preview.simulator.renderer.width, preview.simulator.renderer.height), size)
+                self.assertEqual(preview.snapshot()["render_width"], size[0])
+                self.assertEqual(preview.snapshot()["render_height"], size[1])
+            self.assertEqual(len(worlds), 4)
+        for preview in list(group.previews.values())[1:]:
+            preview.state.update(clients=1, suspended=True)
+        group.tick()
+        self.assertEqual(group.primary.render_size, (800, 500))
+
+    def test_resizing_only_replaces_renderer_and_disables_expensive_effects(self):
+        world = make_simulator()
+        world.mujoco.mjtRndFlag = SimpleNamespace(mjRND_SHADOW=0, mjRND_REFLECTION=1)
+        world.renderer.scene.flags = [1, 1, 1]
+
+        def renderer(_model, *, width, height):
+            return Mock(width=width, height=height, scene=SimpleNamespace(flags=[1, 1, 1]))
+
+        world.mujoco.Renderer.side_effect = renderer
+        state, initial, camera, actor = world.state, world.initial, world.camera, SimpleNamespace(run=lambda _obs: [0.])
+        world._advance_remainder, world.terminal_until = .003, 17.
+        previous = world.renderer
+        world.configure_rendering(400, 250)
+        previous.close.assert_called_once_with()
+        self.assertIs(world.state, state)
+        self.assertIs(world.initial, initial)
+        self.assertIs(world.camera, camera)
+        self.assertEqual(world._advance_remainder, .003)
+        self.assertEqual(world.terminal_until, 17.)
+        self.assertEqual(world.renderer.scene.flags, [0, 0, 1])
+        world.renderer.update_scene.side_effect = lambda *_args, **_kwargs: world.renderer.scene.flags.__setitem__(slice(None), [1, 1, 1])
+        _, metadata = world.frame(actor, paused=True)
+        self.assertEqual((metadata["render_width"], metadata["render_height"]), (400, 250))
+        self.assertEqual(world.renderer.scene.flags, [0, 0, 1])
+        world.configure_rendering(400, 250)
+        _, metadata = world.frame(actor, paused=True)
+        self.assertFalse(metadata["rendered"])
+        self.assertEqual(world.mujoco.Renderer.call_count, 1)
+        world.configure_rendering(800, 500)
+        _, metadata = world.frame(actor, paused=True)
+        self.assertTrue(metadata["rendered"])
+        self.assertIs(world.state, state)
+
     def test_group_scheduler_keeps_visible_worlds_on_their_wall_clock(self):
         for connected in (1, 4):
             with self.subTest(connected=connected):
@@ -115,7 +182,7 @@ class PlaybackTests(unittest.TestCase):
         self.assertEqual(world.renderer.render.call_count, 1)
         for change in (lambda: setattr(world.camera, "azimuth", 20),
                        lambda: setattr(world.renderer, "width", 400),
-                       lambda: world.renderer.scene.flags.__setitem__(0, 1), world.reset):
+                       lambda: world.renderer.scene.flags.__setitem__(2, 1), world.reset):
             change()
             _, state = world.frame(actor, paused=True)
             self.assertTrue(state["rendered"])

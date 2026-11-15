@@ -172,8 +172,12 @@ class PreviewGroup:
             retired, self.retired = self.retired, []
         for preview in retired:
             preview.release()
+        visible = sum(not state["suspended"] and state["clients"] > 0
+                      for state in (preview.snapshot() for preview in records))
+        render_size = (800, 500) if visible <= 1 else (640, 400) if visible == 2 else (400, 250)
         rendered = 0
         for preview in records:
+            preview.render_size = render_size
             before = preview.snapshot()["frames"]
             preview.tick()
             rendered += max(0, preview.snapshot()["frames"] - before)
