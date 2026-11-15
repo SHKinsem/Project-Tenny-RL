@@ -262,15 +262,27 @@ def _identities(args, config, ppo_cfg):
                 sources[path.relative_to(local_root).as_posix()] = _file_hash(path)
     packages = {name: importlib.metadata.version(name)
                 for name in ("jax", "jaxlib", "brax", "flax", "optax", "mujoco", "numpy")}
-    data_identity = dict(schema=SCHEMA, experiment_config=options, contract={k: v for k, v in contract.items()
-                                               if k not in ("source_fingerprint", "force_source_fingerprint")},
+    collection_options = {key: options[key] for key in
+                          ("teacher_source", "standing_only", "initial_state_perturbation")}
+    # Full model metadata remains strict; trajectory reuse only follows inputs
+    # read by the native collector. Its embedded full config/hash must not turn
+    # a BC/PPO edit into another teacher rollout.
+    non_collection_fields = {
+        "source_fingerprint", "force_source_fingerprint", "experiment_config",
+        "experiment_config_sha256", "evaluation_policy", "normalization_policy",
+        "policy_head", "wheel_residual_scale", "previous_torque_clip",
+    }
+    data_identity = dict(schema=SCHEMA, experiment_config=collection_options,
+                         contract={k: v for k, v in contract.items() if k not in non_collection_fields},
                          sources=sources, packages={k: packages[k] for k in ("mujoco", "numpy")},
                          episodes=config.episodes, steps_per_episode=config.steps_per_episode, seed=config.seed)
     network = json.loads(json.dumps(dict(ppo_cfg.network_factory)))
-    bc_identity = dict(schema=SCHEMA, experiment_config=options, source_sha256=_file_hash(__file__), packages=packages,
+    network.update(wheel_head=config.wheel_head, wheel_residual_scale=config.wheel_residual_scale)
+    bc_identity = dict(schema=SCHEMA, source_sha256=_file_hash(__file__), packages=packages,
                        ppo_adapter_sha256=_file_hash(Path(__file__).with_name("ppo.py")),
                        network_head_sha256=_file_hash(Path(__file__).with_name("networks.py")),
                        network=network, normalize_observations=bool(ppo_cfg.normalize_observations),
+                       fixed_normalization=config.fixed_normalization, wheel_loss_weight=config.wheel_loss_weight,
                        updates=config.updates, batch_size=config.batch_size, learning_rate=config.learning_rate,
                        exploration_std=config.exploration_std,
                        sampling="equal-episode-startup0.5s-steady-half-v1" if config.balanced_sampling else "uniform-sample-v1",
@@ -841,7 +853,11 @@ def prepare(args, monitor, env, ppo_cfg):
             from force_teacher.teacher import evaluate_student, CollectionCancelled
             monitor.publish(phase="preparing", stage="teacher_gate", bc_gate_passed=False,
                             preparation_message="验证真实腿力站立：3组微扰初态各6秒")
-            replay_identity = dict(schema=SCHEMA, experiment_config=options, bc_key=bc_key, params_sha256=_file_hash(params_file),
+            # This gate is always noiseless/deterministic standing, regardless
+            # of PPO settings or whether the caller enforces the outcome.
+            replay_identity = dict(schema=SCHEMA, evaluation_profile="standing_gate", bc_key=bc_key,
+                                   sources_sha256=_hash_bytes(_canonical(data_id.get("sources", {}))),
+                                   packages=data_id.get("packages", {}), params_sha256=_file_hash(params_file),
                                    episodes=config.replay_episodes, steps_per_episode=config.replay_steps,
                                    seed=config.seed + 10000)
             replay_key = _hash_bytes(_canonical(replay_identity))

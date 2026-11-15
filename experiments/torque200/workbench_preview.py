@@ -150,6 +150,7 @@ class PreviewGroup:
                             preview.reset_requested = True
                         else:
                             preview.state["paused"] = action == "pause"
+                        preview.reset_clock()
                         preview.lock.notify_all()
                 else:
                     raise ValueError("Unknown viewport action")
@@ -171,18 +172,21 @@ class PreviewGroup:
             retired, self.retired = self.retired, []
         for preview in retired:
             preview.release()
+        rendered = 0
         for preview in records:
+            before = preview.snapshot()["frames"]
             preview.tick()
+            rendered += max(0, preview.snapshot()["frames"] - before)
+        return rendered
 
     def run(self):
         try:
             while not self.closed:
                 started = time.monotonic()
-                self.tick()
-                with self.lock:
-                    active = sum(not preview.snapshot()["suspended"] for preview in self.previews.values())
+                rendered = self.tick()
                 # Multiple renderers share the original 20 frame/s work budget.
-                self.wake.wait(timeout=max(.01, .05 * max(1, active) - (time.monotonic() - started)))
+                # Cached paused frames and slots without viewers spend no budget.
+                self.wake.wait(timeout=max(.01, .05 * max(1, rendered) - (time.monotonic() - started)))
                 self.wake.clear()
         finally:
             with self.lock:
@@ -219,8 +223,10 @@ def stream_preview(handler, preview, *, generation=None):
         if generation is not None and generation != preview.generation:
             raise ControlError("此预览连接已过期，请重新打开画面。")
         bound_generation = preview.generation
+        if preview.state["clients"] == 0:
+            preview.reset_clock()
         preview.state["clients"] += 1
-        sequence = preview.state["frames"]
+        sequence = preview.state["frames"] - 1  # Send the current cached JPEG to a new viewer.
     try:
         # Validate the generation before committing HTTP headers. Client
         # accounting covers header failures as well as disconnects while
@@ -246,6 +252,8 @@ def stream_preview(handler, preview, *, generation=None):
     finally:
         with preview.lock:
             preview.state["clients"] -= 1
+            if preview.state["clients"] == 0:
+                preview.reset_clock()
 
 
 def dispatch_viewports(handler, group):

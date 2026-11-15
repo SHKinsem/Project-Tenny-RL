@@ -1,5 +1,6 @@
 """Host-only cache/partition/cancellation tests; no simulator or GPU training."""
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
+import json
 from pathlib import Path
 import sys
 import tempfile
@@ -174,6 +175,7 @@ class StageTests(unittest.TestCase):
         self.params = object()
         self.fit = Mock(return_value=(self.params, b'finite-test-params',
                                      {'completed': True, 'parameter_tree_sha256': 'tree'}))
+        self.identity_builder = bc._identities
         for target, value in (('_identities', lambda *a: ({'data': 'same'}, {'bc': 'same'})),
                               ('_locked', lambda *a: nullcontext()), ('_fit', self.fit),
                               ('_load_params', lambda *a: self.params), ('parameter_digest', lambda *a: 'tree'),
@@ -184,7 +186,113 @@ class StageTests(unittest.TestCase):
         handle.start(); self.addCleanup(handle.stop)
 
     def prepare(self):
-        return bc.prepare(self.args, self.monitor, environment(), SimpleNamespace())
+        return bc.prepare(self.args, self.monitor, environment(),
+                          SimpleNamespace(network_factory={}, normalize_observations=True))
+
+    @contextmanager
+    def real_stage_identities(self):
+        def metadata(root, options):
+            return dict(mode='leg_force_bc', source_fingerprint='same', force_source_fingerprint='same',
+                experiment_config=options, experiment_config_sha256=bc._hash_bytes(bc._canonical(options)),
+                training_profile='standing' if options['standing_only'] else 'commands',
+                evaluation_policy=options['deterministic_eval'], normalization_policy=options['fixed_normalization'],
+                policy_head=options['wheel_head'], wheel_residual_scale=options['wheel_residual_scale'],
+                previous_torque_clip=1e-5)
+        contract = SimpleNamespace(metadata=metadata, original_path=lambda root: Path(root))
+        with patch.object(bc, '_identities', self.identity_builder), \
+                patch.dict(sys.modules, {'force_teacher.contract': contract}), \
+                patch.object(bc.importlib.metadata, 'version', return_value='test-version'):
+            yield
+
+    def failed_gate(self):
+        return dict(gate_passed=False, student_episode_seconds=[.2] * 3,
+                    episodes=[{'termination': {'reasons': ['fallen']}}] * 3)
+
+    def dagger_receipts(self):
+        records = [json.loads(path.read_text(encoding='utf8')) for path in
+                   self.root.glob('artifacts/force-teacher-pretrain/data/*/data-success.json')]
+        return [record['identity'] for record in records if record['identity']['dagger_round'] == 1]
+
+    def test_real_bc_edit_reuses_collection_but_refits_and_replays(self):
+        with self.real_stage_identities():
+            self.prepare()
+            self.args.experiment_config = {'bc_updates': 512, 'bc_learning_rate': .0005}
+            changed = self.prepare()['report']
+            self.assertTrue(changed['data_cache_hit'])
+            self.assertFalse(changed['bc_cache_hit'])
+            self.assertFalse(changed['replay_cache_hit'])
+            self.assertTrue(self.prepare()['report']['bc_cache_hit'])
+        self.assertEqual(self.teacher.collect_dataset.call_count, 1)
+        self.assertEqual(self.fit.call_count, 2)
+        self.assertEqual(self.teacher.evaluate_student.call_count, 2)
+
+    def test_real_ppo_and_budget_edits_reuse_all_preparation_stages(self):
+        with self.real_stage_identities():
+            self.prepare()
+            for overrides in ({'ppo_learning_rate': .0001}, {'entropy_cost': .002},
+                              {'deterministic_eval': False}, {'preparation_budget_seconds': 240.},
+                              {'bc_gate_enabled': False, 'dagger_rounds': 4}):
+                with self.subTest(overrides=overrides):
+                    self.args.experiment_config = overrides
+                    report = self.prepare()['report']
+                    self.assertTrue(report['data_cache_hit'])
+                    self.assertTrue(report['bc_cache_hit'])
+                    self.assertTrue(report['replay_cache_hit'])
+        self.assertEqual(self.teacher.collect_dataset.call_count, 1)
+        self.assertEqual(self.fit.call_count, 1)
+        self.assertEqual(self.teacher.evaluate_student.call_count, 1)
+
+    def test_real_dagger_recollects_when_parent_policy_changes(self):
+        passed = self.teacher.evaluate_student.return_value
+        self.teacher.evaluate_student.side_effect = [self.failed_gate(), passed, self.failed_gate(), passed]
+        with self.real_stage_identities():
+            self.prepare()
+            self.args.experiment_config = {'bc_updates': 512}
+            self.fit.return_value = (self.params, b'changed-parent-policy',
+                                     {'completed': True, 'parameter_tree_sha256': 'tree'})
+            report = self.prepare()['report']
+            self.assertEqual(report['dagger_round'], 1)
+            self.assertFalse(report['data_cache_hit'])
+            self.assertTrue(self.prepare()['report']['data_cache_hit'])
+        self.assertEqual(self.teacher.collect_dataset.call_count, 3)
+        parents = self.dagger_receipts()
+        self.assertEqual(len({item['parent_params_sha256'] for item in parents}), 2)
+        self.assertEqual(len({item['parent_dataset_sha256'] for item in parents}), 1)
+
+    def test_real_dagger_recollects_when_parent_data_changes_with_same_policy(self):
+        passed = self.teacher.evaluate_student.return_value
+        self.teacher.evaluate_student.side_effect = [self.failed_gate(), passed, self.failed_gate(), passed]
+        with self.real_stage_identities():
+            first = self.prepare()['report']
+            data_root = self.root / 'artifacts/force-teacher-pretrain/data' / first['attempts'][0]['data_key']
+            dataset_path = data_root / 'dataset.npz'
+            with np.load(dataset_path, allow_pickle=False) as source:
+                arrays = {key: source[key] for key in source.files}
+            arrays['observations'][0, 0] += 1
+            bc._save_dataset(dataset_path, arrays)
+            receipt_path = data_root / 'data-success.json'
+            receipt = json.loads(receipt_path.read_text(encoding='utf8'))
+            receipt['dataset_sha256'] = bc._file_hash(dataset_path)
+            bc._json(receipt_path, receipt)
+            self.assertFalse(self.prepare()['report']['data_cache_hit'])
+        self.assertEqual(self.teacher.collect_dataset.call_count, 3)
+        parents = self.dagger_receipts()
+        self.assertEqual(len({item['parent_params_sha256'] for item in parents}), 1)
+        self.assertEqual(len({item['parent_dataset_sha256'] for item in parents}), 2)
+
+    def test_real_collection_and_source_changes_still_invalidate_data(self):
+        with self.real_stage_identities():
+            self.prepare()
+            self.args.experiment_config = {'initial_state_perturbation': False}
+            self.assertFalse(self.prepare()['report']['data_cache_hit'])
+            for filename in ('options.py', 'contract.py'):
+                original_hash = bc._file_hash
+                def changed_hash(path):
+                    digest = original_hash(path)
+                    return bc._hash_bytes((digest + 'changed').encode()) if Path(path).name == filename else digest
+                with self.subTest(filename=filename), patch.object(bc, '_file_hash', side_effect=changed_hash):
+                    self.assertFalse(self.prepare()['report']['data_cache_hit'])
+        self.assertEqual(self.teacher.collect_dataset.call_count, 4)
 
     def test_data_and_bc_success_are_reused_and_initial_hash_persisted(self):
         first = self.prepare()

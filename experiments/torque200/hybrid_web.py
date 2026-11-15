@@ -94,10 +94,27 @@ class Simulator:
     def reset(self):
         self.state = self.initial
         self.terminal_until = 0.0
+        self._advance_remainder = 0.0
+        self._lag_seconds = 0.0
+        self._render_key = None
+        self._jpg = b""
 
-    def frame(self, actor, paused=False):
+    def _image_key(self):
+        camera = self.camera
+        return (self.data.qpos.tobytes(), self.data.qvel.tobytes(), self.data.ctrl.tobytes(),
+                camera.type, camera.fixedcamid, camera.trackbodyid,
+                tuple(camera.lookat), camera.distance, camera.azimuth, camera.elevation,
+                camera.orthographic, self.renderer.width, self.renderer.height,
+                tuple(self.renderer.scene.flags), 80)
+
+    def frame(self, actor, paused=False, *, advance_seconds=.05):
+        """Advance the playback clock independently of the JPEG refresh budget.
+
+        A slow consumer can cost at most 250ms of simulation in one call. Older
+        time is discarded and reported, rather than creating unbounded catch-up.
+        """
         np = self.np
-        reset = 0
+        reset, advanced = 0, 0.0
         if not paused:
             if self.terminal_until and time.monotonic() >= self.terminal_until:
                 self.reset()
@@ -105,25 +122,38 @@ class Simulator:
                     actor.clean_history()
                 reset = 1
             if not self.terminal_until:
-                for _ in range(round(.05 / self.cfg.ctrl_dt)):
+                requested = max(0.0, advance_seconds)
+                budget = min(.25, requested)
+                self._lag_seconds += requested - budget
+                budget += self._advance_remainder
+                steps = int((budget + 1e-10) / self.cfg.ctrl_dt)
+                self._advance_remainder = max(0., budget - steps * self.cfg.ctrl_dt)
+                for _ in range(steps):
                     observation = np.asarray(self.state.obs["state"])
                     action = actor.action(observation) if hasattr(actor, "action") else actor.run(observation)
                     self.state = self.step(self.state, action)
+                    advanced += self.cfg.ctrl_dt
                     if not all(np.isfinite(np.asarray(x)).all() for x in
                                (self.state.data.qpos, self.state.data.qvel, self.state.data.ctrl)):
                         raise FloatingPointError("Nonfinite preview state")
                     if bool(self.state.done) or float(self.state.data.time) >= self.cfg.episode_time:
                         self.terminal_until = time.monotonic() + .7
+                        self._advance_remainder = 0.0
                         break
         self.data.qpos[:] = np.asarray(self.state.data.qpos)
         self.data.qvel[:] = np.asarray(self.state.data.qvel)
         self.data.ctrl[:] = np.asarray(self.state.data.ctrl)
-        self.mujoco.mj_forward(self.env.mj_model, self.data)
-        self.renderer.update_scene(self.data, camera=self.camera)
-        buffer = io.BytesIO()
-        self.Image.fromarray(self.renderer.render()).save(buffer, format="JPEG", quality=80)
-        return buffer.getvalue(), dict(episode_seconds=float(self.state.data.time),
-            terminal=bool(self.terminal_until), actuator_inputs=self.data.ctrl.tolist(), reset_delta=reset)
+        key = self._image_key()
+        rendered = key != self._render_key
+        if rendered:
+            self.mujoco.mj_forward(self.env.mj_model, self.data)
+            self.renderer.update_scene(self.data, camera=self.camera)
+            buffer = io.BytesIO()
+            self.Image.fromarray(self.renderer.render()).save(buffer, format="JPEG", quality=80)
+            self._jpg, self._render_key = buffer.getvalue(), key
+        return self._jpg, dict(episode_seconds=float(self.state.data.time),
+            terminal=bool(self.terminal_until), actuator_inputs=self.data.ctrl.tolist(), reset_delta=reset,
+            rendered=rendered, advanced_seconds=advanced, lag_seconds=self._lag_seconds)
 
     def close(self):
         self.renderer.close()
@@ -202,6 +232,7 @@ class Preview:
         self.closed = False
         self.release_requested = False
         self._last_frame_at = None
+        self._clock_at = None
         self.reset_requested = False
         self.jpg = b""
         self.state = dict(mode=mode, control_hz=spec["control_hz"], ctrl_dt=1 / spec["control_hz"],
@@ -215,7 +246,12 @@ class Preview:
             preview_experiment_config=None,
             preview_conditions="标称确定性预览 · 使用模型指令配置 · 训练扰动关闭" if mode == "leg_force_bc" else "零指令 · 无观测噪声 · 无外部推力",
             sync_status="idle", sync_error=None, error=None,
-            loading={"active": False, "stage": "idle", "progress": None})
+            loading={"active": False, "stage": "idle", "progress": None},
+            playback_rate=None, lag_seconds=0.)
+
+    def reset_clock(self):
+        """Idle, pause and reconnect never accumulate playback debt."""
+        self._clock_at = None
 
     def snapshot(self):
         with self.lock:
@@ -242,6 +278,7 @@ class Preview:
             self.generation += 1
             self.pending = dict(request, generation=self.generation, started=time.monotonic())
             self._last_frame_at = None
+            self.reset_clock()
             self.state.update(sync_status="pending", sync_error=None, paused=False)
             self.loading("syncing" if request["kind"] == "live" else "loading_policy")
             self.lock.notify_all()
@@ -253,6 +290,7 @@ class Preview:
             self.release_requested = True
             self.jpg = b""
             self._last_frame_at = None
+            self.reset_clock()
             self.state.update(suspended=True, sync_status="idle", sync_error=None, fps=0.)
             self.loading("idle")
             self.lock.notify_all()
@@ -346,6 +384,7 @@ class Preview:
                         self.actor = actor
                         self.pending = None
                         self.jpg = b""
+                        self.reset_clock()
                         self.state.update(metadata, suspended=False, sync_status="ready", sync_error=None,
                             episode_seconds=0., terminal=False)
                         self.loading("first_frame")
@@ -353,25 +392,37 @@ class Preview:
             with self.lock:
                 active = not self.state["suspended"] and self.state["clients"] > 0
                 paused, reset = self.state["paused"], self.reset_requested
-                self.reset_requested = False
+                if active:
+                    self.reset_requested = False
             if not active or self.actor is None:
+                self.reset_clock()
+                with self.lock:
+                    self.state.update(fps=0., playback_rate=None)
                 return
             if reset:
                 self.simulator.reset()
                 if hasattr(self.actor, "clean_history"):
                     self.actor.clean_history()
+                self.reset_clock()
             started = time.monotonic()
-            jpg, state = self.simulator.frame(self.actor, paused)
+            interval = max(0., started - self._clock_at) if self._clock_at is not None and not paused else 0.
+            self._clock_at = None if paused else started
+            jpg, state = self.simulator.frame(self.actor, paused, advance_seconds=interval)
             rendered_at = time.monotonic()
             reset_delta = state.pop("reset_delta", 0)
+            rendered = state.pop("rendered", True)
+            advanced = state.pop("advanced_seconds", 0.)
             with self.lock:
                 if generation != self.generation or self.state["suspended"]:
                     return
                 self.jpg = jpg
-                interval = rendered_at - (self._last_frame_at if self._last_frame_at is not None else started)
-                self._last_frame_at = rendered_at
-                self.state.update(state, fps=min(20., 1 / max(.00001, interval)))
-                self.state["frames"] += 1
+                frame_interval = rendered_at - (self._last_frame_at if self._last_frame_at is not None else started)
+                self.state.update(state, fps=min(20., 1 / max(.00001, frame_interval)) if rendered else 0.,
+                                  playback_rate=advanced / interval
+                                  if interval > 0 and not paused and not state.get("terminal") else None)
+                if rendered:
+                    self._last_frame_at = rendered_at
+                    self.state["frames"] += 1
                 self.state["resets"] += reset_delta + int(reset)
                 self.loading("ready")
                 self.lock.notify_all()
@@ -479,6 +530,7 @@ class Console:
                         self.preview.reset_requested = True
                     else:
                         self.preview.state["paused"] = action == "pause"
+                    self.preview.reset_clock()
             else:
                 raise ValueError("Unknown action")
         return {"ok": True}

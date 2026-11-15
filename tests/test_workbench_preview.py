@@ -165,9 +165,22 @@ class GroupTests(unittest.TestCase):
 
         self.group.wake = Mock()
         self.group.wake.wait.side_effect = wait
-        with patch.object(self.group, "tick"), patch("workbench_preview.time.monotonic", side_effect=[0, 0]):
+        with patch.object(self.group, "tick", return_value=2), patch("workbench_preview.time.monotonic", side_effect=[0, 0]):
             self.group.run()
         self.assertEqual(observed, [.1])
+
+    def test_cached_or_unwatched_slots_do_not_spend_render_budget(self):
+        for _ in range(3):
+            self.group.control({"action": "create"})
+        for item in self.group.previews.values():
+            item.state.update(suspended=False, paused=True, clients=1)
+        self.group.primary.state["paused"] = False
+        observed = []
+        self.group.wake = Mock()
+        self.group.wake.wait.side_effect = lambda timeout: (observed.append(timeout), setattr(self.group, "closed", True))
+        with patch.object(self.group, "tick", return_value=1), patch("workbench_preview.time.monotonic", side_effect=[0, 0]):
+            self.group.run()
+        self.assertEqual(observed, [.05])
 
     def test_invalid_identifier_does_not_fall_back_to_primary(self):
         for value in ("0", "5", "../1", True, 1, ""):
