@@ -4,6 +4,18 @@
 
 Tenny 轮腿机器人的强化学习与仿真实验：基于 MuJoCo MJX + Brax PPO 训练平衡/速度跟踪策略，并配有网页预览。
 
+新工作台已完成[生产整合](docs/workbench-production.md)，支持训练暂停/继续、手动保存、历史 checkpoint 续训、参数编辑、最多四窗预览及本机目录导入。保留已验收的 512 配置继承、原生评估与阶段计时；控制及重连语义见[工作台合同](docs/workbench-controls.md)，后续需求见[后端对照表](docs/workbench-backend.md)。
+
+前端设计与模拟示例保留在 [ui-prototype](experiments/torque200/ui-prototype/README.md)，生产 UI 位于 [workbench-ui](experiments/torque200/workbench-ui/README.md)；版本化[只读接口](experiments/torque200/workbench_api/README.md)仍可独立测试。
+
+## 工作台预览
+
+以下截图使用独立 UI 预览的模拟数据，展示三栏布局、曲线和参数层级；此预览不含仿真画面。布局与交互原则见[设计约定](docs/workbench-design.md)。
+
+![训练工作台：曲线、视窗与集中参数](docs/images/workbench/overview.png)
+
+![展开的 PPO 参数与曲线](docs/images/workbench/parameters.png)
+
 ## 快速开始
 
 ```bash
