@@ -11,7 +11,7 @@ args = ["--port", "{port}", "--mode", "{mode}"]
 url = "http://{wsl_ip}:{port}/"
 params = [
   { name = "port", type = "int", default = 8770, min = 1024, max = 65535 },
-  { name = "mode", type = "choice", choices = ["selected", "original", "torque200", "hybrid_virtual_leg_force_100", "hybrid_virtual_leg_force_200", "hybrid_matched_envelope_100", "hybrid_matched_envelope_200", "hybrid_direct_torque_100", "hybrid_direct_torque_200"], default = "selected", label = "模式" },
+  { name = "mode", type = "choice", choices = ["selected", "leg_force_bc", "original", "wheel_torque_bc", "torque200", "hybrid_virtual_leg_force_100", "hybrid_virtual_leg_force_200", "hybrid_matched_envelope_100", "hybrid_matched_envelope_200", "hybrid_direct_torque_100", "hybrid_direct_torque_200"], default = "leg_force_bc", label = "模式" },
 ]
 
 [[task]]

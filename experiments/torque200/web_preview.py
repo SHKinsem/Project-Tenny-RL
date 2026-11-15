@@ -35,11 +35,11 @@ def main():
     parser.add_argument("--artifacts", type=Path, required=True)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8770)
-    parser.add_argument("--mode", choices=MODES, default="original")
+    parser.add_argument("--mode", choices=MODES, default="leg_force_bc")
     parser.add_argument("--original-root", type=Path, default=(Path.home() / "projects/tenny-reference"))
     args = parser.parse_args()
     persist_mode(args.artifacts, args.mode)
-    if mode_spec(args.mode)["hybrid"]:
+    if mode_spec(args.mode)["hybrid"] or mode_spec(args.mode)["teacher"]:
         from hybrid_web import main as hybrid_main
         return hybrid_main(args)
     from preview_sync import read_snapshot, utc_now

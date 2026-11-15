@@ -8,9 +8,102 @@ import tempfile
 import threading
 import time
 import unittest
+from contextlib import nullcontext
+from unittest.mock import patch, MagicMock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from training_control import ControlError, TrainingController, _write
+from force_teacher.options import normalize_options, legacy_options
+
+
+class ExperimentLifecycleTests(unittest.TestCase):
+    """No children or ML; exercise the actual request and CLI boundary on all hosts."""
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.base = Path(self.temporary.name).resolve()
+        self.script = self.base / "console_train.py"
+        self.script.write_text("# unused fake child\n")
+        self.controller = TrainingController(self.base / "artifacts", self.base, self.base, self.script)
+        for name, value in (("_locked", nullcontext()), ("_current", ({}, {}, False)),
+                            ("_latest", None), ("_process", None)):
+            mocked = patch.object(self.controller, name, return_value=value)
+            setattr(self, name + "_mock", mocked.start())
+            self.addCleanup(mocked.stop)
+        state = patch.object(self.controller, "_status", side_effect=lambda mode: json.loads(
+            (self.controller.root / "active.json").read_text()))
+        state.start(); self.addCleanup(state.stop)
+        child = patch("training_control.subprocess.Popen", return_value=MagicMock(pid=43210))
+        self.child = child.start(); self.addCleanup(child.stop)
+        environment = patch("hybrid.readiness.prepare_environment", return_value={})
+        environment.start(); self.addCleanup(environment.stop)
+
+    def saved_checkpoint(self, legacy=False, options=None):
+        run = self.controller.root / "leg_force_bc" / "saved"
+        checkpoint = run / "checkpoints" / "000000000128"
+        checkpoint.mkdir(parents=True)
+        meta = dict(mode="leg_force_bc")
+        if legacy:
+            meta.update(teacher_schema="leg-force-reachable-teacher-bc-v3",
+                        policy_head="wheel_logit_residual_v1", wheel_residual_scale=.05)
+        else:
+            meta.update(teacher_schema="leg-force-configurable-bc-v4", experiment_config=options)
+        _write(run / "policy_metadata.json", meta)
+        self._latest_mock.return_value = {"checkpoint": str(checkpoint)}
+        return checkpoint
+
+    def test_invalid_options_rejected_before_run_directory_or_process(self):
+        bad = [[], {"unknown": True}, {"seed": True}, {"wheel_head": "servo"},
+               {"teacher_source": "reference", "dagger_rounds": 2}]
+        for value in bad:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                self.controller.start("leg_force_bc", experiment_config=value)
+        with self.assertRaises(ValueError):
+            self.controller.start("original", experiment_config={})
+        self.assertFalse((self.controller.root / "leg_force_bc").exists())
+        self.child.assert_not_called()
+
+    def test_request_status_child_seed_and_runner_load_preserve_full_options(self):
+        from console_train import parse_args
+        supplied = dict(wheel_head="residual", wheel_residual_scale=.2,
+                        fixed_normalization=False, deterministic_eval=False, seed=37)
+        state = self.controller.start("leg_force_bc", 30, experiment_config=supplied)
+        expected = normalize_options(supplied)
+        run = Path(state["run_dir"])
+        for path in (run / "request.json", run / "status.json"):
+            self.assertEqual(json.loads(path.read_text())["experiment_config"], expected)
+        self.assertEqual(state["experiment_config"], expected)
+        argv = self.child.call_args.args[0]
+        parsed = parse_args(argv[2:])
+        self.assertEqual(parsed.experiment_config, expected)
+        self.assertEqual(parsed.seed, 37)
+
+    def test_resume_inherits_saved_options_and_seed_instead_of_defaults(self):
+        from console_train import parse_args
+        expected = normalize_options(dict(wheel_head="residual", seed=91, fixed_normalization=False))
+        self.saved_checkpoint(options=expected)
+        state = self.controller.start("leg_force_bc", resume=True)
+        self.assertEqual(state["experiment_config"], expected)
+        parsed = parse_args(self.child.call_args.args[0][2:])
+        self.assertEqual(parsed.experiment_config, expected)
+        self.assertEqual(parsed.seed, 91)
+
+    def test_legacy_v3_resume_retains_residual_head_through_runner(self):
+        from console_train import parse_args
+        self.saved_checkpoint(legacy=True)
+        state = self.controller.start("leg_force_bc", resume=True)
+        self.assertEqual(state["experiment_config"], legacy_options())
+        parsed = parse_args(self.child.call_args.args[0][2:])
+        self.assertEqual(parsed.experiment_config["wheel_head"], "residual")
+        self.assertEqual(parsed.experiment_config, legacy_options())
+
+    def test_resume_rejects_reinterpretation_before_creating_run(self):
+        self.saved_checkpoint(legacy=True)
+        before = list((self.controller.root / "leg_force_bc").iterdir())
+        with self.assertRaisesRegex(ValueError, "differs"):
+            self.controller.start("leg_force_bc", resume=True, experiment_config={"wheel_head": "absolute"})
+        self.assertEqual(list((self.controller.root / "leg_force_bc").iterdir()), before)
+        self.child.assert_not_called()
 
 
 FAKE_RUNNER = r'''

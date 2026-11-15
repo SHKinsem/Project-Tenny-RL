@@ -28,12 +28,26 @@ python tenny.py run web mode=hybrid_virtual_leg_force_100
 
 控制台中可选择动作模式与100/200 Hz、定时或不限时训练、从最近兼容模型继续、停止并保存。混合动作第一次没有模型也能进入控制台；已有模型或训练中的策略快照准备好后才可显示仿真。训练期间关闭网页不会停止训练，停止按钮会等待安全计算边界并验证保存结果。
 
+更新并重启控制台后，新训练会保存分阶段耗时日志及汇总，覆盖准备、首次JIT/计算、训练、评估、快照、IO和保存验证。运行未结束也可分析，详见[训练耗时记录](experiments/torque200/TRAINING-TIMING.md)。
+
+腿力教师模式现已默认使用C++原生评估，GPU继续执行采样/PPO；每次评估读取当前训练参数，并保留分项指标与耗时日志。接入方式和实际整体收益见[训练评估接入](experiments/native_eval/docs/brax-training.md)及[短训练对照](experiments/native_eval/TRAINING-INTEGRATION-RESULTS.md)。
+
+当前腿力教师模式的新训练默认512个并行环境、batch512；已有模型续训继承保存的并行配置，最新模型已使用512。新默认通过120秒实际训练、保存恢复和最终模型站立评估，优化清单及使用/兼容规则见[默认运行配置](experiments/torque200/RUNTIME-DEFAULTS.md)。
+
+进一步定位采样和PPO内部开销，使用独立的[分阶段诊断](experiments/training_profile/README.md)。设备trace、编译和采集扰动分别记录；实测边界与优化优先级见[诊断结果](experiments/training_profile/RESULTS.md)。
+
+当前推荐“腿力＋轮扭矩（老师初始化）”`leg_force_bc`：腿为虚拟轴向力，经实时雅可比映射至关节扭矩，四个执行器全部是motor；先用可达的教师实际力/扭矩标签初始化，再接PPO。详见[腿力教师模式](experiments/torque200/FORCE-TEACHER.md)。
+
+此前“腿位置＋轮扭矩（老师初始化）”`wheel_torque_bc`保留为独立对照，它仍使用原版腿位置执行器，不能与腿力模型混用。详见[位置模式教师说明](experiments/torque200/WHEEL-TEACHER.md)。两者均支持同页开始、停止保存、续训和按需预览。
+
 ## 目录
 
 | 路径 | 说明 |
 |---|---|
 | `tenny.py`、`tenny/` | 统一入口（网页控制台 + CLI）与任务清单 `tenny/tasks.toml` |
 | `experiments/torque200/` | 全扭矩接口 200 Hz 独立实验（环境回归测试 + 短训练流水线），详见其中的 `README.md` |
+| `experiments/native_eval/` | 可复用 C++ 原生评估，独立构建与 Python/CLI 入口；[模块文档](experiments/native_eval/README.md) |
+| `experiments/training_profile/` | 独立采样/PPO诊断、GPU阶段归因和测量验收；[模块文档](experiments/training_profile/README.md) |
 | `reference/` | 参考项目的副本（见下） |
 | `docs/` | 文档（控制模式 `docs/CONTROL-MODES.md` 等） |
 | `tasks/` | 过程记录与辅助脚本 |

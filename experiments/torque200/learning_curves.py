@@ -229,14 +229,30 @@ def load_console_learning_data(run_dir: Path, mode: str) -> dict:
             if path.stat().st_size > 4 * 1024 * 1024:
                 raise ValueError("Live snapshot too large")
             return json.loads(path.read_text(encoding="utf8"), parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x)))
+        profile = {}
+        if mode == "leg_force_bc":
+            for name in ("status.json", "report.json"):
+                if (directory / name).is_file():
+                    value = read(name)
+                    if isinstance(value, dict):
+                        profile = value
+                        break
+            if (profile.get("bc_gate_passed") is False and profile.get("training_clock_started") is False
+                    and (profile.get("phase") == "failed" or profile.get("stage") == "teacher_gate_failed")):
+                return {"available": False, "metadata": {
+                    "message": "BC闭环站立验收未通过，本轮未进入PPO；没有PPO学习曲线。请查看准备阶段错误。"}, "points": []}
         config, ppo, events = read("env_config.json"), read("ppo_config.json"), read("progress.json")
         dt = config["ctrl_dt"]
         if dt != 1 / spec["control_hz"]:
             raise ValueError("Mode mismatch")
-        if spec["hybrid"]:
+        if spec["hybrid"] and not spec["teacher"]:
             policy = read("policy_metadata.json")
             if policy.get("action_mode") != spec["action_mode"] or policy.get("control_hz") != spec["control_hz"]:
                 raise ValueError("Hybrid action mode or frequency mismatch")
+        if spec["teacher"]:
+            policy = read("policy_metadata.json")
+            if policy.get("mode") != mode or policy.get("control_hz") != spec["control_hz"] or policy.get("actor_dim") != spec["obs_dim"]:
+                raise ValueError("Teacher student metadata mismatch")
         if not isinstance(events, list) or len(events) > 2000:
             raise ValueError("Invalid progress window")
         def number(value):
@@ -260,7 +276,9 @@ def load_console_learning_data(run_dir: Path, mode: str) -> dict:
             "episode_target_seconds": config["episode_length"] * dt,
             "eval_envs": ppo.get("num_eval_envs", 2), "point_count": len(points),
             "eval_point_count": sum(p["episode_seconds"] is not None for p in points),
-            "source": "控制台本轮训练记录", "limitations": [
+            "source": "站立阶段PPO记录（确定性站立评估）" if profile.get("training_profile") == "standing_v2" and profile.get("evaluation_policy") == "deterministic" else "控制台本轮训练记录",
+            "training_profile": profile.get("training_profile"), "evaluation_policy": profile.get("evaluation_policy"),
+            "limitations": (["本轮为站立阶段，评估使用确定性策略；不代表速度或转向任务已通过。"] if profile.get("training_profile") == "standing_v2" and profile.get("evaluation_policy") == "deterministic" else []) + [
                 "曲线最多显示最近2000个记录点；完整记录保存在本轮metrics.jsonl。",
                 "续训步数从本轮零点开始；不同运行不会拼接。",
                 "奖励与回合长度只使用实际评估，缺失值不会补造。",

@@ -26,7 +26,7 @@ a{color:var(--gold)}
 <script>
 const $ = s => document.querySelector(s);
 let job = null, since = 0, timer = null, knownJobs = [];
-const modeLabel = c => ({selected:'上次选择',original:'原版 · 100 Hz',torque200:'全扭矩 · 200 Hz',virtual_leg_force:'虚拟腿力',matched_envelope:'匹配包络对照',direct_torque:'直接扭矩对照'}[c] || c.replace(/^hybrid_(.*)_(100|200)$/, (_,mode,hz)=>modeLabel(mode)+' · '+hz+' Hz'));
+const modeLabel = c => ({selected:'上次选择',leg_force_bc:'推荐：腿力＋轮扭矩（老师初始化）· 100 Hz',original:'原版 · 100 Hz',wheel_torque_bc:'腿位置＋轮扭矩（老师初始化）· 100 Hz',torque200:'全扭矩 · 200 Hz',virtual_leg_force:'虚拟腿力',matched_envelope:'匹配包络对照',direct_torque:'直接扭矩对照'}[c] || c.replace(/^hybrid_(.*)_(100|200)$/, (_,mode,hz)=>modeLabel(mode)+' · '+hz+' Hz'));
 
 async function api(path, body) {
   const r = await fetch(path, body === undefined ? {} :

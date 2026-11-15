@@ -17,22 +17,64 @@ from control_modes import MODES, mode_spec
 from training_control import ControlError
 
 
+def select_teacher_sources(original_root):
+    """Select the reference environment before its first import; never swap modules."""
+    root = Path(original_root or Path.home() / "projects/tenny-reference").resolve()
+    source = root / "mujoco_legwheel_rl_public"
+    deployment = root / "mujoco_esp32_robot_deploy_public"
+    if not (source / "legwheel/__init__.py").is_file():
+        raise FileNotFoundError("Reference environment is unavailable for wheel-torque preview")
+    if not (deployment / "host/policy/rl_policy.py").is_file():
+        raise FileNotFoundError("Reference policy reader is unavailable for wheel-torque preview")
+    imported = sys.modules.get("legwheel")
+    if imported is not None and not Path(imported.__file__).resolve().is_relative_to(source):
+        raise RuntimeError("Wrong legwheel source is already imported; switch mode in a new process")
+    sys.path[:0] = [str(source), str(deployment)]
+    return root
+
+
+def select_torque_sources():
+    """Force students use the local torque environment, never the teacher's legwheel."""
+    source = Path(__file__).resolve().parent
+    if not (source / "legwheel/__init__.py").is_file():
+        raise FileNotFoundError("Torque environment is unavailable for force preview")
+    imported = sys.modules.get("legwheel")
+    if imported is not None and not Path(imported.__file__).resolve().is_relative_to(source / "legwheel"):
+        raise RuntimeError("Wrong legwheel source is already imported; switch mode in a new process")
+    sys.path.insert(0, str(source))
+    return source
+
+
 class Simulator:
     """Constructed only after an explicit request to open a valid policy."""
 
-    def __init__(self, mode):
+    def __init__(self, mode, original_root=None, experiment_config=None):
+        spec = mode_spec(mode)
+        if mode == "leg_force_bc":
+            select_torque_sources()
+        elif spec["teacher"]:
+            select_teacher_sources(original_root)
         import jax
         import mujoco
         import numpy as np
         from PIL import Image
-        from hybrid.env import HybridLegWheelRobot, hybrid_config
-        spec = mode_spec(mode)
         self.jax, self.mujoco, self.np, self.Image = jax, mujoco, np, Image
-        cfg = hybrid_config(spec["control_hz"])
+        if mode == "leg_force_bc":
+            from force_teacher.env import StudentEnv, student_config
+            cfg = student_config(experiment_config=experiment_config)
+            environment = StudentEnv
+        elif spec["teacher"]:
+            from wheel_teacher.env import StudentEnv, student_config
+            cfg = student_config()
+            environment = StudentEnv
+        else:
+            from hybrid.env import HybridLegWheelRobot, hybrid_config
+            cfg = hybrid_config(spec["control_hz"])
+            environment = lambda config: HybridLegWheelRobot(spec["action_mode"], config)
         cfg.noise_config.level = 0.0
         cfg.push_config.enable = False
         cfg.cmd_config.cmd_prob = 0.0
-        self.env = HybridLegWheelRobot(spec["action_mode"], cfg)
+        self.env = environment(cfg)
         self.initial = jax.jit(self.env.reset)(jax.random.PRNGKey(0))
         self.step = jax.jit(self.env.step)
         self.cfg = cfg
@@ -80,21 +122,50 @@ class Simulator:
         self.renderer.close()
 
 
-def load_saved(model, mode):
-    from hybrid.deployment import HybridPolicy
+def load_saved(model, mode, original_root=None):
     spec = mode_spec(mode)
-    actor = HybridPolicy(model["export_path"], Path(model["run_dir"]) / "policy_metadata.json",
-                         spec["action_mode"], spec["control_hz"])
-    return actor, dict(model_source="最近保存的混合动作模型", checkpoint=model["checkpoint"],
+    profile = {}
+    if mode == "leg_force_bc":
+        select_torque_sources()
+        from force_teacher.contract import verified_report
+        run = Path(model["run_dir"])
+        report = json.loads((run / "report.json").read_text(encoding="utf8"))
+        verified_report(run, report, original_root)
+        from force_teacher.options import options_from_metadata
+        profile = {"preview_training_profile": report.get("training_profile"),
+                   "preview_evaluation_policy": report.get("evaluation_policy"),
+                   "preview_experiment_config": options_from_metadata(json.loads((run / "policy_metadata.json").read_text(encoding="utf8")))}
+        from force_teacher.policy import ForcePolicy
+        actor = ForcePolicy(Path(report["export_path"]), run / "policy_metadata.json", original_root)
+        description = "最近保存的腿力＋轮扭矩模型"
+    elif spec["teacher"]:
+        root = select_teacher_sources(original_root)
+        from wheel_teacher.contract import verified_report
+        run = Path(model["run_dir"])
+        report = json.loads((run / "report.json").read_text(encoding="utf8"))
+        verified_report(run, report, root)
+        from host.policy.rl_policy import RL_Policy
+        actor = RL_Policy(path=Path(report["export_path"]))
+        description = "最近保存的腿位置＋轮扭矩模型"
+    else:
+        from hybrid.deployment import HybridPolicy
+        actor = HybridPolicy(model["export_path"], Path(model["run_dir"]) / "policy_metadata.json",
+                             spec["action_mode"], spec["control_hz"])
+        description = "最近保存的混合动作模型"
+    return actor, dict(model_source=description, checkpoint=model["checkpoint"], **profile,
                       model_run_id=model.get("run_id"),
                       preview_training_steps=model.get("actual_timesteps"), preview_kind="saved",
                       preview_synced_at=datetime.now(timezone.utc).isoformat())
 
 
 class Preview:
-    def __init__(self, mode, controller, simulator_factory=Simulator):
+    def __init__(self, mode, controller, simulator_factory=None, original_root=None):
         spec = mode_spec(mode)
-        self.mode, self.controller, self.factory = mode, controller, simulator_factory
+        position_teacher = spec["teacher"] and not spec["hybrid"]
+        self.original_root = original_root
+        self.mode, self.controller = mode, controller
+        self.factory = simulator_factory
+        self.simulator_config = None
         self.lock = threading.Condition()
         self.generation = 0
         self.pending = None
@@ -103,11 +174,15 @@ class Preview:
         self.reset_requested = False
         self.jpg = b""
         self.state = dict(mode=mode, control_hz=spec["control_hz"], ctrl_dt=1 / spec["control_hz"],
-            obs_dim=24, action_semantics=spec["action_mode"], frames=0, clients=0, fps=0.,
+            obs_dim=spec["obs_dim"], action_semantics="腿位置增量＋轮扭矩" if position_teacher else spec["action_mode"], frames=0, clients=0, fps=0.,
             suspended=True, paused=False, terminal=False, episode_seconds=0., resets=0,
-            actuator_inputs=[0.]*4, torques=[0.]*4, input_units=["N·m"]*4, switching=False,
-            model_source="尚未加载混合动作模型", checkpoint="", model_run_id=None,
+            actuator_inputs=[0.]*4, torques=[0.]*4, input_units=["rad", "rad", "N·m", "N·m"] if position_teacher else ["N·m"]*4, switching=False,
+            actuator_description="策略腿命令为虚拟伸展力（N）；下表显示映射后实际发送的执行器扭矩（N·m）。" if spec["action_mode"] == "virtual_leg_force" else "下表显示发送给执行器的控制输入及其单位。",
+            model_source="尚未加载腿位置＋轮扭矩模型" if position_teacher else "尚未加载腿力＋轮扭矩模型" if mode == "leg_force_bc" else "尚未加载混合动作模型", checkpoint="", model_run_id=None,
             preview_training_steps=None, preview_synced_at=None, preview_kind="saved",
+            preview_training_profile=None, preview_evaluation_policy=None,
+            preview_experiment_config=None,
+            preview_conditions="标称确定性预览 · 使用模型指令配置 · 训练扰动关闭" if mode == "leg_force_bc" else "零指令 · 无观测噪声 · 无外部推力",
             sync_status="idle", sync_error=None, error=None)
 
     def snapshot(self):
@@ -137,7 +212,7 @@ class Preview:
 
     def _resolve(self, request):
         if request["kind"] == "saved":
-            return load_saved(request["model"], self.mode)
+            return load_saved(request["model"], self.mode, self.original_root)
         from preview_sync import read_snapshot
         run = Path(request["run_dir"])
         response_path = run / "preview.response.json"
@@ -145,19 +220,29 @@ class Preview:
         if response.get("request_id") == request["request_id"]:
             if response.get("error"):
                 raise ValueError(response["error"])
-            loaded = read_snapshot(run / "preview-policy.npz", self.mode, request["request_id"])
+            loaded = read_snapshot(run / "preview-policy.npz", self.mode, request["request_id"], original_root=self.original_root)
             if loaded is not None:
                 actor, metadata = loaded
+                profile = {}
+                if self.mode == "leg_force_bc":
+                    profile = {"preview_training_profile": None, "preview_evaluation_policy": None,
+                               "preview_experiment_config": actor.experiment_config}
+                    try:
+                        status = json.loads((run / "status.json").read_text(encoding="utf8"))
+                        profile.update(preview_training_profile=status.get("training_profile"),
+                                       preview_evaluation_policy=status.get("evaluation_policy"))
+                    except (OSError, ValueError, AttributeError):
+                        pass  # Older runs do not attest a training profile.
                 return actor, dict(model_source="打开画面时同步的训练策略", checkpoint=str(run / "preview-policy.npz"),
                     model_run_id=metadata["run_id"], preview_training_steps=metadata["steps"],
-                    preview_synced_at=metadata["synced_at"], preview_kind="live")
+                    preview_synced_at=metadata["synced_at"], preview_kind="live", **profile)
         if time.monotonic() - request["started"] > 180:
             raise ValueError("等待策略同步超时；关闭后可重新打开，训练继续运行。")
         current = self.controller.status(self.mode)
         if not current.get("active") or current.get("run_dir") != request["run_dir"]:
             model = self.controller.latest(self.mode)
             if model and model.get("run_id") == request["run_id"]:
-                return load_saved(model, self.mode)
+                return load_saved(model, self.mode, self.original_root)
             raise ValueError("本轮已结束，尚无可用模型；请查看训练状态。")
         return None
 
@@ -174,8 +259,13 @@ class Preview:
                     with self.lock:
                         if generation != self.generation:
                             return
-                    if self.simulator is None:
-                        self.simulator = self.factory(self.mode)
+                    config = metadata.get("preview_experiment_config")
+                    if self.simulator is None or config != self.simulator_config:
+                        if self.simulator is not None:
+                            self.simulator.close()
+                        self.simulator = (self.factory(self.mode) if self.factory is not None else
+                                          Simulator(self.mode, self.original_root, config))
+                        self.simulator_config = config
                     self.simulator.reset()
                     with self.lock:
                         if generation != self.generation:
@@ -235,7 +325,7 @@ class Preview:
 class Console:
     def __init__(self, args, controller, preview=None):
         self.args, self.controller = args, controller
-        self.preview = preview or Preview(args.mode, controller)
+        self.preview = preview or Preview(args.mode, controller, original_root=getattr(args, "original_root", None))
         self.switch_mode = None
         self.control_lock = threading.Lock()
 
@@ -245,6 +335,11 @@ class Console:
         value.update(training=training, preview_available=bool(training.get("latest") or
             (training.get("active") and training.get("active_mode") == self.args.mode)),
             switching=self.switch_mode is not None)
+        if self.args.mode == "leg_force_bc":
+            from force_teacher.options import option_schema
+            schema = option_schema()
+            value.update(experiment_schema=schema, experiment_defaults=schema["defaults"],
+                         saved_experiment_config=(training.get("latest") or {}).get("experiment_config"))
         return value
 
     def training(self, request):
@@ -252,8 +347,22 @@ class Console:
             if self.switch_mode is not None:
                 raise ControlError("模式正在切换。")
             if request.get("action") == "start":
+                options = {}
+                config = request.get("experiment_config")
+                if self.args.mode != "leg_force_bc" and config is not None:
+                    raise ValueError("此模式不支持腿力实验配置；请切换到腿力＋轮扭矩。")
+                if self.args.mode == "leg_force_bc":
+                    if request.get("resume", False):
+                        if config is not None:
+                            raise ValueError("继续训练采用保存模型的配置，请勿提交新实验草稿。")
+                    else:
+                        from force_teacher.options import normalize_options
+                        try:
+                            options["experiment_config"] = normalize_options(config)
+                        except ValueError as exc:
+                            raise ValueError("实验配置无效：" + str(exc)) from exc
                 return self.controller.start(self.args.mode, duration_seconds=request.get("duration_seconds", 0),
-                    resume=request.get("resume", False), force_revalidate=request.get("force_revalidate", False))
+                    resume=request.get("resume", False), force_revalidate=request.get("force_revalidate", False), **options)
             if request.get("action") == "stop":
                 return self.controller.stop()
             raise ValueError("Unknown training action")
@@ -349,7 +458,7 @@ def make_handler(console):
                 return self.send({"error": "JSON required"}, 415)
             try:
                 size = int(self.headers.get("Content-Length", "0"))
-                if not 0 < size <= 1024:
+                if not 0 < size <= 8192:
                     raise ValueError("Invalid request size")
                 request = json.loads(self.rfile.read(size))
                 if not isinstance(request, dict):

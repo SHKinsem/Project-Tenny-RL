@@ -29,6 +29,7 @@ class ControlError(RuntimeError):
 
 MODES = frozenset(CONTROL_MODES)
 TERMINAL = frozenset({"completed", "stopped", "cancelled", "failed", "interrupted"})
+RUNNER_NAMES = frozenset({"console_train.py", "timed_console_train.py"})
 
 
 def _read(path: Path) -> dict[str, Any]:
@@ -57,6 +58,24 @@ def _mode(mode: str) -> str:
     return mode
 
 
+def resolve_experiment_config(mode, value=None, *, restore=None):
+    """Resolve before creating a run; restored weights retain their saved semantics."""
+    if mode != "leg_force_bc":
+        if value is not None:
+            raise ValueError("experiment_config is only supported for leg_force_bc")
+        return None
+    from force_teacher.options import normalize_options, options_from_metadata
+    requested = normalize_options(value) if value is not None else None
+    if restore is not None:
+        path = Path(restore).resolve().parent.parent / "policy_metadata.json"
+        metadata = json.loads(path.read_text(encoding="utf8"))
+        saved = options_from_metadata(metadata)
+        if requested is not None and requested != saved:
+            raise ValueError("Checkpoint experiment_config differs; changed experiments require a new run")
+        return saved
+    return requested if requested is not None else normalize_options()
+
+
 def _within(path: str | Path, root: Path) -> Path:
     candidate = Path(path)
     if not candidate.is_absolute():
@@ -73,7 +92,7 @@ class TrainingController:
         self.root = (Path(artifacts).resolve() / "console").resolve()
         self.original_root = Path(original_root).resolve()
         self.torque_root = Path(torque_root).resolve()
-        self.script = Path(script or Path(__file__).with_name("console_train.py")).resolve()
+        self.script = Path(script or Path(__file__).with_name("timed_console_train.py")).resolve()
         self.python_executable = str(python_executable or sys.executable)
         self.root.mkdir(parents=True, exist_ok=True)
         self._children: dict[int, subprocess.Popen] = {}
@@ -134,7 +153,7 @@ class TrainingController:
             script = str(Path(record.get("script", str(self.script))).resolve())
             # Exact argv boundaries defeat substring/prefix matches and reused PIDs.
             run_index = argv.index("--run-dir")
-            return (script in argv and Path(script).name == "console_train.py"
+            return (script in argv and Path(script).name in RUNNER_NAMES
                     and argv[run_index + 1] == str(run)
                     and record.get("process_start") in {None, started})
         except (ValueError, KeyError, IndexError):
@@ -181,7 +200,17 @@ class TrainingController:
             export = _within(report["export_path"], run)
             if not checkpoint.exists() or not export.exists():
                 return None
-            if mode_spec(mode)["hybrid"]:
+            if mode_spec(mode)["teacher"]:
+                if mode == "leg_force_bc":
+                    from force_teacher.contract import verified_report
+                else:
+                    from wheel_teacher.contract import verified_report
+                verified_report(run, report, self.original_root)
+                if mode == "leg_force_bc":
+                    from force_teacher.options import options_from_metadata
+                    report = {**report, "experiment_config": options_from_metadata(
+                        _read(run / "policy_metadata.json"))}
+            elif mode_spec(mode)["hybrid"]:
                 from hybrid.managed_training import verified_report, verification_signature
                 signature = verification_signature(run)
                 key = (str(run), mode)
@@ -217,7 +246,7 @@ class TrainingController:
         fingerprint = (directory_mtime, record.get("run_dir"), record.get("ended_at"), alive)
         # Hybrid contracts and artifact hashes must remain valid after source/file edits.
         # These checks happen only when selecting a saved model, not in training callbacks.
-        if mode_spec(mode)["hybrid"]:
+        if mode_spec(mode)["hybrid"] or mode == "wheel_torque_bc":
             cached = None
         else:
             cached = self._latest_cache.get(mode)
@@ -250,6 +279,8 @@ class TrainingController:
             state = {**record, **runner}
             # Runner data cannot redefine manager-owned identity or liveness.
             state.update({key: record.get(key) for key in ("mode", "run_dir", "pid")})
+            if selected == "leg_force_bc":
+                state["experiment_config"] = record.get("experiment_config")
             if not alive:
                 state["phase"] = record.get("phase", "interrupted")
                 if record.get("error"):
@@ -260,6 +291,7 @@ class TrainingController:
             state = {"mode": selected, "phase": "idle"}
             previous = self._recent(selected)
             if previous is not None:
+                state.update(_read(previous / "request.json"))
                 state.update(_read(previous / "status.json"))
                 state.update(mode=selected, run_dir=str(previous))
                 if state.get("phase") not in TERMINAL:
@@ -294,8 +326,10 @@ class TrainingController:
             return self._runs(mode, record if alive else None)
 
     def start(self, mode: str, duration_seconds: float = 0, resume: bool = False,
-              force_revalidate: bool = False) -> dict:
+              force_revalidate: bool = False, experiment_config=None) -> dict:
         _mode(mode)
+        # Strict type/range validation precedes locks, run directories and children.
+        requested_options = resolve_experiment_config(mode, experiment_config)
         if (isinstance(duration_seconds, bool) or not isinstance(duration_seconds, (float, int))
                 or not math.isfinite(duration_seconds) or not 0 <= duration_seconds <= 7 * 86400):
             raise ValueError("duration_seconds must be 0 (unlimited) or at most seven days")
@@ -303,8 +337,8 @@ class TrainingController:
             raise ValueError("resume must be a boolean")
         if not isinstance(force_revalidate, bool):
             raise ValueError("force_revalidate must be a boolean")
-        if not self.script.is_file() or self.script.name != "console_train.py":
-            raise ValueError("training script must be an existing console_train.py")
+        if not self.script.is_file() or self.script.name not in RUNNER_NAMES:
+            raise ValueError("training script must be an existing console_train.py or timed_console_train.py")
         with self._locked():
             record, _, alive = self._current()
             if alive:
@@ -313,19 +347,24 @@ class TrainingController:
             restore = self._latest(mode, record, False) if resume else None
             if resume and not restore:
                 raise ControlError("No verified checkpoint is available for this mode")
+            options = (resolve_experiment_config(mode, experiment_config,
+                       restore=restore["checkpoint"]) if restore else requested_options)
+            seed = options["seed"] if options is not None else 0
             if (self.root / mode).is_symlink():
                 raise ValueError("mode directory cannot be a symbolic link")
             run = self.root / mode / (datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ") + "_" + uuid.uuid4().hex[:8])
             run.mkdir(parents=True)
             request = {"mode": mode, "duration_seconds": duration_seconds, "resume": resume,
                        "force_revalidate": force_revalidate,
-                       "restore": restore["checkpoint"] if restore else None, "seed": 0, "preview_protocol": 1,
+                       "restore": restore["checkpoint"] if restore else None, "seed": seed, "preview_protocol": 1,
                        "created_at": datetime.now(timezone.utc).isoformat(), "run_dir": str(run)}
+            if options is not None:
+                request["experiment_config"] = options
             _write(run / "request.json", request)
             _write(run / "status.json", {**request, "phase": "preparing"})
             argv = [self.python_executable, str(self.script), "--mode", mode, "--run-dir", str(run),
                     "--original-root", str(self.original_root), "--torque-root", str(self.torque_root),
-                    "--duration-seconds", str(duration_seconds), "--seed", "0"]
+                    "--duration-seconds", str(duration_seconds), "--seed", str(seed)]
             if restore:
                 argv += ["--restore", restore["checkpoint"]]
             if force_revalidate:

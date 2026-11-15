@@ -1,12 +1,14 @@
 """Runner lifecycle tests: no ML imports, GPU, WSL, or training required."""
 import argparse
+from contextlib import nullcontext, redirect_stderr
+import io
 import importlib.util
 import json
 from pathlib import Path
 import sys
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 SCRIPT = Path(__file__).resolve().parents[1] / "console_train.py"
 spec = importlib.util.spec_from_file_location("console_train_under_test", SCRIPT)
@@ -60,6 +62,43 @@ class RunnerTests(unittest.TestCase):
         with self.assertRaisesRegex(runner.StopRequested, "wall_budget"):
             monitor.check_stop()
         self.assertEqual(self.read("status.json")["remaining_seconds"], 0)
+
+    def test_teacher_preparation_does_not_consume_ppo_budget(self):
+        self.args.mode = "wheel_torque_bc"
+        self.args.duration_seconds = 30.
+        monitor = self.monitor()
+        self.now[0] = 70.
+        monitor.check_stop()
+        self.assertEqual(monitor.remaining, 30.)
+        monitor.begin_training_clock()
+        self.assertEqual(monitor.state["preparation_seconds"], 70.)
+        self.now[0] = 100.
+        with self.assertRaisesRegex(runner.StopRequested, "wall_budget"):
+            monitor.check_stop()
+
+    def test_teacher_preparation_remains_cancellable(self):
+        self.args.mode = "wheel_torque_bc"
+        monitor = self.monitor()
+        (self.directory / "stop.request").write_text("{}")
+        with self.assertRaisesRegex(runner.StopRequested, "user_stop"):
+            monitor.check_stop()
+        self.assertFalse(monitor.training_clock_started)
+
+    def test_leg_force_preparation_preserves_full_twenty_minute_budget(self):
+        self.args.mode = "leg_force_bc"
+        self.args.duration_seconds = 1200.
+        monitor = self.monitor()
+        self.now[0] = 180.
+        monitor.check_stop()
+        self.assertFalse(monitor.training_clock_started)
+        self.assertEqual(monitor.remaining, 1200.)
+        monitor.begin_training_clock()
+        self.now[0] = 1379.
+        monitor.check_stop()
+        self.assertEqual(monitor.remaining, 1.)
+        self.now[0] = 1380.
+        with self.assertRaisesRegex(runner.StopRequested, "wall_budget"):
+            monitor.check_stop()
 
     def test_full_stream_and_bounded_window(self):
         monitor = self.monitor()
@@ -124,6 +163,77 @@ class RunnerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             runner.atomic_json(path, {"a": float("nan")})
         self.assertEqual(self.read("sample.json"), {"a": 2})
+
+    def force_cli(self, *extra):
+        return runner.parse_args(["--mode", "leg_force_bc", "--run-dir", str(self.directory), *extra])
+
+    def test_cli_option_file_is_normalized_and_seed_is_not_defaulted_over_it(self):
+        from force_teacher.options import normalize_options
+        path = self.directory / "options.json"
+        runner.atomic_json(path, {"seed": 47, "wheel_head": "residual", "fixed_normalization": False})
+        args = self.force_cli("--experiment-config", str(path))
+        self.assertEqual(args.seed, 47)
+        self.assertEqual(args.experiment_config, normalize_options(
+            dict(seed=47, wheel_head="residual", fixed_normalization=False)))
+        with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            self.force_cli("--experiment-config", str(path), "--seed", "0")
+
+    def test_seed_only_cli_is_folded_into_saved_experiment(self):
+        args = self.force_cli("--seed", "52")
+        self.assertEqual(args.seed, 52)
+        self.assertEqual(args.experiment_config["seed"], 52)
+
+    def test_option_file_and_run_request_cannot_disagree(self):
+        runner.atomic_json(self.directory / "request.json", {"experiment_config": {"seed": 5}})
+        path = self.directory / "options.json"
+        runner.atomic_json(path, {"seed": 6})
+        with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            self.force_cli("--experiment-config", str(path))
+
+    def test_option_file_wrong_mode_invalid_type_and_unknown_key_fail_before_monitor(self):
+        path = self.directory / "options.json"
+        for value in (None, [], {"bogus": True}, {"seed": True}):
+            path.write_text(json.dumps(value))
+            with self.subTest(value=value), redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                self.force_cli("--experiment-config", str(path))
+        runner.atomic_json(path, {})
+        with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            runner.parse_args(["--mode", "original", "--run-dir", str(self.directory),
+                               "--experiment-config", str(path)])
+        self.assertFalse((self.directory / "status.json").exists())
+
+    def test_direct_resume_reads_v3_metadata_and_rejects_new_head(self):
+        from force_teacher.options import legacy_options
+        checkpoint = self.directory / "saved" / "checkpoints" / "000000000100"
+        checkpoint.mkdir(parents=True)
+        runner.atomic_json(checkpoint.parent.parent / "policy_metadata.json", dict(mode="leg_force_bc",
+            teacher_schema="leg-force-reachable-teacher-bc-v3", policy_head="wheel_logit_residual_v1",
+            wheel_residual_scale=.05))
+        args = self.force_cli("--restore", str(checkpoint))
+        self.assertEqual(args.experiment_config, legacy_options())
+        path = self.directory / "options.json"
+        runner.atomic_json(path, {"wheel_head": "absolute"})
+        with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            self.force_cli("--restore", str(checkpoint), "--experiment-config", str(path))
+
+    def test_main_saves_options_and_status_before_training_and_preserves_request_fields(self):
+        runner.atomic_json(self.directory / "request.json", dict(experiment_config={"seed": 61}, created_at="preserved"))
+        def entered(args, monitor):
+            self.assertEqual(self.read("request.json")["experiment_config"], args.experiment_config)
+            self.assertEqual(self.read("status.json")["experiment_config"], args.experiment_config)
+            self.assertEqual(self.read("request.json")["created_at"], "preserved")
+            self.assertEqual(args.seed, 61)
+        with patch("hybrid.managed_training.runtime_locks", return_value=nullcontext()), \
+             patch.object(runner, "run_training", side_effect=entered):
+            runner.main(["--mode", "leg_force_bc", "--run-dir", str(self.directory)])
+
+    def test_adaptive_normalizer_reports_real_change_and_fixed_mode_rejects_it(self):
+        monitor = Mock()
+        runner.record_normalizer_change(monitor, .25, {"fixed_normalization": False})
+        monitor.publish.assert_called_with(ppo_normalizer_max_abs_change=.25)
+        with self.assertRaisesRegex(RuntimeError, "frozen"):
+            runner.record_normalizer_change(monitor, .25, {"fixed_normalization": True})
+        runner.record_normalizer_change(monitor, 0., {"fixed_normalization": True})
 
 
 if __name__ == "__main__":
