@@ -11,7 +11,7 @@
 
 ## 入口与验证
 - 统一入口：`python tenny.py`（网页）/ `list` / `run <任务> name=value`。设计与计划：`docs/superpowers/specs/`、`docs/superpowers/plans/`。
-- 在任何环境都能跑：`python -m unittest discover -s tests`（27 个，Linux 全过，Windows 跳过 1 个 POSIX 用例）；`bash -n` 检查 `*.sh`。
+- CPU、回环HTTP及shell验证先读[验证指南](docs/validation.md)，使用仓库测试入口与已验证的运行方式；测试数量和平台跳过以当次结果为准。
 - 训练/仿真类任务**只能在作者本机跑**：需要 WSL/Linux + GPU，以及按 `tasks/REPRODUCTION.md` 搭好的 `~/projects/tenny-reference`、`~/projects/tenny-torque200`。云端/新克隆里没有这些环境，也没有 `results/` 历史产物——不要声称跑过训练，改动训练脚本时用 `bash -n` 和代码审查验证，并在汇报里写明“未实机验证”。
 
 ## 已知待办（可选）
