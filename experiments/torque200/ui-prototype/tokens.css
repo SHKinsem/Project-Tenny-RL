@@ -1,0 +1,23 @@
+/* Local prototype: monochrome, with one restrained active-training accent. */
+:root {
+  --paper: #101010;
+  --ink: #ededed;
+  --ink-soft: #969696;
+  --line: #303030;
+  --accent: #ededed;
+  --c2: #c4c4c4;
+  --c3: #b5b5b5;
+  --c4: #ededed;
+  --c5: #999999;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --training-active: #8ab59b;
+  --text-value: 1.375rem;
+  --text-title: 1.25rem;
+  --text-section: 1.0625rem;
+  --text-group: .9375rem;
+  --text-plain: .875rem;
+  --text-meta: .75rem;
+  --dur-fast: 120ms;
+  --ease-out: ease-out;
+}

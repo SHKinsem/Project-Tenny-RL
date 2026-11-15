@@ -6,17 +6,17 @@
 @media(max-width:650px){main{padding:20px 14px 36px}header{align-items:flex-start;flex-direction:column;gap:10px}h1{font-size:24px}.charts{grid-template-columns:1fr}.metric{padding:12px}.metric strong{font-size:21px}.aside dl{display:block}.section-head{align-items:flex-start;flex-direction:column;gap:6px}.summary{min-height:0}.actions button{flex:1;padding:9px 10px;white-space:nowrap}}
 </style></head><body><main>
 <header><div><div class="eyebrow" id="mode-label">原参考机器人</div><h1>训练控制台</h1><p class="small">集中查看训练进度与学习曲线；每次打开画面，同步一次最新策略。</p></div><nav aria-label="页面导航"><a href="#live">实时画面</a><a href="#learning">学习曲线</a><a href="#performance">性能记录</a></nav></header>
-<section class="panel" style="margin-bottom:18px"><div class="actions" style="border:0"><button id="mode-original" onclick="switchMode('original')">原版：腿位置＋轮速度 · 100 Hz</button><button id="mode-torque200" onclick="switchMode('torque200')">全扭矩 · 200 Hz</button><button id="mode-hybrid" onclick="switchHybrid()">混合动作实验</button><label class="small">动作 <select id="hybrid-action" aria-label="混合动作" onchange="hybridChanged()"><option value="virtual_leg_force">腿力＋轮扭矩</option><option value="matched_envelope">匹配包络对照</option><option value="direct_torque">直接扭矩对照</option></select></label><label class="small">频率 <select id="hybrid-hz" aria-label="混合控制频率" onchange="hybridChanged()"><option value="100">100 Hz</option><option value="200">200 Hz</option></select></label><span class="small" id="mode-note">选择训练模式；训练与保存期间锁定模式。</span></div></section>
+<section class="panel" style="margin-bottom:18px"><div class="actions" style="border:0"><button class="primary" id="mode-leg_force_bc" onclick="switchMode('leg_force_bc')">推荐：腿力＋轮扭矩（老师初始化）· 站立阶段</button><button id="mode-original" onclick="switchMode('original')">原版：腿位置＋轮速度 · 100 Hz</button><button id="mode-wheel_torque_bc" onclick="switchMode('wheel_torque_bc')">腿位置＋轮扭矩（老师初始化）</button><button id="mode-torque200" onclick="switchMode('torque200')">全扭矩 · 200 Hz</button><button id="mode-hybrid" onclick="switchHybrid()">混合动作实验</button><label class="small">动作 <select id="hybrid-action" aria-label="混合动作" onchange="hybridChanged()"><option value="virtual_leg_force">腿力＋轮扭矩</option><option value="matched_envelope">匹配包络对照</option><option value="direct_torque">直接扭矩对照</option></select></label><label class="small">频率 <select id="hybrid-hz" aria-label="混合控制频率" onchange="hybridChanged()"><option value="100">100 Hz</option><option value="200">200 Hz</option></select></label><span class="small" id="mode-note">选择训练模式；训练与保存期间锁定模式。</span></div></section>
 <section class="panel training-run" style="padding:18px;margin-bottom:18px" aria-label="训练控制">
 <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><strong id="training-phase">正在读取训练状态</strong><strong id="training-countdown" style="color:var(--gold);font-variant-numeric:tabular-nums">—</strong></div>
-<div class="training-settings"><label>训练方式<select aria-label="训练方式" id="training-schedule" onchange="scheduleChanged()"><option value="timed">定时训练</option><option value="unlimited">不限时训练</option></select></label><label id="duration-field">时长（分钟）<input id="training-minutes" type="number" min="0.1" max="10080" step="0.1" value="15"></label><label id="force-field" hidden><span>准备检查</span><span><input type="checkbox" id="force-revalidate"> 强制重新验证</span></label><span class="small" id="training-config">128个并行环境 · GPU训练</span></div>
+<div class="training-settings"><label>训练方式<select aria-label="训练方式" id="training-schedule" onchange="scheduleChanged()"><option value="timed">定时训练</option><option value="unlimited">不限时训练</option></select></label><label id="duration-field">时长（分钟）<input id="training-minutes" type="number" min="0.1" max="10080" step="0.1" value="15"></label><label id="force-field" hidden><span>准备检查</span><span><input type="checkbox" id="force-revalidate"> 强制重新验证</span></label><span class="small" id="training-config">GPU训练</span></div>
 <div class="training-buttons"><button class="primary" id="training-start" onclick="trainingAction(false)" disabled>开始新训练</button><button id="training-resume" onclick="trainingAction(true)" disabled>从最近模型继续</button><button class="stop" id="training-stop" onclick="stopTraining()" disabled>停止并保存</button></div>
 <progress id="training-progress" value="0" max="900" style="width:100%;height:7px;accent-color:var(--green)"></progress><p id="training-detail" class="small">正在连接…</p><p id="training-message" class="small" role="status" aria-live="polite"></p>
-<details><summary>保存位置与继续训练说明</summary><p id="run-files">开始后自动创建独立运行目录。</p><p>混合动作先完成或复用准备检查，再开始训练计时（包含训练编译与评估）；原版计时包含初始化。到时或手动停止后，等待当前计算段结束并保存验证。关闭网页不停止训练。从最近模型继续会加载网络与观测归一化参数，并重建优化器；已有结果保留。</p></details></section>
+<details><summary>保存位置与继续训练说明</summary><p id="run-files">开始后自动创建独立运行目录。</p><p>混合动作先完成或复用准备检查；老师初始化模式先采集、拟合并核对学生，再开始PPO计时（包含训练编译与评估）；原版计时包含初始化。到时或手动停止后，等待当前计算段结束并保存验证。关闭网页不停止训练。从最近模型继续会加载网络与观测归一化参数，并重建优化器；已有结果保留。</p></details></section>
 <div class="metrics" aria-label="最新保存的训练指标"><div class="metric"><span>已记录训练步数</span><strong id="metric-steps">—</strong><small>当前所选运行</small></div><div class="metric"><span>平均回合持续时间</span><strong id="metric-duration">—</strong><small>完整回合目标 6 秒</small></div><div class="metric"><span>平均回合奖励</span><strong id="metric-reward">—</strong><small>观察趋势，不只看单次值</small></div><div class="metric"><span>记录点 / 每次评估规模</span><strong id="metric-points">—</strong><small>小样本，尚未通过稳定平衡验收</small></div></div>
 <div id="live" class="section-head"><h2>实时仿真</h2><span class="badge">展示 1 个机器人副本</span></div>
 <div class="live-grid"><div><section class="panel"><div class="video"><img id="simulation-image" alt="机器人实时仿真画面"><div class="video-overlay" id="view-off"><span id="view-title">画面计算已关闭</span><small id="view-detail">打开时同步一次最新策略；曲线继续更新</small></div></div><div class="actions"><button id="pause" disabled onclick="control('pause')">暂停</button><button onclick="control('reset')">重置回合</button><button id="display" onclick="control('resume')">开启画面计算</button><button id="reload-model" onclick="reloadModel()" disabled hidden>载入最新模型</button></div></section><div class="connection small"><span id="message" role="status">正在连接仿真…</span><span id="control-rate">正在读取控制频率</span></div><div class="note" id="model-note">正在读取模型来源…</div></div>
-<aside class="panel aside"><dl><div class="stat"><dt>展示状态</dt><dd id="status">连接中</dd></div><div class="stat"><dt>当前回合 / 重置</dt><dd id="episode">—</dd></div><div class="stat"><dt>显示帧率</dt><dd id="fps">—</dd></div><div class="stat"><dt>控制周期</dt><dd id="control-period">—</dd></div></dl><h3 class="torque-title">执行器输入</h3><table id="torques" aria-label="四路执行器输入与单位"></table><p class="small">零指令 · 无观测噪声 · 无外部推力</p><details><summary>当前模型</summary><p id="model" class="small">—</p></details></aside></div>
+<aside class="panel aside"><dl><div class="stat"><dt>展示状态</dt><dd id="status">连接中</dd></div><div class="stat"><dt>当前回合 / 重置</dt><dd id="episode">—</dd></div><div class="stat"><dt>显示帧率</dt><dd id="fps">—</dd></div><div class="stat"><dt>控制周期</dt><dd id="control-period">—</dd></div></dl><h3 class="torque-title">执行器输入</h3><p class="small" id="actuator-description">下表显示发送给执行器的控制输入及其单位。</p><table id="torques" aria-label="四路执行器输入与单位"></table><p class="small">零指令 · 无观测噪声 · 无外部推力</p><details><summary>当前模型</summary><p id="model" class="small">—</p></details></aside></div>
 <div id="learning" class="section-head"><h2>学习曲线</h2><span id="learning-status" class="small">正在读取保存记录…</span></div><div class="notice" id="context">加载中</div>
 <div class="charts"><section class="panel chart-card"><h3>平均回合持续时间</h3><div class="summary" id="episode-summary"></div><div class="chart" id="episode-chart"></div><p class="legend">接近 6 秒完整回合是观察目标。均值变长不等于已经获得稳定成功率。</p></section><section class="panel chart-card"><h3>平均回合奖励</h3><div class="summary" id="reward-summary"></div><div class="chart" id="reward-chart"></div><p class="legend">同一奖励定义下观察趋势；回合长度、随机指令也会影响总奖励。</p></section><section class="panel chart-card"><h3>Value Loss · 价值预测误差</h3><div class="summary" id="value-summary"></div><div class="chart" id="value-chart"></div><p class="legend">用于检查价值网络的拟合情况，不能单独衡量机器人的平衡能力。</p></section><section class="panel chart-card"><h3>Policy Loss · 策略优化目标</h3><div class="summary" id="policy-summary"></div><div class="chart" id="policy-chart"></div><p class="legend">可能为负并上下波动。两种 Loss 使用各自的纵轴。</p></section></div>
 <div class="footer-grid"><section id="performance" class="panel"><h3>显示开关的性能记录</h3><p id="benchmark" class="small">正在读取已保存的对照结果…</p><p class="small">关闭画面计算会停止展示用的推理、物理仿真与渲染，指标和曲线仍可读取。</p></section><section class="panel"><details><summary>数据范围与读图说明</summary><ul id="limits"></ul><div id="source"></div></details><p class="small">曲线每 10 秒读取本轮记录；画面关闭仍持续更新。不同运行的数据不会拼接。</p></section></div><footer>仿真画面与训练评估的条件不同；评估改善以曲线和后续独立测试为准。</footer>
@@ -26,8 +26,9 @@
 let latest={}, pendingMode=null, trainingBusy=false;
 const el=id=>document.getElementById(id);
 const actionNames={virtual_leg_force:'腿力＋轮扭矩',matched_envelope:'匹配包络对照',direct_torque:'直接扭矩对照'};
+function teacherMode(mode=latest.mode){return mode==='wheel_torque_bc'||mode==='leg_force_bc';}
 function hybridMode(mode=latest.mode){return typeof mode==='string'&&mode.startsWith('hybrid_');}
-function modeLabel(mode){if(mode==='original')return '原版：腿位置＋轮速度 · 100 Hz';if(mode==='torque200')return '全扭矩 · 200 Hz';if(hybridMode(mode)){const parts=mode.slice(7).split('_'),hz=parts.pop();return (actionNames[parts.join('_')]||'混合动作')+' · '+hz+' Hz';}return '正在读取模式';}
+function modeLabel(mode){if(mode==='original')return '原版：腿位置＋轮速度 · 100 Hz';if(mode==='torque200')return '全扭矩 · 200 Hz';if(mode==='leg_force_bc')return '腿力＋轮扭矩（老师初始化）· 100 Hz';if(mode==='wheel_torque_bc')return '腿位置＋轮扭矩（老师初始化）· 100 Hz';if(hybridMode(mode)){const parts=mode.slice(7).split('_'),hz=parts.pop();return (actionNames[parts.join('_')]||'混合动作')+' · '+hz+' Hz';}return '正在读取模式';}
 function scheduleChanged(){el('duration-field').hidden=el('training-schedule').value==='unlimited';}
 function clockText(seconds){const n=Math.max(0,Math.floor(seconds));return (n>=3600?Math.floor(n/3600)+':':'')+Math.floor(n%3600/60).toString().padStart(2,'0')+':'+(n%60).toString().padStart(2,'0');}
 async function request(path,payload){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});let body={};try{body=await r.json()}catch(e){}if(!r.ok)throw Error(body.error||('请求失败（'+r.status+'）'));return body;}
@@ -41,25 +42,31 @@ async function trainingAction(resume){
 async function stopTraining(){if(trainingBusy)return;trainingBusy=true;renderTraining();try{await request('/training',{action:'stop'});el('training-message').textContent='已请求停止；准备阶段会取消，训练阶段会等待当前计算段结束并保存。';}catch(e){el('training-message').textContent=e.message;}finally{trainingBusy=false;await refresh();}}
 function switchHybrid(){return switchMode('hybrid_'+el('hybrid-action').value+'_'+el('hybrid-hz').value);}
 function hybridChanged(){if(hybridMode())switchHybrid();}
-function lockModes(disabled){for(const id of ['mode-original','mode-torque200','mode-hybrid','hybrid-action','hybrid-hz'])el(id).disabled=disabled;}
+function lockModes(disabled){for(const id of ['mode-leg_force_bc','mode-original','mode-wheel_torque_bc','mode-torque200','mode-hybrid','hybrid-action','hybrid-hz'])el(id).disabled=disabled;}
 async function switchMode(mode){if(pendingMode||latest.mode===mode||latest.training?.active)return;pendingMode=mode;el('mode-note').textContent='正在加载模式…';el('simulation-image').removeAttribute('src');el('view-off').hidden=false;lockModes(true);renderTraining();try{await request('/control',{action:'switch-mode',mode});}catch(e){pendingMode=null;el('mode-note').textContent=e.message;renderTraining();}}
 async function reloadModel(){if(pendingMode||latest.training?.active)return;pendingMode=latest.mode;el('simulation-image').removeAttribute('src');el('view-off').hidden=false;try{await request('/control',{action:'reload-model'});}catch(e){pendingMode=null;el('mode-note').textContent=e.message;}}
 async function control(action){try{await request('/control',{action});await refresh()}catch(e){el('message').textContent='控制失败：'+e.message}}
 function renderTraining(){
- const t=latest.training||{},active=!!t.active,hybrid=hybridMode();
- const labels={idle:'等待开始',preparing:'准备检查',training:'GPU训练中',stopping:'正在停止 · 等待当前计算完成',saving:'正在保存与验证',exporting:'正在导出模型',verifying:'正在核对模型',completed:'已停止 · 模型已保存',stopped:'已停止 · 模型已保存',failed:'训练进程已停止 · 请查看错误',cancelled:'准备阶段已取消',interrupted:'训练已中断 · 文件已保留'};
- const preparing=hybrid&&t.training_clock_started===false;
+ const t=latest.training||{},active=!!t.active,hybrid=hybridMode(),teacher=teacherMode();
+ const labels={idle:'等待开始',preparing:'准备检查',teacher_collect:'正在采集老师示范',teacher_fit:'正在学习老师示范',teacher_verify:'正在核对初始化模型',teacher_gate:'BC闭环站立验收',teacher_gate_failed:'BC闭环验收失败 · 未进入PPO',training:'GPU训练中',stopping:'正在停止 · 等待当前计算完成',saving:'正在保存与验证',exporting:'正在导出模型',verifying:'正在核对模型',completed:'已停止 · 模型已保存',stopped:'已停止 · 模型已保存',failed:'训练进程已停止 · 请查看错误',cancelled:'准备阶段已取消',interrupted:'训练已中断 · 文件已保留'};
+ const preparing=active&&(hybrid||teacher)&&t.training_clock_started===false;
+ const gateBlocked=latest.mode==='leg_force_bc'&&t.bc_gate_passed===false&&t.training_clock_started===false&&(t.phase==='failed'||t.stage==='teacher_gate_failed');
+ const standing=t.training_profile==='standing_v2'&&t.evaluation_policy==='deterministic';
  const elapsed=preparing?0:(t.elapsed_seconds||0),duration=t.duration_seconds||0;
  const overdue=active&&!preparing&&duration>0&&elapsed>=duration&&!['saving','exporting','verifying','completed'].includes(t.phase);
- el('training-phase').textContent=overdue?'已到时 · 等待当前计算段结束':(labels[t.phase]||'正在连接');
+ el('training-phase').textContent=gateBlocked?'BC闭环验收失败 · 未进入PPO':overdue?'已到时 · 等待当前计算段结束':(teacher&&preparing&&labels[t.stage]?labels[t.stage]:labels[t.phase]||'正在连接');
  if(active){el('training-schedule').value=duration?'timed':'unlimited';if(duration)el('training-minutes').value=duration/60;scheduleChanged();}
  el('training-countdown').textContent=preparing?'准备 '+clockText(t.preparation_seconds||t.elapsed_seconds||0):active?(duration?'剩余 '+clockText(duration-elapsed):'已训练 '+clockText(elapsed)):(t.run_id?'用时 '+clockText(elapsed):'—');
  const progress=el('training-progress');if(active&&(!duration||preparing))progress.removeAttribute('value');else{progress.max=duration||1;progress.value=duration?Math.min(duration,elapsed):0;}
  let detail=t.error||((overdue||['stopping','saving','exporting','verifying'].includes(t.phase))?'等待当前计算段完成，已有结果保留。':active?'真实评估完成后更新曲线；页面每10秒读取记录。':'选择训练方式，开始新训练或从最近模型继续。');
- if(preparing)detail=t.preparation_message||'正在核对已有检查；首次运行或配置变化时自动完整验证。训练计时尚未开始。';
+ if(preparing&&!t.error)detail=t.preparation_message||(teacher?'先采集老师示范并学习初始化，再开始PPO；训练计时尚未开始。':'正在核对已有检查；首次运行或配置变化时自动完整验证。训练计时尚未开始。');
+ if(teacher&&!active&&!t.error)detail='新训练先用老师示范初始化，再进行PPO；继续训练直接恢复学生模型，不重复初始化。短验通过不代表已经学会平衡。';
+ if(gateBlocked)detail='本轮在准备阶段停止，未进入PPO。'+(t.error||t.preparation_message||'BC闭环站立验收未通过。');
+ if(standing&&!gateBlocked)detail='站立阶段 · 确定性评估。'+detail;
  const cache=t.readiness_cache_hit===true?'已复用准备检查 · ':t.readiness_cache_hit===false?'本轮执行完整准备检查 · ':'';
  el('training-detail').textContent=cache+(t.run_id?'本轮 '+Number(t.steps||0).toLocaleString()+' 环境步 · ':'')+detail;
- el('training-config').textContent='128个并行环境 · '+modeLabel(latest.mode)+' · GPU训练';
+ el('training-config').textContent=Number(t.num_envs||t.latest?.num_envs||(latest.mode==='leg_force_bc'?512:128)).toLocaleString()+'个并行环境 · '+modeLabel(latest.mode)+(standing?' · 站立阶段 · 确定性评估':'')+' · GPU训练';
+ if(latest.mode==='leg_force_bc'&&!pendingMode)el('mode-note').textContent='新版新训练采用站立阶段；旧模型保留，继续训练须匹配当前版本。';
  el('force-field').hidden=!hybrid;el('force-revalidate').disabled=active||trainingBusy||!!pendingMode;
  el('training-start').disabled=trainingBusy||active||!!pendingMode;
  el('training-resume').disabled=trainingBusy||active||!!pendingMode||!t.can_resume;
@@ -74,13 +81,14 @@ async function refresh(){
   const previousMode=latest.mode;latest=await r.json();
   if(pendingMode&&(latest.mode!==pendingMode||latest.switching))return;
   if(pendingMode){pendingMode=null;el('mode-note').textContent='已加载所选模式 · 画面默认关闭。';}
-  for(const name of ['original','torque200'])el('mode-'+name).setAttribute('aria-pressed',String(latest.mode===name));
+  for(const name of ['leg_force_bc','original','wheel_torque_bc','torque200'])el('mode-'+name).setAttribute('aria-pressed',String(latest.mode===name));
   el('mode-hybrid').setAttribute('aria-pressed',String(hybridMode()));
   if(hybridMode()){const parts=latest.mode.slice(7).split('_');el('hybrid-hz').value=parts.pop();el('hybrid-action').value=parts.join('_');}
   el('mode-label').textContent=modeLabel(latest.mode);
   el('control-rate').textContent=latest.control_hz+' Hz 控制 · 20 fps 显示';el('control-period').textContent=(latest.ctrl_dt*1000).toFixed(0)+' ms';
   const syncing=latest.sync_status==='pending',previewStep=latest.preview_training_steps;
   el('model-note').textContent=latest.model_source+' · '+latest.obs_dim+'维观测。'+(latest.model_run_id?'运行 '+latest.model_run_id+'；':'')+(previewStep!=null?'本轮 '+Number(previewStep).toLocaleString()+' 环境步；':'')+(latest.preview_synced_at?'同步时间 '+new Date(latest.preview_synced_at).toLocaleTimeString()+'。':'')+'每次打开同步一次，观看期间保持此版本。';
+  if(latest.mode==='leg_force_bc'&&latest.checkpoint)el('model-note').textContent+=(latest.preview_training_profile==='standing_v2'?' 该展示模型来自新版站立阶段。':' 该展示模型未记录新版站立阶段，不能当作新版站立成果。');
   if(previousMode!==latest.mode)update();
   const image=el('simulation-image');if(latest.suspended)image.removeAttribute('src');else if(!image.hasAttribute('src'))image.src='/stream.mjpg?t='+Date.now();
   el('status').textContent=latest.error?'运行出错':syncing?'正在准备最新策略':latest.sync_error?'同步未完成':latest.suspended?'画面计算已关闭':latest.paused?'已暂停':latest.terminal?'回合结束 / 等待重置':'运行中';
@@ -93,6 +101,7 @@ async function refresh(){
   el('display').setAttribute('aria-pressed',String(!latest.suspended||syncing));
   el('episode').textContent=latest.episode_seconds.toFixed(3)+' 秒 / '+latest.resets+' 次';el('fps').textContent=latest.fps.toFixed(1)+' / 20 fps';
   const checkpoint=latest.checkpoint||'';el('model').textContent=latest.model_source+(checkpoint?' · '+checkpoint.split('/').slice(-4).join(' / '):'');el('model').title=checkpoint;
+  el('actuator-description').textContent=latest.actuator_description||'下表显示发送给执行器的控制输入及其单位。';
   el('torques').replaceChildren(...(latest.actuator_inputs||latest.torques).map((n,i)=>{const row=document.createElement('tr'),a=document.createElement('td'),b=document.createElement('td');a.textContent=['左腿','右腿','左轮','右轮'][i];b.textContent=n.toFixed(5)+' '+latest.input_units[i];row.append(a,b);return row}));
   el('pause').textContent=latest.paused?'继续画面':'暂停画面';el('pause').onclick=()=>control(latest.paused?'unpause':'pause');
   el('display').textContent=syncing?'取消开启画面':latest.suspended?'开启画面并同步':'关闭画面计算';el('display').onclick=()=>control(syncing||!latest.suspended?'suspend':'resume');

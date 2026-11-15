@@ -42,7 +42,7 @@ class RunMonitor:
         self.events = deque(maxlen=2000)
         self.total_events = 0
         self.loss_names = set()
-        self.training_clock_started = not mode_spec(args.mode)["hybrid"]
+        self.training_clock_started = not (mode_spec(args.mode)["hybrid"] or mode_spec(args.mode)["teacher"])
         started = datetime.now(timezone.utc)
         self.state = dict(
             mode=args.mode, run_id=self.output.name, run_dir=str(self.output),
@@ -148,8 +148,11 @@ def validate_restore_metadata(checkpoint, mode, obs_dim):
 def run_training(args, monitor):
     spec = mode_spec(args.mode)
     # Select source before the first ML import; the web server's CPU env is not used.
+    teacher_mode = spec["teacher"]
+    position_teacher = args.mode == "wheel_torque_bc"
+    force_teacher = args.mode == "leg_force_bc"
     source = (args.original_root / "mujoco_legwheel_rl_public"
-              if args.mode == "original" else args.torque_root / "src")
+              if args.mode == "original" or position_teacher else args.torque_root / "src")
     deploy_source = args.original_root / "mujoco_esp32_robot_deploy_public"
     sys.path[:0] = [str(source), str(deploy_source)]
     monitor.check_stop()
@@ -180,7 +183,20 @@ def run_training(args, monitor):
     monitor.publish(stage="environment_setup", devices=[str(d) for d in devices],
                     source=str(Path(legwheel.__file__).resolve()))
     monitor.check_stop()
-    if spec["hybrid"]:
+    if teacher_mode:
+        if force_teacher:
+            from force_teacher.env import StudentEnv, student_config
+            from force_teacher.contract import metadata, restore_guard
+            from force_teacher.policy import export_params
+        else:
+            from wheel_teacher.env import StudentEnv, student_config
+            from wheel_teacher.contract import metadata, restore_guard
+        cfg = student_config()
+        contract = metadata(args.original_root)
+        atomic_json(args.run_dir / "policy_metadata.json", contract)
+        if args.restore:
+            restore_guard(args.restore, args.original_root)
+    elif spec["hybrid"]:
         from hybrid.env import HybridLegWheelRobot, hybrid_config
         from hybrid.core import metadata, read_geometry, scan_geometry, write_json
         cfg = hybrid_config(spec["control_hz"])
@@ -192,12 +208,12 @@ def run_training(args, monitor):
     else:
         cfg = default_config()  # Preserve the original environment semantics.
     overrides = (dict(batch_size=8, num_minibatches=16, unroll_length=75,
-                      num_updates_per_batch=4) if args.mode == "original" else
+                      num_updates_per_batch=4) if args.mode == "original" or position_teacher else
                  dict(batch_size=128, num_minibatches=1, unroll_length=16,
                       num_updates_per_batch=1))
     # Hundreds of millions of callback epochs, with no finite UI event limit.
     # Torque uses four training steps/epoch (8192 env steps), original one (9600).
-    epoch_steps = 9600 if args.mode == "original" else 8192
+    epoch_steps = 9600 if args.mode == "original" or position_teacher else 8192
     epochs = 100_000_000
     ppo_cfg = get_ppo_config(cfg, num_evals=epochs + 1,
                             maxstep_candidate=epoch_steps * epochs,
@@ -213,7 +229,14 @@ def run_training(args, monitor):
         ppo_cfg.gae_lambda = contract["gae_lambda"]
     ppo_cfg.network_factory.policy_hidden_layer_sizes = [64, 64]
     ppo_cfg.network_factory.value_hidden_layer_sizes = [512, 512, 512, 512]
-    ppo_cfg.num_eval_envs = 2
+    ppo_cfg.num_eval_envs = 8 if force_teacher else 2
+    if force_teacher:
+        from force_teacher.ppo import configure_ppo
+        configure_ppo(ppo_cfg)
+        monitor.publish(training_profile="standing_v2", evaluation_policy="deterministic",
+                        normalization_policy="fixed_bc", policy_head=contract["policy_head"],
+                        eval_envs=ppo_cfg.num_eval_envs,
+                        evaluation_scope="Nominal stationary deterministic evaluation; parallel resets are identical")
     ppo_cfg.save_checkpoint_path = None  # Custom 300-second/final saves.
     if args.restore:
         ppo_cfg.restore_checkpoint_path = str(args.restore)
@@ -221,7 +244,14 @@ def run_training(args, monitor):
         raise AssertionError("Expected exactly 128 training environments")
     atomic_json(args.run_dir / "env_config.json", json.loads(cfg.to_json_best_effort()))
     atomic_json(args.run_dir / "ppo_config.json", json.loads(ppo_cfg.to_json_best_effort()))
-    if spec["hybrid"]:
+    if teacher_mode:
+        environments = dict(env=StudentEnv(config=cfg), eval_env=StudentEnv(config=student_config()))
+        if force_teacher:
+            from force_teacher.ppo import train_student, normalizer_max_abs_change, restore_fixed_normalizer
+        else:
+            from wheel_teacher.ppo import train_student
+        train_ppo = train_student
+    elif spec["hybrid"]:
         from hybrid.managed_training import environment_pair
         environments = environment_pair(args.mode, cfg, LegWheelRobot,
                                         HybridLegWheelRobot, hybrid_config)
@@ -232,13 +262,16 @@ def run_training(args, monitor):
     sample = jax.jit(env.reset)(jax.random.PRNGKey(args.seed))
     observation_sizes = {key: int(value.shape[-1]) for key, value in sample.obs.items()}
     obs_dim = observation_sizes["state"]
-    expected_dim = 26 if args.mode == "original" else 24
+    expected_dim = spec["obs_dim"]
     if obs_dim != expected_dim:
         raise ValueError(f"Unexpected actual actor observation dimension {obs_dim}")
     monitor.publish(control_hz=1.0 / cfg.ctrl_dt, obs_dim=obs_dim,
                     observation_sizes=observation_sizes, action_mode=spec["action_mode"])
     monitor.check_stop()
-    network_factory = partial(ppo_networks.make_ppo_networks, **dict(ppo_cfg.network_factory))
+    network_builder = ppo_networks.make_ppo_networks
+    if force_teacher:
+        from force_teacher.networks import make_ppo_networks as network_builder
+    network_factory = partial(network_builder, **dict(ppo_cfg.network_factory))
     # Do not call load_config: its optional initializer=None decoding is broken.
     network_config = ppo_checkpoint.network_config(
         observation_sizes, env.action_size, True, network_factory)
@@ -247,10 +280,14 @@ def run_training(args, monitor):
         preprocess_observations_fn=running_statistics.normalize)
     make_policy = ppo_networks.make_inference_fn(inference_network)
     latest = None
+    initial_params = None
+    bc_report = None
     if args.restore:
         monitor.publish(stage="loading_checkpoint")
         validate_restore_metadata(args.restore, args.mode, obs_dim)
         restored = load(str(args.restore))
+        if force_teacher:
+            restored[0] = restore_fixed_normalizer(restored[0])
         for key, size in observation_sizes.items():
             if np.asarray(restored[0].mean[key]).shape != (size,):
                 raise ValueError(f"Checkpoint normalization shape mismatch: {key}")
@@ -269,8 +306,23 @@ def run_training(args, monitor):
         # Also reject nonfinite normalization, critic and exploration leaves.
         check_parameter_trees(restored, restored)
         latest = (0, restored, make_policy)
+    elif teacher_mode:
+        if force_teacher:
+            from force_teacher.pretrain import prepare
+        else:
+            from wheel_teacher.pretrain import prepare
+        prepared = prepare(args, monitor, env, ppo_cfg)
+        initial_params, bc_report = prepared["params"], prepared["report"]
+        check_parameter_trees(initial_params, initial_params)
+        latest = (0, initial_params, make_policy)
+        monitor.publish(teacher_pretraining=bc_report)
+    reference_normalizer = latest[1][0] if force_teacher and latest is not None else None
+    if teacher_mode:
+        monitor.check_stop()
+        monitor.begin_training_clock()
     from preview_sync import SnapshotPublisher
-    preview_publisher = SnapshotPublisher(args.run_dir, args.mode)
+    preview_publisher = (SnapshotPublisher(args.run_dir, args.mode, original_root=args.original_root)
+                         if teacher_mode else SnapshotPublisher(args.run_dir, args.mode))
 
     def service_preview():
         if latest is not None:
@@ -298,6 +350,17 @@ def run_training(args, monitor):
         # Copy first: a stop arriving during the just-completed epoch must retain it.
         cpu = jax.tree.map(lambda x: np.asarray(x).copy(), jax.device_get(params))
         latest = (int(steps), cpu, factory)
+        if force_teacher:
+            norm_error = normalizer_max_abs_change(reference_normalizer, cpu[0])
+            monitor.publish(ppo_normalizer_max_abs_change=norm_error)
+            if norm_error != 0.0:
+                raise RuntimeError("Standing PPO changed its frozen observation normalization")
+        if teacher_mode and initial_params is not None and int(steps) == 0:
+            same = all(np.array_equal(a, b) for a, b in zip(
+                jax.tree.leaves(initial_params[1]), jax.tree.leaves(cpu[1]), strict=True))
+            monitor.publish(ppo_initial_actor_matches_bc=same)
+            if not same:
+                raise RuntimeError("PPO did not start from the fitted teacher-initialized actor")
         service_preview()
         monitor.event(steps, {})
         monitor.publish(phase="training", stage="optimization")
@@ -337,8 +400,9 @@ def run_training(args, monitor):
         monitor.check_stop()
         monitor.publish(phase="training", stage="compiling")
         with patch.object(acting.Evaluator, "run_evaluation", scheduled_eval):
+            initialization = {"params": initial_params} if initial_params is not None else {}
             factory, params, _ = train_ppo(
-                **environments, env_cfg=cfg, ppo_params=ppo_cfg, progress_fn=progress)
+                **environments, env_cfg=cfg, ppo_params=ppo_cfg, progress_fn=progress, **initialization)
         capture(monitor.state["steps"], factory, params)
         stop_reason = "step_limit"
     except StopRequested as exc:
@@ -365,6 +429,8 @@ def run_training(args, monitor):
     monitor.publish(checkpoint=str(checkpoint))
     save_cpu_checkpoint(params, str(args.run_dir))
     recovered = load(str(checkpoint))
+    if force_teacher:
+        recovered[0] = restore_fixed_normalizer(recovered[0])
     checks = check_parameter_trees(params, recovered)
     checks["finite_training_losses_checked"] = sorted(monitor.loss_names)
     export_path = args.run_dir / "policy.cpp.txt"
@@ -373,10 +439,15 @@ def run_training(args, monitor):
         from hybrid.core import digest_file, digest_tree
         from hybrid.deployment import HybridPolicy
         contract["export_sha256"] = digest_file(export_path)
-        write_json(args.run_dir / "policy_metadata.json", contract)
-        deployed = HybridPolicy(export_path, args.run_dir / "policy_metadata.json",
-                                expected_mode=spec["action_mode"], expected_control_hz=spec["control_hz"])
-    elif args.mode == "original":
+        atomic_json(args.run_dir / "policy_metadata.json", contract)
+        if force_teacher:
+            from force_teacher.policy import ForcePolicy
+            deployed = ForcePolicy(export_path, args.run_dir / "policy_metadata.json",
+                                   original_root=args.original_root)
+        else:
+            deployed = HybridPolicy(export_path, args.run_dir / "policy_metadata.json",
+                                    expected_mode=spec["action_mode"], expected_control_hz=spec["control_hz"])
+    elif args.mode == "original" or teacher_mode:
         from host.policy.rl_policy import RL_Policy
     else:
         from legwheel.deployment.numpy_policy import RL_Policy
@@ -405,7 +476,7 @@ def run_training(args, monitor):
     if max(restore_errors) > 1e-6 or max(export_errors) > 1e-3:
         raise AssertionError("Checkpoint/export action comparison failed")
     report = dict(monitor.state, checkpoint=str(checkpoint), export_path=str(export_path),
-                  actual_timesteps=steps, num_eval_envs=2, real_evaluations=real_evaluations,
+                  actual_timesteps=steps, num_eval_envs=ppo_cfg.num_eval_envs, real_evaluations=real_evaluations,
                   completed=failure is None, phase="failed" if failure else "completed",
                   training_stop_elapsed_seconds=stop_elapsed,
                   finalization_seconds=monitor.elapsed - stop_elapsed,
@@ -424,6 +495,29 @@ def run_training(args, monitor):
                       export_sha256=contract["export_sha256"],
                       optimizer_resume="Network and normalization restored; optimizer reinitialized",
                       deadline_semantics="Readiness excluded; training setup/JIT/evaluation included; finalization separate")
+    if teacher_mode:
+        if force_teacher:
+            from force_teacher.contract import file_digest as digest_file, tree_digest as digest_tree
+        else:
+            from wheel_teacher.contract import file_digest as digest_file, tree_digest as digest_tree
+        contract["export_sha256"] = digest_file(export_path)
+        atomic_json(args.run_dir / "policy_metadata.json", contract)
+        reference_params = initial_params if initial_params is not None else restored
+        old_leaves = jax.tree.leaves(reference_params[1])
+        new_leaves = jax.tree.leaves(params[1])
+        changes = [float(np.max(np.abs(np.asarray(a, dtype=np.float64) - np.asarray(b, dtype=np.float64))))
+                   for a, b in zip(old_leaves, new_leaves, strict=True)]
+        report.update(checkpoint_validated=failure is None, source_fingerprint=contract["source_fingerprint"],
+                      checkpoint_name=checkpoint.name, checkpoint_sha256=digest_tree(checkpoint),
+                      export_sha256=contract["export_sha256"], teacher_pretraining=bc_report,
+                      ppo_actor_changed_leaves=sum(change > 0 for change in changes),
+                      ppo_actor_max_abs_change=max(changes),
+                      optimizer_resume="Network and normalization restored; optimizer reinitialized",
+                      deadline_semantics="Teacher preparation excluded; PPO setup/JIT/evaluation included; finalization separate")
+        if force_teacher:
+            report.update(force_source_fingerprint=contract["force_source_fingerprint"],
+                          action_semantics="left/right virtual axial leg force N; left/right wheel torque Nm",
+                          actuator_semantics="four unit-gain torque motors; hip torque = instantaneous leg Jacobian * axial force")
     atomic_json(args.run_dir / "report.json", report)
     monitor.publish(phase="failed" if failure else "completed",
                     stage="saved_previous_snapshot" if failure else "verified",
@@ -464,7 +558,11 @@ def main(argv=None):
     args = parse_args(argv)
     monitor = RunMonitor(args)  # Publish BEFORE any ML imports.
     try:
-        if mode_spec(args.mode)["hybrid"]:
+        if mode_spec(args.mode)["teacher"]:
+            from hybrid.managed_training import runtime_locks
+            with runtime_locks(args.torque_root):
+                run_training(args, monitor)
+        elif mode_spec(args.mode)["hybrid"]:
             from hybrid.managed_training import run_managed
             run_managed(args, monitor, run_training)
         else:

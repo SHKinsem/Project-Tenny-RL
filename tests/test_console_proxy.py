@@ -20,6 +20,7 @@ class BridgeTest(unittest.TestCase):
             def do_GET(self):
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Security-Policy', "connect-src 'self'")
                 self.end_headers()
                 self.wfile.write(b'{"mode":"hybrid_virtual_leg_force_100"}')
             def do_POST(self):
@@ -34,8 +35,8 @@ class BridgeTest(unittest.TestCase):
         self.upstream.shutdown()
         self.upstream.server_close()
 
-    def request(self, path='/state', method='GET', headers=None, body=None):
-        connection = http.client.HTTPConnection('127.0.0.1', self.bridge.server.server_port, timeout=2)
+    def request(self, path='/state', method='GET', headers=None, body=None, timeout=2):
+        connection = http.client.HTTPConnection('127.0.0.1', self.bridge.server.server_port, timeout=timeout)
         connection.request(method, path, body=body, headers=headers or {})
         response = connection.getresponse()
         status, payload = response.status, response.read()
@@ -60,7 +61,25 @@ class BridgeTest(unittest.TestCase):
     def test_unavailable_upstream_is_recoverable_502(self):
         self.upstream.shutdown()
         self.upstream.server_close()
-        self.assertEqual(self.request()[0], 502)
+        # The bridge's production upstream timeout is 15 seconds; Windows may
+        # retry a refused SYN longer than this test's usual 2-second client wait.
+        self.assertEqual(self.request(timeout=20)[0], 502)
+
+    def test_workbench_routes_are_explicit_without_turning_into_open_proxy(self):
+        for path in ('/workbench/app.mjs', '/workbench/styles.css', '/api/workbench/v1/state?mode=leg_force_bc',
+                     '/api/workbench/v1/catalog', '/api/workbench/v1/descriptor', '/legacy', '/health/workbench'):
+            self.assertEqual(self.request(path)[0], 200)
+        for path in ('/workbench/../console_train.py', '/workbench/private.mjs', '/api/workbench/v1/start',
+                     '/api/workbench/v1/not-a-route'):
+            self.assertEqual(self.request(path)[0], 404)
+        connection = http.client.HTTPConnection('127.0.0.1', self.bridge.server.server_port, timeout=2)
+        try:
+            connection.request('GET', '/')
+            response = connection.getresponse()
+            self.assertEqual(response.getheader('Content-Security-Policy'), "connect-src 'self'")
+            response.read()
+        finally:
+            connection.close()
 
 
 if __name__ == '__main__':

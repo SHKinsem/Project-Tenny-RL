@@ -14,6 +14,7 @@ def utc_now():
 
 class SnapshotPolicy:
     def __init__(self, arrays, mode):
+        self.mode = mode
         size = mode_spec(mode)["obs_dim"]
         shapes = {"mean": (size,), "std": (size,)}
         for i, (a, b) in enumerate(zip((size, 64, 64), (64, 64, 8))):
@@ -48,34 +49,53 @@ class SnapshotPolicy:
         x = np.asarray(observation, dtype=np.float32)
         if x.shape != a["mean"].shape:
             raise ValueError("Wrong preview observation shape")
+        raw_observation = x
         x = (x - a["mean"]) / a["std"]
         for i in range(3):
             x = x @ a[f"w{i}"] + a[f"b{i}"]
             if i < 2:
                 x = x / (1 + np.exp(-np.clip(x, -80, 80)))
+        if self.mode == "leg_force_bc":
+            from force_teacher.networks import transform_logits
+            x = transform_logits(x, raw_observation, xp=np)
         result = np.tanh(x[:4])
         if not np.isfinite(result).all():
             raise ValueError("Nonfinite preview action")
         return result
 
 
-def read_snapshot(path, mode, request_id):
+def snapshot_fingerprint(mode, original_root=None):
+    """Exactly one contract owns each mode, including teacher-backed hybrids."""
+    spec = mode_spec(mode)
+    if mode == "leg_force_bc":
+        from force_teacher.contract import source_fingerprint
+        return source_fingerprint(original_root)
+    if spec["teacher"]:
+        from wheel_teacher.contract import source_fingerprint
+        return source_fingerprint(original_root)
+    if spec["hybrid"]:
+        from hybrid.core import source_fingerprint
+        return source_fingerprint()
+    return None
+
+
+def read_snapshot(path, mode, request_id, *, original_root=None):
     with np.load(path, allow_pickle=False) as data:
         metadata = json.loads(str(data["metadata"]))
         if metadata.get("request_id") != request_id:
             return None  # An older request must never satisfy a new open.
         if metadata.get("mode") != mode:
             raise ValueError("Preview snapshot mode mismatch")
-        if mode_spec(mode)["hybrid"]:
-            from hybrid.core import source_fingerprint
-            if metadata.get("source_fingerprint") != source_fingerprint():
-                raise ValueError("Preview snapshot source fingerprint mismatch")
+        fingerprint = snapshot_fingerprint(mode, original_root)
+        if fingerprint is not None and metadata.get("source_fingerprint") != fingerprint:
+            raise ValueError("Preview snapshot source fingerprint mismatch")
         return SnapshotPolicy(data, mode), metadata
 
 
 class SnapshotPublisher:
-    def __init__(self, run_dir, mode):
+    def __init__(self, run_dir, mode, original_root=None):
         self.run_dir, self.mode = Path(run_dir), mode
+        self.original_root = original_root
         self.handled = None
         self.count = 0
 
@@ -91,9 +111,9 @@ class SnapshotPublisher:
         started = time.perf_counter()
         response = {"request_id": request_id, "mode": self.mode,
                     "run_id": self.run_dir.name, "steps": int(steps), "synced_at": utc_now()}
-        if mode_spec(self.mode)["hybrid"]:
-            from hybrid.core import source_fingerprint
-            response["source_fingerprint"] = source_fingerprint()
+        fingerprint = snapshot_fingerprint(self.mode, self.original_root)
+        if fingerprint is not None:
+            response["source_fingerprint"] = fingerprint
             response.update(action_mode=mode_spec(self.mode)["action_mode"],
                             control_hz=mode_spec(self.mode)["control_hz"])
         temporary = self.run_dir / ("preview-" + uuid.uuid4().hex + ".tmp")

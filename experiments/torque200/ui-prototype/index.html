@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+  <title>Tenny · 训练工作台</title><link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="styles.css"><script type="module" src="app.mjs"></script>
+</head>
+<body>
+<a class="skip-link" href="#workbench">跳到工作台</a>
+<div class="workspace-shell">
+  <details id="navigation-panel" class="shell-panel navigation-panel" open>
+    <summary><span class="brand">Tenny</span><span class="nav-task"><span id="nav-run-id" hidden>R024</span><span id="run-name">基线平衡</span><span id="phase-chip" class="status-chip" role="status" aria-live="polite">训练进行中</span></span><span class="nav-checkpoint">checkpoint <strong id="nav-checkpoint">C023</strong></span></summary>
+    <div class="fold-body nav-body" data-developer-only><span id="run-mode" class="nav-mode"></span><div class="demo-tools"><label for="scenario-select">演示场景</label><select id="scenario-select"></select><button id="demo-play" type="button" class="quiet-button" aria-pressed="false">播放</button><button id="demo-reset" type="button" class="quiet-button">重置</button><button id="layout-reset" type="button" class="quiet-button">重置布局</button><button type="button" data-open-backlog class="quiet-button">待办</button></div></div>
+  </details>
+
+  <main id="workbench" class="workbench" aria-label="可调整的三栏工作台" tabindex="-1">
+    <details id="curves-panel" class="pane curves-pane" data-pane="left" open>
+      <summary aria-label="折叠或展开曲线区域" title="折叠或展开曲线区域"><span class="fold-title disclosure-label">曲线</span><span id="evaluation-context" class="fold-meta">最近评估</span></summary>
+      <div class="pane-body fold-body">
+        <details class="fold chart-fold" open><summary><span class="disclosure-label">回合时长</span><span class="fold-meta"><strong id="metric-duration">—</strong> 秒</span></summary><div class="fold-body"><div class="chart" id="duration-chart"></div><div class="chart-note"><span id="duration-change"></span><span>目标 6 秒</span></div><p class="caption">局部纵轴，完整目标以数值为准。</p></div></details>
+        <details class="fold chart-fold" open><summary><span class="disclosure-label">回合奖励</span><span class="fold-meta"><strong id="metric-reward">—</strong></span></summary><div class="fold-body"><div class="chart" id="reward-chart"></div><p id="reward-change" class="caption"></p></div></details>
+        <details class="fold chart-fold" open><summary><span class="disclosure-label">Value Loss</span><span id="value-latest" class="fold-meta">—</span></summary><div class="fold-body"><div class="chart" id="value-chart"></div><p class="caption">价值预测误差，尺度按需显示。</p></div></details>
+        <details class="fold chart-fold" open><summary><span class="disclosure-label">Policy Loss</span><span id="policy-latest" class="fold-meta">—</span></summary><div class="fold-body"><div class="chart" id="policy-chart"></div><p class="caption">优化目标，不单独代表平衡能力。</p></div></details>
+        <details class="fold"><summary><span class="disclosure-label">评估概况</span><span id="metric-points" class="fold-meta"></span></summary><div class="fold-body padded"><dl class="key-values"><div><dt>评估规模</dt><dd><span id="metric-samples">—</span> 环境</dd></div><div><dt>评估步数</dt><dd id="chart-eval-step">—</dd></div></dl><p class="caption">不同运行分别记录；训练效果以评估结果为准。</p></div></details>
+      </div>
+    </details>
+
+    <div class="splitter" data-splitter="left" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整曲线与预览宽度"></div>
+
+    <details id="preview-panel" class="pane preview-pane" data-pane="center" open>
+      <summary aria-label="折叠或展开预览区域" title="折叠或展开预览区域"><span class="fold-title disclosure-label">预览</span><span id="preview-chip" class="fold-meta status-chip">已关闭</span></summary>
+      <div class="pane-body fold-body preview-body">
+        <details id="scene-panel" class="fold scene-panel" open>
+          <summary aria-label="折叠或展开窗口组"><span class="scene-fold-label disclosure-label">展开预览</span><span id="window-layout-label" class="visually-hidden">单窗口</span></summary>
+          <div class="fold-body scene-body"><div id="viewport-grid" class="viewport-grid" data-count="1" aria-label="预览窗口布局"></div><div class="viewport-caption"><span id="viewport-status">预览未开启</span></div></div>
+        </details>
+        <details id="policy-info" class="fold"><summary><span class="disclosure-label">策略信息</span><span id="preview-short-version" class="fold-meta">尚未同步</span></summary><div class="fold-body padded"><p id="preview-description"></p><p id="preview-version" class="caption"></p><p class="caption">开启时同步一次，观看期间保持此版本。</p></div></details>
+        <details id="telemetry-section" class="fold"><summary><span class="disclosure-label">遥测</span><span id="telemetry-state" class="fold-meta">未采样</span></summary><div class="fold-body padded"><span id="telemetry-time" class="caption"></span><div id="telemetry-panel" hidden><dl id="telemetry-values" class="telemetry-values"></dl></div></div></details>
+      </div>
+    </details>
+
+    <div class="splitter" data-splitter="right" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整预览与参数宽度"></div>
+
+    <details id="parameters-panel" class="pane parameters-pane" data-pane="right" open>
+      <summary aria-label="折叠或展开参数区域" title="折叠或展开参数区域"><span class="fold-title disclosure-label">参数</span><span id="draft-state" class="fold-meta">下一轮草稿</span></summary>
+      <div class="pane-body fold-body">
+        <details class="fold" open><summary><span class="disclosure-label">训练</span><span id="settings-state" class="fold-meta">草稿</span></summary><div class="fold-body padded parameter-fields">
+          <label>任务名称<input id="param-name" value="基线平衡" maxlength="32"></label>
+          <label>新增时长<select id="duration-select"><option value="600">10 分钟</option><option value="900">15 分钟</option><option value="1800">30 分钟</option><option value="0">不限时</option></select></label>
+          <label>并行环境<input id="param-envs" type="number" min="1" max="4096" step="1" value="128"></label>
+          <label>随机种子<input id="param-seed" type="number" min="0" max="999999" step="1" value="0"></label>
+          <p class="caption">变更将在下一轮训练生效。</p>
+        </div></details>
+        <details class="fold" open><summary><span class="disclosure-label">控制</span><span id="setting-frequency" class="fold-meta">100 Hz</span></summary><div class="fold-body padded parameter-fields">
+          <label>动作接口<select id="param-mode"><option value="original">腿位置＋轮速度</option><option value="torque200">全扭矩</option><option value="hybrid">腿力＋轮扭矩</option></select></label>
+          <label>控制频率<select id="param-hz"><option value="100">100 Hz</option><option value="200">200 Hz</option></select></label>
+          <label>回合上限<span class="input-unit"><input id="param-episode" type="number" min="1" max="60" value="6" step="1"><span>秒</span></span></label>
+        </div></details>
+        <details class="fold" data-developer-only open><summary><span class="disclosure-label">曲线显示</span><span class="fold-meta">渐进披露</span></summary><div class="fold-body padded parameter-fields"><label>数据样例<select id="curve-fixture"><option value="current">本轮记录</option><option value="dense-1k">1,000 点</option><option value="dense-10k">10,000 点</option><option value="wide-loss">Loss 大跨度</option><option value="signed-loss">零与负值</option><option value="tiny-changes">微小变化</option><option value="gaps">缺失与断点</option><option value="constant">常数与零</option></select></label><p class="caption">悬停读原值；聚焦后可用方向键。尺度控件按需出现。</p></div></details>
+        <details class="fold"><summary><span class="disclosure-label">PPO</span></summary><div class="fold-body padded parameter-fields">
+          <label>学习率<input id="param-lr" type="number" min="0.000001" max="0.1" step="0.0001" value="0.0003"></label>
+          <label>Rollout 长度<input id="param-rollout" type="number" min="1" max="1024" value="75"></label>
+          <label>更新次数<input id="param-epochs" type="number" min="1" max="64" value="4"></label>
+          <label>折扣系数 γ<input id="param-discount" type="number" min="0.8" max="1" step="0.001" value="0.99"></label>
+          <label>GAE λ<input id="param-gae" type="number" min="0" max="1" step="0.01" value="0.95"></label>
+          <label>Clip 范围<input id="param-clip" type="number" min="0.01" max="0.5" step="0.01" value="0.2"></label>
+
+        </div></details>
+        <details class="fold"><summary><span class="disclosure-label">评估</span></summary><div class="fold-body padded parameter-fields"><label>评估环境<input id="param-eval-envs" type="number" min="1" max="128" value="8"></label><label>评估间隔<span class="input-unit"><input id="param-eval-interval" type="number" min="5" max="300" value="45"><span>秒</span></span></label></div></details>
+        <details class="fold" open><summary><span class="disclosure-label">视窗设置</span></summary><div class="fold-body padded parameter-fields"><label>窗口数量<select id="viewport-count"><option value="1">单窗口</option><option value="4">2 × 2</option><option value="9">3 × 3</option></select></label><label>显示帧率<select id="param-fps"><option value="20">20 fps</option><option value="30">30 fps</option></select></label><div class="preview-actions"><button id="preview-open" type="button" class="button button-secondary">开启预览</button><button id="preview-pause" type="button" class="quiet-button" hidden>暂停预览</button><button id="preview-reset" type="button" class="quiet-button" hidden>重置回合</button></div></div></details>
+        <details id="model-panel" class="fold"><summary><span class="disclosure-label">模型来源</span><span id="source-alias" class="fold-meta">C023</span></summary><div class="fold-body padded"><div class="model-origin"><span class="field-label">本轮起点</span><h3 id="source-model-name"></h3><p id="source-model-detail" class="caption"></p><span id="source-model-state" class="caption"></span></div><div class="model-row"><span>当前训练</span><div><strong id="training-model-name"></strong><span id="training-model-steps"></span></div></div><div class="model-row"><span>最近保存</span><div><strong id="saved-model-name"></strong><span id="saved-model-steps"></span></div></div><div class="model-row"><span>预览版本</span><div><strong id="view-model-name"></strong><span id="view-model-steps"></span></div></div><button id="choose-model" type="button" class="button full-width">选择模型</button><details class="nested-fold"><summary><span class="disclosure-label">checkpoint 目录</span></summary><p id="checkpoint-dir-current" class="directory-path"></p><div class="directory-actions"><button id="checkpoint-dir-open" class="button" type="button">打开保存目录</button><button id="checkpoint-dir-choose" class="button" type="button">指定目录</button></div><p id="checkpoint-dir-draft" class="caption"></p></details><p id="model-lock-note" class="caption"></p><p id="run-id" class="caption" data-developer-only></p></div></details>
+        <details id="progress-panel" class="fold"><summary><span class="disclosure-label">运行与准备</span><span id="process-description" class="fold-meta">状态</span></summary><div class="fold-body padded"><ol class="phase-track" aria-label="训练生命周期"><li data-stage="prepare"><span>准备</span><span id="step-prepare-description"></span></li><li data-stage="train"><span>训练</span><span id="step-train-description"></span></li><li data-stage="save"><span>保存校验</span><span id="step-save-description"></span></li><li data-stage="complete"><span>完成</span><span id="step-complete-description"></span></li></ol><details id="preparation-details" class="nested-fold" hidden><summary><span class="disclosure-label">准备检查</span> <span id="preparation-summary"></span></summary><ol id="preparation-stages" class="preparation-stages"></ol></details><dl class="key-values"><div><dt>当前动作</dt><dd id="setting-action"></dd></div><div><dt>当前预算</dt><dd id="setting-schedule"></dd></div><div><dt>观测维数</dt><dd id="setting-observations"></dd></div></dl><button id="main-action" type="button" class="button full-width">结束本轮并保存</button><p id="action-hint" class="caption"></p></div></details>
+        <details class="fold"><summary><span class="disclosure-label">数据时效</span><span id="connection-chip" class="fold-meta connection-chip">连接正常</span></summary><div class="fold-body padded"><dl class="key-values"><div><dt>页面读取</dt><dd id="received-age"></dd></div><div><dt>进度更新</dt><dd id="progress-age"></dd></div><div><dt>最近评估</dt><dd id="evaluation-age"></dd></div></dl><p id="data-lag-note" class="caption"></p></div></details>
+        <details class="fold"><summary><span class="disclosure-label">事件记录</span></summary><div class="fold-body padded"><ol id="event-list" class="event-list"></ol></div></details>
+        <details class="fold state-inspector" data-developer-only><summary><span class="disclosure-label">演示状态</span></summary><div class="fold-body padded"><pre id="state-inspector"></pre></div></details>
+      </div>
+    </details>
+  </main>
+
+  <details id="transport-panel" class="shell-panel transport-panel" open>
+    <summary aria-label="折叠或展开训练进度"><span id="transport-summary" class="fold-meta">训练进行中</span></summary>
+    <div class="fold-body transport-body"><div class="transport-time"><span id="clock-label" class="field-label">累计 / 计划时长</span><strong id="run-clock">—</strong></div><div class="transport-progress"><div class="progress-overview"><span id="transport-status">训练进行中</span><span id="transport-percent">—</span></div><div id="training-progress-track" class="training-progress-track"><progress id="training-progress" max="900" value="0" aria-label="累计训练时长进度" aria-describedby="transport-detail"></progress><span class="progress-energy" aria-hidden="true"></span></div><p id="transport-detail" class="visually-hidden">训练时长进度</p></div><div class="transport-steps"><span id="steps-label" class="field-label">累计环境步</span><strong id="run-steps">—</strong></div><div class="transport-actions"><button id="training-start" type="button" class="button">开始</button><button id="training-pause" type="button" class="button">暂停</button><button id="training-save" type="button" class="button button-primary">保存</button></div></div>
+  </details>
+</div>
+<div id="connection-alert" class="status-banner" role="alert" hidden><strong id="connection-alert-title"></strong><p id="connection-alert-description"></p><button id="reconnect-button" type="button" class="button">重新连接</button></div>
+<p id="action-notice" class="action-notice" role="status" aria-live="polite" hidden></p>
+<dialog id="model-dialog" class="modal" aria-labelledby="model-dialog-title"><div class="modal-heading"><h2 id="model-dialog-title">训练起点</h2><button type="button" data-close-dialog="model-dialog" class="quiet-button">关闭</button></div><p id="model-dialog-description" class="caption"></p><div id="model-options" class="model-options"></div></dialog>
+<dialog id="checkpoint-dir-dialog" class="modal" aria-labelledby="checkpoint-dir-title"><div class="modal-heading"><h2 id="checkpoint-dir-title">checkpoint 目录</h2><button type="button" data-close-dialog="checkpoint-dir-dialog" class="quiet-button">关闭</button></div><label class="directory-label" for="checkpoint-dir-input">目录路径</label><input id="checkpoint-dir-input" type="text" autocomplete="off" spellcheck="false" placeholder="checkpoints/C023"><button id="checkpoint-dir-apply" type="button" class="button button-primary">使用此目录</button></dialog>
+<dialog id="backlog-dialog" class="modal" aria-labelledby="backlog-title"><div class="modal-heading"><h2 id="backlog-title">功能与工作草稿</h2><button type="button" data-close-dialog="backlog-dialog" class="quiet-button">关闭</button></div><ul class="backlog-list"><li>原 F-01～08：准备、来源、时效、对比、评估、导出、预设与资源监测。</li><li>草稿：同窗多环境实时渲染。</li><li>草稿：真实训练暂停/继续及后台 checkpoint 保存。</li><li>草稿：正式短编号与身份映射。</li><li>草稿：参数校验、持久化及实际生效。</li><li>草稿：checkpoint 累计时长/步数与续训进度恢复。</li></ul><p class="caption">界面收尾后再统一整理后端对照清单。当前仅内存模拟。</p></dialog>
+<noscript>请启用 JavaScript 使用训练工作台。</noscript>
+</body></html>

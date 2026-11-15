@@ -1,4 +1,4 @@
-"""Hybrid console using the existing dashboard, with lazy CPU-only preview.
+"""Training console with bounded, lazy CPU-only policy previews.
 
 The HTTP service needs no model or ML imports to start. A single background
 thread owns the simulator; cancelled opens can never publish a late frame.
@@ -15,24 +15,71 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from control_modes import MODES, mode_spec
 from training_control import ControlError
+from workbench_preview import PreviewGroup, dispatch_viewports
+
+
+def select_teacher_sources(original_root):
+    """Select the reference environment before its first import; never swap modules."""
+    root = Path(original_root or Path.home() / "projects/tenny-reference").resolve()
+    source = root / "mujoco_legwheel_rl_public"
+    deployment = root / "mujoco_esp32_robot_deploy_public"
+    if not (source / "legwheel/__init__.py").is_file():
+        raise FileNotFoundError("Reference environment is unavailable for wheel-torque preview")
+    if not (deployment / "host/policy/rl_policy.py").is_file():
+        raise FileNotFoundError("Reference policy reader is unavailable for wheel-torque preview")
+    imported = sys.modules.get("legwheel")
+    if imported is not None and not Path(imported.__file__).resolve().is_relative_to(source):
+        raise RuntimeError("Wrong legwheel source is already imported; switch mode in a new process")
+    sys.path[:0] = [str(source), str(deployment)]
+    return root
+
+
+def select_torque_sources():
+    """Force students use the local torque environment, never the teacher's legwheel."""
+    source = Path(__file__).resolve().parent
+    if not (source / "legwheel/__init__.py").is_file():
+        raise FileNotFoundError("Torque environment is unavailable for force preview")
+    imported = sys.modules.get("legwheel")
+    if imported is not None and not Path(imported.__file__).resolve().is_relative_to(source / "legwheel"):
+        raise RuntimeError("Wrong legwheel source is already imported; switch mode in a new process")
+    sys.path.insert(0, str(source))
+    return source
 
 
 class Simulator:
     """Constructed only after an explicit request to open a valid policy."""
 
-    def __init__(self, mode):
+    def __init__(self, mode, original_root=None):
+        spec = mode_spec(mode)
+        if mode in {"leg_force_bc", "torque200"}:
+            select_torque_sources()
+        elif spec["teacher"] or mode == "original":
+            select_teacher_sources(original_root)
         import jax
         import mujoco
         import numpy as np
         from PIL import Image
-        from hybrid.env import HybridLegWheelRobot, hybrid_config
-        spec = mode_spec(mode)
         self.jax, self.mujoco, self.np, self.Image = jax, mujoco, np, Image
-        cfg = hybrid_config(spec["control_hz"])
+        if mode in {"original", "torque200"}:
+            from legwheel import LegWheelRobot, default_config
+            cfg = default_config()
+            environment = LegWheelRobot
+        elif mode == "leg_force_bc":
+            from force_teacher.env import StudentEnv, student_config
+            cfg = student_config()
+            environment = StudentEnv
+        elif spec["teacher"]:
+            from wheel_teacher.env import StudentEnv, student_config
+            cfg = student_config()
+            environment = StudentEnv
+        else:
+            from hybrid.env import HybridLegWheelRobot, hybrid_config
+            cfg = hybrid_config(spec["control_hz"])
+            environment = lambda config: HybridLegWheelRobot(spec["action_mode"], config)
         cfg.noise_config.level = 0.0
         cfg.push_config.enable = False
         cfg.cmd_config.cmd_prob = 0.0
-        self.env = HybridLegWheelRobot(spec["action_mode"], cfg)
+        self.env = environment(cfg)
         self.initial = jax.jit(self.env.reset)(jax.random.PRNGKey(0))
         self.step = jax.jit(self.env.step)
         self.cfg = cfg
@@ -54,6 +101,8 @@ class Simulator:
         if not paused:
             if self.terminal_until and time.monotonic() >= self.terminal_until:
                 self.reset()
+                if hasattr(actor, "clean_history"):
+                    actor.clean_history()
                 reset = 1
             if not self.terminal_until:
                 for _ in range(round(.05 / self.cfg.ctrl_dt)):
@@ -80,64 +129,135 @@ class Simulator:
         self.renderer.close()
 
 
-def load_saved(model, mode):
-    from hybrid.deployment import HybridPolicy
+def load_saved(model, mode, original_root=None):
     spec = mode_spec(mode)
-    actor = HybridPolicy(model["export_path"], Path(model["run_dir"]) / "policy_metadata.json",
-                         spec["action_mode"], spec["control_hz"])
-    return actor, dict(model_source="最近保存的混合动作模型", checkpoint=model["checkpoint"],
+    profile = {}
+    if mode == "original":
+        select_teacher_sources(original_root)
+        from host.policy.rl_policy import RL_Policy
+        actor = RL_Policy(path=Path(model["export_path"]))
+        description = "最近保存的腿位置＋轮速度模型"
+    elif mode == "torque200":
+        select_torque_sources()
+        from legwheel.deployment.numpy_policy import RL_Policy
+        actor = RL_Policy(Path(model["export_path"]))
+        description = "最近保存的全扭矩模型"
+    elif mode == "leg_force_bc":
+        select_torque_sources()
+        from force_teacher.contract import verified_report
+        run = Path(model["run_dir"])
+        report = json.loads((run / "report.json").read_text(encoding="utf8"))
+        verified_report(run, report, original_root)
+        profile = {"preview_training_profile": report.get("training_profile"),
+                   "preview_evaluation_policy": report.get("evaluation_policy")}
+        from force_teacher.policy import ForcePolicy
+        actor = ForcePolicy(Path(report["export_path"]), run / "policy_metadata.json", original_root)
+        description = "最近保存的腿力＋轮扭矩模型"
+    elif spec["teacher"]:
+        root = select_teacher_sources(original_root)
+        from wheel_teacher.contract import verified_report
+        run = Path(model["run_dir"])
+        report = json.loads((run / "report.json").read_text(encoding="utf8"))
+        verified_report(run, report, root)
+        from host.policy.rl_policy import RL_Policy
+        actor = RL_Policy(path=Path(report["export_path"]))
+        description = "最近保存的腿位置＋轮扭矩模型"
+    else:
+        from hybrid.deployment import HybridPolicy
+        actor = HybridPolicy(model["export_path"], Path(model["run_dir"]) / "policy_metadata.json",
+                             spec["action_mode"], spec["control_hz"])
+        description = "最近保存的混合动作模型"
+    return actor, dict(model_source=description, checkpoint=model["checkpoint"], **profile,
                       model_run_id=model.get("run_id"),
                       preview_training_steps=model.get("actual_timesteps"), preview_kind="saved",
                       preview_synced_at=datetime.now(timezone.utc).isoformat())
 
 
+def load_baseline(mode, original_root=None):
+    """Keep the original author's baseline available without inventing a run."""
+    if mode != "original":
+        raise ControlError("尚无此模式与频率的可用模型；请先开始训练或完成一次保存。")
+    select_teacher_sources(original_root)
+    from host.policy.rl_policy import RL_Policy
+    from host.policy.ckpt import POLICY_CPP
+    return RL_Policy(), dict(model_source="作者预训练模型", checkpoint=str(POLICY_CPP),
+                            model_run_id=None, preview_training_steps=None,
+                            preview_kind="baseline", preview_synced_at=datetime.now(timezone.utc).isoformat())
+
+
 class Preview:
-    def __init__(self, mode, controller, simulator_factory=Simulator):
+    def __init__(self, mode, controller, simulator_factory=None, original_root=None):
         spec = mode_spec(mode)
-        self.mode, self.controller, self.factory = mode, controller, simulator_factory
+        position_teacher = spec["teacher"] and not spec["hybrid"]
+        self.original_root = original_root
+        self.mode, self.controller = mode, controller
+        self.factory = simulator_factory or (lambda selected: Simulator(selected, original_root))
         self.lock = threading.Condition()
         self.generation = 0
         self.pending = None
         self.actor = self.simulator = None
         self.closed = False
+        self.release_requested = False
+        self._last_frame_at = None
         self.reset_requested = False
         self.jpg = b""
         self.state = dict(mode=mode, control_hz=spec["control_hz"], ctrl_dt=1 / spec["control_hz"],
-            obs_dim=24, action_semantics=spec["action_mode"], frames=0, clients=0, fps=0.,
+            obs_dim=spec["obs_dim"], action_semantics="腿位置增量＋轮速度残差" if mode == "original" else "四路直接扭矩" if mode == "torque200" else "腿位置增量＋轮扭矩" if position_teacher else spec["action_mode"], frames=0, clients=0, fps=0.,
             suspended=True, paused=False, terminal=False, episode_seconds=0., resets=0,
-            actuator_inputs=[0.]*4, torques=[0.]*4, input_units=["N·m"]*4, switching=False,
-            model_source="尚未加载混合动作模型", checkpoint="", model_run_id=None,
+            actuator_inputs=[0.]*4, torques=[0.]*4, input_units=["rad", "rad", "N·m", "N·m"] if position_teacher else ["N·m"]*4, switching=False,
+            actuator_description="策略腿命令为虚拟伸展力（N）；下表显示映射后实际发送的执行器扭矩（N·m）。" if spec["action_mode"] == "virtual_leg_force" else "下表显示发送给执行器的控制输入及其单位。",
+            model_source="尚未加载腿位置＋轮扭矩模型" if position_teacher else "尚未加载腿力＋轮扭矩模型" if mode == "leg_force_bc" else "尚未加载混合动作模型", checkpoint="", model_run_id=None,
             preview_training_steps=None, preview_synced_at=None, preview_kind="saved",
-            sync_status="idle", sync_error=None, error=None)
+            preview_training_profile=None, preview_evaluation_policy=None,
+            sync_status="idle", sync_error=None, error=None,
+            loading={"active": False, "stage": "idle", "progress": None})
 
     def snapshot(self):
         with self.lock:
-            return dict(self.state)
+            return {**self.state, "generation": self.generation}
+
+    def loading(self, stage, *, generation=None):
+        with self.lock:
+            if generation is not None and generation != self.generation:
+                return
+            self.state["loading"] = {"active": stage not in {"idle", "ready", "error"},
+                                     "stage": stage, "progress": None}
+            self.lock.notify_all()
 
     def open(self):
         with self.lock:
+            if self.closed:
+                raise ControlError("视窗已关闭。")
             if self.pending is not None or not self.state["suspended"]:
                 return
             request = self.controller.request_preview(self.mode)
-            if request["kind"] == "saved" and not request.get("model"):
+            if request["kind"] == "saved" and not request.get("model") and self.mode != "original":
+                self.controller.cancel_preview(request)
                 raise ControlError("尚无此模式与频率的可用模型；请先开始训练或完成一次保存。")
             self.generation += 1
             self.pending = dict(request, generation=self.generation, started=time.monotonic())
+            self._last_frame_at = None
             self.state.update(sync_status="pending", sync_error=None, paused=False)
+            self.loading("syncing" if request["kind"] == "live" else "loading_policy")
             self.lock.notify_all()
 
     def suspend(self):
         with self.lock:
             request, self.pending = self.pending, None
             self.generation += 1
+            self.release_requested = True
             self.jpg = b""
+            self._last_frame_at = None
             self.state.update(suspended=True, sync_status="idle", sync_error=None, fps=0.)
+            self.loading("idle")
             self.lock.notify_all()
         self.controller.cancel_preview(request)
 
     def _resolve(self, request):
         if request["kind"] == "saved":
-            return load_saved(request["model"], self.mode)
+            if not request.get("model"):
+                return load_baseline(self.mode, self.original_root)
+            return load_saved(request["model"], self.mode, self.original_root)
         from preview_sync import read_snapshot
         run = Path(request["run_dir"])
         response_path = run / "preview.response.json"
@@ -145,46 +265,79 @@ class Preview:
         if response.get("request_id") == request["request_id"]:
             if response.get("error"):
                 raise ValueError(response["error"])
-            loaded = read_snapshot(run / "preview-policy.npz", self.mode, request["request_id"])
+            self.loading("loading_policy", generation=request.get("generation"))
+            loaded = read_snapshot(run / "preview-policy.npz", self.mode, request["request_id"], original_root=self.original_root)
             if loaded is not None:
                 actor, metadata = loaded
+                profile = {}
+                if self.mode == "leg_force_bc":
+                    profile = {"preview_training_profile": None, "preview_evaluation_policy": None}
+                    try:
+                        status = json.loads((run / "status.json").read_text(encoding="utf8"))
+                        profile = {"preview_training_profile": status.get("training_profile"),
+                                   "preview_evaluation_policy": status.get("evaluation_policy")}
+                    except (OSError, ValueError, AttributeError):
+                        pass  # Older runs do not attest a training profile.
                 return actor, dict(model_source="打开画面时同步的训练策略", checkpoint=str(run / "preview-policy.npz"),
                     model_run_id=metadata["run_id"], preview_training_steps=metadata["steps"],
-                    preview_synced_at=metadata["synced_at"], preview_kind="live")
+                    preview_synced_at=metadata["synced_at"], preview_kind="live", **profile)
         if time.monotonic() - request["started"] > 180:
             raise ValueError("等待策略同步超时；关闭后可重新打开，训练继续运行。")
         current = self.controller.status(self.mode)
         if not current.get("active") or current.get("run_dir") != request["run_dir"]:
             model = self.controller.latest(self.mode)
             if model and model.get("run_id") == request["run_id"]:
-                return load_saved(model, self.mode)
+                return load_saved(model, self.mode, self.original_root)
             raise ValueError("本轮已结束，尚无可用模型；请查看训练状态。")
         return None
+
+    def release(self):
+        """Release native rendering resources on the owning worker thread."""
+        with self.lock:
+            simulator, self.simulator = self.simulator, None
+            self.actor = None
+            self.release_requested = False
+        if simulator is not None:
+            try:
+                simulator.close()
+            except Exception as exc:
+                # A failed native teardown must not terminate other viewports'
+                # shared worker. Surface it instead of pretending cleanup won.
+                with self.lock:
+                    self.state["error"] = "释放预览资源失败：" + str(exc)
 
     def tick(self):
         """One worker iteration, separated for cancellation/race tests."""
         with self.lock:
             request = self.pending
             generation = self.generation
+            cleanup = self.release_requested
         try:
+            if cleanup:
+                self.release()
             if request is not None:
                 resolved = self._resolve(request)
                 if resolved is not None:
                     actor, metadata = resolved
                     with self.lock:
-                        if generation != self.generation:
+                        if generation != self.generation or self.closed:
                             return
+                    self.loading("loading_environment", generation=generation)
                     if self.simulator is None:
                         self.simulator = self.factory(self.mode)
                     self.simulator.reset()
+                    if hasattr(actor, "clean_history"):
+                        actor.clean_history()
                     with self.lock:
-                        if generation != self.generation:
+                        if generation != self.generation or self.closed:
+                            self.release()
                             return
                         self.actor = actor
                         self.pending = None
                         self.jpg = b""
                         self.state.update(metadata, suspended=False, sync_status="ready", sync_error=None,
                             episode_seconds=0., terminal=False)
+                        self.loading("first_frame")
                     self.controller.cancel_preview(request)
             with self.lock:
                 active = not self.state["suspended"] and self.state["clients"] > 0
@@ -194,16 +347,22 @@ class Preview:
                 return
             if reset:
                 self.simulator.reset()
+                if hasattr(self.actor, "clean_history"):
+                    self.actor.clean_history()
             started = time.monotonic()
             jpg, state = self.simulator.frame(self.actor, paused)
+            rendered_at = time.monotonic()
             reset_delta = state.pop("reset_delta", 0)
             with self.lock:
                 if generation != self.generation or self.state["suspended"]:
                     return
                 self.jpg = jpg
-                self.state.update(state, fps=min(20., 1 / max(.00001, time.monotonic() - started)))
+                interval = rendered_at - (self._last_frame_at if self._last_frame_at is not None else started)
+                self._last_frame_at = rendered_at
+                self.state.update(state, fps=min(20., 1 / max(.00001, interval)))
                 self.state["frames"] += 1
                 self.state["resets"] += reset_delta + int(reset)
+                self.loading("ready")
                 self.lock.notify_all()
         except Exception as exc:
             with self.lock:
@@ -212,6 +371,8 @@ class Preview:
                 self.pending = None
                 self.jpg = b""
                 self.state.update(suspended=True, sync_status="error", sync_error=str(exc), fps=0.)
+                self.loading("error")
+            self.release()
             self.controller.cancel_preview(request)
 
     def run(self):
@@ -222,8 +383,7 @@ class Preview:
                 with self.lock:
                     self.lock.wait(timeout=max(.01, .05 - (time.monotonic() - started)))
         finally:
-            if self.simulator is not None:
-                self.simulator.close()
+            self.release()
 
     def close(self):
         self.suspend()
@@ -235,16 +395,23 @@ class Preview:
 class Console:
     def __init__(self, args, controller, preview=None):
         self.args, self.controller = args, controller
-        self.preview = preview or Preview(args.mode, controller)
+        factory = lambda coordinated: Preview(args.mode, coordinated, original_root=getattr(args, "original_root", None))
+        self.viewports = PreviewGroup(args.mode, controller, factory, initial=preview)
         self.switch_mode = None
         self.control_lock = threading.Lock()
+
+    @property
+    def preview(self):
+        return self.viewports.primary
 
     def state(self):
         value = self.preview.snapshot()
         training = self.controller.status(self.args.mode)
         value.update(training=training, preview_available=bool(training.get("latest") or
             (training.get("active") and training.get("active_mode") == self.args.mode)),
-            switching=self.switch_mode is not None)
+            switching=self.switch_mode is not None, viewports=self.viewports.snapshot()["viewports"])
+        if self.args.mode == "original":
+            value["preview_available"] = True
         return value
 
     def training(self, request):
@@ -252,10 +419,14 @@ class Console:
             if self.switch_mode is not None:
                 raise ControlError("模式正在切换。")
             if request.get("action") == "start":
+                extra = {key: request[key] for key in ("checkpoint", "parameters") if key in request}
                 return self.controller.start(self.args.mode, duration_seconds=request.get("duration_seconds", 0),
-                    resume=request.get("resume", False), force_revalidate=request.get("force_revalidate", False))
+                    resume=request.get("resume", False), force_revalidate=request.get("force_revalidate", False), **extra)
             if request.get("action") == "stop":
                 return self.controller.stop()
+            if request.get("action") in {"pause", "resume", "save"}:
+                function = getattr(self.controller, request["action"])
+                return function(**({"request_id": request["request_id"]} if "request_id" in request else {}))
             raise ValueError("Unknown training action")
 
     def control(self, request):
@@ -267,7 +438,7 @@ class Console:
                     raise ValueError("Unknown mode")
                 if self.controller.status().get("active"):
                     raise ControlError("请先停止训练并等待保存结束，再切换模式。")
-                self.preview.suspend()
+                self.viewports.suspend_all()
                 self.switch_mode = mode
             elif action == "resume":
                 self.preview.open()
@@ -296,9 +467,16 @@ def make_handler(console):
             self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Length", str(len(data)))
             self.end_headers()
-            self.wfile.write(data)
+            if getattr(self, "command", None) != "HEAD":
+                self.wfile.write(data)
 
         def do_GET(self):
+            if dispatch_viewports(self, console.viewports):
+                return
+            from workbench_web import dispatch
+            if dispatch(self, artifacts=getattr(console.args, "artifacts", None), mode=console.args.mode,
+                        controller=console.controller):
+                return
             if self.path == "/":
                 return self.send(Path(__file__).with_name("dashboard.html").read_bytes(), kind="text/html; charset=utf-8")
             if self.path == "/learning-curves":
@@ -315,41 +493,42 @@ def make_handler(console):
                 result = load_console_learning_data(Path(selected["run_dir"]), console.args.mode) if selected.get("run_dir") else {
                     "available": False, "metadata": {"message": "此模式与频率尚无训练记录；可直接开始新训练。"}, "points": []}
                 return self.send(result)
-            if self.path.split("?", 1)[0] != "/stream.mjpg":
-                return self.send({"error": "Not found"}, 404)
-            preview = console.preview
-            self.send_response(200)
-            self.send_header("Content-Type", "multipart/x-mixed-replace; boundary=frame")
-            self.send_header("Cache-Control", "no-store")
-            self.end_headers()
-            with preview.lock:
-                preview.state["clients"] += 1
-                sequence = preview.state["frames"]
-            try:
-                while not preview.closed:
-                    with preview.lock:
-                        preview.lock.wait_for(lambda: preview.closed or preview.state["frames"] != sequence, timeout=1)
-                        jpg, sequence = preview.jpg, preview.state["frames"]
-                        if preview.closed or preview.state["suspended"]:
-                            break
-                    if jpg:
-                        self.wfile.write(b"--frame\r\nContent-Type: image/jpeg\r\nContent-Length: " +
-                            str(len(jpg)).encode() + b"\r\n\r\n" + jpg + b"\r\n")
-                        self.wfile.flush()
-            except (BrokenPipeError, ConnectionResetError, TimeoutError):
-                pass
-            finally:
-                with preview.lock:
-                    preview.state["clients"] -= 1
+            return self.send({"error": "Not found"}, 404)
+
+        def do_HEAD(self):
+            if dispatch_viewports(self, console.viewports):
+                return
+            from workbench_web import dispatch
+            if not dispatch(self, artifacts=getattr(console.args, "artifacts", None), mode=console.args.mode,
+                            controller=console.controller):
+                self.send_error(404)
+
+        def do_PUT(self):
+            if dispatch_viewports(self, console.viewports):
+                return
+            from workbench_web import dispatch
+            if not dispatch(self, artifacts=getattr(console.args, "artifacts", None), mode=console.args.mode,
+                            controller=console.controller):
+                self.send_error(405)
+
+        do_PATCH = do_PUT
+        do_DELETE = do_PUT
+        do_OPTIONS = do_PUT
 
         def do_POST(self):
+            if dispatch_viewports(self, console.viewports):
+                return
+            from workbench_web import dispatch
+            if dispatch(self, artifacts=getattr(console.args, "artifacts", None), mode=console.args.mode,
+                        controller=console.controller):
+                return
             if self.path not in ("/control", "/training"):
                 return self.send({"error": "Not found"}, 404)
             if self.headers.get("Content-Type", "").split(";")[0] != "application/json":
                 return self.send({"error": "JSON required"}, 415)
             try:
                 size = int(self.headers.get("Content-Length", "0"))
-                if not 0 < size <= 1024:
+                if not 0 < size <= 16384:
                     raise ValueError("Invalid request size")
                 request = json.loads(self.rfile.read(size))
                 if not isinstance(request, dict):
@@ -364,6 +543,9 @@ def make_handler(console):
 
 
 def main(args):
+    # Only this web process owns the simulators. TrainingController gives its
+    # detached runner an explicit CUDA environment when the user starts a run.
+    os.environ["JAX_PLATFORMS"] = "cpu"
     from training_control import TrainingController
     from web_preview import persist_mode, restart_arguments
     controller = TrainingController(args.artifacts, args.original_root, args.artifacts.parent)
@@ -371,8 +553,7 @@ def main(args):
     server = ThreadingHTTPServer((args.host, args.port), make_handler(console))
     server.daemon_threads = True
     server.timeout = .25
-    worker = threading.Thread(target=console.preview.run, daemon=True)
-    worker.start()
+    console.viewports.start()
     print(f"WEB_READY http://{args.host}:{args.port}/ mode={args.mode} preview=off", flush=True)
     try:
         while console.switch_mode is None:
@@ -380,9 +561,8 @@ def main(args):
     except KeyboardInterrupt:
         pass
     finally:
-        console.preview.close()
+        console.viewports.close()
         server.server_close()
-        worker.join(timeout=2)
     if console.switch_mode is not None:
         persist_mode(args.artifacts, console.switch_mode)
         os.execv(sys.executable, restart_arguments(args, console.switch_mode))
