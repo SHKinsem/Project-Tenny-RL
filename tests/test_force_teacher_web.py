@@ -19,6 +19,7 @@ from hybrid_web import Console, Preview, load_saved, select_torque_sources
 from learning_curves import load_console_learning_data
 from preview_sync import SnapshotPublisher, read_snapshot
 import web_preview
+from force_teacher.options import normalize_options
 
 MODE = "leg_force_bc"
 
@@ -118,12 +119,17 @@ class ForceTeacherWebTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp, patch.dict(sys.modules, modules):
             run = Path(tmp)
             reference = run / "teacher"
+            options = normalize_options()
+            (run / "policy_metadata.json").write_text(json.dumps(dict(mode=MODE,
+                teacher_schema="leg-force-configurable-bc-v4", experiment_config=options)))
             (run / "preview.request.json").write_text(json.dumps({"request_id": "one", "mode": MODE}))
             result = SnapshotPublisher(run, MODE, reference).service(128, params)
             self.assertNotIn("error", result)
             actor, metadata = read_snapshot(run / "preview-policy.npz", MODE, "one", original_root=reference)
             self.assertEqual(actor.run(np.zeros(24)).shape, (4,))
             self.assertEqual(metadata["source_fingerprint"], "force-teacher-source")
+            self.assertEqual(actor.experiment_config, options)
+            self.assertEqual(metadata["experiment_config"], options)
             contract.source_fingerprint.assert_called_with(reference)
             with self.assertRaisesRegex(ValueError, "mode mismatch"):
                 read_snapshot(run / "preview-policy.npz", "hybrid_virtual_leg_force_100", "one")
@@ -145,9 +151,13 @@ class ForceTeacherWebTests(unittest.TestCase):
             export = run / "policy.cpp.txt"
             report = {"export_path": str(export)}
             (run / "report.json").write_text(json.dumps(report))
+            options = normalize_options(dict(wheel_head="residual"))
+            (run / "policy_metadata.json").write_text(json.dumps(dict(mode=MODE,
+                teacher_schema="leg-force-configurable-bc-v4", experiment_config=options)))
             model = {"run_dir": str(run), "checkpoint": str(run / "checkpoints/128"), "actual_timesteps": 128}
             _, displayed = load_saved(model, MODE, run / "reference")
             self.assertIsNone(displayed["preview_training_profile"])
+            self.assertEqual(displayed["preview_experiment_config"], options)
             contract.verified_report.assert_called_once_with(run, report, run / "reference")
             reader.ForcePolicy.assert_called_once_with(export, run / "policy_metadata.json", run / "reference")
             reader.ForcePolicy.reset_mock()

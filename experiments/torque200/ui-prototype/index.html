@@ -63,7 +63,7 @@
           <label>折扣系数 γ<input id="param-discount" type="number" min="0.8" max="1" step="0.001" value="0.99"></label>
           <label>GAE λ<input id="param-gae" type="number" min="0" max="1" step="0.01" value="0.95"></label>
           <label>Clip 范围<input id="param-clip" type="number" min="0.01" max="0.5" step="0.01" value="0.2"></label>
-          
+
         </div></details>
         <details class="fold"><summary><span class="disclosure-label">评估</span></summary><div class="fold-body padded parameter-fields"><label>评估环境<input id="param-eval-envs" type="number" min="1" max="128" value="8"></label><label>评估间隔<span class="input-unit"><input id="param-eval-interval" type="number" min="5" max="300" value="45"><span>秒</span></span></label></div></details>
         <details class="fold" open><summary><span class="disclosure-label">视窗设置</span></summary><div class="fold-body padded parameter-fields"><label>窗口数量<select id="viewport-count"><option value="1">单窗口</option><option value="4">2 × 2</option><option value="9">3 × 3</option></select></label><label>显示帧率<select id="param-fps"><option value="20">20 fps</option><option value="30">30 fps</option></select></label><div class="preview-actions"><button id="preview-open" type="button" class="button button-secondary">开启预览</button><button id="preview-pause" type="button" class="quiet-button" hidden>暂停预览</button><button id="preview-reset" type="button" class="quiet-button" hidden>重置回合</button></div></div></details>

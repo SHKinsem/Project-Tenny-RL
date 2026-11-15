@@ -57,6 +57,7 @@ body.is-resizing, body.is-resizing * { cursor: col-resize !important; user-selec
 .fold[open] > summary { color: var(--ink); }
 .fold:not([open]) > summary { color: var(--secondary); }
 .padded { padding: 8px 16px 12px; }
+#parameters-panel > .pane-body > details.fold > .fold-body.padded { padding-inline-start: 24px; }
 .caption { font-size: var(--text-meta); color: var(--muted); line-height: 1.65; }
 p.caption + p.caption { margin-top: 5px; }
 .chart-fold { margin-bottom: 12px; }

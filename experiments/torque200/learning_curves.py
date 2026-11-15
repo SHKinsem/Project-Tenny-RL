@@ -264,9 +264,13 @@ def load_console_learning_data(run_dir: Path, mode: str) -> dict:
                 raise ValueError("Invalid step")
             metrics = event["metrics"]
             length = number(metrics.get("eval/avg_episode_length"))
+            measured = [key for key, source in (
+                ("episode_seconds", "eval/avg_episode_length"), ("episode_reward", "eval/episode_reward"),
+                ("value_loss", "training/v_loss"), ("policy_loss", "training/policy_loss")) if source in metrics]
             points.append({"steps": steps, "episode_seconds": None if length is None else length * dt,
                 "episode_reward": number(metrics.get("eval/episode_reward")),
-                "value_loss": number(metrics.get("training/v_loss")), "policy_loss": number(metrics.get("training/policy_loss"))})
+                "value_loss": number(metrics.get("training/v_loss")), "policy_loss": number(metrics.get("training/policy_loss")),
+                "measured": measured})
         if not points:
             return waiting
         if any(b["steps"] <= a["steps"] for a, b in zip(points, points[1:])):
@@ -282,7 +286,7 @@ def load_console_learning_data(run_dir: Path, mode: str) -> dict:
                 "曲线最多显示最近2000个记录点；完整记录保存在本轮metrics.jsonl。",
                 "续训步数从本轮零点开始；不同运行不会拼接。",
                 "奖励与回合长度只使用实际评估，缺失值不会补造。",
-                "每次仅2个评估环境；回合时长不等于成功率，loss不代表平衡能力。",
+                f"每次{ppo.get('num_eval_envs', 2)}个评估环境；回合时长不等于成功率，loss不代表平衡能力。",
                 "展示模型独立加载，训练结束后点击载入最新模型查看成果。"]}, "points": points}
     except (OSError, ValueError, KeyError, TypeError, AttributeError, OverflowError):
         return waiting

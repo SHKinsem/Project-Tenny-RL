@@ -11,11 +11,24 @@ import numpy as np
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"experiments/torque200"))
 from force_teacher import policy, contract
-from force_teacher.networks import POLICY_HEAD_VERSION, WHEEL_RESIDUAL_SCALE, PREVIOUS_TORQUE_CLIP
+from force_teacher.options import normalize_options, legacy_options
+from force_teacher.networks import POLICY_HEAD_VERSION
 _spec=importlib.util.spec_from_file_location("_force_test_kernel",Path(__file__).resolve().parents[1]/"experiments/torque200/legwheel/deployment/numpy_policy.py")
 _kernel=importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_kernel)
 load_exported=_kernel.load_exported
+_make_metadata = contract.metadata
+
+
+def metadata_fixture(original_root=None, experiment_config=None):
+    """Keep the actual metadata/reader validation with synthetic source identity."""
+    with patch.object(contract, "hybrid_metadata", return_value=dict(source_fingerprint="hybrid", control_hz=100)), \
+         patch.object(contract, "read_geometry", return_value=()), \
+         patch.object(contract, "scan_geometry", return_value=()), \
+         patch.object(contract, "source_fingerprint", return_value="force"), \
+         patch.object(contract, "teacher_policy_path", return_value=Path("teacher.cpp")), \
+         patch.object(contract, "file_digest", return_value="teacher-bytes"):
+        return _make_metadata(original_root, experiment_config)
 
 
 def parameters():
@@ -36,15 +49,40 @@ class ForcePolicyTests(unittest.TestCase):
         self.export=self.root/"policy.cpp.txt"
         self.params=parameters()
         policy._write_export(self.params,self.export,"synthetic-unit-fixture")
-        self.expected=dict(mode="leg_force_bc",teacher_schema=contract.SCHEMA,control_hz=100,
-            policy_head=POLICY_HEAD_VERSION,wheel_residual_scale=WHEEL_RESIDUAL_SCALE,
-            previous_torque_clip=PREVIOUS_TORQUE_CLIP,force_source_fingerprint="test-source")
+        self.expected=metadata_fixture(experiment_config=legacy_options())
         self.meta=self.root/"policy_metadata.json"
         self.meta.write_text(json.dumps({**self.expected,"export_sha256":contract.file_digest(self.export)}))
 
     def reader(self):
-        with patch.object(policy,"metadata",return_value=self.expected), patch.dict(sys.modules,{"legwheel.deployment.numpy_policy":_kernel}):
+        with patch.object(contract,"metadata",side_effect=metadata_fixture), patch.dict(sys.modules,{"legwheel.deployment.numpy_policy":_kernel}):
             return policy.ForcePolicy(self.export,self.meta)
+
+    def test_v4_absolute_head_ignores_previous_wheel_torque(self):
+        saved = metadata_fixture()
+        saved["export_sha256"] = contract.file_digest(self.export)
+        self.meta.write_text(json.dumps(saved))
+        reader = self.reader()
+        self.assertEqual(reader.experiment_config, normalize_options())
+        obs = np.zeros(24, dtype=np.float32)
+        expected = np.tanh([.1, -.2, 5., -10.])
+        np.testing.assert_allclose(reader.action(obs), expected, atol=1e-7)
+        obs[22:24] = [.8, -.9]
+        np.testing.assert_allclose(reader.action(obs), expected, atol=1e-7)
+
+    def test_allowlisted_v3_preserves_the_residual_runtime(self):
+        saved = dict(self.expected)
+        saved.pop("experiment_config")
+        saved.pop("experiment_config_sha256")
+        source, force_source = next(iter(contract.LEGACY_SOURCE_PAIRS))
+        saved.update(teacher_schema=contract.LEGACY_SCHEMA, source_fingerprint=source,
+                     force_source_fingerprint=force_source, export_sha256=contract.file_digest(self.export))
+        self.meta.write_text(json.dumps(saved))
+        reader = self.reader()
+        self.assertEqual(reader.experiment_config, legacy_options())
+        obs = np.zeros(24, dtype=np.float32)
+        obs[22:24] = [.6, -.4]
+        expected = np.tanh(np.r_[[.1, -.2], np.arctanh(obs[22:24]) + .05 * np.array([5., -10.])])
+        np.testing.assert_allclose(reader.action(obs), expected, atol=1e-7)
 
     def test_float32_stats_and_weights_round_trip_exactly(self):
         self.params[1]["params"]["hidden_0"]["kernel"][0,0]=np.float32(.123456789)

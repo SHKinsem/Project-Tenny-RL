@@ -14,7 +14,22 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments/torque200"))
 from force_teacher.teacher import force_label, projected_action, _observations, collect_dataset
 from force_teacher import contract
+from force_teacher.options import normalize_options, legacy_options
 from hybrid.core import XML, map_action
+
+
+_make_metadata = contract.metadata
+
+
+def metadata_fixture(original_root=None, experiment_config=None):
+    """Exercise the real metadata builder without external teacher artifacts."""
+    with patch.object(contract, "hybrid_metadata", return_value=dict(source_fingerprint="hybrid", control_hz=100)), \
+         patch.object(contract, "read_geometry", return_value=()), \
+         patch.object(contract, "scan_geometry", return_value=()), \
+         patch.object(contract, "source_fingerprint", return_value="force"), \
+         patch.object(contract, "teacher_policy_path", return_value=Path("teacher.cpp")), \
+         patch.object(contract, "file_digest", return_value="teacher-bytes"):
+        return _make_metadata(original_root, experiment_config)
 
 
 class StandingConfigTests(unittest.TestCase):
@@ -144,10 +159,43 @@ class ForceLabelTests(unittest.TestCase):
 
 class ForceContractTests(unittest.TestCase):
     def test_v1_teacher_data_cannot_match_new_semantics(self):
-        self.assertEqual(contract.SCHEMA, "leg-force-reachable-teacher-bc-v3")
+        self.assertEqual(contract.SCHEMA, "leg-force-configurable-bc-v4")
         with self.assertRaises(ValueError):
-            contract.require_metadata(dict(teacher_schema="leg-force-teacher-bc-v1"),
-                                      dict(teacher_schema=contract.SCHEMA))
+            contract.validate_metadata(dict(mode=contract.MODE, teacher_schema="leg-force-teacher-bc-v1"))
+
+    def test_v4_checks_complete_options_hash_head_and_resume_configuration(self):
+        expected = metadata_fixture()
+        with patch.object(contract, "metadata", side_effect=metadata_fixture):
+            self.assertEqual(contract.validate_metadata(expected), normalize_options())
+            invalid = [dict(expected, policy_head="wheel_logit_residual_v1"),
+                       dict(expected, experiment_config_sha256="changed"),
+                       dict(expected, unexpected=True),
+                       dict(expected, experiment_config={"wheel_head": "absolute"})]
+            for actual in invalid:
+                with self.subTest(actual=actual), self.assertRaises(ValueError):
+                    contract.validate_metadata(actual)
+            with self.assertRaisesRegex(ValueError, "Resume configuration conflicts"):
+                contract.validate_metadata(expected, experiment_config=dict(wheel_head="residual"))
+
+    def test_v3_migration_requires_exact_source_pair_and_residual_semantics(self):
+        legacy = metadata_fixture(experiment_config=legacy_options())
+        legacy.pop("experiment_config")
+        legacy.pop("experiment_config_sha256")
+        source, force_source = next(iter(contract.LEGACY_SOURCE_PAIRS))
+        legacy.update(teacher_schema=contract.LEGACY_SCHEMA, source_fingerprint=source,
+                      force_source_fingerprint=force_source)
+        with patch.object(contract, "metadata", side_effect=metadata_fixture):
+            self.assertEqual(contract.validate_metadata(legacy), legacy_options())
+            invalid = [dict(legacy, source_fingerprint="unknown"),
+                       dict(legacy, force_source_fingerprint="unknown"),
+                       dict(legacy, policy_head="absolute_tanh_v1"),
+                       dict(legacy, wheel_residual_scale=.1),
+                       dict(legacy, experiment_config=legacy_options())]
+            for actual in invalid:
+                with self.subTest(actual=actual), self.assertRaises(ValueError):
+                    contract.validate_metadata(actual)
+            with self.assertRaisesRegex(ValueError, "Resume configuration conflicts"):
+                contract.validate_metadata(legacy, experiment_config=normalize_options())
 
     def test_actual_student_xml_has_four_motors_not_leg_servos(self):
         actuators = list(ET.parse(XML).getroot().find("actuator"))
@@ -169,15 +217,19 @@ class ForceContractTests(unittest.TestCase):
             (checkpoint / "weights").write_bytes(b"verified")
             export = root / "policy.cpp.txt"
             export.write_bytes(b"export")
-            expected = dict(mode=contract.MODE, source_fingerprint="hybrid", force_source_fingerprint="force")
+            expected = metadata_fixture()
             report = dict(mode=contract.MODE, checkpoint_validated=True, source_fingerprint="hybrid",
                           checkpoint=str(checkpoint), export_path=str(export),
                           checkpoint_sha256=contract.tree_digest(checkpoint), export_sha256=contract.file_digest(export))
             (root / "policy_metadata.json").write_text(json.dumps({**expected, "export_sha256": report["export_sha256"]}))
             (root / "report.json").write_text(json.dumps(report))
-            with patch.object(contract, "metadata", return_value=expected):
-                contract.verified_report(root, report)
-                contract.restore_guard(checkpoint)
+            with patch.object(contract, "metadata", side_effect=metadata_fixture):
+                self.assertEqual(contract.verified_report(root, report), normalize_options())
+                self.assertEqual(contract.restore_guard(checkpoint), normalize_options())
+                export.write_bytes(b"changed export")
+                with self.assertRaises(ValueError):
+                    contract.verified_report(root, report)
+                export.write_bytes(b"export")
                 (checkpoint / "weights").write_bytes(b"changed")
                 with self.assertRaises(ValueError):
                     contract.verified_report(root, report)

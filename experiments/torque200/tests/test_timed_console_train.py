@@ -2,6 +2,7 @@
 
 import argparse
 from contextlib import contextmanager
+import importlib
 import inspect
 import json
 from pathlib import Path
@@ -58,6 +59,14 @@ def fake_training_modules(args, train_function, clock):
     def save(path, steps, params, config):
         return path
 
+    def network_config(observation_size, action_size, normalize_observations, network_factory):
+        return {
+            "observation_size": observation_size,
+            "action_size": action_size,
+            "normalize_observations": normalize_observations,
+            "network_factory": network_factory,
+        }
+
     def save_cpu_checkpoint(params, path):
         return path
 
@@ -80,7 +89,7 @@ def fake_training_modules(args, train_function, clock):
     source = args.original_root / "mujoco_legwheel_rl_public" if args.mode == "original" else args.torque_root / "src"
     module("jax", jit=jit, block_until_ready=block_until_ready)
     module("brax.training.acting", Evaluator=Evaluator)
-    module("brax.training.agents.ppo.checkpoint", save=save)
+    module("brax.training.agents.ppo.checkpoint", save=save, network_config=network_config)
     module("brax.training.agents.ppo.networks", make_ppo_networks=make_ppo_networks)
     module("brax.training.agents.ppo.train", train=train_function)
     module("legwheel", __file__=str(source / "legwheel" / "__init__.py"))
@@ -280,6 +289,7 @@ class TimedConsoleTests(unittest.TestCase):
                     (modules["jax"], "jit"),
                     (modules["brax.training.acting"].Evaluator, "run_evaluation"),
                     (modules["brax.training.agents.ppo.checkpoint"], "save"),
+                    (modules["brax.training.agents.ppo.checkpoint"], "network_config"),
                     (modules["legwheel.utils"], "save_cpu_checkpoint"),
                     (modules["legwheel.deployment.extract"], "load"),
                     (modules["legwheel.deployment.extract"], "export_params"),
@@ -449,6 +459,108 @@ class TimedConsoleTests(unittest.TestCase):
         phases = {event["phase"] for event in self.segments()}
         self.assertIn("io.status", phases)
         self.assertIn("io.report", phases)
+
+    def test_main_selects_model_roots_before_package_dispatch_and_restores_path(self):
+        release_source = self.directory / "release" / "src"
+        torque_root = self.directory / "models"
+        original_root = self.directory / "reference"
+        torque_source = torque_root / "src"
+        reference_source = original_root / "mujoco_legwheel_rl_public"
+        deploy_source = original_root / "mujoco_esp32_robot_deploy_public"
+        deploy_source.mkdir(parents=True)
+        for source in (release_source, torque_source, reference_source):
+            legwheel = source / "legwheel"
+            legwheel.mkdir(parents=True)
+            (legwheel / "__init__.py").write_text("", encoding="utf8")
+        for source in (release_source, torque_source):
+            hybrid = source / "hybrid"
+            hybrid.mkdir()
+            (hybrid / "__init__.py").write_text("", encoding="utf8")
+            (hybrid / "managed_training.py").write_text(
+                "from contextlib import contextmanager\n"
+                "@contextmanager\n"
+                "def runtime_locks(root):\n"
+                "    yield\n"
+                "def run_managed(args, monitor, run_training):\n"
+                "    return run_training(args, monitor)\n", encoding="utf8")
+
+        original_sys_path = list(sys.path)
+        for mode in ("original", "wheel_torque_bc", "torque200", "leg_force_bc",
+                     "hybrid_virtual_leg_force_100"):
+            for failure in (False, True):
+                with self.subTest(mode=mode, failure=failure), patch.dict(sys.modules):
+                    # Each run represents a fresh runner, with a versioned wrapper
+                    # visible first and distinct model/assets roots in its args.
+                    for name in ("hybrid.managed_training", "hybrid", "legwheel"):
+                        sys.modules.pop(name, None)
+                    importlib.invalidate_caches()
+                    sys.path[:] = [str(release_source)] + original_sys_path
+                    before_main = list(sys.path)
+                    run = self.directory / (mode + ("-failure" if failure else "-success"))
+                    run.mkdir()
+                    expected_source = (reference_source if mode in ("original", "wheel_torque_bc")
+                                       else torque_source)
+                    entered = []
+
+                    @contextmanager
+                    def hooks(args, monitor, code):
+                        self.assertEqual(sys.path[:2], [str(expected_source), str(deploy_source)])
+                        package = importlib.import_module("legwheel")
+                        self.assertEqual(Path(package.__file__).resolve().parent.parent, expected_source)
+                        if mode in ("leg_force_bc", "hybrid_virtual_leg_force_100"):
+                            # This package was bound by console.main, before hooks.
+                            managed = sys.modules["hybrid.managed_training"]
+                            self.assertEqual(Path(managed.__file__).resolve().parent.parent, torque_source)
+                        entered.append(True)
+                        yield
+
+                    def train(args, monitor):
+                        if failure:
+                            raise RuntimeError("fixture training failure")
+                        monitor.publish(phase="completed", stage="verified", completed=True)
+                        timed.console.atomic_json(run / "report.json", dict(monitor.state))
+
+                    try:
+                        with self.fake_main_clock(), patch.object(timed, "training_hooks", hooks), \
+                                patch.object(timed.console, "run_training", train):
+                            argv = ["--mode", mode, "--run-dir", str(run),
+                                    "--original-root", str(original_root), "--torque-root", str(torque_root)]
+                            if failure:
+                                with self.assertRaisesRegex(RuntimeError, "fixture training failure"):
+                                    timed.main(argv)
+                            else:
+                                timed.main(argv)
+                        self.assertEqual(entered, [True])
+                        self.assertEqual(sys.path, before_main)
+                    finally:
+                        sys.path[:] = original_sys_path
+
+    def test_manual_force_snapshot_restores_experiment_normalizer(self):
+        monitor = self.monitor()
+        monitor._workbench_network_config = {"fixture": True}
+        options = {"fixed_normalization": False}
+        args = SimpleNamespace(mode="leg_force_bc", experiment_config=options)
+        restored = ["saved_normalizer", "actor", "critic"]
+        normalizer = ModuleType("force_teacher.ppo")
+        normalizer.restore_normalizer = lambda state, config: (
+            "welford" if state == "saved_normalizer" and config is options else "wrong")
+
+        class VerificationReached(Exception):
+            pass
+
+        def verify(params, recovered):
+            self.assertEqual(recovered[0], "welford")
+            raise VerificationReached
+
+        builder = timed.manual_snapshot_builder(
+            args, monitor, SimpleNamespace(),
+            SimpleNamespace(save=lambda *args: None),
+            SimpleNamespace(load=lambda path: restored, export_params=lambda *args: None),
+            SimpleNamespace(check_parameter_trees=verify))
+        with patch.dict(sys.modules, {"force_teacher.ppo": normalizer}):
+            with self.assertRaises(VerificationReached):
+                builder(self.directory, steps=123, factory=None, params=None,
+                        elapsed_seconds=10, stage=lambda value: None)
 
     def test_wrappers_preserve_the_public_signatures_brax_inspects(self):
         monitor = self.monitor()

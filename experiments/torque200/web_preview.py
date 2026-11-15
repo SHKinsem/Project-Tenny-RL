@@ -39,7 +39,7 @@ def main():
     parser.add_argument("--original-root", type=Path, default=(Path.home() / "projects/tenny-reference"))
     args = parser.parse_args()
     persist_mode(args.artifacts, args.mode)
-    if mode_spec(args.mode)["hybrid"] or mode_spec(args.mode)["teacher"]:
+    if args.mode in MODES:
         from hybrid_web import main as hybrid_main
         return hybrid_main(args)
     from preview_sync import read_snapshot, utc_now
@@ -173,6 +173,9 @@ def main():
             self.wfile.write(content)
 
         def do_GET(self):
+            from workbench_web import dispatch
+            if dispatch(self, artifacts=args.artifacts, mode=args.mode):
+                return
             if self.path == "/":
                 return self.send(Path(__file__).with_name("dashboard.html").read_bytes(),
                                  "text/html; charset=utf-8")
@@ -229,7 +232,24 @@ def main():
                 with lock:
                     shared["clients"] -= 1
 
+        def do_HEAD(self):
+            from workbench_web import dispatch
+            if not dispatch(self, artifacts=args.artifacts, mode=args.mode):
+                self.send_error(404)
+
+        def do_PUT(self):
+            from workbench_web import dispatch
+            if not dispatch(self, artifacts=args.artifacts, mode=args.mode):
+                self.send_error(405)
+
+        do_PATCH = do_PUT
+        do_DELETE = do_PUT
+        do_OPTIONS = do_PUT
+
         def do_POST(self):
+            from workbench_web import dispatch
+            if dispatch(self, artifacts=args.artifacts, mode=args.mode):
+                return
             nonlocal reset_requested, switch_requested, pending_preview
             if self.path not in ("/control", "/training"):
                 return self.send(b"Not found", "text/plain", 404)
