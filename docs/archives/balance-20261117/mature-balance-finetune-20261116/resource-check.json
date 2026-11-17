@@ -1,0 +1,33 @@
+{
+  "active_record": {
+    "mode": "leg_force_bc",
+    "duration_seconds": 900,
+    "resume": false,
+    "force_revalidate": false,
+    "restore": null,
+    "seed": 0,
+    "preview_protocol": 1,
+    "parameters": {},
+    "requested_effective_parameters": {
+      "num_envs": 512,
+      "batch_size": 512,
+      "num_minibatches": 1,
+      "unroll_length": 16,
+      "num_updates_per_batch": 1,
+      "learning_rate": 3e-05,
+      "entropy_cost": 0.001,
+      "reward_scaling": 0.1,
+      "clipping_epsilon": 0.3,
+      "max_grad_norm": 1.0,
+      "num_eval_envs": 8
+    },
+    "created_at": "2026-11-15T17:25:33.825091+00:00",
+    "run_dir": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875",
+    "phase": "completed",
+    "script": "$HOME/projects/tenny-torque200/releases/preview-20261115T170627Z/src/timed_console_train.py",
+    "pid": 77501,
+    "process_start": "8472677",
+    "ended_at": "2026-11-15T17:37:42.423362+00:00"
+  },
+  "matching_processes": []
+}

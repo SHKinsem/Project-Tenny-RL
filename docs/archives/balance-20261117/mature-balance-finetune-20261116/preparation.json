@@ -1,0 +1,36 @@
+{
+  "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "action_export_max_abs_error": 0.0,
+  "model_origin": {
+    "run_dir": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40",
+    "checkpoint": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/checkpoints/000002801664",
+    "checkpoint_sha256": "b177fb73cd6566e96fcaefcb5c8ecd2324de53f8318fa82cf74684476803aa5d",
+    "restored_from": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T053612.022810Z_47e4b501/checkpoints/000001171456",
+    "learning_rate": 3e-05,
+    "episode_length": 600,
+    "original_action_mode": "virtual_leg_force"
+  },
+  "protected_inputs": {
+    "files": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/env_config.json": "e0794635e38237a972ea91a758c91e663697f7025e00786cd06d92d936d94ca7",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/ppo_config.json": "cf68c3d7db925a2592c08fc9e5742cf7f9826d86011a24644c73cf4f2980fead",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/policy_metadata.json": "5e38ccd6c1f852435b21ecfb91f1781b95115eeb607fc967494f5fd6d1e1292f",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/policy.cpp.txt": "5495abd4c8c39cf42fb5c9e4d2a0a1936c030367231ed5fe0b6bc8e2f9dcd681",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/report.json": "5a1af1cc2995177a7e916a39626305b2868dabcab0ca632067d8e91a430980ef",
+      "$HOME/projects/tenny-torque200/src/force_teacher/env.py": "537023bbb3dc9246cc54dc8a96a33fcb88873fca5c6be95cbac51fab94b849cf",
+      "$HOME/projects/tenny-torque200/src/force_teacher/ppo.py": "55ddc1ea05c9c5ed08cd479f6a9481b146a601297dd5630b98a102da42151b57",
+      "$HOME/projects/tenny-torque200/src/force_teacher/networks.py": "804c8103571bb926de26417b6642b6447161360b07ef6aa59b6db50f26a0044a",
+      "$HOME/projects/tenny-torque200/src/legwheel/env.py": "2e2d883fd00c1898113eb2a5406c89e0d7b762e07dcad05c89aaf1e6fa867c4c",
+      "$HOME/projects/tenny-torque200/src/legwheel/rewards.py": "f415a3f39b388117b7d79426b4df7445d6373ce862197b0860ddbf82388a3417",
+      "$HOME/projects/tenny-torque200/src/hybrid/env.py": "c27e78890b9a528167313e33320001e9abef5dec611b3dfdfc3dcfaf76115332",
+      "$HOME/projects/tenny-reference/.venv-gpu/lib/python3.12/site-packages/brax/training/agents/ppo/train.py": "32ed2754f3f9b545c7f381aba9953d1160ca82cc0d01deb59d1f5847872eea32",
+      "$HOME/projects/tenny-reference/.venv-gpu/lib/python3.12/site-packages/brax/training/agents/ppo/losses.py": "b6dfe0aefeb1e3d11252fc40c6ec4512757fc7fccc0b3e37ec9ccd349351007c",
+      "$HOME/projects/tenny-native-eval/python/native_eval/_native.cpython-312-x86_64-linux-gnu.so": "1dd12b5bc3c5baabb85529129eee362e09b70f45b56161606cc90c7597106b6f"
+    },
+    "checkpoint_trees": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/checkpoints/000002801664": "b177fb73cd6566e96fcaefcb5c8ecd2324de53f8318fa82cf74684476803aa5d"
+    }
+  },
+  "runtime_files": 25,
+  "executed_source_sha256": "40d9a40d3a762361f4239a3cc2c3dc4e92e6b7ee98b242a0ddf5a6dfce3416dd"
+}

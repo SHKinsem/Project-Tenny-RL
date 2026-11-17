@@ -1,0 +1,805 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "nominal",
+      "control_steps": 620,
+      "physics_steps": 2480,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8397046881480655,
+        0.8851951876866155
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0,
+        0.06935483870967742
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 582,
+      "physics_steps": 2328,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8753011404514198,
+        0.8850878359678804
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.015463917525773196,
+        0.17353951890034364
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 564,
+      "physics_steps": 2256,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.7497091952772872,
+        0.8852354110692842
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0,
+        0.15602836879432624
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 566,
+      "physics_steps": 2264,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8539122715394246,
+        0.8850338091567564
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0035335689045936395,
+        0.1413427561837456
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 904,
+      "physics_steps": 3616,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8851738808325643,
+        0.8863760102918106
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.17256637168141592,
+        0.2411504424778761
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "nominal",
+      "control_steps": 828,
+      "physics_steps": 3312,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8848983909596458,
+        0.8864205199258746
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.16304347826086957,
+        0.2210144927536232
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 787,
+      "physics_steps": 3148,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8849313186362251,
+        0.8863817076876577
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.18678526048284624,
+        0.20838627700127066
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 554,
+      "physics_steps": 2216,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8407195429497392,
+        0.8852354157451146
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0,
+        0.17509025270758122
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 772,
+      "physics_steps": 3088,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8849309348690018,
+        0.8864306154701632
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.19041450777202074,
+        0.20725388601036268
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 517,
+      "physics_steps": 2068,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.859115087645968,
+        0.885268239674101
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0038684719535783366,
+        0.0851063829787234
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "nominal",
+      "control_steps": 969,
+      "physics_steps": 3876,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8850064152569627,
+        0.886403930746839
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.15273477812177502,
+        0.20123839009287925
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 962,
+      "physics_steps": 3848,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8849777526783201,
+        0.8865749663267578
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.14553014553014554,
+        0.18607068607068608
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 553,
+      "physics_steps": 2212,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8332829269850835,
+        0.8852345523416273
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0,
+        0.13200723327305605
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 1989,
+      "physics_steps": 7956,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8904170350852646,
+        0.8866831813294024
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.15133232780291603,
+        0.1649069884364002
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 544,
+      "physics_steps": 2176,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.7927660854068701,
+        0.8852622379770285
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0,
+        0.14154411764705882
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "nominal",
+      "control_steps": 577,
+      "physics_steps": 2308,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8791847384206902,
+        0.8851959112215934
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.01559792027729636,
+        0.17850953206239167
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 801,
+      "physics_steps": 3204,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.884999027660903,
+        0.8865959023650978
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.18102372034956304,
+        0.19975031210986266
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 439,
+      "physics_steps": 1756,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.6404779398712864,
+        0.8852352262558949
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0,
+        0.0979498861047836
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 534,
+      "physics_steps": 2136,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8706169743631549,
+        0.8849528730156226
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.0056179775280898875,
+        0.27340823970037453
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 480,
+      "physics_steps": 1920,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8757551869715704,
+        0.885262543852342
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "held_force_action_ge95_fraction": [
+        0.004166666666666667,
+        0.12291666666666666
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "nominal",
+      "control_steps": 62,
+      "physics_steps": 248,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.769122987739839,
+        1.764822592378183
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5483870967741935,
+        0.8387096774193549
+      ],
+      "held_force_action_ge95_fraction": [
+        0.3064516129032258,
+        0.3225806451612903
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 63,
+      "physics_steps": 252,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.767554588278473,
+        1.7608083191859314
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5396825396825397,
+        0.8095238095238095
+      ],
+      "held_force_action_ge95_fraction": [
+        0.20634920634920634,
+        0.2698412698412698
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 62,
+      "physics_steps": 248,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7698673919516499,
+        1.768799090050787
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5483870967741935,
+        0.7580645161290323
+      ],
+      "held_force_action_ge95_fraction": [
+        0.3709677419354839,
+        0.41935483870967744
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 66,
+      "physics_steps": 264,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7653943350434473,
+        1.7624410766792888
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5151515151515151,
+        0.7575757575757576
+      ],
+      "held_force_action_ge95_fraction": [
+        0.22727272727272727,
+        0.21212121212121213
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 115,
+      "physics_steps": 460,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.77011088653217,
+        1.7701666045350828
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.6,
+        0.7391304347826086
+      ],
+      "held_force_action_ge95_fraction": [
+        0.22608695652173913,
+        0.4782608695652174
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "nominal",
+      "control_steps": 63,
+      "physics_steps": 252,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7697486388949577,
+        1.7638825903166881
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5555555555555556,
+        0.7936507936507936
+      ],
+      "held_force_action_ge95_fraction": [
+        0.3968253968253968,
+        0.36507936507936506
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 65,
+      "physics_steps": 260,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7685004045691748,
+        1.758302541561879
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5846153846153846,
+        0.8
+      ],
+      "held_force_action_ge95_fraction": [
+        0.3230769230769231,
+        0.23076923076923078
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 63,
+      "physics_steps": 252,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7702681307388852,
+        1.768405650754627
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5714285714285714,
+        0.7936507936507936
+      ],
+      "held_force_action_ge95_fraction": [
+        0.42857142857142855,
+        0.4444444444444444
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 83,
+      "physics_steps": 332,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.770027667932507,
+        1.7597406529891868
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5662650602409639,
+        0.6385542168674698
+      ],
+      "held_force_action_ge95_fraction": [
+        0.27710843373493976,
+        0.2289156626506024
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 60,
+      "physics_steps": 240,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7702174213649535,
+        1.7701426138302483
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5333333333333333,
+        0.7333333333333333
+      ],
+      "held_force_action_ge95_fraction": [
+        0.31666666666666665,
+        0.4166666666666667
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "nominal",
+      "control_steps": 62,
+      "physics_steps": 248,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7692943735972249,
+        1.7662798437776803
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5483870967741935,
+        0.8225806451612904
+      ],
+      "held_force_action_ge95_fraction": [
+        0.2903225806451613,
+        0.3548387096774194
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 64,
+      "physics_steps": 256,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7680033037557203,
+        1.762843498202346
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.546875,
+        0.8125
+      ],
+      "held_force_action_ge95_fraction": [
+        0.234375,
+        0.296875
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 62,
+      "physics_steps": 248,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7699822745219922,
+        1.7691393300548306
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.532258064516129,
+        0.7741935483870968
+      ],
+      "held_force_action_ge95_fraction": [
+        0.3064516129032258,
+        0.41935483870967744
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 69,
+      "physics_steps": 276,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7673114904476706,
+        1.7629058303323806
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5507246376811594,
+        0.6956521739130435
+      ],
+      "held_force_action_ge95_fraction": [
+        0.2463768115942029,
+        0.21739130434782608
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 125,
+      "physics_steps": 500,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7702901647391307,
+        1.7702153769785474
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.544,
+        0.84
+      ],
+      "held_force_action_ge95_fraction": [
+        0.208,
+        0.64
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "nominal",
+      "control_steps": 62,
+      "physics_steps": 248,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7693995152005983,
+        1.764620350495945
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5806451612903226,
+        0.8064516129032258
+      ],
+      "held_force_action_ge95_fraction": [
+        0.3709677419354839,
+        0.3709677419354839
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "pitch-plus",
+      "control_steps": 65,
+      "physics_steps": 260,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7683426473216177,
+        1.7586712141551992
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.6,
+        0.8153846153846154
+      ],
+      "held_force_action_ge95_fraction": [
+        0.4,
+        0.24615384615384617
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "pitch-minus",
+      "control_steps": 62,
+      "physics_steps": 248,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7700529667487725,
+        1.768868945532461
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.532258064516129,
+        0.7741935483870968
+      ],
+      "held_force_action_ge95_fraction": [
+        0.3870967741935484,
+        0.41935483870967744
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "heldout-plus",
+      "control_steps": 82,
+      "physics_steps": 328,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7700657371239072,
+        1.7655186750390444
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5853658536585366,
+        0.6707317073170732
+      ],
+      "held_force_action_ge95_fraction": [
+        0.23170731707317074,
+        0.24390243902439024
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "heldout-minus",
+      "control_steps": 118,
+      "physics_steps": 472,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.7702112781369503,
+        1.7702024741215943
+      ],
+      "sampled_command_over_original_1nm_fraction": [
+        0.5932203389830508,
+        0.7966101694915254
+      ],
+      "held_force_action_ge95_fraction": [
+        0.2711864406779661,
+        0.5338983050847458
+      ],
+      "scope": "Command magnitude: 100Hz final-substep samples. Action: held controls. Raw clipping: full-physics native aggregate; nonzero is not a duty ratio."
+    }
+  ]
+}

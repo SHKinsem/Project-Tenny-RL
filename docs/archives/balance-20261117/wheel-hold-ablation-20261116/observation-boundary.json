@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scope": "Actual deployed StudentEnv -> Hybrid -> LegWheelRobot observation chain and force_teacher network state/privileged_state keys; source copies and hashes are in deployed-source.",
+  "actor_dimension": 24,
+  "actor_world_xy_input": false,
+  "actor_true_body_linear_velocity_input": false,
+  "actor_features": [
+    {
+      "slice": [
+        0,
+        4
+      ],
+      "meaning": "commands"
+    },
+    {
+      "slice": [
+        4,
+        7
+      ],
+      "meaning": "gyroscope"
+    },
+    {
+      "slice": [
+        7,
+        10
+      ],
+      "meaning": "yaw, pitch and roll error features"
+    },
+    {
+      "slice": [
+        10,
+        14
+      ],
+      "meaning": "joint-position features; wheel slots use common wheel-angle hold error"
+    },
+    {
+      "slice": [
+        14,
+        18
+      ],
+      "meaning": "actual joint velocities"
+    },
+    {
+      "slice": [
+        18,
+        20
+      ],
+      "meaning": "wheel angular velocities multiplied by wheel radius"
+    },
+    {
+      "slice": [
+        20,
+        24
+      ],
+      "meaning": "previous sent motor torques normalized by original limits"
+    }
+  ],
+  "scaling": "Feature scales and fixed observation normalization remain unchanged; these labels are not raw SI values after normalization.",
+  "critic_dimension": 51,
+  "critic_true_body_local_x_velocity_index": 46,
+  "critic_world_xy_input": false,
+  "true_xy_usage": "Simulator root-position displacement enters the added training reward and offline evaluation, not actor or critic observation.",
+  "wheel_observation_unchanged": true,
+  "observation_noise_level": 0,
+  "imu_bias_or_drift_tested": false,
+  "wheel_slip_robustness_tested": false
+}

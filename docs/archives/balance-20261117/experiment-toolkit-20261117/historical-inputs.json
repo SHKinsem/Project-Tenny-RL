@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "input_sha256_inventory",
+  "hash_algorithm": "sha256",
+  "tree_hash_format": "relative-path-kind-size-sha256-canonical-json-v1",
+  "entries": [
+    {
+      "path": "${REPO}\\tasks\\results\\mature-balance-finetune-20261116\\comparison\\summary.json",
+      "kind": "file",
+      "size_bytes": 183448,
+      "sha256": "f7d8de95ec4c4cf0d074fc12cbf934a5bb81fa253062575843ee3f370cd50732"
+    },
+    {
+      "path": "${REPO}\\tasks\\results\\mature-balance-finetune-20261116\\selected-stage\\descriptor.json",
+      "kind": "file",
+      "size_bytes": 211598,
+      "sha256": "106c6060f50064e70ac120478998d434887e1ba794a5179ed1cec681f97ad9a1"
+    },
+    {
+      "path": "${REPO}\\tasks\\results\\mature-balance-finetune-20261116\\selected-stage\\summary.json",
+      "kind": "file",
+      "size_bytes": 16859,
+      "sha256": "3649e0e732230c93b7b0c7733e7b7bdff1d708c412a87fe50402a5ada1154831"
+    },
+    {
+      "path": "${REPO}\\tasks\\results\\mature-balance-finetune-20261116\\selected-stage\\verification.json",
+      "kind": "file",
+      "size_bytes": 1355,
+      "sha256": "bf2b7623ec7c49f13870efe53e385e1e69e5199b37ff10c1cc58fc08a1e08240"
+    },
+    {
+      "path": "${REPO}\\tasks\\results\\wheel-hold-ablation-20261116\\comparison\\summary.json",
+      "kind": "file",
+      "size_bytes": 196838,
+      "sha256": "4aed791425d3191e624a81220360e7f3bbeec32ce3177e89ff15a6fd72926f22"
+    },
+    {
+      "path": "${REPO}\\tasks\\results\\wheel-hold-ablation-20261116\\selected-snapshot\\descriptor.json",
+      "kind": "file",
+      "size_bytes": 212187,
+      "sha256": "a695f8b7d5277fe5aa7706c073770d229dde86f87a7f0a829a05cb2bfaf6c35a"
+    },
+    {
+      "path": "${REPO}\\tasks\\results\\wheel-hold-ablation-20261116\\selected-snapshot\\summary.json",
+      "kind": "file",
+      "size_bytes": 19893,
+      "sha256": "29a3e004a66511143e09fe5b8181acbcdcad95d94821caa8cd933e66fe2ed330"
+    },
+    {
+      "path": "${REPO}\\tasks\\results\\wheel-hold-ablation-20261116\\selected-snapshot\\verification.json",
+      "kind": "file",
+      "size_bytes": 574,
+      "sha256": "2ec7fcaae1d6260e3fba8a67f3ed61b00352be697df17c4e594715af558dc7ba"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "phase": "completed",
+  "arm": "baseline",
+  "seed": 0,
+  "steps": 2097152,
+  "elapsed_seconds": 160.55607395400875,
+  "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+  "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+  "final_array_digest": "3d15a714df0dd9666c9650aa41f823c68e5f51f1c91d380b65a7d94562914e1a",
+  "actor_changed": true,
+  "normalizer_drift": 0.0,
+  "descriptor_sha256": "2147bafaf4ee585118aff4b03e543f743a1022c171758adfe25d6f47ab06daa3",
+  "devices": [
+    "cuda:0"
+  ],
+  "checkpoint_reload_exact": true
+}

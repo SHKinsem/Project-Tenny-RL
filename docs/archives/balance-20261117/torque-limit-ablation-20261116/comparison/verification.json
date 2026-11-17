@@ -1,0 +1,94 @@
+{
+  "reused_limit1_verified": true,
+  "new_effective_configs_matched": true,
+  "all_initial_arrays_exact": true,
+  "all_normalizers_frozen": true,
+  "all_3_new_checkpoints_finite": true,
+  "all_checkpoint_reloads_exact": true,
+  "protected_files_unchanged": 16,
+  "protected_checkpoint_trees_unchanged": 4,
+  "frozen_runtime_files_unchanged": 17,
+  "base_source_fingerprint_unchanged": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+  "copied_source_assets_identical": 13,
+  "native_build_source_sha256": {
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/CMakeLists.txt": "967cb1619a5ae2a63ee23ecf141b2a2908c5152b6ad02fe881ca87ebf3534223",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/validate_legwheel_modes.py": "bbeeaed72dd650c4a50e73e1a6dbd1e74f85cf5db004423cf95e318a281ad2ba",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/test_runtime.py": "6179f5163eb9d779ae7cfe5dd625eb55ded1208050534bbbf4ee52f623f486c3",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/test_brax.py": "5747b06ec415a8acfb3f381477596cada21d37d83df5b96fa392af0ea753d2c8",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/test_policy.py": "0cac6a82e28a8b849b8f0d4a8078b5dae3df01c08b797df2db3c1f23f5eba79a",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/test_export.py": "438789dc99cd93584d7cc14145e9a5a440de6ed7934848d43ac88d854a51104a",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/validate_saved_model.py": "6f776686c45d9557cf18b39b74112b6bf8e0ac7dfb54971c8dbe30a454b41e00",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/test_api.py": "a09593fa4e8dd6cd5f782a33b3e3005636d733104a3959feb0ff596176ae6475",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/tests/test_brax_policy.py": "5333f9411e26564d3a073cad7e5e0659a9b5b89c7fa3fa59656737e39e903697",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/cpp/policy.cpp": "3e301263667034f3e743e80f83edc2441ea9a8aa4837486f4f10409103d351d2",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/cpp/pendulum_task.cpp": "0d124dcb8770b183a5e028fe700e03441d47f7c976095ed0e8091ccce3633f7a",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/cpp/legwheel_task.cpp": "7e6105cb2c977616ecf5077a571e0f7046d9c6c7519a9a4242cea8123c3c353f",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/cpp/bindings.cpp": "1d7eafb46059c1d01a4b81f878a00930192af58f1c2ec73f0a65849c12c13bff",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/cpp/runtime.cpp": "551f5752df7b893234e7b7b041ab570531514599ce28ac6bd106512435fc6586",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/python/native_eval/legwheel.py": "a19817d775229b9fe26d84851ded19620d0bc1896e60912a552aba396a411d5e",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/python/native_eval/brax.py": "c9924431037fdf7465b72e515bbfd269ff36c317b25df2aeb0917cf5f7ac71e4",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/python/native_eval/__main__.py": "1d28bdaa148f05bc5494a840667c28bbda09bf18946418d09e3934e60da0f14c",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/python/native_eval/brax_policy.py": "7ea95e44d5a4e8cb34a6bfb5b89eda2c14bef2d8b2fafe54db2471ff2245898c",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/python/native_eval/api.py": "0f568f5f8c57336ae9d59741ef4e8f1bb84f044b0a5735f599821a239ed39b81",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/python/native_eval/__init__.py": "f9f1ad71b05caaa30bc89b869967d5840e5144f92fb53251812232349c4ff8e7",
+    "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/include/native_eval/runtime.hpp": "31e594bce75e81d11b47d2a67253f5c51b03e74a9c9327369f5d2b12f81244e0"
+  },
+  "experiment_fingerprint": "4271ee39e8767bebb9c4ec42413958cc20622393ea382fcf976fdcbb49ada9b0",
+  "formal_new_environment_steps": 6291456,
+  "formal_matrix_elapsed_seconds": 420.535972926009,
+  "separate_smoke_steps": 8192,
+  "smoke_elapsed_seconds": 47.05976596100663,
+  "exact_common_prefix_cases": 40,
+  "reached_30_seconds": 0,
+  "actual_frozen_env_wrapper_chain": [
+    {
+      "type": "BraxAutoResetWrapper",
+      "episode_length": null
+    },
+    {
+      "type": "EpisodeWrapper",
+      "episode_length": 3000
+    },
+    {
+      "type": "VmapWrapper",
+      "episode_length": null
+    },
+    {
+      "type": "TorqueLimitEnv",
+      "episode_length": null
+    }
+  ],
+  "public_metadata_correction_only": true,
+  "public_limit1_limit2_metadata_verified": true,
+  "source_archive_sha256": "f998f81596176d7143af94455a163aa8e24dc8fc9950a7e2c5c2881773995096",
+  "runs": [
+    {
+      "seed": 0,
+      "steps": 2097152,
+      "elapsed_seconds": 151.91712294399622,
+      "all_parameter_leaves_finite": true,
+      "leaf_count": 25,
+      "descriptor_matches_loaded_actor": true,
+      "checkpoint_sha256": "0ea39d9571568459405ede09e4de1d9cd9c83a91f1999267bff88c152478ee96"
+    },
+    {
+      "seed": 1,
+      "steps": 2097152,
+      "elapsed_seconds": 130.42368037599954,
+      "all_parameter_leaves_finite": true,
+      "leaf_count": 25,
+      "descriptor_matches_loaded_actor": true,
+      "checkpoint_sha256": "edb9f1aaff2d625b35b458cfd4f65088fb983067f80c73c3a52bdefc8a3cfa2b"
+    },
+    {
+      "seed": 2,
+      "steps": 2097152,
+      "elapsed_seconds": 124.85066875000484,
+      "all_parameter_leaves_finite": true,
+      "leaf_count": 25,
+      "descriptor_matches_loaded_actor": true,
+      "checkpoint_sha256": "46788a0d2fc8f0a945932407834ba79e59abe592f9b0922b4da2ed9e1d842f8c"
+    }
+  ],
+  "verification_seconds": 2.1264722240011906
+}

@@ -1,0 +1,5 @@
+{
+  "input_files_unchanged": 9,
+  "checkpoint_trees_unchanged": 3,
+  "source": "Exact pre/post hash comparison; no restore or overwrite performed."
+}

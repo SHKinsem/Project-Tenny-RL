@@ -1,0 +1,15 @@
+{
+  "base": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+  "experiment_files": {
+    "experiments/torque_limit_ablation/contract.py": "76af14805efaab2a9aad6d5f71450ff8d6414de082f68f0f7907631629c75052",
+    "experiments/torque_limit_ablation/native_patch.py": "4a70c62405b8fa4485f997cae84fbc394a736c975e6d97ddc0b4db901341aa20",
+    "experiments/torque_limit_ablation/__init__.py": "0a56e9d1bc8ddbcc11a6768bffe41a3f469337a8c07e2073fc7457dbc6c989f5",
+    "experiments/torque_limit_ablation/report.py": "a5e6fc0064709471d7661611a83a9c578f20ec5fe65434b2128ab77b5f1e2e6d",
+    "experiments/torque_limit_ablation/env.py": "6856cfddacbf85653f3844522bbe9fd05ee9d76b09e71737a3d72b69b0e50380"
+  },
+  "native_original_sha256": "03c864594f315847ca48b466c933fc6e3f803ef879a2a4d238454970eb1ee906",
+  "native_patched_sha256": "7e6105cb2c977616ecf5077a571e0f7046d9c6c7519a9a4242cea8123c3c353f",
+  "modified_xml_sha256": "f4c4de0904934def64ec2b18fec47f22a7353954ba0e72a1c71a58b3389367d5",
+  "trainer_original_sha256": "57a07025cdf0f6452860a894826d6642f4dd4e03ac1fe2e4c729b4ac8396f070",
+  "trainer_patched_sha256": "58f06d9f551e2cd71ba5f89ae57d1175df3ad4a96480012426e0e6cbe7ccfecd"
+}

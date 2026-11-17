@@ -1,0 +1,212 @@
+{
+  "phase": "completed",
+  "completed": [
+    {
+      "phase": "completed",
+      "condition": "high_lr",
+      "seed": 0,
+      "steps": 2097152,
+      "elapsed_seconds": 127.34643582699937,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "1b0da5ea32fcd1d650777adf1249cd1776f4741cb2793262c94bce875f736c9c",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "6a57d6bf61953f1a6057ce7c9a9992fe02cbb241aaee07d8b2f95d912e5a4020",
+      "checkpoint_reload_exact": true,
+      "requested_learning_rate": 3e-05,
+      "observed_learning_rates": [
+        2.9999999242136255e-05
+      ],
+      "optimizer_learning_rate_verified": true,
+      "callback_steps": [
+        0,
+        262144,
+        524288,
+        786432,
+        1048576,
+        1310720,
+        1572864,
+        1835008,
+        2097152
+      ],
+      "devices": [
+        "cuda:0"
+      ],
+      "reused": false
+    },
+    {
+      "phase": "completed",
+      "condition": "low_lr",
+      "seed": 0,
+      "steps": 2097152,
+      "elapsed_seconds": 134.95469179801876,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "e72c054cfb962ecbe2ad53bfd9e67835c679be741bb7edc574132b0dad767664",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "6abf0ff6fbb341d53a4091fea6c34c7f30ae2295a55bd5f5c72de0598b3a4bf6",
+      "checkpoint_reload_exact": true,
+      "requested_learning_rate": 3e-06,
+      "observed_learning_rates": [
+        3.000000106112566e-06
+      ],
+      "optimizer_learning_rate_verified": true,
+      "callback_steps": [
+        0,
+        262144,
+        524288,
+        786432,
+        1048576,
+        1310720,
+        1572864,
+        1835008,
+        2097152
+      ],
+      "devices": [
+        "cuda:0"
+      ],
+      "reused": false
+    },
+    {
+      "phase": "completed",
+      "condition": "low_lr",
+      "seed": 1,
+      "steps": 2097152,
+      "elapsed_seconds": 121.74892653498682,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "3fe7b9e2b7d8e75c86809a30b9c3d826d06bd5031041faf13c6ae33cef435335",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "1f0a251ec9269447e2566d3018b75540a1d2fc260966867c8896ee0c03f8801f",
+      "checkpoint_reload_exact": true,
+      "requested_learning_rate": 3e-06,
+      "observed_learning_rates": [
+        3.000000106112566e-06
+      ],
+      "optimizer_learning_rate_verified": true,
+      "callback_steps": [
+        0,
+        262144,
+        524288,
+        786432,
+        1048576,
+        1310720,
+        1572864,
+        1835008,
+        2097152
+      ],
+      "devices": [
+        "cuda:0"
+      ],
+      "reused": false
+    },
+    {
+      "phase": "completed",
+      "condition": "high_lr",
+      "seed": 1,
+      "steps": 2097152,
+      "elapsed_seconds": 108.58067615999607,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "c512530d9b75f1fe8716f8c11e72d4edae5d645d2ac2854168d93f8f9fee309a",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "042d7124bfbcf845da200c18cdf3b6de8890cafa64aa5832b9929cb9c045d005",
+      "checkpoint_reload_exact": true,
+      "requested_learning_rate": 3e-05,
+      "observed_learning_rates": [
+        2.9999999242136255e-05
+      ],
+      "optimizer_learning_rate_verified": true,
+      "callback_steps": [
+        0,
+        262144,
+        524288,
+        786432,
+        1048576,
+        1310720,
+        1572864,
+        1835008,
+        2097152
+      ],
+      "devices": [
+        "cuda:0"
+      ],
+      "reused": false
+    },
+    {
+      "phase": "completed",
+      "condition": "high_lr",
+      "seed": 2,
+      "steps": 2097152,
+      "elapsed_seconds": 101.81598059501266,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "b9fd7617fbcf169d98fcf51c4a1d653d86cbc7a918e76799190e0c342f82ab6d",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "c7feb62caf7c7d1c362bbbd41591f1c80f39c04d1557c644e7765943556b9911",
+      "checkpoint_reload_exact": true,
+      "requested_learning_rate": 3e-05,
+      "observed_learning_rates": [
+        2.9999999242136255e-05
+      ],
+      "optimizer_learning_rate_verified": true,
+      "callback_steps": [
+        0,
+        262144,
+        524288,
+        786432,
+        1048576,
+        1310720,
+        1572864,
+        1835008,
+        2097152
+      ],
+      "devices": [
+        "cuda:0"
+      ],
+      "reused": false
+    },
+    {
+      "phase": "completed",
+      "condition": "low_lr",
+      "seed": 2,
+      "steps": 2097152,
+      "elapsed_seconds": 140.5325287169835,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "1381f905ab0126ec8a8d98e1f12b5c0633fb76c78a0f2d0b6f145e1e7887c2ae",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "80477cdef11e3b28476c21618d9ae7130c982f9d5dfa5997452aa9f9d9754089",
+      "checkpoint_reload_exact": true,
+      "requested_learning_rate": 3e-06,
+      "observed_learning_rates": [
+        3.000000106112566e-06
+      ],
+      "optimizer_learning_rate_verified": true,
+      "callback_steps": [
+        0,
+        262144,
+        524288,
+        786432,
+        1048576,
+        1310720,
+        1572864,
+        1835008,
+        2097152
+      ],
+      "devices": [
+        "cuda:0"
+      ],
+      "reused": false
+    }
+  ],
+  "total_steps": 12582912,
+  "runtime_freeze_sha256": "f468548579affa74819d25a9ebdda144f8610120ef39ba2068e6e4bc372b8cd1",
+  "elapsed_seconds": 763.1394121129997
+}

@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "kind": "retrospectively_selected_mature_snapshot",
+  "selected": {
+    "policy_id": "high_lr-seed-1",
+    "steps": 1048576,
+    "rms": 0.004574095934180226,
+    "last10": 0.002114602935567801
+  },
+  "selection_rule": "Minimum first-30s true-XY RMS averaged over the three primary initial states, across 48 nonzero saved stages; heldout states excluded from ranking.",
+  "descriptor": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-1048576.json",
+  "scope": "Exploratory selection of lowest 30-second primary-state XY RMS among 48 nonzero saved stages. Not an additional training seed and not part of the prespecified final-step comparison.",
+  "primary_120s_rms_xy_m": 0.00294898625519549,
+  "primary_120s_last10_xy_m": 0.0021611102410958,
+  "heldout_120s_rms_xy_m": 0.0037396523834118053,
+  "heldout_120s_last10_xy_m": 0.003181454285807654,
+  "cases": [
+    {
+      "initial_state_id": "nominal",
+      "measurement": {
+        "schema_version": 1,
+        "observed_episode_seconds": 120.0,
+        "reached_30s": true,
+        "reached_120s": true,
+        "max_xy_displacement_m": 0.025272974139301022,
+        "rms_xy_displacement_m": 0.0027757744024542947,
+        "last_10s_mean_xy_displacement_m": 0.0019022096903731135,
+        "horizontal_speed_rms_m_s": 0.0044687653532938555,
+        "pitch_error_rms_deg": 3.9986663133487426,
+        "first30s_in_band_seconds": 29.0,
+        "first30s_within_1cm_seconds": 28.31,
+        "true_position_addition_return": -354.63726198823537,
+        "base_return": 190360.83982959227,
+        "objective_return": 190006.20256760402,
+        "termination": {
+          "terminated": false,
+          "truncated": true,
+          "reason": "time_limit",
+          "time_s": 120.0
+        },
+        "windows": {
+          "first_30s": {
+            "requested_seconds": 30.0,
+            "observed_seconds": 30.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.025272974139301022,
+            "rms_xy_displacement_m": 0.004499095047077233,
+            "last_10s_mean_xy_displacement_m": 0.0018467717960918826,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.008645963350665451,
+            "pitch_error_rms_deg": 4.021017672915773,
+            "in_band_seconds_after_settling": 29.0,
+            "within_1cm_seconds_after_settling": 28.31
+          },
+          "first_120s": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.025272974139301022,
+            "rms_xy_displacement_m": 0.0027757744024542947,
+            "last_10s_mean_xy_displacement_m": 0.0019022096903731135,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.0044687653532938555,
+            "pitch_error_rms_deg": 3.9986663133487426,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.31
+          },
+          "full_episode": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.025272974139301022,
+            "rms_xy_displacement_m": 0.0027757744024542947,
+            "last_10s_mean_xy_displacement_m": 0.0019022096903731135,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.0044687653532938555,
+            "pitch_error_rms_deg": 3.9986663133487426,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.31
+          }
+        },
+        "sampling": "First-episode recorded states only; trapezoidal state summaries. Band time counts complete post-settling intervals with both endpoints in band. Reward addition uses post-step displacement and dt/.01.",
+        "reward_contract": "trace.reward is the base-task reward; the real XY addition is applied exactly once offline."
+      }
+    },
+    {
+      "initial_state_id": "pitch-plus",
+      "measurement": {
+        "schema_version": 1,
+        "observed_episode_seconds": 120.0,
+        "reached_30s": true,
+        "reached_120s": true,
+        "max_xy_displacement_m": 0.025886467320332226,
+        "rms_xy_displacement_m": 0.003070178074941002,
+        "last_10s_mean_xy_displacement_m": 0.00220988973631829,
+        "horizontal_speed_rms_m_s": 0.004433000254930616,
+        "pitch_error_rms_deg": 3.9981292149828924,
+        "first30s_in_band_seconds": 29.0,
+        "first30s_within_1cm_seconds": 28.31,
+        "true_position_addition_return": -435.3089021323876,
+        "base_return": 190423.06623104427,
+        "objective_return": 189987.7573289119,
+        "termination": {
+          "terminated": false,
+          "truncated": true,
+          "reason": "time_limit",
+          "time_s": 120.0
+        },
+        "windows": {
+          "first_30s": {
+            "requested_seconds": 30.0,
+            "observed_seconds": 30.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.025886467320332226,
+            "rms_xy_displacement_m": 0.004824004930790974,
+            "last_10s_mean_xy_displacement_m": 0.0021691886554418907,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.008572219211999877,
+            "pitch_error_rms_deg": 4.019026602464543,
+            "in_band_seconds_after_settling": 29.0,
+            "within_1cm_seconds_after_settling": 28.31
+          },
+          "first_120s": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.025886467320332226,
+            "rms_xy_displacement_m": 0.003070178074941002,
+            "last_10s_mean_xy_displacement_m": 0.00220988973631829,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004433000254930616,
+            "pitch_error_rms_deg": 3.9981292149828924,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.31
+          },
+          "full_episode": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.025886467320332226,
+            "rms_xy_displacement_m": 0.003070178074941002,
+            "last_10s_mean_xy_displacement_m": 0.00220988973631829,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004433000254930616,
+            "pitch_error_rms_deg": 3.9981292149828924,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.31
+          }
+        },
+        "sampling": "First-episode recorded states only; trapezoidal state summaries. Band time counts complete post-settling intervals with both endpoints in band. Reward addition uses post-step displacement and dt/.01.",
+        "reward_contract": "trace.reward is the base-task reward; the real XY addition is applied exactly once offline."
+      }
+    },
+    {
+      "initial_state_id": "pitch-minus",
+      "measurement": {
+        "schema_version": 1,
+        "observed_episode_seconds": 120.0,
+        "reached_30s": true,
+        "reached_120s": true,
+        "max_xy_displacement_m": 0.02410726356231194,
+        "rms_xy_displacement_m": 0.0030010062881911724,
+        "last_10s_mean_xy_displacement_m": 0.0023712312965959957,
+        "horizontal_speed_rms_m_s": 0.004514730730165149,
+        "pitch_error_rms_deg": 3.9999122260227717,
+        "first30s_in_band_seconds": 29.0,
+        "first30s_within_1cm_seconds": 28.34,
+        "true_position_addition_return": -419.8183724280512,
+        "base_return": 190269.4204065404,
+        "objective_return": 189849.60203411235,
+        "termination": {
+          "terminated": false,
+          "truncated": true,
+          "reason": "time_limit",
+          "time_s": 120.0
+        },
+        "windows": {
+          "first_30s": {
+            "requested_seconds": 30.0,
+            "observed_seconds": 30.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.02410726356231194,
+            "rms_xy_displacement_m": 0.0043991878246724715,
+            "last_10s_mean_xy_displacement_m": 0.0023278483551696302,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.008740665031880196,
+            "pitch_error_rms_deg": 4.025597772387693,
+            "in_band_seconds_after_settling": 29.0,
+            "within_1cm_seconds_after_settling": 28.34
+          },
+          "first_120s": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.02410726356231194,
+            "rms_xy_displacement_m": 0.0030010062881911724,
+            "last_10s_mean_xy_displacement_m": 0.0023712312965959957,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004514730730165149,
+            "pitch_error_rms_deg": 3.9999122260227717,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.33999999999999
+          },
+          "full_episode": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.02410726356231194,
+            "rms_xy_displacement_m": 0.0030010062881911724,
+            "last_10s_mean_xy_displacement_m": 0.0023712312965959957,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004514730730165149,
+            "pitch_error_rms_deg": 3.9999122260227717,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.33999999999999
+          }
+        },
+        "sampling": "First-episode recorded states only; trapezoidal state summaries. Band time counts complete post-settling intervals with both endpoints in band. Reward addition uses post-step displacement and dt/.01.",
+        "reward_contract": "trace.reward is the base-task reward; the real XY addition is applied exactly once offline."
+      }
+    },
+    {
+      "initial_state_id": "heldout-plus",
+      "measurement": {
+        "schema_version": 1,
+        "observed_episode_seconds": 120.0,
+        "reached_30s": true,
+        "reached_120s": true,
+        "max_xy_displacement_m": 0.026422790581240415,
+        "rms_xy_displacement_m": 0.00379130232896937,
+        "last_10s_mean_xy_displacement_m": 0.003071133138996054,
+        "horizontal_speed_rms_m_s": 0.004404004189369599,
+        "pitch_error_rms_deg": 3.9977786261954678,
+        "first30s_in_band_seconds": 29.0,
+        "first30s_within_1cm_seconds": 28.0,
+        "true_position_addition_return": -670.2483176841426,
+        "base_return": 190485.55410640666,
+        "objective_return": 189815.30578872253,
+        "termination": {
+          "terminated": false,
+          "truncated": true,
+          "reason": "time_limit",
+          "time_s": 120.0
+        },
+        "windows": {
+          "first_30s": {
+            "requested_seconds": 30.0,
+            "observed_seconds": 30.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.026422790581240415,
+            "rms_xy_displacement_m": 0.005423697139407087,
+            "last_10s_mean_xy_displacement_m": 0.0030415116055143325,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.00851194841831683,
+            "pitch_error_rms_deg": 4.017431722589391,
+            "in_band_seconds_after_settling": 29.0,
+            "within_1cm_seconds_after_settling": 28.0
+          },
+          "first_120s": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.026422790581240415,
+            "rms_xy_displacement_m": 0.00379130232896937,
+            "last_10s_mean_xy_displacement_m": 0.003071133138996054,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004404004189369599,
+            "pitch_error_rms_deg": 3.9977786261954678,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.0
+          },
+          "full_episode": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.026422790581240415,
+            "rms_xy_displacement_m": 0.00379130232896937,
+            "last_10s_mean_xy_displacement_m": 0.003071133138996054,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004404004189369599,
+            "pitch_error_rms_deg": 3.9977786261954678,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.0
+          }
+        },
+        "sampling": "First-episode recorded states only; trapezoidal state summaries. Band time counts complete post-settling intervals with both endpoints in band. Reward addition uses post-step displacement and dt/.01.",
+        "reward_contract": "trace.reward is the base-task reward; the real XY addition is applied exactly once offline."
+      }
+    },
+    {
+      "initial_state_id": "heldout-minus",
+      "measurement": {
+        "schema_version": 1,
+        "observed_episode_seconds": 120.0,
+        "reached_30s": true,
+        "reached_120s": true,
+        "max_xy_displacement_m": 0.02302654993584942,
+        "rms_xy_displacement_m": 0.0036880024378542404,
+        "last_10s_mean_xy_displacement_m": 0.003291775432619254,
+        "horizontal_speed_rms_m_s": 0.004527402377397551,
+        "pitch_error_rms_deg": 4.0009281847428,
+        "first30s_in_band_seconds": 29.0,
+        "first30s_within_1cm_seconds": 28.36,
+        "true_position_addition_return": -641.8168060165776,
+        "base_return": 190304.7964216578,
+        "objective_return": 189662.97961564123,
+        "termination": {
+          "terminated": false,
+          "truncated": true,
+          "reason": "time_limit",
+          "time_s": 120.0
+        },
+        "windows": {
+          "first_30s": {
+            "requested_seconds": 30.0,
+            "observed_seconds": 30.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.02302654993584942,
+            "rms_xy_displacement_m": 0.004695609270762258,
+            "last_10s_mean_xy_displacement_m": 0.0032680378450866453,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.00876669417931003,
+            "pitch_error_rms_deg": 4.027346766955704,
+            "in_band_seconds_after_settling": 29.0,
+            "within_1cm_seconds_after_settling": 28.36
+          },
+          "first_120s": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.02302654993584942,
+            "rms_xy_displacement_m": 0.0036880024378542404,
+            "last_10s_mean_xy_displacement_m": 0.003291775432619254,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004527402377397551,
+            "pitch_error_rms_deg": 4.0009281847428,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.36
+          },
+          "full_episode": {
+            "requested_seconds": 120.0,
+            "observed_seconds": 120.0,
+            "reached_requested_horizon": true,
+            "max_xy_displacement_m": 0.02302654993584942,
+            "rms_xy_displacement_m": 0.0036880024378542404,
+            "last_10s_mean_xy_displacement_m": 0.003291775432619254,
+            "last_10s_observed_seconds": 10.0,
+            "horizontal_speed_rms_m_s": 0.004527402377397551,
+            "pitch_error_rms_deg": 4.0009281847428,
+            "in_band_seconds_after_settling": 119.0,
+            "within_1cm_seconds_after_settling": 118.36
+          }
+        },
+        "sampling": "First-episode recorded states only; trapezoidal state summaries. Band time counts complete post-settling intervals with both endpoints in band. Reward addition uses post-step displacement and dt/.01.",
+        "reward_contract": "trace.reward is the base-task reward; the real XY addition is applied exactly once offline."
+      }
+    }
+  ],
+  "recovery_limit": "Saved descriptor preserves deterministic actor/normalizer inference; no complete intermediate actor/critic/std checkpoint was saved, so this is not a full PPO resume checkpoint."
+}

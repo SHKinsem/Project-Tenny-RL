@@ -1,0 +1,980 @@
+{
+  "run_id": "20261115T172533.823984Z_0a516875",
+  "checkpoint": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000007954432",
+  "checkpoint_sha256": "4d345e3a2d38ef7deaa25a0c892b3116e8c24e8956aa4f3cdfd74f6ed28d8c23",
+  "source_fingerprint": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+  "steps": 7954432,
+  "completed": true,
+  "checkpoint_validated": true,
+  "export_sha256": "ac7baea7556bdf35957f67072535c687349b4700861e20de6ee845c2c35f261b",
+  "normalizer_change": null,
+  "checkpoints": [
+    "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000003768320",
+    "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000006799360",
+    "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000007954432"
+  ],
+  "pretrain_keys": [
+    "bc",
+    "bc_gate",
+    "bootstrap_cache_hit",
+    "bootstrap_receipt",
+    "completed",
+    "dataset_path",
+    "evaluation_policy",
+    "initial_params_path",
+    "initial_params_sha256",
+    "normalization_policy",
+    "parameter_tree_sha256",
+    "preparation_seconds",
+    "provenance",
+    "replay",
+    "schema",
+    "scope",
+    "source",
+    "teacher",
+    "training_profile"
+  ],
+  "bootstrap_receipt": "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/verified.json",
+  "bootstrap_keys": {
+    "bc": {
+      "actor_initialization": "Previous skip actor, first layer exactly rebased to updated normalization; Adam state restarted",
+      "completed": true,
+      "critic_initialization": "Random untrained value network, fitted observation normalization only",
+      "exploration_semantics": "Zero std-head kernels with inverse-softplus bias; trainable again during PPO",
+      "final_train_mse": 0.009290242567658424,
+      "fitted_actor_min_std": 0.0030795482452958822,
+      "heldout_action_mae": [
+        0.11328227818012238,
+        0.08363417536020279,
+        0.015256313607096672,
+        0.016444826498627663
+      ],
+      "heldout_episodes": [
+        4,
+        5,
+        8,
+        16,
+        20,
+        27,
+        30,
+        34,
+        35,
+        42,
+        43,
+        44,
+        45,
+        53,
+        55,
+        57,
+        67,
+        70
+      ],
+      "heldout_final_mse": 0.01967359147965908,
+      "heldout_initial_mse": 0.029799818992614746,
+      "heldout_leg_force_nrmse": 0.1959790140390396,
+      "heldout_leg_force_rmse_n": [
+        1.7529260706231902,
+        1.7242213800988684
+      ],
+      "heldout_samples": 3151,
+      "heldout_scope": "Episode split on one fixed model and a small command schedule; not cross-randomization generalization",
+      "heldout_wheel_torque_nrmse": 0.03064977563917637,
+      "heldout_wheel_torque_rmse_nm": [
+        0.0008658685837872326,
+        0.0009409101330675185
+      ],
+      "initial_exploration_pre_tanh_std": 0.15,
+      "initial_train_mse": 0.025073448196053505,
+      "loss_semantics": "Mean squared force/Fscale and wheel torque/0.0295 errors, equal weight per normalized actuator; never mixes raw N with raw Nm",
+      "normalization_noise_prior": {
+        "actor_variance_prior": [
+          0.013333333333333336,
+          0.75,
+          0.020833333333333332,
+          0.013333333333333336,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command_ranges": {
+          "ang_vel_yaw": [
+            -1.5,
+            1.5
+          ],
+          "height_value": [
+            -0.5,
+            0.0
+          ],
+          "lin_vel_x": [
+            -0.2,
+            0.2
+          ],
+          "roll_value": [
+            -0.2,
+            0.2
+          ]
+        },
+        "critic_variance_prior": [
+          0.013333333333333336,
+          0.75,
+          0.020833333333333332,
+          0.013333333333333336,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "level": 0.0,
+        "physical_action_scales": [
+          8.871533393859863,
+          8.871519088745117,
+          0.0295,
+          0.0295
+        ],
+        "scales": {
+          "gyro": 0.02,
+          "joint_pos": 0.02,
+          "joint_vel": 1.0,
+          "linvel": 0.01,
+          "pitch": 0.02,
+          "roll": 0.02
+        },
+        "semantics": "Uniform sensor noise and configured command-range variance added to train-only statistics; mean unchanged, summed_variance and std updated together"
+      },
+      "normalizer_scope": "Training episodes only; held-out episodes never fit normalization or gradients",
+      "numpy_actor_max_error": 7.897615432739258e-07,
+      "parameter_tree_sha256": "8c5aaac3632ee0440657b2612f3e17c5634b9ac3bd3dbeea89b0af3e1eb0a4f2",
+      "raw_actor_low_variance_dimensions": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "raw_actor_min_std": 0.0,
+      "scope": "Short BC initialization, not stable-balance or sim-to-real acceptance",
+      "train_episodes": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        28,
+        29,
+        31,
+        32,
+        33,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        54,
+        56,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        68,
+        69,
+        71
+      ],
+      "train_samples": 10253,
+      "training_sampler": "Equal mass per train episode; first 0.5 seconds and remaining samples each receive half within long episodes",
+      "updates": 2048,
+      "warm_start_action_max_error": 6.705522537231445e-07
+    },
+    "bc_gate": {
+      "criteria": "Three standing episodes with pitch 0/+0.01/-0.01 rad reach six seconds without termination or invalid state",
+      "passed": true,
+      "required_episodes": 3,
+      "required_seconds": 6.0,
+      "student_episode_seconds": [
+        6.0,
+        6.0,
+        6.0
+      ]
+    },
+    "calibration": {
+      "actor_variance_prior": [
+        0.013333333333333336,
+        0.75,
+        0.020833333333333332,
+        0.013333333333333336,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "command_ranges": {
+        "ang_vel_yaw": [
+          -1.5,
+          1.5
+        ],
+        "height_value": [
+          -0.5,
+          0.0
+        ],
+        "lin_vel_x": [
+          -0.2,
+          0.2
+        ],
+        "roll_value": [
+          -0.2,
+          0.2
+        ]
+      },
+      "critic_variance_prior": [
+        0.013333333333333336,
+        0.75,
+        0.020833333333333332,
+        0.013333333333333336,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "level": 0.0,
+      "physical_action_scales": [
+        8.871533393859863,
+        8.871519088745117,
+        0.0295,
+        0.0295
+      ],
+      "scales": {
+        "gyro": 0.02,
+        "joint_pos": 0.02,
+        "joint_vel": 1.0,
+        "linvel": 0.01,
+        "pitch": 0.02,
+        "roll": 0.02
+      },
+      "semantics": "Uniform sensor noise and configured command-range variance added to train-only statistics; mean unchanged, summed_variance and std updated together"
+    },
+    "completed": true,
+    "export_max_error": 1.1324882507324219e-06,
+    "factory_numpy_max_error": 1.2218952178955078e-06,
+    "files": {
+      "candidate-report.json": "522add54d871b5efc426d9e4df007ae98b1b106d48dc30af8d0cf3256bb55e27",
+      "dataset.npz": "5581f541a86d2cd2d48f7daff9d3bd37ab50f7f36be0d8c2221c6c8175f0e160",
+      "params.msgpack": "b22f3f27195c6d60c5c9ae2a96c60a03c7d271a865dd03ab04c9e79b5a0e620a",
+      "policy.cpp.txt": "a7d5c33290cebec4466546d9ae75180e3d11b310a0877f041bfb4e7b5f8b7497",
+      "policy_metadata.json": "0881a9a88869169ed9eb90ec52265e391f02021d60efb81a1db6c66011f56cea",
+      "source-0-candidate-final-skip-v2.py": "48b013e85cdac7ea77cfa50ded426f73b183459d404fd4f5d0d85b0d2aaa0131",
+      "source-1-pretrain.py": "daf9d71ff7311e9ab2b38eabe395ffa32d4eeaa4e526683e3cc2c16e6f69d0de",
+      "source-2-teacher.py": "56e6a6df86fadab019c3927218a190b76feaf7ae794621914617aaf44643af5f",
+      "source-3-core.py": "d78fa2388634a94787f726d80ed180ea30bc8d44ab55f9b431e9754903a76c23",
+      "validation.json": "e445140106bf9d98c9a3d9b54abe746c38ff9916909e5b01198c15158b25ba98"
+    },
+    "identity": {
+      "contract": {
+        "action_delay_ms": 0.0,
+        "action_delay_steps": 0,
+        "action_mode": "virtual_leg_force",
+        "action_order": [
+          "left_leg",
+          "right_leg",
+          "left_wheel",
+          "right_wheel"
+        ],
+        "action_repeat": 1,
+        "actor_dim": 24,
+        "command_period_seconds": 3.0,
+        "command_period_steps": 300,
+        "command_start_seconds": 0.2,
+        "command_start_steps": 20,
+        "control_hz": 100,
+        "critic_dim": 51,
+        "ctrl_dt": 0.01,
+        "discount_half_life_seconds": 0.5,
+        "discounting": 0.9862327044933592,
+        "episode_length": 600,
+        "episode_seconds": 6.0,
+        "evaluation_policy": "deterministic",
+        "export_float_precision": "float32-roundtrip-10sig",
+        "force_bias_n": [
+          0.0,
+          0.0
+        ],
+        "force_scales_n": [
+          8.871533178778112,
+          8.871518771776556
+        ],
+        "force_source_fingerprint": "234757fe38df11388b3303f3a6686f9e4877727769b0ca762968a979f1a94487",
+        "gae_lambda": 0.9025,
+        "hip_range": [
+          -0.5,
+          0.05
+        ],
+        "mode": "leg_force_bc",
+        "n_substeps": 4,
+        "normalization_policy": "fixed_bc",
+        "observation_version": "torque24-mean-sent-v1",
+        "physics_hz": 400,
+        "policy_head": "wheel_logit_residual_v1",
+        "previous_torque_clip": 1e-05,
+        "reward_reference_dt": 0.01,
+        "schema": "wheel-center-axial-v1",
+        "sim_dt": 0.0025,
+        "source_fingerprint": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+        "teacher_checkpoint": "ckpts/newobs-norecovery/000403660800",
+        "teacher_collection_version": 2,
+        "teacher_information": "author 26D policy and private wheel-target memory; student observes only deployable 24D state",
+        "teacher_label_semantics": "projected reachable oracle on true motor student states; 100 Hz held axial force and wheel torque; 400 Hz Jacobian refresh",
+        "teacher_schema": "leg-force-reachable-teacher-bc-v3",
+        "teacher_sha256": "02130fb6dd2e73a3157ec478a66c0093eb629f4412e50fb72132608fe4357122",
+        "timing_schema": "hybrid-timing-v1",
+        "torque_limits_nm": [
+          1.0,
+          1.0,
+          0.0295,
+          0.0295
+        ],
+        "training_profile": "standing_v2",
+        "unreachable_label_policy": "explicit force projection with saturation/error reporting; retain reachable executed student trajectories",
+        "validity": {
+          "equality_position_rad": 0.01,
+          "length_velocity_m_s": 0.05,
+          "minimum_jacobian_ratio": 0.05
+        },
+        "wheel_residual_scale": 0.05
+      },
+      "environment": {
+        "_XML_PATH": "<source>/assets/legwheel_robot2_stl_nolinkage6_terrain.xml",
+        "action_delay_ms": 0.0,
+        "action_delay_steps": 0,
+        "action_range": {
+          "thigh": [
+            -0.5,
+            0.0
+          ]
+        },
+        "action_repeat": 1,
+        "cmd_ang_vel_zero_margin": 0.01,
+        "cmd_config": {
+          "ang_vel_yaw": [
+            -1.5,
+            1.5
+          ],
+          "cmd_prob": 0.0,
+          "command_change_interval": 299,
+          "enable": {
+            "ang_vel_yaw": true,
+            "height_value": true,
+            "lin_vel_x": true,
+            "roll_value": true
+          },
+          "height_value": [
+            -0.5,
+            0.0
+          ],
+          "lin_vel_x": [
+            -0.2,
+            0.2
+          ],
+          "roll_value": [
+            -0.2,
+            0.2
+          ]
+        },
+        "cmd_lin_vel_x_zero_margin": 0.000195,
+        "cmd_start_delay_s": 0.2,
+        "control_hz": 100,
+        "ctrl_dt": 0.01,
+        "episode_length": 600,
+        "episode_time": 6.0,
+        "hold_error_clip": {
+          "enable": false,
+          "sinyaw": 1.0,
+          "wheel_sinpos": 5.0
+        },
+        "last_act_obs": false,
+        "noise_config": {
+          "level": 0.0,
+          "scales": {
+            "gyro": 0.02,
+            "joint_pos": 0.02,
+            "joint_vel": 1.0,
+            "linvel": 0.01,
+            "pitch": 0.02,
+            "roll": 0.02
+          }
+        },
+        "obs_history_len": 1,
+        "obs_normalize": {
+          "privileged_state_mean": null,
+          "privileged_state_std": null,
+          "state_mean": null,
+          "state_std": null
+        },
+        "push_config": {
+          "burst_interval_range": [
+            0.3,
+            0.8
+          ],
+          "burst_prob": 0.0,
+          "enable": false,
+          "interval_range": [
+            1.0,
+            5.0
+          ],
+          "magnitude_pow": 1.0,
+          "magnitude_range": [
+            0.0,
+            0.5
+          ]
+        },
+        "reward_config": {
+          "action_rate_scale": -0.5,
+          "base_scale": 1.0,
+          "do_deconflict": false,
+          "energy_scale": -1.0,
+          "height_feasible_projection": true,
+          "height_scale": 2.0,
+          "pitch_scale": 0.0,
+          "pitch_velocity_penalty_scale": -0.5,
+          "posture_scale": 1.0,
+          "reference_dt": 0.01,
+          "roll_scale": 4.0,
+          "roll_thigh_coupling": 0.433,
+          "sigma": 0.5,
+          "sigma_wheel": 0.5,
+          "termination_penalty_enable": false,
+          "termination_penalty_value": -10.0,
+          "vel_scale": 2.0,
+          "zero_keep_scale": 10.0
+        },
+        "sim_dt": 0.0025,
+        "sinpitch_zero": true,
+        "sinyaw": true,
+        "sinyaw_scale": 0.5,
+        "torque_control": {
+          "scales": [
+            1.0,
+            1.0,
+            0.0295,
+            0.0295
+          ]
+        },
+        "wheel_pos_nosin": false,
+        "wheel_radius": 0.0195,
+        "wheel_sin_scale": 0.1,
+        "wheel_sinpos_start": true
+      },
+      "evaluation_policy": "deterministic",
+      "exploration_pre_tanh_std": 0.01,
+      "jax_environment": {
+        "JAX_PLATFORMS": "cuda",
+        "XLA_PYTHON_CLIENT_MEM_FRACTION": "0.35",
+        "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+      },
+      "network": {
+        "policy_hidden_layer_sizes": [
+          64,
+          64
+        ],
+        "policy_obs_key": "state",
+        "value_hidden_layer_sizes": [
+          512,
+          512,
+          512,
+          512
+        ],
+        "value_obs_key": "privileged_state"
+      },
+      "normalization_policy": "fixed_bc",
+      "packages": {
+        "brax": "0.14.2",
+        "flax": "0.12.6",
+        "jax": "0.9.2",
+        "jaxlib": "0.9.2",
+        "mujoco": "3.12.0",
+        "numpy": "2.5.2",
+        "optax": "0.2.9"
+      },
+      "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+      "schema": "force-verified-bootstrap-v1"
+    },
+    "parameter_tree_sha256": "90b26ebb8cd54b0dfa405f589e7bfe4500fce532c78ddff8b9794dfc611f229d",
+    "provenance": {
+      "candidate_dataset_sha256": "5581f541a86d2cd2d48f7daff9d3bd37ab50f7f36be0d8c2221c6c8175f0e160",
+      "candidate_params_sha256": "ca9347f3fc47fb2cb363e3c31fb8daaa0f3f2797414b9c534a54c0c8d4210ebb",
+      "candidate_report": "$HOME/projects/tenny-force-v2-prepare/skip-dagger-final/round-2/report.json",
+      "candidate_report_sha256": "522add54d871b5efc426d9e4df007ae98b1b106d48dc30af8d0cf3256bb55e27",
+      "episodes": 72,
+      "exploration_reset": {
+        "modified": "Only std head kernels/bias; deterministic mean actions bitwise unchanged",
+        "pre_tanh_std": 0.01
+      },
+      "fit_updates": 2048,
+      "samples": 13404,
+      "scripts": {
+        "$HOME/projects/tenny-force-v2-prepare/src/force_teacher/pretrain.py": "daf9d71ff7311e9ab2b38eabe395ffa32d4eeaa4e526683e3cc2c16e6f69d0de",
+        "$HOME/projects/tenny-force-v2-prepare/src/force_teacher/teacher.py": "56e6a6df86fadab019c3927218a190b76feaf7ae794621914617aaf44643af5f",
+        "$HOME/projects/tenny-force-v2-prepare/src/hybrid/core.py": "d78fa2388634a94787f726d80ed180ea30bc8d44ab55f9b431e9754903a76c23",
+        "$HOME/projects/tenny-force-v3-verify/candidate-final-skip-v2.py": "48b013e85cdac7ea77cfa50ded426f73b183459d404fd4f5d0d85b0d2aaa0131"
+      },
+      "source": "explicit_external_multiround_skip_candidate"
+    },
+    "replay": {
+      "closed_loop_comparison": "reachable oracle and student on true motor model; identical nominal starts; 100Hz F/wheel torque held",
+      "episodes": [
+        {
+          "command": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "initial_qpos": [
+            -0.0,
+            0.0,
+            0.09,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "initial_qvel": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "oracle_seconds": 6.0,
+          "oracle_termination": {
+            "legs": [
+              {
+                "equality_position_rad": -0.000969249233774669,
+                "equality_velocity_mps": 2.829787918929457e-06,
+                "hip_rad": 0.0009340244965442152,
+                "jacobian_ratio": 0.9836618857320154
+              },
+              {
+                "equality_position_rad": -0.0009671284468532018,
+                "equality_velocity_mps": 1.4907504432779042e-06,
+                "hip_rad": 0.0009339877237650168,
+                "jacobian_ratio": 0.9836612551672572
+              }
+            ],
+            "pitch_sin": 0.07037287581135446,
+            "reasons": [],
+            "roll_sin": -4.769648367585511e-07
+          },
+          "seconds": 6.0,
+          "termination": {
+            "legs": [
+              {
+                "equality_position_rad": -0.0009045425421165508,
+                "equality_velocity_mps": 2.9939239205242984e-05,
+                "hip_rad": 0.005639394413024085,
+                "jacobian_ratio": 0.984141151957603
+              },
+              {
+                "equality_position_rad": -0.0011830717395070623,
+                "equality_velocity_mps": -2.245017766500077e-06,
+                "hip_rad": -0.00459718887475115,
+                "jacobian_ratio": 0.9831584306792106
+              }
+            ],
+            "pitch_sin": 0.2928588338183424,
+            "reasons": [],
+            "roll_sin": -0.01194818674426437
+          }
+        },
+        {
+          "command": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "initial_qpos": [
+            -0.0,
+            0.0,
+            0.09,
+            0.9999875000260416,
+            0.0,
+            0.004999979166692708,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "initial_qvel": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "oracle_seconds": 6.0,
+          "oracle_termination": {
+            "legs": [
+              {
+                "equality_position_rad": -0.0009697999466113309,
+                "equality_velocity_mps": 2.6024457259204826e-06,
+                "hip_rad": 0.0009340195755606447,
+                "jacobian_ratio": 0.9836619727636394
+              },
+              {
+                "equality_position_rad": -0.0009674025946693975,
+                "equality_velocity_mps": 1.3514320759693548e-06,
+                "hip_rad": 0.0009339920805189987,
+                "jacobian_ratio": 0.9836612991797163
+              }
+            ],
+            "pitch_sin": 0.07222090995139409,
+            "reasons": [],
+            "roll_sin": -6.685332759952018e-07
+          },
+          "seconds": 6.0,
+          "termination": {
+            "legs": [
+              {
+                "equality_position_rad": -0.0008091115873705233,
+                "equality_velocity_mps": -0.0005079812911479273,
+                "hip_rad": 0.005771049907574731,
+                "jacobian_ratio": 0.9841405197742782
+              },
+              {
+                "equality_position_rad": -0.000995503659682405,
+                "equality_velocity_mps": 6.968772304146939e-05,
+                "hip_rad": -0.0039871408094246845,
+                "jacobian_ratio": 0.9831850928460396
+              }
+            ],
+            "pitch_sin": -0.5340325663724592,
+            "reasons": [],
+            "roll_sin": -0.012116995507669329
+          }
+        },
+        {
+          "command": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "initial_qpos": [
+            -0.0,
+            0.0,
+            0.09,
+            0.9999875000260416,
+            0.0,
+            -0.004999979166692708,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "initial_qvel": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "oracle_seconds": 6.0,
+          "oracle_termination": {
+            "legs": [
+              {
+                "equality_position_rad": -0.0009686761614008644,
+                "equality_velocity_mps": 2.917207070027467e-06,
+                "hip_rad": 0.0009340270235229677,
+                "jacobian_ratio": 0.9836617949049801
+              },
+              {
+                "equality_position_rad": -0.0009668358915823753,
+                "equality_velocity_mps": 1.533400691148291e-06,
+                "hip_rad": 0.0009339781970120751,
+                "jacobian_ratio": 0.983661207707424
+              }
+            ],
+            "pitch_sin": 0.0685802959777705,
+            "reasons": [],
+            "roll_sin": -3.2964280593854145e-07
+          },
+          "seconds": 6.0,
+          "termination": {
+            "legs": [
+              {
+                "equality_position_rad": -0.0008842738570844447,
+                "equality_velocity_mps": 2.0378693019725916e-05,
+                "hip_rad": 0.004727370648299473,
+                "jacobian_ratio": 0.984040837670069
+              },
+              {
+                "equality_position_rad": -0.0010506913017061248,
+                "equality_velocity_mps": -3.870266206613031e-05,
+                "hip_rad": -6.364851316772904e-05,
+                "jacobian_ratio": 0.9835745960202057
+              }
+            ],
+            "pitch_sin": 0.1579385254282284,
+            "reasons": [],
+            "roll_sin": -0.005294241502333351
+          }
+        }
+      ],
+      "evaluated_seconds_per_episode": 6.0,
+      "evaluation_profile": "standing_gate",
+      "gate_passed": true,
+      "reachable_comparison_samples": 1800,
+      "seed": 10000,
+      "stable_balance_validated": true,
+      "student_episode_seconds": [
+        6.0,
+        6.0,
+        6.0
+      ],
+      "tail_motion": [
+        {
+          "last_observation_gyro_rad_s": [
+            -0.3845144212245941,
+            -1.3264669179916382,
+            1.0934786796569824
+          ],
+          "last_observation_pitch_sin": 0.23529663681983948,
+          "last_observation_roll_sin": -0.01169147901237011,
+          "last_second_max_abs_gyro_rad_s": [
+            0.3845144212245941,
+            2.0876073837280273,
+            1.462985873222351
+          ],
+          "last_second_pitch_sin_rate": 0.2775828540325165,
+          "last_second_roll_sin_rate": -0.006803958211094141
+        },
+        {
+          "last_observation_gyro_rad_s": [
+            0.07365736365318298,
+            2.091979742050171,
+            0.157691091299057
+          ],
+          "last_observation_pitch_sin": -0.6225108504295349,
+          "last_observation_roll_sin": -0.012143104337155819,
+          "last_second_max_abs_gyro_rad_s": [
+            0.7384876012802124,
+            4.745162010192871,
+            1.528856635093689
+          ],
+          "last_second_pitch_sin_rate": -0.6165286302566528,
+          "last_second_roll_sin_rate": -0.007007764186710119
+        },
+        {
+          "last_observation_gyro_rad_s": [
+            -0.30000776052474976,
+            1.8916081190109253,
+            2.337669849395752
+          ],
+          "last_observation_pitch_sin": 0.06643741577863693,
+          "last_observation_roll_sin": -0.005505017936229706,
+          "last_second_max_abs_gyro_rad_s": [
+            0.30000776052474976,
+            2.2126307487487793,
+            2.337669849395752
+          ],
+          "last_second_pitch_sin_rate": 0.12479379773139954,
+          "last_second_roll_sin_rate": 0.0001015240341075696
+        }
+      ],
+      "tail_motion_scope": "Last policy observation precedes the final physics step by 0.01s; final pitch/roll are in episodes[].termination",
+      "teacher_episode_seconds": [
+        6.0,
+        6.0,
+        6.0
+      ],
+      "teacher_information": "oracle uses author 26D/private history; student only 24D",
+      "teacher_reachable_state_action_nrmse": 0.03231124207377434
+    },
+    "schema": "force-verified-bootstrap-v1"
+  },
+  "cached_reset": "$HOME/projects/tenny-cpu-gpu-eval-20261115/result/initial.npz",
+  "cached_reset_exists": true,
+  "matplotlib_available": true,
+  "native_extension": [
+    "$HOME/projects/tenny-native-eval/python/native_eval/_native.cpython-312-x86_64-linux-gnu.so"
+  ]
+}

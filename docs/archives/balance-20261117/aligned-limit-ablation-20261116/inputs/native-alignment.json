@@ -1,0 +1,95 @@
+{
+  "deterministic_pair_max_abs_errors": {
+    "observation": 0.0,
+    "action": 0.0,
+    "qpos": 0.0,
+    "qvel": 0.0,
+    "ctrl": 0.0,
+    "reward": 0.0
+  },
+  "common_request_max_abs_error": 0.0,
+  "deterministic_physical_alignment_verified": true,
+  "random_common_request_verified": false,
+  "old_BC_relative_force_reference_max_abs_error": 1.0728836059570312e-06,
+  "wider_capacity_reachable_probe_nm": [
+    [
+      -0.8850182364030307,
+      -0.8850179688608126
+    ],
+    [
+      -1.681534433772596,
+      -1.6815339254310757
+    ]
+  ],
+  "compiled_actuators": {
+    "1": {
+      "ctrlrange": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "forcerange": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "capacity": [
+        8.871533178778112,
+        8.871518771776556
+      ],
+      "common_request_scale": [
+        17.743066357556224,
+        17.74303754355311
+      ]
+    },
+    "2": {
+      "ctrlrange": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          2.0
+        ]
+      ],
+      "forcerange": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          2.0
+        ]
+      ],
+      "capacity": [
+        17.743066357556224,
+        17.74303754355311
+      ],
+      "common_request_scale": [
+        17.743066357556224,
+        17.74303754355311
+      ]
+    }
+  },
+  "zero_step_survival_s": [
+    6.2,
+    5.82,
+    5.64,
+    5.66,
+    9.03
+  ],
+  "zero_step_primary_in_band_seconds": 3.97,
+  "elapsed_seconds": 3.4675077029969543
+}

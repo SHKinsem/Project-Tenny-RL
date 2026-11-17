@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "scope": "Same mature-run seed1, fixed30s primary-state averages, native preweight metrics reconstructed with signed task weights. Shows objective rankings; not a gradient-cause intervention.",
+  "stages": [
+    {
+      "steps": 0,
+      "last10_xy_m": 0.017356041761353667,
+      "mean_base_return": 50057.7568900932,
+      "mean_position_addition": -3128.0538149974323,
+      "mean_objective_return": 46929.70307509577,
+      "weighted_components": {
+        "tracking_lin_vel": 5826.4965945969425,
+        "tracking_ang_vel": 5894.3280072103,
+        "tracking_wheels_sinposition": 13081.22773511427,
+        "tracking_sinyaw": 8369.089416652634,
+        "roll_cost": 11197.033735011317,
+        "tracking_height_jnt": 5797.016383146208,
+        "pitch_cost": 0.0,
+        "energy_cost": -25.64970129836925,
+        "action_rate": -30.58703506128189,
+        "pitch_velocity_penalty": -51.198245278834776,
+        "termination_penalty": 0.0
+      },
+      "components_minus_selected": {
+        "tracking_lin_vel": 9.183915431554851,
+        "tracking_ang_vel": 9.382120055872292,
+        "tracking_wheels_sinposition": 1585.5824298686148,
+        "tracking_sinyaw": 819.1799434301529,
+        "roll_cost": -12.343513791387522,
+        "tracking_height_jnt": 56.332524663646836,
+        "pitch_cost": 0.0,
+        "energy_cost": 1.2637407543064576,
+        "action_rate": 2.7438360456437714,
+        "pitch_velocity_penalty": 1.985099322968189,
+        "termination_penalty": 0.0
+      }
+    },
+    {
+      "steps": 786432,
+      "last10_xy_m": 0.009614700246513815,
+      "mean_base_return": 63992.1938123134,
+      "mean_position_addition": -1170.908800012491,
+      "mean_objective_return": 62821.28501230091,
+      "weighted_components": {
+        "tracking_lin_vel": 5815.137909391983,
+        "tracking_ang_vel": 5895.397124049017,
+        "tracking_wheels_sinposition": 25635.62576051946,
+        "tracking_sinyaw": 9711.13727409272,
+        "roll_cost": 11263.347910761346,
+        "tracking_height_jnt": 5769.446234585765,
+        "pitch_cost": 0.0,
+        "energy_cost": -25.896971147524322,
+        "action_rate": -26.228954420261342,
+        "pitch_velocity_penalty": -45.77247551906933,
+        "termination_penalty": 0.0
+      },
+      "components_minus_selected": {
+        "tracking_lin_vel": -2.1747697734044777,
+        "tracking_ang_vel": 10.451236894589783,
+        "tracking_wheels_sinposition": 14139.980455273804,
+        "tracking_sinyaw": 2161.2278008702388,
+        "roll_cost": 53.97066195864136,
+        "tracking_height_jnt": 28.762376103203678,
+        "pitch_cost": 0.0,
+        "energy_cost": 1.0164709051513867,
+        "action_rate": 7.101916686664321,
+        "pitch_velocity_penalty": 7.410869082733633,
+        "termination_penalty": 0.0
+      }
+    },
+    {
+      "steps": 1048576,
+      "last10_xy_m": 0.002114602935567801,
+      "mean_base_return": 47584.44679431184,
+      "mean_position_addition": -236.68627821095254,
+      "mean_objective_return": 47347.76051610089,
+      "weighted_components": {
+        "tracking_lin_vel": 5817.312679165388,
+        "tracking_ang_vel": 5884.9458871544275,
+        "tracking_wheels_sinposition": 11495.645305245655,
+        "tracking_sinyaw": 7549.909473222481,
+        "roll_cost": 11209.377248802704,
+        "tracking_height_jnt": 5740.683858482561,
+        "pitch_cost": 0.0,
+        "energy_cost": -26.91344205267571,
+        "action_rate": -33.33087110692566,
+        "pitch_velocity_penalty": -53.183344601802965,
+        "termination_penalty": 0.0
+      },
+      "components_minus_selected": {
+        "tracking_lin_vel": 0.0,
+        "tracking_ang_vel": 0.0,
+        "tracking_wheels_sinposition": 0.0,
+        "tracking_sinyaw": 0.0,
+        "roll_cost": 0.0,
+        "tracking_height_jnt": 0.0,
+        "pitch_cost": 0.0,
+        "energy_cost": 0.0,
+        "action_rate": 0.0,
+        "pitch_velocity_penalty": 0.0,
+        "termination_penalty": 0.0
+      }
+    },
+    {
+      "steps": 2097152,
+      "last10_xy_m": 0.013713731336348801,
+      "mean_base_return": 37460.997167557645,
+      "mean_position_addition": -2007.0971055752743,
+      "mean_objective_return": 35453.90006198237,
+      "weighted_components": {
+        "tracking_lin_vel": 5844.766687971262,
+        "tracking_ang_vel": 5865.475572397762,
+        "tracking_wheels_sinposition": 4083.958246107373,
+        "tracking_sinyaw": 4756.365970756952,
+        "roll_cost": 11288.592638076227,
+        "tracking_height_jnt": 5766.8195011377165,
+        "pitch_cost": 0.0,
+        "energy_cost": -29.223910001020112,
+        "action_rate": -47.83034124521663,
+        "pitch_velocity_penalty": -67.92719764344453,
+        "termination_penalty": 0.0
+      },
+      "components_minus_selected": {
+        "tracking_lin_vel": 27.454008805874764,
+        "tracking_ang_vel": -19.470314756665175,
+        "tracking_wheels_sinposition": -7411.687059138281,
+        "tracking_sinyaw": -2793.543502465529,
+        "roll_cost": 79.2153892735223,
+        "tracking_height_jnt": 26.135642655155607,
+        "pitch_cost": 0.0,
+        "energy_cost": -2.310467948344403,
+        "action_rate": -14.499470138290967,
+        "pitch_velocity_penalty": -14.743853041641565,
+        "termination_penalty": 0.0
+      }
+    }
+  ]
+}

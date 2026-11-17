@@ -1,0 +1,5 @@
+{
+  "all_12_actor_critic_normalizer_trees_finite": true,
+  "nonfinite_parameter_guard_checked": true,
+  "scope": "CPU reads of completed experimental checkpoints; no training or model mutation."
+}

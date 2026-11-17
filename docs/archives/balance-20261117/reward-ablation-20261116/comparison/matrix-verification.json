@@ -1,0 +1,84 @@
+{
+  "all_12_effective_configs_exact": true,
+  "all_initial_arrays_exact": true,
+  "all_normalizers_frozen": true,
+  "all_checkpoints_reload_exact": true,
+  "source_fingerprint_unchanged": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+  "completed_runs": [
+    {
+      "arm": "baseline",
+      "seed": 0,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "posture",
+      "seed": 0,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "position",
+      "seed": 0,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "both",
+      "seed": 0,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "posture",
+      "seed": 1,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "position",
+      "seed": 1,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "both",
+      "seed": 1,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "baseline",
+      "seed": 1,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "position",
+      "seed": 2,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "both",
+      "seed": 2,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "baseline",
+      "seed": 2,
+      "steps": 2097152,
+      "actor_changed": true
+    },
+    {
+      "arm": "posture",
+      "seed": 2,
+      "steps": 2097152,
+      "actor_changed": true
+    }
+  ],
+  "total_environment_steps": 25165824,
+  "matrix_elapsed_seconds": 1351.5969883390062,
+  "frozen_training_source_sha256": "1bafa19319eabef369f2568e9d69aa9164d0f6fca616b3ea183adb9831fc99ce"
+}

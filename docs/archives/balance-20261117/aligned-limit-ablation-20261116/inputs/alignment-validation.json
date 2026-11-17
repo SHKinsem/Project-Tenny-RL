@@ -1,0 +1,107 @@
+{
+  "deterministic_pair_max_abs_errors": {
+    "observation": 0.0,
+    "action": 0.0,
+    "qpos": 0.0,
+    "qvel": 0.0,
+    "ctrl": 0.0,
+    "reward": 0.0
+  },
+  "common_request_max_abs_error": 0.0,
+  "deterministic_physical_alignment_verified": true,
+  "random_common_request_verified": true,
+  "old_BC_relative_force_reference_max_abs_error": 1.0728836059570312e-06,
+  "wider_capacity_reachable_probe_nm": [
+    [
+      -0.8850182364030307,
+      -0.8850179688608126
+    ],
+    [
+      -1.681534433772596,
+      -1.6815339254310757
+    ]
+  ],
+  "compiled_actuators": {
+    "1": {
+      "ctrlrange": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "forcerange": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "capacity": [
+        8.871533178778112,
+        8.871518771776556
+      ],
+      "common_request_scale": [
+        17.743066357556224,
+        17.74303754355311
+      ]
+    },
+    "2": {
+      "ctrlrange": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          2.0
+        ]
+      ],
+      "forcerange": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          2.0
+        ]
+      ],
+      "capacity": [
+        17.743066357556224,
+        17.74303754355311
+      ],
+      "common_request_scale": [
+        17.743066357556224,
+        17.74303754355311
+      ]
+    }
+  },
+  "zero_step_survival_s": [
+    6.2,
+    5.82,
+    5.64,
+    5.66,
+    9.03
+  ],
+  "zero_step_primary_in_band_seconds": 3.97,
+  "elapsed_seconds": 3.4675077029969543,
+  "random_policy_logits_max_abs_error": 0.0,
+  "random_action_max_abs_error": 0.0,
+  "sampled_states": 1000,
+  "sample_seed": 42,
+  "jax_native_max_abs_action_error": 8.344650268554688e-07,
+  "mutable_probe_jax_native_max_abs_action_error": 2.384185791015625e-07,
+  "mutable_probe_max_abs_leg_action": 0.9878637194633484,
+  "initial_random_force_request_over_low_capacity_fraction": [
+    0.0,
+    0.054
+  ],
+  "sampling_scope": "Same state and random key: pre-cap physical requests identical. Requests above low-arm capacity are intentionally clipped differently."
+}

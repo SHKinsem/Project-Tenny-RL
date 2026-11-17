@@ -1,0 +1,87 @@
+{
+  "reused_limit1_exact_cases": 20,
+  "limit1_replay_errors": {
+    "observation": 0.0,
+    "action": 0.0,
+    "qpos": 0.0,
+    "qvel": 0.0,
+    "ctrl": 0.0,
+    "reward": 0.0
+  },
+  "same_physical_torque_state_reward_observation_errors": {
+    "observation": 0.0,
+    "qpos": 0.0,
+    "qvel": 0.0,
+    "ctrl": 0.0,
+    "reward": 0.0
+  },
+  "physical_comparison_control_steps": 128,
+  "physical_comparison_initial_states": 3,
+  "compiled_actuators": {
+    "1": {
+      "leg_ctrlrange": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "leg_forcerange": [
+        [
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "normalization": [
+        1.0,
+        1.0,
+        0.0295,
+        0.0295
+      ],
+      "force_scales": [
+        8.871533178778112,
+        8.871518771776556
+      ]
+    },
+    "2": {
+      "leg_ctrlrange": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          2.0
+        ]
+      ],
+      "leg_forcerange": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          2.0
+        ]
+      ],
+      "normalization": [
+        1.0,
+        1.0,
+        0.0295,
+        0.0295
+      ],
+      "force_scales": [
+        17.743066357556224,
+        17.74303754355311
+      ]
+    }
+  },
+  "elapsed_seconds": 3.288064143998781
+}

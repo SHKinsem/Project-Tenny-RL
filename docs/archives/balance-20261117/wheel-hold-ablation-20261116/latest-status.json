@@ -1,0 +1,68 @@
+{
+  "smoke": {
+    "phase": "completed",
+    "steps": 8192,
+    "elapsed_seconds": 56.95034579298226,
+    "observed_learning_rates": [
+      2.9999999242136255e-05
+    ],
+    "checkpoint_reload_exact": true,
+    "callback_steps": [
+      0,
+      8192
+    ]
+  },
+  "matrix": {
+    "phase": "completed",
+    "current_seed": null,
+    "elapsed_seconds": 342.9464464269986,
+    "total_new_steps": 6291456,
+    "error": null,
+    "completed": [
+      {
+        "seed": 0,
+        "seconds": 136.5357004919788
+      },
+      {
+        "seed": 1,
+        "seconds": 98.053388817003
+      },
+      {
+        "seed": 2,
+        "seconds": 94.850572121999
+      }
+    ]
+  },
+  "completed_metrics": [
+    {
+      "seed": 0,
+      "lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "rms_xy": 0.007508980476107788,
+      "last10_xy": 0.006524078099847875
+    },
+    {
+      "seed": 1,
+      "lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "rms_xy": 0.005990179191091076,
+      "last10_xy": 0.0053248318823477915
+    },
+    {
+      "seed": 2,
+      "lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "rms_xy": 0.010048633587181305,
+      "last10_xy": 0.008804238947420193
+    }
+  ]
+}

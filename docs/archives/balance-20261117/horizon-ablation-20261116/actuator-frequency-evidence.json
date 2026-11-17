@@ -1,0 +1,393 @@
+{
+  "student": {
+    "activation_states": 0,
+    "actuators": [
+      {
+        "name": "thigh_left_motor",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 0,
+        "gain_first3": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -1.0,
+          1.0
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -1.0,
+          1.0
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "thigh_right_motor",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 0,
+        "gain_first3": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -1.0,
+          1.0
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -1.0,
+          1.0
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "wheel_left_motor",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 0,
+        "gain_first3": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -0.04,
+          0.04
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -0.04,
+          0.04
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "wheel_right_motor",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 0,
+        "gain_first3": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -0.04,
+          0.04
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -0.04,
+          0.04
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "raw_xml_physics_dt": 0.004,
+    "actual_native_evaluator_physics_dt": 0.0025,
+    "configured_training_physics_dt": 0.0025
+  },
+  "reference": {
+    "activation_states": 0,
+    "actuators": [
+      {
+        "name": "thigh_left_pos",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 1,
+        "gain_first3": [
+          120.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          -120.0,
+          -80.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -24.0,
+          24.0
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -0.5,
+          0.0
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "thigh_right_pos",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 1,
+        "gain_first3": [
+          120.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          -120.0,
+          -80.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -24.0,
+          24.0
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -0.5,
+          0.0
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "wheel_left_motor",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 0,
+        "gain_first3": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -0.04,
+          0.04
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -0.04,
+          0.04
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "wheel_right_motor",
+        "dyntype": 0,
+        "gaintype": 0,
+        "biastype": 0,
+        "gain_first3": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "bias_first3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gear": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_limited": true,
+        "force_range": [
+          -0.04,
+          0.04
+        ],
+        "ctrl_limited": true,
+        "ctrl_range": [
+          -0.04,
+          0.04
+        ],
+        "joint_force_limited": false,
+        "joint_force_range": [
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "raw_xml_physics_dt": 0.004,
+    "configured_teacher_physics_dt": 0.0025
+  },
+  "reference_config": {
+    "control_dt": 0.01,
+    "physics_dt": 0.0025,
+    "wheel_velocity_feedback": true
+  },
+  "deployed_source_snippets": {
+    "wheel_teacher/teacher.py": [
+      {
+        "line": 68,
+        "text": "if (cfg.ctrl_dt != .01 or cfg.sim_dt != .0025 or not cfg.delta_thigh_action or"
+      },
+      {
+        "line": 76,
+        "text": "self.model.opt.timestep = cfg.sim_dt"
+      },
+      {
+        "line": 186,
+        "text": "for _ in range(4):"
+      },
+      {
+        "line": 190,
+        "text": "error = np.asarray(self.pack.last_target_wheel_vel) - self.data.qvel[self.wheel_v]"
+      },
+      {
+        "line": 191,
+        "text": "torque = np.clip(self.last_torque + self.cfg.vel_pid.kp * error,"
+      }
+    ],
+    "hybrid/env.py": [
+      {
+        "line": 95,
+        "text": "def substep(carry, _):"
+      },
+      {
+        "line": 107,
+        "text": "tau, raw = self.torque_command(safe_a, jp.where(jp.isfinite(jac), jac, 0.0))"
+      },
+      {
+        "line": 109,
+        "text": "new = mjx_env.step(self.mjx_model, d, tau, 1)"
+      },
+      {
+        "line": 126,
+        "text": "substep, initial, None, length=self.n_substeps)"
+      }
+    ],
+    "force_teacher/env.py": [
+      {
+        "line": 12,
+        "text": "cfg = hybrid_config(100)"
+      },
+      {
+        "line": 22,
+        "text": "if cfg.control_hz != 100:"
+      }
+    ],
+    "legwheel/env.py": [
+      {
+        "line": 39,
+        "text": "self._mj_model.opt.timestep = config.sim_dt"
+      }
+    ]
+  },
+  "scope": "Compiled actuator/static source audit, no control-rate experiment or hardware measurement."
+}

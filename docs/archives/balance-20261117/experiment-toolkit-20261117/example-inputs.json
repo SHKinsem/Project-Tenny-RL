@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "input_sha256_inventory",
+  "hash_algorithm": "sha256",
+  "tree_hash_format": "relative-path-kind-size-sha256-canonical-json-v1",
+  "entries": [
+    {
+      "path": "${REPO}\\experiments\\experiment_tools\\examples",
+      "kind": "directory",
+      "sha256": "5f46a0e80b1557178d84801b0c2bf5ae9817b0515bdf82f7efb319cb3fd9c26c",
+      "members": [
+        {
+          "path": "cpu-jobs.json",
+          "kind": "file",
+          "size_bytes": 478,
+          "sha256": "e37327866c62fcadadeb414e403d7f3aad2b64a5762e75abec2e989c6e1ee262"
+        },
+        {
+          "path": "paired-study.json",
+          "kind": "file",
+          "size_bytes": 2004,
+          "sha256": "4a1f8db92905d984c60f627dd6ce50a3a9264c2e2c2bff6925e38aded20ee0a6"
+        }
+      ]
+    }
+  ]
+}

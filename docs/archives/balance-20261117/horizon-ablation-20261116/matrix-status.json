@@ -1,0 +1,67 @@
+{
+  "phase": "completed",
+  "completed": [
+    {
+      "phase": "completed",
+      "arm": "baseline",
+      "seed": 0,
+      "steps": 2097152,
+      "elapsed_seconds": 160.55607395400875,
+      "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "final_array_digest": "3d15a714df0dd9666c9650aa41f823c68e5f51f1c91d380b65a7d94562914e1a",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "2147bafaf4ee585118aff4b03e543f743a1022c171758adfe25d6f47ab06daa3",
+      "devices": [
+        "cuda:0"
+      ],
+      "checkpoint_reload_exact": true
+    },
+    {
+      "phase": "completed",
+      "arm": "baseline",
+      "seed": 1,
+      "steps": 2097152,
+      "elapsed_seconds": 161.61860579099448,
+      "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "final_array_digest": "1bcbd9ebbf1b0c4b554372bf2b855e93cf9b9787dc69cb9b830344140bf0b211",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "8472dbc0f087adffd5d36be9ac2b4323eab1fd520b6e492b59fa1b79160469ea",
+      "devices": [
+        "cuda:0"
+      ],
+      "checkpoint_reload_exact": true
+    },
+    {
+      "phase": "completed",
+      "arm": "baseline",
+      "seed": 2,
+      "steps": 2097152,
+      "elapsed_seconds": 178.83000955200987,
+      "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "final_array_digest": "0d00063ad5d2f444becf292f651b116f3857bfd4afde9e8a857949a6fceb2ee7",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "372b3c36fa03808ffcdb2d66ac166640feea203f6fb7205f2f99383687690dbd",
+      "devices": [
+        "cuda:0"
+      ],
+      "checkpoint_reload_exact": true
+    }
+  ],
+  "total_runs": 3,
+  "elapsed_seconds": 517.8278177489992,
+  "manifest_sha256": "78cb6c3297a50cfd4713e59c705d7f8733e613e0475944406b8c96dca4ae576b",
+  "code_sha256": {
+    "__init__.py": "e8f231d51cfc582fdd738f2bcecd0f00ba881a3680da3da073d05a1ed23bf484",
+    "__main__.py": "b1b69ebf6f16d5e57122f48b3818fc5c876cc431bb3f332805092642d2d3e05e",
+    "matrix.py": "55367353c22d6fa5c609b0b8562e9a12790f3358aa4af9ffb16e0728510088ac",
+    "train.py": "57a07025cdf0f6452860a894826d6642f4dd4e03ac1fe2e4c729b4ac8396f070",
+    "legwheel_env.py": "2a1640c434b10f2025d3252bf83a98ff08da6165c2d4a12606e5b01e7f1653fd",
+    "rewards.py": "8e35c3551204957dfeb09d09c617d3fc13a9956c02f0e7e6c9311c7fe67c2f12"
+  }
+}

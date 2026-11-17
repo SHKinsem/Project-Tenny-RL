@@ -1,0 +1,46 @@
+{
+  "audit_type": "read-only live workbench UI audit",
+  "url": "http://127.0.0.1:8095/",
+  "page_data_time": "2026-11-17T01:15:24+08:00",
+  "initial_state": {
+    "connection": "已连接",
+    "run_id": "20261115T172533.823984Z_0a516875",
+    "run_status": "已完成",
+    "checkpoint": "CP·0AC2C398",
+    "actions_performed": [
+      "expand panels",
+      "open and close checkpoint history"
+    ]
+  },
+  "findings": {
+    "checkpoint_resume": "existing_but_inconvenient",
+    "ppo_learning_rate": "existing_good",
+    "reward_components_and_xy_wheel_weights": "no_entry",
+    "multi_seed_batch_control": "no_entry",
+    "stage_snapshots_best_rollback": "partial",
+    "fixed_initial_state_120s_paired_evaluation": "no_entry",
+    "input_freeze_fingerprints_and_full_parameters": "partial"
+  },
+  "observed_values": {
+    "learning_rate": 3e-05,
+    "parallel_envs": 512,
+    "batch_size": 512,
+    "minibatches": 1,
+    "rollout_steps": 16,
+    "eval_envs": 8,
+    "control_frequency_hz": 100,
+    "physics_frequency_hz": 400,
+    "observation_descriptor": "torque24-mean-sent-v1",
+    "action_descriptor": "virtual_leg_force"
+  },
+  "screenshot_evidence": {
+    "captured_in_live_cua_session": [
+      "workbench overview",
+      "checkpoint history",
+      "parameters and run description"
+    ],
+    "local_files": [],
+    "limitation": "CUA browser API displayed screenshots but exposed no local-save capability. Edge plugin fallback was unavailable: edge_status and its official rpc helper both returned connected=false, transportConnected=false, healthy=false, execution=unverified. No file was fabricated or claimed view_image-verified."
+  },
+  "final_state": "No training, preview, configuration, model selection, save, or global setting was changed; only read-only panels remain expanded."
+}

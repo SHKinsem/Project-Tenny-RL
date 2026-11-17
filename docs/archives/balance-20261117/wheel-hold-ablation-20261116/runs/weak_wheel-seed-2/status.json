@@ -1,0 +1,104 @@
+{
+  "phase": "completed",
+  "condition": "weak_wheel",
+  "seed": 2,
+  "steps": 2097152,
+  "elapsed_seconds": 94.850572121999,
+  "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "final_array_digest": "495b77d71e20ff1fe287d76a89bb15d84abee4caf243820b0f8c7227e587b8e6",
+  "actor_changed": true,
+  "normalizer_drift": 0.0,
+  "descriptor_sha256": "5cc16045d15ec26347429cbc4b84eefbd5ec476f791de61749c9f1e03da87e0b",
+  "checkpoint_reload_exact": true,
+  "requested_learning_rate": 3e-05,
+  "observed_learning_rates": [
+    2.9999999242136255e-05
+  ],
+  "optimizer_learning_rate_verified": true,
+  "callback_steps": [
+    0,
+    262144,
+    524288,
+    786432,
+    1048576,
+    1310720,
+    1572864,
+    1835008,
+    2097152
+  ],
+  "devices": [
+    "cuda:0"
+  ],
+  "wheel_hold": {
+    "original_weight": 10.0,
+    "training_weight": 1.0,
+    "metric": "reward/tracking_wheels_sinposition"
+  },
+  "snapshot_checkpoints": [
+    {
+      "steps": 0,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-0",
+      "checkpoint_sha256": "d4e894ca3b8bd139322a573fb5438ab6999df685082763bd2dd0216367f4858e",
+      "complete_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "reload_exact": true
+    },
+    {
+      "steps": 262144,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-262144",
+      "checkpoint_sha256": "d0905d9e1dc1ef49947ce895bc248fe275bbca045bcbfae7b105213699028dd8",
+      "complete_array_digest": "0ffec89de38105bef7b8103b4abead21e59534a62cd3d60ebf52276ffa8b8342",
+      "reload_exact": true
+    },
+    {
+      "steps": 524288,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-524288",
+      "checkpoint_sha256": "24a4338b9b377d18a5ae77fcc08c931ce42a780fd620e44671823576fefc9942",
+      "complete_array_digest": "f18bf9b89384b3780df73a9f0ec7e90b21bd7c6814ec1425d0abf94846767195",
+      "reload_exact": true
+    },
+    {
+      "steps": 786432,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-786432",
+      "checkpoint_sha256": "032f26fb4ff68781dca81e7a8ce6a1650e3b4b4d799daac42bc2fd6760d966f2",
+      "complete_array_digest": "a69f5c34ef18cd62e4f45562f48771c996ac2b7787f3b8212d1f162beb301de5",
+      "reload_exact": true
+    },
+    {
+      "steps": 1048576,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-1048576",
+      "checkpoint_sha256": "8476c85b8320a092f3236b36db58160012cf6285435da44f728524026e978c1d",
+      "complete_array_digest": "e1fb0aa2bbd735a9575bca9127a3d74f01e2e22c0218447f8813a317118a8177",
+      "reload_exact": true
+    },
+    {
+      "steps": 1310720,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-1310720",
+      "checkpoint_sha256": "901de36eb8defac11f5a517f234ed08f20c9a872568f96dacc9ab091204e36c2",
+      "complete_array_digest": "e2e370d4f0d104c7af0afcef0011a033dd5d534b1c98773f381e45b4a65d3f1d",
+      "reload_exact": true
+    },
+    {
+      "steps": 1572864,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-1572864",
+      "checkpoint_sha256": "e7b504f9682eefa91829e464084b0c5fa3c69db946a9edb9c02bfe77936d1cf1",
+      "complete_array_digest": "c8495586ea1546a248b30035e50addbcb712330582ab00a1e70a0b1a51d7655e",
+      "reload_exact": true
+    },
+    {
+      "steps": 1835008,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-1835008",
+      "checkpoint_sha256": "d283ddc303753c2ef95c6cfd051f6712bb52afd6ef81743042cac295a4ef6d59",
+      "complete_array_digest": "a734e6623d0a062a9de72eed8eeb25b32b74d24c791526c62bc566fc4dd6ee57",
+      "reload_exact": true
+    },
+    {
+      "steps": 2097152,
+      "path": "$HOME/projects/tenny-wheel-hold-ablation-20261116/matrix/seed-2/weak_wheel/checkpoint-step-2097152",
+      "checkpoint_sha256": "81a400659e578b93a980ce890401b6985b59f85bcebbd8abeea418f1bd56a0f6",
+      "complete_array_digest": "495b77d71e20ff1fe287d76a89bb15d84abee4caf243820b0f8c7227e587b8e6",
+      "reload_exact": true
+    }
+  ],
+  "snapshot_checkpoint_contents": "Complete normalizer, actor and critic parameters; Adam state is not saved."
+}

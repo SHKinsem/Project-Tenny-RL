@@ -1,0 +1,754 @@
+{
+  "schema_version": 1,
+  "kind": "wheel_hold_ablation_v1",
+  "condition": "weak_wheel",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "steps_per_run": 2097152,
+  "ppo": {
+    "seed": 0,
+    "num_timesteps": 2097152,
+    "num_evals": 9,
+    "reward_scaling": 0.1,
+    "episode_length": 3000,
+    "normalize_observations": true,
+    "action_repeat": 1,
+    "unroll_length": 16,
+    "num_minibatches": 1,
+    "num_updates_per_batch": 1,
+    "discounting": 0.9862327044933592,
+    "learning_rate": 3e-05,
+    "entropy_cost": 0.001,
+    "num_envs": 512,
+    "batch_size": 512,
+    "max_grad_norm": 1.0,
+    "network_factory": {
+      "policy_hidden_layer_sizes": [
+        64,
+        64
+      ],
+      "value_hidden_layer_sizes": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "policy_obs_key": "state",
+      "value_obs_key": "privileged_state"
+    },
+    "save_checkpoint_path": null,
+    "gae_lambda": 0.9025,
+    "num_eval_envs": 8,
+    "normalize_observations_mode": "ema",
+    "normalize_observations_std_eps": 0.0,
+    "normalize_until_count": 0,
+    "deterministic_eval": true,
+    "run_evals": false,
+    "clipping_epsilon": 0.3,
+    "num_resets_per_eval": 0
+  },
+  "env_config": {
+    "_XML_PATH": "unserializable object: $HOME/projects/tenny-torque200/src/assets/legwheel_robot2_stl_nolinkage6_terrain.xml",
+    "episode_time": 6.0,
+    "ctrl_dt": 0.01,
+    "sim_dt": 0.0025,
+    "cmd_start_delay_s": 0.2,
+    "episode_length": 600,
+    "action_repeat": 1,
+    "action_delay_steps": 0,
+    "obs_history_len": 1,
+    "wheel_radius": 0.0195,
+    "torque_control": {
+      "scales": [
+        1.0,
+        1.0,
+        0.0295,
+        0.0295
+      ]
+    },
+    "cmd_lin_vel_x_zero_margin": 0.000195,
+    "cmd_ang_vel_zero_margin": 0.01,
+    "sinpitch_zero": true,
+    "wheel_sin_scale": 0.1,
+    "wheel_sinpos_start": true,
+    "wheel_pos_nosin": false,
+    "sinyaw": true,
+    "sinyaw_scale": 0.5,
+    "hold_error_clip": {
+      "enable": false,
+      "wheel_sinpos": 5.0,
+      "sinyaw": 1.0
+    },
+    "last_act_obs": false,
+    "action_range": {
+      "thigh": [
+        -0.5,
+        0.0
+      ]
+    },
+    "noise_config": {
+      "level": 0.0,
+      "scales": {
+        "joint_pos": 0.02,
+        "joint_vel": 1.0,
+        "linvel": 0.01,
+        "gyro": 0.02,
+        "pitch": 0.02,
+        "roll": 0.02
+      }
+    },
+    "reward_config": {
+      "reference_dt": 0.01,
+      "do_deconflict": false,
+      "height_scale": 2.0,
+      "vel_scale": 2.0,
+      "roll_scale": 4.0,
+      "base_scale": 1.0,
+      "pitch_scale": 0.0,
+      "posture_scale": 1.0,
+      "zero_keep_scale": 10.0,
+      "energy_scale": -1.0,
+      "action_rate_scale": -0.5,
+      "pitch_velocity_penalty_scale": -0.5,
+      "termination_penalty_enable": false,
+      "termination_penalty_value": -10.0,
+      "sigma": 0.5,
+      "sigma_wheel": 0.5,
+      "height_feasible_projection": true,
+      "roll_thigh_coupling": 0.433
+    },
+    "push_config": {
+      "enable": false,
+      "interval_range": [
+        1.0,
+        5.0
+      ],
+      "magnitude_range": [
+        0.0,
+        0.5
+      ],
+      "magnitude_pow": 1.0,
+      "burst_prob": 0.0,
+      "burst_interval_range": [
+        0.3,
+        0.8
+      ]
+    },
+    "cmd_config": {
+      "command_change_interval": 299,
+      "cmd_prob": 0.0,
+      "lin_vel_x": [
+        -0.2,
+        0.2
+      ],
+      "ang_vel_yaw": [
+        -1.5,
+        1.5
+      ],
+      "height_value": [
+        -0.5,
+        0.0
+      ],
+      "roll_value": [
+        -0.2,
+        0.2
+      ],
+      "enable": {
+        "lin_vel_x": true,
+        "ang_vel_yaw": true,
+        "height_value": true,
+        "roll_value": true
+      }
+    },
+    "obs_normalize": {
+      "state_mean": null,
+      "state_std": null,
+      "privileged_state_mean": null,
+      "privileged_state_std": null
+    },
+    "control_hz": 100,
+    "action_delay_ms": 0.0
+  },
+  "arms": {
+    "baseline": {
+      "posture_weight": 0.0,
+      "position_weight": 0.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    },
+    "posture": {
+      "posture_weight": 4.0,
+      "position_weight": 0.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    },
+    "position": {
+      "posture_weight": 0.0,
+      "position_weight": 10.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    },
+    "both": {
+      "posture_weight": 4.0,
+      "position_weight": 10.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    }
+  },
+  "reward": {
+    "posture_weight": 0.0,
+    "position_weight": 10.0,
+    "pitch_scale_rad": 0.17453292519943295,
+    "position_scale_m": 0.05
+  },
+  "initial_checkpoint": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/checkpoints/000002801664",
+  "initial_checkpoint_sha256": "b177fb73cd6566e96fcaefcb5c8ecd2324de53f8318fa82cf74684476803aa5d",
+  "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "model_origin": {
+    "run_dir": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40",
+    "checkpoint": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/checkpoints/000002801664",
+    "checkpoint_sha256": "b177fb73cd6566e96fcaefcb5c8ecd2324de53f8318fa82cf74684476803aa5d",
+    "restored_from": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T053612.022810Z_47e4b501/checkpoints/000001171456",
+    "learning_rate": 3e-05,
+    "episode_length": 600,
+    "original_action_mode": "virtual_leg_force"
+  },
+  "base_descriptor": "$HOME/projects/tenny-wheel-hold-ablation-20261116/inputs/initial-descriptor.json",
+  "policy_metadata": {
+    "schema": "wheel-center-axial-v1",
+    "action_mode": "virtual_leg_force",
+    "action_order": [
+      "left_leg",
+      "right_leg",
+      "left_wheel",
+      "right_wheel"
+    ],
+    "observation_version": "torque24-mean-sent-v1",
+    "actor_dim": 24,
+    "critic_dim": 51,
+    "timing_schema": "hybrid-timing-v1",
+    "control_hz": 100,
+    "physics_hz": 400,
+    "ctrl_dt": 0.01,
+    "sim_dt": 0.0025,
+    "n_substeps": 4,
+    "episode_seconds": 6.0,
+    "episode_length": 600,
+    "command_period_seconds": 3.0,
+    "command_period_steps": 300,
+    "command_start_seconds": 0.2,
+    "command_start_steps": 20,
+    "action_repeat": 1,
+    "action_delay_ms": 0.0,
+    "action_delay_steps": 0,
+    "reward_reference_dt": 0.01,
+    "discount_half_life_seconds": 0.5,
+    "discounting": 0.9862327044933592,
+    "gae_lambda": 0.9025,
+    "force_bias_n": [
+      0.0,
+      0.0
+    ],
+    "force_scales_n": [
+      8.871533178778112,
+      8.871518771776556
+    ],
+    "torque_limits_nm": [
+      1.0,
+      1.0,
+      0.0295,
+      0.0295
+    ],
+    "hip_range": [
+      -0.5,
+      0.05
+    ],
+    "validity": {
+      "equality_position_rad": 0.01,
+      "length_velocity_m_s": 0.05,
+      "minimum_jacobian_ratio": 0.05
+    },
+    "source_fingerprint": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+    "mode": "leg_force_bc",
+    "teacher_schema": "leg-force-reachable-teacher-bc-v3",
+    "force_source_fingerprint": "234757fe38df11388b3303f3a6686f9e4877727769b0ca762968a979f1a94487",
+    "teacher_checkpoint": "ckpts/newobs-norecovery/000403660800",
+    "teacher_sha256": "02130fb6dd2e73a3157ec478a66c0093eb629f4412e50fb72132608fe4357122",
+    "teacher_label_semantics": "projected reachable oracle on true motor student states; 100 Hz held axial force and wheel torque; 400 Hz Jacobian refresh",
+    "unreachable_label_policy": "explicit force projection with saturation/error reporting; retain reachable executed student trajectories",
+    "teacher_information": "author 26D policy and private wheel-target memory; student observes only deployable 24D state",
+    "teacher_collection_version": 2,
+    "training_profile": "standing_v2",
+    "evaluation_policy": "deterministic",
+    "normalization_policy": "fixed_bc",
+    "policy_head": "wheel_logit_residual_v1",
+    "wheel_residual_scale": 0.05,
+    "previous_torque_clip": 1e-05,
+    "export_float_precision": "float32-roundtrip-10sig",
+    "export_sha256": "5495abd4c8c39cf42fb5c9e4d2a0a1936c030367231ed5fe0b6bc8e2f9dcd681"
+  },
+  "initial_states": [
+    {
+      "id": "nominal",
+      "label": "标称重置",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "pitch-plus",
+      "label": "固定俯仰扰动 +0.01 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999875000260416,
+          0.0,
+          0.004999979166692708,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "pitch-minus",
+      "label": "固定俯仰扰动 -0.01 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999875000260416,
+          0.0,
+          -0.004999979166692708,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "heldout-plus",
+      "label": "预留俯仰扰动 +0.02 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999500004166653,
+          0.0,
+          0.009999833334166664,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "heldout-minus",
+      "label": "预留俯仰扰动 -0.02 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999500004166653,
+          0.0,
+          -0.009999833334166664,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    }
+  ],
+  "protected_inputs": {
+    "files": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/env_config.json": "e0794635e38237a972ea91a758c91e663697f7025e00786cd06d92d936d94ca7",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/ppo_config.json": "cf68c3d7db925a2592c08fc9e5742cf7f9826d86011a24644c73cf4f2980fead",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/policy_metadata.json": "5e38ccd6c1f852435b21ecfb91f1781b95115eeb607fc967494f5fd6d1e1292f",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/policy.cpp.txt": "5495abd4c8c39cf42fb5c9e4d2a0a1936c030367231ed5fe0b6bc8e2f9dcd681",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/report.json": "5a1af1cc2995177a7e916a39626305b2868dabcab0ca632067d8e91a430980ef",
+      "$HOME/projects/tenny-torque200/src/force_teacher/env.py": "537023bbb3dc9246cc54dc8a96a33fcb88873fca5c6be95cbac51fab94b849cf",
+      "$HOME/projects/tenny-torque200/src/force_teacher/ppo.py": "55ddc1ea05c9c5ed08cd479f6a9481b146a601297dd5630b98a102da42151b57",
+      "$HOME/projects/tenny-torque200/src/force_teacher/networks.py": "804c8103571bb926de26417b6642b6447161360b07ef6aa59b6db50f26a0044a",
+      "$HOME/projects/tenny-torque200/src/legwheel/env.py": "2e2d883fd00c1898113eb2a5406c89e0d7b762e07dcad05c89aaf1e6fa867c4c",
+      "$HOME/projects/tenny-torque200/src/legwheel/rewards.py": "f415a3f39b388117b7d79426b4df7445d6373ce862197b0860ddbf82388a3417",
+      "$HOME/projects/tenny-torque200/src/hybrid/env.py": "c27e78890b9a528167313e33320001e9abef5dec611b3dfdfc3dcfaf76115332",
+      "$HOME/projects/tenny-reference/.venv-gpu/lib/python3.12/site-packages/brax/training/agents/ppo/train.py": "32ed2754f3f9b545c7f381aba9953d1160ca82cc0d01deb59d1f5847872eea32",
+      "$HOME/projects/tenny-reference/.venv-gpu/lib/python3.12/site-packages/brax/training/agents/ppo/losses.py": "b6dfe0aefeb1e3d11252fc40c6ec4512757fc7fccc0b3e37ec9ccd349351007c",
+      "$HOME/projects/tenny-native-eval/python/native_eval/_native.cpython-312-x86_64-linux-gnu.so": "1dd12b5bc3c5baabb85529129eee362e09b70f45b56161606cc90c7597106b6f",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/status.json": "f9d7bec525c2dece72a865fd863fa94ae937b8a1e5ae7bf402706737a0a80015",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/effective-config.json": "7875690f887b5a6a60db94b9f395a418e407af164b04c8f509e23820ac78c4ef",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/progress.jsonl": "00d4149a8d69f4e3dfd33183b3ca537a3e11fc7206960d41894f7ab70ed8554e",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/training-metrics.jsonl": "0caccff3f969553657e41400c24337f399fd2b01753f896d864554178bd1621e",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor.json": "6a57d6bf61953f1a6057ce7c9a9992fe02cbb241aaee07d8b2f95d912e5a4020",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-524288.json": "21441e3a1b8bc524233e39911b2902d7e91ce8347a60b16798434629723b7853",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-786432.json": "90a18980d4291d32696efb611fd6d12a7228523e6139e64a658ef1cfface724e",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-1835008.json": "e90fe5cf3b113ba08e88ba6b41a21e592227df14d793a01bfe1ff70d608f1b98",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-1048576.json": "fe7a38fb6aa84f9c4c4058657aa05ea38bc276f2b110bd7286859ace2f092d19",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-1572864.json": "91ffb2b76223565b5ae3a681bf07117975afb9fe66aa529a877fda89f4e76b98",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-2097152.json": "15f07c207493d87b7ae13adcdc33a1cfe6bbaf8e43751bc8941cfd7c9eb493a0",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-262144.json": "6d2316d997dcc48139f95cc91a3e173887b7590043edf51c5013f3d41e29cd89",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-0.json": "e7977f44dc2d46a57dd82adf0f9541e21bc8c0c17721d9018044fda7eb2423a8",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor-step-1310720.json": "5f77df73652651f82491a9cbda429031c6ba7fcae2f7f9b34008d0c952d6db85",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/status.json": "59bdc22aa696906fe0d5ee8d9a4b7b0a1138a693f16df713ecc7ded8fe4bbe66",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/effective-config.json": "29b64f13f5a16a8b1ea0c2684c0dd150a799761401a8f8bb83e45ba2b0b3d749",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/progress.jsonl": "3d8eb6971ce5dcc1ad207aa34ab45d39d14f8feed270bd0da26463a9522fd4a7",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/training-metrics.jsonl": "e1369f5a8c4b7560a9074024eac4c229e7c7bb2ab4f09fa5fd44e9c30e71a6e3",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor.json": "042d7124bfbcf845da200c18cdf3b6de8890cafa64aa5832b9929cb9c045d005",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-524288.json": "3a474272ee14f229e905e73ea2b17f38d31a766a0f2e2d01dfffdb3e32225396",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-786432.json": "7c20315c68511edfc9199d840f8255a9bc5bcb91aeb23538bdb35f5539316eb5",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-1835008.json": "d7c85692dba89d487e6ba21ed17011a3afd0a426a5692279db1970275577b14f",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-1048576.json": "106c6060f50064e70ac120478998d434887e1ba794a5179ed1cec681f97ad9a1",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-1572864.json": "23410feae4f72f957e5303a16541f86e150e882eeee39fadab0b68f3908ccef4",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-2097152.json": "cc83de0ee9953b70d721a3a1cb1b09f0734182596fce6b402b0ab0f84dd1e844",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-262144.json": "26b6c4c7442932212c3239e22fd90f09cce727da9450aa14460dd976518e563f",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-0.json": "c0593d6f773b611d8ebfcc28c1aa31496ed3727c709eefbafbd4669574e912ea",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor-step-1310720.json": "7ca15b2caffeb0f042429ed323ff355e088c34296262887c6f44dc7159f65a2e",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/status.json": "4df7f2b41e3505112933db0004654a3685f0f500293860c4589222068a3b43ab",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/effective-config.json": "0158a0dc9ec44dcfe73f285687933ad25b98f5d5ca09e00b5b322c8879996781",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/progress.jsonl": "a1b2b0605e80914de955346861a3d4dcffd69cc39f7ea9e4f35a0ec1be7c725c",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/training-metrics.jsonl": "90b61f9a8a5f64919e0543b9aafe84feea7a1c61f7652c97fdcd81dd963c037e",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor.json": "c7feb62caf7c7d1c362bbbd41591f1c80f39c04d1557c644e7765943556b9911",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-524288.json": "c28febca0dfeb532316e663d22077b02975dc6e92be69892bfa6bfc0facbb192",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-786432.json": "f61353e2196216c91e04e0b3ca254b32f27fa9a9977caa02453bc4173935c154",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-1835008.json": "cc6fcfda6ab67b2a863b5d6fd43dc7f747bb874a9c763b3c380a34c0031a46ee",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-1048576.json": "e840d39d0243b2d8e94f73d8f7a6557d6abc68d54d6344e0a2799fa626730621",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-1572864.json": "bb14dddfd343fef728a9b2e330ce77104e72eea6346005cfcf03fdb4cfdc06ee",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-2097152.json": "3dff99da6634cd9a91ed8bdc4887667e3634f0a986edfebf4c4d2e153626df35",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-262144.json": "134794987d2b9067583a06a8f77aaddbc9b6ae2780b0281fd61fc1b1a0a5b940",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-0.json": "578290bd3b197c27661d93c0edc28079cfa80a286d9134131084cbe03b2ed862",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor-step-1310720.json": "0b259b254046ef8b87ecc007a8eb484032a3cafddcfe797e1e7540f6a4850d76"
+    },
+    "checkpoint_trees": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/checkpoints/000002801664": "b177fb73cd6566e96fcaefcb5c8ecd2324de53f8318fa82cf74684476803aa5d",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/checkpoint": "3ddb0397b151c5a5bc42c583b9afe432c4800061ec00f244f5fd9c79bf968e2e",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/checkpoint": "7e34484d834191bed4bd0a463a884a46ae1930e6ac49acd0226299ecfc2079cd",
+      "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/checkpoint": "2cb3953658a80adb9f304d29ee6f07cfa622cf9569cc71dab2873d2fe1b924fa"
+    }
+  },
+  "wheel_hold": {
+    "original_weight": 10.0,
+    "training_weight": 1.0,
+    "metric": "reward/tracking_wheels_sinposition"
+  },
+  "baseline_runs": [
+    {
+      "seed": 0,
+      "run_dir": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr",
+      "descriptor": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor.json",
+      "checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/checkpoint",
+      "checkpoint_sha256": "3ddb0397b151c5a5bc42c583b9afe432c4800061ec00f244f5fd9c79bf968e2e",
+      "status": {
+        "phase": "completed",
+        "condition": "original_wheel",
+        "seed": 0,
+        "steps": 2097152,
+        "elapsed_seconds": 127.34643582699937,
+        "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "final_array_digest": "1b0da5ea32fcd1d650777adf1249cd1776f4741cb2793262c94bce875f736c9c",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "6a57d6bf61953f1a6057ce7c9a9992fe02cbb241aaee07d8b2f95d912e5a4020",
+        "checkpoint_reload_exact": true,
+        "requested_learning_rate": 3e-05,
+        "observed_learning_rates": [
+          2.9999999242136255e-05
+        ],
+        "optimizer_learning_rate_verified": true,
+        "callback_steps": [
+          0,
+          262144,
+          524288,
+          786432,
+          1048576,
+          1310720,
+          1572864,
+          1835008,
+          2097152
+        ],
+        "devices": [
+          "cuda:0"
+        ],
+        "reused": true,
+        "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr"
+      }
+    },
+    {
+      "seed": 1,
+      "run_dir": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr",
+      "descriptor": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor.json",
+      "checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/checkpoint",
+      "checkpoint_sha256": "7e34484d834191bed4bd0a463a884a46ae1930e6ac49acd0226299ecfc2079cd",
+      "status": {
+        "phase": "completed",
+        "condition": "original_wheel",
+        "seed": 1,
+        "steps": 2097152,
+        "elapsed_seconds": 108.58067615999607,
+        "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "final_array_digest": "c512530d9b75f1fe8716f8c11e72d4edae5d645d2ac2854168d93f8f9fee309a",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "042d7124bfbcf845da200c18cdf3b6de8890cafa64aa5832b9929cb9c045d005",
+        "checkpoint_reload_exact": true,
+        "requested_learning_rate": 3e-05,
+        "observed_learning_rates": [
+          2.9999999242136255e-05
+        ],
+        "optimizer_learning_rate_verified": true,
+        "callback_steps": [
+          0,
+          262144,
+          524288,
+          786432,
+          1048576,
+          1310720,
+          1572864,
+          1835008,
+          2097152
+        ],
+        "devices": [
+          "cuda:0"
+        ],
+        "reused": true,
+        "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr"
+      }
+    },
+    {
+      "seed": 2,
+      "run_dir": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr",
+      "descriptor": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor.json",
+      "checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/checkpoint",
+      "checkpoint_sha256": "2cb3953658a80adb9f304d29ee6f07cfa622cf9569cc71dab2873d2fe1b924fa",
+      "status": {
+        "phase": "completed",
+        "condition": "original_wheel",
+        "seed": 2,
+        "steps": 2097152,
+        "elapsed_seconds": 101.81598059501266,
+        "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "final_array_digest": "b9fd7617fbcf169d98fcf51c4a1d653d86cbc7a918e76799190e0c342f82ab6d",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "c7feb62caf7c7d1c362bbbd41591f1c80f39c04d1557c644e7765943556b9911",
+        "checkpoint_reload_exact": true,
+        "requested_learning_rate": 3e-05,
+        "observed_learning_rates": [
+          2.9999999242136255e-05
+        ],
+        "optimizer_learning_rate_verified": true,
+        "callback_steps": [
+          0,
+          262144,
+          524288,
+          786432,
+          1048576,
+          1310720,
+          1572864,
+          1835008,
+          2097152
+        ],
+        "devices": [
+          "cuda:0"
+        ],
+        "reused": true,
+        "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr"
+      }
+    }
+  ]
+}

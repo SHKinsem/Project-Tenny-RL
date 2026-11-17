@@ -1,0 +1,82 @@
+{
+  "all_effective_configs_match": true,
+  "sole_ppo_difference": "episode_length:600->3000",
+  "all_initial_arrays_exact": true,
+  "all_normalizers_frozen": true,
+  "all_checkpoint_reloads_exact": true,
+  "all_3_new_checkpoints_finite": true,
+  "reused_6s_checkpoints_match_prior_evaluation": true,
+  "frozen_training_files_verified": 6,
+  "source_fingerprint_unchanged": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+  "protected_files_unchanged": 16,
+  "protected_checkpoint_trees_unchanged": 4,
+  "common_prefix_exact_cases": 35,
+  "reached_30_seconds": 0,
+  "evaluated_first_episodes": 35,
+  "new_environment_steps": 6291456,
+  "new_matrix_elapsed_seconds": 517.8278177489992,
+  "frozen_training_source_archive_sha256": "f3fb65a43d973bd17d382734ee4ffbdbb0f51ada950cc4d08aacad3a2451c66d",
+  "run_checks": [
+    {
+      "condition": "h6",
+      "seed": 0,
+      "steps": 2097152,
+      "elapsed_seconds": 124.93072255600418,
+      "finite_check": null,
+      "reused_evaluation_checkpoint_verified": true
+    },
+    {
+      "condition": "h30",
+      "seed": 0,
+      "steps": 2097152,
+      "elapsed_seconds": 160.55607395400875,
+      "finite_check": {
+        "all_leaves_finite": true,
+        "leaf_count": 25,
+        "array_digest": "3d15a714df0dd9666c9650aa41f823c68e5f51f1c91d380b65a7d94562914e1a"
+      },
+      "reused_evaluation_checkpoint_verified": false
+    },
+    {
+      "condition": "h6",
+      "seed": 1,
+      "steps": 2097152,
+      "elapsed_seconds": 103.35388559800049,
+      "finite_check": null,
+      "reused_evaluation_checkpoint_verified": true
+    },
+    {
+      "condition": "h30",
+      "seed": 1,
+      "steps": 2097152,
+      "elapsed_seconds": 161.61860579099448,
+      "finite_check": {
+        "all_leaves_finite": true,
+        "leaf_count": 25,
+        "array_digest": "1bcbd9ebbf1b0c4b554372bf2b855e93cf9b9787dc69cb9b830344140bf0b211"
+      },
+      "reused_evaluation_checkpoint_verified": false
+    },
+    {
+      "condition": "h6",
+      "seed": 2,
+      "steps": 2097152,
+      "elapsed_seconds": 100.61809319000167,
+      "finite_check": null,
+      "reused_evaluation_checkpoint_verified": true
+    },
+    {
+      "condition": "h30",
+      "seed": 2,
+      "steps": 2097152,
+      "elapsed_seconds": 178.83000955200987,
+      "finite_check": {
+        "all_leaves_finite": true,
+        "leaf_count": 25,
+        "array_digest": "0d00063ad5d2f444becf292f651b116f3857bfd4afde9e8a857949a6fceb2ee7"
+      },
+      "reused_evaluation_checkpoint_verified": false
+    }
+  ],
+  "verification_seconds": 0.9917755919886986
+}

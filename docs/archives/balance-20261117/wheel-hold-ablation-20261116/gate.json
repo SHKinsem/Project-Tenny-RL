@@ -1,0 +1,15 @@
+{
+  "phase": "passed",
+  "scope": "Identical inherited dynamics/observation methods; real saved post-state reward calls on shared data. No claim that this is a full JAX/native trajectory equivalence test.",
+  "reset_physics_and_actor_observation_exact": true,
+  "sampled_states": 16,
+  "nonzero_wheel_scores": 16,
+  "weight10_all_reward_terms_max_abs_error": 0.0,
+  "weight1_other_terms_max_abs_error": 0.0,
+  "weight1_single_wheel_adjustment_max_abs_error": 0.0,
+  "shared_zero_keep_scale": 10.0,
+  "yaw_weight": 10.0,
+  "actor_uses_world_xy": false,
+  "actor_uses_body_local_linear_velocity": false,
+  "wall_seconds": 4.938302319002105
+}

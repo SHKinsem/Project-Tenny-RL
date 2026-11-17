@@ -1,0 +1,904 @@
+{
+  "rows": [
+    {
+      "policy": "initial",
+      "initial": "nominal",
+      "seconds": 6.2,
+      "max_displacement_cm": 20.28877576842875,
+      "first_6s_displacement_cm": 12.606656510068493,
+      "pitch_rms_deg": 8.39994780633843,
+      "tail": {
+        "start_s": 5.2,
+        "end_s": 6.2,
+        "observed_seconds": 1.0,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          -0.13163221698091185,
+          -0.15439041962132333
+        ],
+        "end_horizontal_displacement_m": 0.2028877576842875,
+        "max_horizontal_displacement_m": 0.2028877576842875,
+        "position_rms_m": 0.08601675979543544,
+        "path_length_m": 0.21713665238505486,
+        "horizontal_speed_max_m_s": 0.5193444068477722,
+        "horizontal_speed_end_m_s": 0.17984936895836992,
+        "horizontal_speed_rms_m_s": 0.28720059406829046,
+        "pitch_error_rms_deg": 17.959711795496272,
+        "pitch_error_max_abs_deg": 61.48493184003443,
+        "pitch_error_end_deg": 61.48493184003443,
+        "pitch_max_abs_deg": 61.48493184003443,
+        "roll_max_abs_deg": 0.6799864835705112,
+        "pitch_rate_rms_rad_s": 2.7187300245731083,
+        "pitch_rate_end_rad_s": 8.109677437940032,
+        "reward_total": 672.3284324761237,
+        "reward_per_second": 672.3284324761237,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": 5.8500000000000005,
+          "confirmed_at_s": 6.05
+        },
+        "pitch_error": {
+          "first_exceeded_s": 5.63,
+          "confirmed_at_s": 5.83
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 5.69,
+          "confirmed_at_s": 5.89
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 6.2
+      },
+      "wheel_angle_distance_end_m": -0.2694841382221245
+    },
+    {
+      "policy": "initial",
+      "initial": "pitch-plus",
+      "seconds": 5.82,
+      "max_displacement_cm": 11.692703989641931,
+      "first_6s_displacement_cm": 11.692703989641931,
+      "pitch_rms_deg": 8.829901661911064,
+      "tail": {
+        "start_s": 4.82,
+        "end_s": 5.82,
+        "observed_seconds": 1.0,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.03744921205761966,
+          0.11076772623468564
+        ],
+        "end_horizontal_displacement_m": 0.11692703989641931,
+        "max_horizontal_displacement_m": 0.11692703989641931,
+        "position_rms_m": 0.04531490888296369,
+        "path_length_m": 0.23081098659385507,
+        "horizontal_speed_max_m_s": 0.7189056309861861,
+        "horizontal_speed_end_m_s": 0.7189056309861861,
+        "horizontal_speed_rms_m_s": 0.2782014534094484,
+        "pitch_error_rms_deg": 18.117172119246735,
+        "pitch_error_max_abs_deg": 37.38347567125085,
+        "pitch_error_end_deg": -37.38347567125085,
+        "pitch_max_abs_deg": 37.38347567125085,
+        "roll_max_abs_deg": 0.9070246111787413,
+        "pitch_rate_rms_rad_s": 4.159871809952729,
+        "pitch_rate_end_rad_s": 1.5483515430307793,
+        "reward_total": 576.4054698120484,
+        "reward_per_second": 576.4054698120484,
+        "command_at_limit_fraction": 0.07250000000000023
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "pitch_error": {
+          "first_exceeded_s": 5.12,
+          "confirmed_at_s": 5.32
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 4.88,
+          "confirmed_at_s": 5.08
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 5.82
+      },
+      "wheel_angle_distance_end_m": 0.1585123067800834
+    },
+    {
+      "policy": "initial",
+      "initial": "pitch-minus",
+      "seconds": 5.64,
+      "max_displacement_cm": 17.618734006724207,
+      "first_6s_displacement_cm": 17.618734006724207,
+      "pitch_rms_deg": 9.599028489637247,
+      "tail": {
+        "start_s": 4.64,
+        "end_s": 5.64,
+        "observed_seconds": 1.0,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          -0.09429007208366466,
+          -0.14883333331759832
+        ],
+        "end_horizontal_displacement_m": 0.17618734006724207,
+        "max_horizontal_displacement_m": 0.17618734006724207,
+        "position_rms_m": 0.04846613228297826,
+        "path_length_m": 0.26875621410189005,
+        "horizontal_speed_max_m_s": 1.0757058999634348,
+        "horizontal_speed_end_m_s": 0.6799406353395938,
+        "horizontal_speed_rms_m_s": 0.3804658946528016,
+        "pitch_error_rms_deg": 19.833685161789372,
+        "pitch_error_max_abs_deg": 37.077548176372844,
+        "pitch_error_end_deg": -37.077548176372844,
+        "pitch_max_abs_deg": 37.077548176372844,
+        "roll_max_abs_deg": 0.8230380755726207,
+        "pitch_rate_rms_rad_s": 3.052350166885128,
+        "pitch_rate_end_rad_s": -1.0819695937079628,
+        "reward_total": 668.5980562648134,
+        "reward_per_second": 668.5980562648134,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "pitch_error": {
+          "first_exceeded_s": 4.76,
+          "confirmed_at_s": 4.96
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 4.5600000000000005,
+          "confirmed_at_s": 4.76
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 5.64
+      },
+      "wheel_angle_distance_end_m": -0.13728967348640098
+    },
+    {
+      "policy": "mid-1",
+      "initial": "nominal",
+      "seconds": 7.19,
+      "max_displacement_cm": 39.6235566582296,
+      "first_6s_displacement_cm": 37.38884734373456,
+      "pitch_rms_deg": 24.385539671682388,
+      "tail": {
+        "start_s": 6.19,
+        "end_s": 7.19,
+        "observed_seconds": 1.0,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          -0.10146854298222062,
+          -0.38302318338431995
+        ],
+        "end_horizontal_displacement_m": 0.39623556658229603,
+        "max_horizontal_displacement_m": 0.39623556658229603,
+        "position_rms_m": 0.32637084396067995,
+        "path_length_m": 0.1997498749871358,
+        "horizontal_speed_max_m_s": 0.759826372006502,
+        "horizontal_speed_end_m_s": 0.6290247162139623,
+        "horizontal_speed_rms_m_s": 0.27809746641636374,
+        "pitch_error_rms_deg": 35.726016807677986,
+        "pitch_error_max_abs_deg": 36.89232187126014,
+        "pitch_error_end_deg": -36.89232187126014,
+        "pitch_max_abs_deg": 36.89232187126014,
+        "roll_max_abs_deg": 0.6061404171053237,
+        "pitch_rate_rms_rad_s": 0.42110275785317314,
+        "pitch_rate_end_rad_s": 0.2825429584647092,
+        "reward_total": 673.4541072411523,
+        "reward_per_second": 673.4541072411523,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": 4.05,
+          "confirmed_at_s": 4.25
+        },
+        "pitch_error": {
+          "first_exceeded_s": 3.34,
+          "confirmed_at_s": 3.54
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 3.5100000000000002,
+          "confirmed_at_s": 3.71
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 7.19
+      },
+      "wheel_angle_distance_end_m": -0.5415859784924592
+    },
+    {
+      "policy": "mid-1",
+      "initial": "pitch-plus",
+      "seconds": 4.36,
+      "max_displacement_cm": 17.48918803895639,
+      "first_6s_displacement_cm": 17.48918803895639,
+      "pitch_rms_deg": 8.24268710885489,
+      "tail": {
+        "start_s": 3.36,
+        "end_s": 4.36,
+        "observed_seconds": 1.0000000000000004,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          -0.10417367604627885,
+          -0.140481369032347
+        ],
+        "end_horizontal_displacement_m": 0.17489188038956388,
+        "max_horizontal_displacement_m": 0.17489188038956388,
+        "position_rms_m": 0.07583656558179945,
+        "path_length_m": 0.17214366207799706,
+        "horizontal_speed_max_m_s": 0.42133745678109025,
+        "horizontal_speed_end_m_s": 0.15718265469149917,
+        "horizontal_speed_rms_m_s": 0.2279488782928096,
+        "pitch_error_rms_deg": 14.927059932257718,
+        "pitch_error_max_abs_deg": 60.295434255222325,
+        "pitch_error_end_deg": 60.295434255222325,
+        "pitch_max_abs_deg": 60.295434255222325,
+        "roll_max_abs_deg": 0.39803040099615616,
+        "pitch_rate_rms_rad_s": 2.6993835044672645,
+        "pitch_rate_end_rad_s": 9.461292599100997,
+        "reward_total": 666.698325023852,
+        "reward_per_second": 666.6983250238517,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": 4.0,
+          "confirmed_at_s": 4.2
+        },
+        "pitch_error": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 3.86,
+          "confirmed_at_s": 4.0600000000000005
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 4.36
+      },
+      "wheel_angle_distance_end_m": -0.24159636614109667
+    },
+    {
+      "policy": "mid-1",
+      "initial": "pitch-minus",
+      "seconds": 9.31,
+      "max_displacement_cm": 37.853892835521,
+      "first_6s_displacement_cm": 37.853892835521,
+      "pitch_rms_deg": 26.685935498236947,
+      "tail": {
+        "start_s": 8.31,
+        "end_s": 9.31,
+        "observed_seconds": 1.0,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.06670716966739597,
+          -0.24525814915344682
+        ],
+        "end_horizontal_displacement_m": 0.254168066859724,
+        "max_horizontal_displacement_m": 0.27546304658291987,
+        "position_rms_m": 0.2619402084550384,
+        "path_length_m": 0.02481813194053636,
+        "horizontal_speed_max_m_s": 0.1011884124955947,
+        "horizontal_speed_end_m_s": 0.016759915377506637,
+        "horizontal_speed_rms_m_s": 0.035460666874742315,
+        "pitch_error_rms_deg": 33.062708303216525,
+        "pitch_error_max_abs_deg": 33.5962230137071,
+        "pitch_error_end_deg": -32.73757281459824,
+        "pitch_max_abs_deg": 33.5962230137071,
+        "roll_max_abs_deg": 2.773856614003324,
+        "pitch_rate_rms_rad_s": 0.10768516168016383,
+        "pitch_rate_end_rad_s": 0.008881891907247851,
+        "reward_total": 712.9775882490662,
+        "reward_per_second": 712.9775882490662,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": 3.93,
+          "confirmed_at_s": 4.13
+        },
+        "pitch_error": {
+          "first_exceeded_s": 3.2600000000000002,
+          "confirmed_at_s": 3.46
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 3.73,
+          "confirmed_at_s": 3.93
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "hip_range",
+        "time_s": 9.31
+      },
+      "wheel_angle_distance_end_m": -0.5868707657044495
+    },
+    {
+      "policy": "mid-2",
+      "initial": "nominal",
+      "seconds": 4.04,
+      "max_displacement_cm": 6.7902354826516245,
+      "first_6s_displacement_cm": 6.7902354826516245,
+      "pitch_rms_deg": 9.84438684087975,
+      "tail": {
+        "start_s": 3.04,
+        "end_s": 4.04,
+        "observed_seconds": 1.0,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.06492285621517964,
+          -0.019893529899171352
+        ],
+        "end_horizontal_displacement_m": 0.06790235482651624,
+        "max_horizontal_displacement_m": 0.06790235482651624,
+        "position_rms_m": 0.02279749417286192,
+        "path_length_m": 0.06165280900465924,
+        "horizontal_speed_max_m_s": 0.5918262603238026,
+        "horizontal_speed_end_m_s": 0.5918262603238026,
+        "horizontal_speed_rms_m_s": 0.13401277441188572,
+        "pitch_error_rms_deg": 17.30132579674264,
+        "pitch_error_max_abs_deg": 59.99453145088434,
+        "pitch_error_end_deg": 59.99453145088434,
+        "pitch_max_abs_deg": 59.99453145088434,
+        "roll_max_abs_deg": 0.06325404479029709,
+        "pitch_rate_rms_rad_s": 1.9537614796506384,
+        "pitch_rate_end_rad_s": 5.131625940621605,
+        "reward_total": 1540.5894862418008,
+        "reward_per_second": 1540.5894862418008,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "pitch_error": {
+          "first_exceeded_s": 3.8200000000000003,
+          "confirmed_at_s": 4.0200000000000005
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 4.04
+      },
+      "wheel_angle_distance_end_m": -0.005412201507384833
+    },
+    {
+      "policy": "mid-2",
+      "initial": "pitch-plus",
+      "seconds": 4.63,
+      "max_displacement_cm": 4.046524898226565,
+      "first_6s_displacement_cm": 4.046524898226565,
+      "pitch_rms_deg": 6.981593154134698,
+      "tail": {
+        "start_s": 3.63,
+        "end_s": 4.63,
+        "observed_seconds": 1.0,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.03951186489664462,
+          0.004672725521905551
+        ],
+        "end_horizontal_displacement_m": 0.03978720688127988,
+        "max_horizontal_displacement_m": 0.04046524898226565,
+        "position_rms_m": 0.022694162501397868,
+        "path_length_m": 0.033619516715991525,
+        "horizontal_speed_max_m_s": 0.1371475938473231,
+        "horizontal_speed_end_m_s": 0.033781742200366775,
+        "horizontal_speed_rms_m_s": 0.05329165062812848,
+        "pitch_error_rms_deg": 10.710870645753753,
+        "pitch_error_max_abs_deg": 37.470069452427374,
+        "pitch_error_end_deg": -37.470069452427374,
+        "pitch_max_abs_deg": 37.470069452427374,
+        "roll_max_abs_deg": 0.2624614125188876,
+        "pitch_rate_rms_rad_s": 2.592279999568694,
+        "pitch_rate_end_rad_s": -1.1019129139762822,
+        "reward_total": 1770.7030998982123,
+        "reward_per_second": 1770.7030998982123,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "pitch_error": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 4.63
+      },
+      "wheel_angle_distance_end_m": 0.0855641503786667
+    },
+    {
+      "policy": "mid-2",
+      "initial": "pitch-minus",
+      "seconds": 4.43,
+      "max_displacement_cm": 3.0064724763196145,
+      "first_6s_displacement_cm": 3.0064724763196145,
+      "pitch_rms_deg": 7.500945793577134,
+      "tail": {
+        "start_s": 3.43,
+        "end_s": 4.43,
+        "observed_seconds": 0.9999999999999996,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.025764673904603547,
+          0.015494168376398285
+        ],
+        "end_horizontal_displacement_m": 0.030064724763196146,
+        "max_horizontal_displacement_m": 0.030064724763196146,
+        "position_rms_m": 0.01937107712654918,
+        "path_length_m": 0.043576515059267164,
+        "horizontal_speed_max_m_s": 0.14616152297399335,
+        "horizontal_speed_end_m_s": 0.12308540705469234,
+        "horizontal_speed_rms_m_s": 0.06081967629798373,
+        "pitch_error_rms_deg": 12.030476777894519,
+        "pitch_error_max_abs_deg": 38.24998127706314,
+        "pitch_error_end_deg": -38.24998127706314,
+        "pitch_max_abs_deg": 38.24998127706314,
+        "roll_max_abs_deg": 0.2109830426939863,
+        "pitch_rate_rms_rad_s": 3.0954227041914026,
+        "pitch_rate_end_rad_s": -0.5877014072915531,
+        "reward_total": 1495.747290794606,
+        "reward_per_second": 1495.7472907946067,
+        "command_at_limit_fraction": 0.0
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "pitch_error": {
+          "first_exceeded_s": 4.11,
+          "confirmed_at_s": 4.3100000000000005
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 4.43
+      },
+      "wheel_angle_distance_end_m": 0.07320077516642935
+    },
+    {
+      "policy": "final",
+      "initial": "nominal",
+      "seconds": 4.15,
+      "max_displacement_cm": 11.833405130537052,
+      "first_6s_displacement_cm": 11.833405130537052,
+      "pitch_rms_deg": 11.68840435808783,
+      "tail": {
+        "start_s": 3.15,
+        "end_s": 4.15,
+        "observed_seconds": 1.0000000000000004,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.11526940736252637,
+          -0.026756521160906106
+        ],
+        "end_horizontal_displacement_m": 0.11833405130537053,
+        "max_horizontal_displacement_m": 0.11833405130537053,
+        "position_rms_m": 0.03385321519380503,
+        "path_length_m": 0.11344694879688078,
+        "horizontal_speed_max_m_s": 0.8964173082719189,
+        "horizontal_speed_end_m_s": 0.8964173082719189,
+        "horizontal_speed_rms_m_s": 0.23600399659736024,
+        "pitch_error_rms_deg": 21.259509803603525,
+        "pitch_error_max_abs_deg": 60.09445584612576,
+        "pitch_error_end_deg": 60.09445584612576,
+        "pitch_max_abs_deg": 60.09445584612576,
+        "roll_max_abs_deg": 0.06181186377028494,
+        "pitch_rate_rms_rad_s": 1.7597007691707056,
+        "pitch_rate_end_rad_s": 4.560364908659788,
+        "reward_total": 1418.4282446384461,
+        "reward_per_second": 1418.4282446384454,
+        "command_at_limit_fraction": 0.007500000000000059
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "pitch_error": {
+          "first_exceeded_s": 3.86,
+          "confirmed_at_s": 4.0600000000000005
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 3.94,
+          "confirmed_at_s": 4.14
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 4.15
+      },
+      "wheel_angle_distance_end_m": 0.04474995181179476
+    },
+    {
+      "policy": "final",
+      "initial": "pitch-plus",
+      "seconds": 4.26,
+      "max_displacement_cm": 22.542801415897937,
+      "first_6s_displacement_cm": 22.542801415897937,
+      "pitch_rms_deg": 12.781433319587666,
+      "tail": {
+        "start_s": 3.2600000000000002,
+        "end_s": 4.26,
+        "observed_seconds": 0.9999999999999996,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.21996910239635326,
+          -0.049309061627693315
+        ],
+        "end_horizontal_displacement_m": 0.22542801415897937,
+        "max_horizontal_displacement_m": 0.22542801415897937,
+        "position_rms_m": 0.06451341231551641,
+        "path_length_m": 0.22029602823066644,
+        "horizontal_speed_max_m_s": 1.1960574640574997,
+        "horizontal_speed_end_m_s": 1.1960574640574997,
+        "horizontal_speed_rms_m_s": 0.40578513005932604,
+        "pitch_error_rms_deg": 24.177573452758214,
+        "pitch_error_max_abs_deg": 62.88854202088449,
+        "pitch_error_end_deg": 62.88854202088449,
+        "pitch_max_abs_deg": 62.88854202088449,
+        "roll_max_abs_deg": 0.10458748569941229,
+        "pitch_rate_rms_rad_s": 1.923979686937254,
+        "pitch_rate_end_rad_s": 7.390169122883756,
+        "reward_total": 1301.222049386799,
+        "reward_per_second": 1301.2220493867997,
+        "command_at_limit_fraction": 0.032499999999999765
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": 4.05,
+          "confirmed_at_s": 4.25
+        },
+        "pitch_error": {
+          "first_exceeded_s": 3.85,
+          "confirmed_at_s": 4.05
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": 3.93,
+          "confirmed_at_s": 4.13
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 4.26
+      },
+      "wheel_angle_distance_end_m": 0.15153487631678753
+    },
+    {
+      "policy": "final",
+      "initial": "pitch-minus",
+      "seconds": 4.14,
+      "max_displacement_cm": 9.95778817832413,
+      "first_6s_displacement_cm": 9.95778817832413,
+      "pitch_rms_deg": 11.200029627031936,
+      "tail": {
+        "start_s": 3.14,
+        "end_s": 4.14,
+        "observed_seconds": 0.9999999999999996,
+        "sample_count": 101,
+        "end_displacement_xy_m": [
+          0.09690239687335198,
+          -0.022927712939509796
+        ],
+        "end_horizontal_displacement_m": 0.0995778817832413,
+        "max_horizontal_displacement_m": 0.0995778817832413,
+        "position_rms_m": 0.03097216327837402,
+        "path_length_m": 0.09321411473360229,
+        "horizontal_speed_max_m_s": 0.7967329464883405,
+        "horizontal_speed_end_m_s": 0.7967329464883405,
+        "horizontal_speed_rms_m_s": 0.19636052800907847,
+        "pitch_error_rms_deg": 19.94019163699877,
+        "pitch_error_max_abs_deg": 59.28813811311186,
+        "pitch_error_end_deg": 59.28813811311186,
+        "pitch_max_abs_deg": 59.28813811311186,
+        "roll_max_abs_deg": 0.054019200060982715,
+        "pitch_rate_rms_rad_s": 1.7834105718757756,
+        "pitch_rate_end_rad_s": 4.068376517867543,
+        "reward_total": 1433.543713771998,
+        "reward_per_second": 1433.5437137719987,
+        "command_at_limit_fraction": 0.002499999999999948
+      },
+      "events": {
+        "displacement": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        },
+        "pitch_error": {
+          "first_exceeded_s": 3.88,
+          "confirmed_at_s": 4.08
+        },
+        "horizontal_speed": {
+          "first_exceeded_s": null,
+          "confirmed_at_s": null
+        }
+      },
+      "termination": {
+        "terminated": true,
+        "truncated": false,
+        "reason": "pitch",
+        "time_s": 4.14
+      },
+      "wheel_angle_distance_end_m": 0.025045305593619453
+    }
+  ],
+  "parity": [
+    {
+      "policy_id": "initial",
+      "initial_state_id": "nominal",
+      "compared_steps": 600,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 11218.234733991028,
+      "reference_length_seconds": 6.0
+    },
+    {
+      "policy_id": "initial",
+      "initial_state_id": "pitch-plus",
+      "compared_steps": 582,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 10496.09292082743,
+      "reference_length_seconds": 5.82
+    },
+    {
+      "policy_id": "initial",
+      "initial_state_id": "pitch-minus",
+      "compared_steps": 564,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 9992.960669500213,
+      "reference_length_seconds": 5.64
+    },
+    {
+      "policy_id": "mid-1",
+      "initial_state_id": "nominal",
+      "compared_steps": 600,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 7829.034053534695,
+      "reference_length_seconds": 6.0
+    },
+    {
+      "policy_id": "mid-1",
+      "initial_state_id": "pitch-plus",
+      "compared_steps": 436,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 7022.696946658162,
+      "reference_length_seconds": 4.36
+    },
+    {
+      "policy_id": "mid-1",
+      "initial_state_id": "pitch-minus",
+      "compared_steps": 600,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 7776.938905025601,
+      "reference_length_seconds": 6.0
+    },
+    {
+      "policy_id": "mid-2",
+      "initial_state_id": "nominal",
+      "compared_steps": 404,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 7846.302503841637,
+      "reference_length_seconds": 4.04
+    },
+    {
+      "policy_id": "mid-2",
+      "initial_state_id": "pitch-plus",
+      "compared_steps": 463,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 9057.787710040175,
+      "reference_length_seconds": 4.63
+    },
+    {
+      "policy_id": "mid-2",
+      "initial_state_id": "pitch-minus",
+      "compared_steps": 443,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 8812.784058971723,
+      "reference_length_seconds": 4.43
+    },
+    {
+      "policy_id": "final",
+      "initial_state_id": "nominal",
+      "compared_steps": 415,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 7488.240867798977,
+      "reference_length_seconds": 4.15
+    },
+    {
+      "policy_id": "final",
+      "initial_state_id": "pitch-plus",
+      "compared_steps": 426,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 7465.3079754945,
+      "reference_length_seconds": 4.26
+    },
+    {
+      "policy_id": "final",
+      "initial_state_id": "pitch-minus",
+      "compared_steps": 414,
+      "max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "exact_prefix_match": true,
+      "reference_return": 7434.748978719855,
+      "reference_length_seconds": 4.14
+    }
+  ],
+  "preparation_evidence": {
+    "run_id": "20261115T172533.823984Z_0a516875",
+    "protected_files": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/env_config.json": "e0794635e38237a972ea91a758c91e663697f7025e00786cd06d92d936d94ca7",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/ppo_config.json": "c71eabbc814ba23e8dc85b8df4c084cfeceb586041b001425ab3fed934acc78c",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/policy_metadata.json": "9ab81e4a0938f99931fbf6ff3447812eaf6fc6b5c258a60d449d730bd202e145",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/policy.cpp.txt": "ac7baea7556bdf35957f67072535c687349b4700861e20de6ee845c2c35f261b",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/report.json": "3171bcc0f407dd24bc39c6aa44bab979f380955ddf79549eba93c1732c607af6",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/params.msgpack": "b22f3f27195c6d60c5c9ae2a96c60a03c7d271a865dd03ab04c9e79b5a0e620a",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/policy.cpp.txt": "a7d5c33290cebec4466546d9ae75180e3d11b310a0877f041bfb4e7b5f8b7497",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/policy_metadata.json": "0881a9a88869169ed9eb90ec52265e391f02021d60efb81a1db6c66011f56cea",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/verified.json": "5dc3e7e48b976abc7420885bff5763b30f14f2dcb723d949b196e8340fdbe1d7"
+    },
+    "checkpoint_trees": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000003768320": "f903ebdb6c9450aa8b17d1bcf96d77c82a20d61443d990faa734d9dc7425691a",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000006799360": "033fe5c448488a6d7cb737d6ebbe182a6e2083eea4b5c6cd6ae781e56330f6c8",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000007954432": "4d345e3a2d38ef7deaa25a0c892b3116e8c24e8956aa4f3cdfd74f6ed28d8c23"
+    },
+    "initializer_receipt_sha256": "5dc3e7e48b976abc7420885bff5763b30f14f2dcb723d949b196e8340fdbe1d7",
+    "cached_reset_sha256": "65625478a4885df91043c5b36850a0c12b37b2a2ed69dbae112256df6ecf1443",
+    "native_extension_sha256": "1dd12b5bc3c5baabb85529129eee362e09b70f45b56161606cc90c7597106b6f",
+    "final_export_checkpoint_action_max_abs": 0.0,
+    "normalizer_max_changes": {
+      "initial": 0.0,
+      "mid-1": 0.0,
+      "mid-2": 0.0,
+      "final": 0.0
+    },
+    "preparation_seconds": 1.447541903005913,
+    "initial_state_scope": "Nominal reset from cached real production reset; local pitch perturbations retain the same equilibrium/position/yaw reference."
+  },
+  "timing": {
+    "evaluation_and_analysis_seconds": 3.812596552001196
+  }
+}

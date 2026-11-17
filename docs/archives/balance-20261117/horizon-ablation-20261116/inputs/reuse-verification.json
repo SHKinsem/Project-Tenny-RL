@@ -1,0 +1,93 @@
+{
+  "reused": 3,
+  "only_ppo_difference": "episode_length",
+  "wrapper_chains": {
+    "600": [
+      {
+        "type": "BraxAutoResetWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "EpisodeWrapper",
+        "episode_length": 600
+      },
+      {
+        "type": "VmapWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "RewardExperimentEnv",
+        "episode_length": null
+      }
+    ],
+    "3000": [
+      {
+        "type": "BraxAutoResetWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "EpisodeWrapper",
+        "episode_length": 3000
+      },
+      {
+        "type": "VmapWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "RewardExperimentEnv",
+        "episode_length": null
+      }
+    ]
+  },
+  "source_references": {
+    "legwheel/env.py": [
+      {
+        "line": 270,
+        "text": "# Episode 步数计数（用于区分：提前终止 vs 正常跑满 episode_length）"
+      },
+      {
+        "line": 379,
+        "text": "# 非正常终止惩罚：正常跑满 episode_length 不惩罚；提前终止(done=True 且 step < episode_length)才惩罚。"
+      },
+      {
+        "line": 382,
+        "text": "early_termination = done & (state.info[\"episode_step\"] < jp.array(self._config.episode_length, dtype=jp.int32))"
+      }
+    ],
+    "hybrid/env.py": [],
+    "hybrid/timing.py": [
+      {
+        "line": 60,
+        "text": "episode_length=self.steps(EPISODE_SECONDS),"
+      },
+      {
+        "line": 78,
+        "text": "cfg.episode_time, cfg.episode_length = EPISODE_SECONDS, values[\"episode_length\"]"
+      },
+      {
+        "line": 95,
+        "text": "(cfg.episode_time, EPISODE_SECONDS), (cfg.episode_length, values[\"episode_length\"]),"
+      }
+    ],
+    "force_teacher/env.py": [],
+    "force_teacher/ppo.py": [],
+    "brax/train.py": [
+      {
+        "line": 111,
+        "text": "episode_length=episode_length,"
+      },
+      {
+        "line": 775,
+        "text": "episode_length=episode_length,"
+      }
+    ]
+  },
+  "old_source_sha256": {
+    "__init__.py": "e8f231d51cfc582fdd738f2bcecd0f00ba881a3680da3da073d05a1ed23bf484",
+    "__main__.py": "b1b69ebf6f16d5e57122f48b3818fc5c876cc431bb3f332805092642d2d3e05e",
+    "matrix.py": "55367353c22d6fa5c609b0b8562e9a12790f3358aa4af9ffb16e0728510088ac",
+    "train.py": "57a07025cdf0f6452860a894826d6642f4dd4e03ac1fe2e4c729b4ac8396f070",
+    "legwheel_env.py": "2a1640c434b10f2025d3252bf83a98ff08da6165c2d4a12606e5b01e7f1653fd",
+    "rewards.py": "8e35c3551204957dfeb09d09c617d3fc13a9956c02f0e7e6c9311c7fe67c2f12"
+  }
+}

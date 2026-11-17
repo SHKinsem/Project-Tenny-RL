@@ -1,0 +1,3515 @@
+{
+  "schema_version": 1,
+  "kind": "paired_study_summary",
+  "conditions": [
+    {
+      "id": "original_wheel",
+      "label": "轮角位置权重10（复用）"
+    },
+    {
+      "id": "weak_wheel",
+      "label": "轮角位置权重1（新训练）"
+    }
+  ],
+  "comparison": {
+    "baseline": "original_wheel",
+    "treatment": "weak_wheel"
+  },
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "partitions": {
+    "primary": [
+      "nominal",
+      "pitch-plus",
+      "pitch-minus"
+    ],
+    "heldout": [
+      "heldout-plus",
+      "heldout-minus"
+    ]
+  },
+  "metrics": [
+    {
+      "id": "first_30s_max_xy_displacement_m",
+      "unit": "m",
+      "direction": "min"
+    },
+    {
+      "id": "first_30s_rms_xy_displacement_m",
+      "unit": "m",
+      "direction": "min"
+    },
+    {
+      "id": "first_30s_last_10s_mean_xy_displacement_m",
+      "unit": "m",
+      "direction": "min"
+    },
+    {
+      "id": "first_30s_horizontal_speed_rms_m_s",
+      "unit": "m/s",
+      "direction": "min"
+    },
+    {
+      "id": "first_30s_pitch_error_rms_deg",
+      "unit": "deg",
+      "direction": "min"
+    },
+    {
+      "id": "first_30s_in_band_seconds_after_settling",
+      "unit": "s",
+      "direction": "max"
+    },
+    {
+      "id": "first_30s_within_1cm_seconds_after_settling",
+      "unit": "s",
+      "direction": "max"
+    },
+    {
+      "id": "first_120s_max_xy_displacement_m",
+      "unit": "m",
+      "direction": "min"
+    },
+    {
+      "id": "first_120s_rms_xy_displacement_m",
+      "unit": "m",
+      "direction": "min"
+    },
+    {
+      "id": "first_120s_last_10s_mean_xy_displacement_m",
+      "unit": "m",
+      "direction": "min"
+    },
+    {
+      "id": "first_120s_horizontal_speed_rms_m_s",
+      "unit": "m/s",
+      "direction": "min"
+    },
+    {
+      "id": "first_120s_pitch_error_rms_deg",
+      "unit": "deg",
+      "direction": "min"
+    },
+    {
+      "id": "first_120s_in_band_seconds_after_settling",
+      "unit": "s",
+      "direction": "max"
+    },
+    {
+      "id": "first_120s_within_1cm_seconds_after_settling",
+      "unit": "s",
+      "direction": "max"
+    }
+  ],
+  "condition_summaries": {
+    "original_wheel": {
+      "primary": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "case_count": 3,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.03156277508975902,
+              "first_30s_rms_xy_displacement_m": 0.013535733391303097,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.013464381520843074,
+              "first_30s_horizontal_speed_rms_m_s": 0.010433586185108321,
+              "first_30s_pitch_error_rms_deg": 4.026332651226514,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 1.3500000000000003,
+              "first_120s_max_xy_displacement_m": 0.03156277508975902,
+              "first_120s_rms_xy_displacement_m": 0.013492702420269955,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.01350048537423536,
+              "first_120s_horizontal_speed_rms_m_s": 0.005526519148737093,
+              "first_120s_pitch_error_rms_deg": 4.000801779289785,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 1.3500000000000003
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 1,
+            "case_count": 3,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.023057740917636915,
+              "first_30s_rms_xy_displacement_m": 0.01315717722610507,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.013713731336348801,
+              "first_30s_horizontal_speed_rms_m_s": 0.007775765646467766,
+              "first_30s_pitch_error_rms_deg": 4.034308650380457,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 2.0,
+              "first_120s_max_xy_displacement_m": 0.023057740917636915,
+              "first_120s_rms_xy_displacement_m": 0.0135764561951371,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.013703501618213923,
+              "first_120s_horizontal_speed_rms_m_s": 0.003966972201704221,
+              "first_120s_pitch_error_rms_deg": 4.008276382421129,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 2.0
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 2,
+            "case_count": 3,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.03345053399730053,
+              "first_30s_rms_xy_displacement_m": 0.011725652500865165,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.011080895751181518,
+              "first_30s_horizontal_speed_rms_m_s": 0.009874146824887346,
+              "first_30s_pitch_error_rms_deg": 4.030665174099926,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 7.539999999999999,
+              "first_120s_max_xy_displacement_m": 0.03345053399730053,
+              "first_120s_rms_xy_displacement_m": 0.01126904010211846,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.011124166588264116,
+              "first_120s_horizontal_speed_rms_m_s": 0.005200160222638014,
+              "first_120s_pitch_error_rms_deg": 4.005788156159306,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 25.920000000000005
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.03156277508975902,
+            "min": 0.023057740917636915,
+            "max": 0.03345053399730053,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": 0.01315717722610507,
+            "min": 0.011725652500865165,
+            "max": 0.013535733391303097,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": 0.013464381520843074,
+            "min": 0.011080895751181518,
+            "max": 0.013713731336348801,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": 0.009874146824887346,
+            "min": 0.007775765646467766,
+            "max": 0.010433586185108321,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": 4.030665174099926,
+            "min": 4.026332651226514,
+            "max": 4.034308650380457,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 29.0,
+            "min": 29.0,
+            "max": 29.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 2.0,
+            "min": 1.3500000000000003,
+            "max": 7.539999999999999,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.03156277508975902,
+            "min": 0.023057740917636915,
+            "max": 0.03345053399730053,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": 0.013492702420269955,
+            "min": 0.01126904010211846,
+            "max": 0.0135764561951371,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": 0.01350048537423536,
+            "min": 0.011124166588264116,
+            "max": 0.013703501618213923,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": 0.005200160222638014,
+            "min": 0.003966972201704221,
+            "max": 0.005526519148737093,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": 4.005788156159306,
+            "min": 4.000801779289785,
+            "max": 4.008276382421129,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 119.0,
+            "min": 119.0,
+            "max": 119.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 2.0,
+            "min": 1.3500000000000003,
+            "max": 25.920000000000005,
+            "count": 3,
+            "missing_count": 0
+          }
+        }
+      },
+      "heldout": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "case_count": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.03086824024598336,
+              "first_30s_rms_xy_displacement_m": 0.013568367081764008,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.013476549071679365,
+              "first_30s_horizontal_speed_rms_m_s": 0.01040383935218461,
+              "first_30s_pitch_error_rms_deg": 4.027891145956199,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 1.9500000000000002,
+              "first_120s_max_xy_displacement_m": 0.03086824024598336,
+              "first_120s_rms_xy_displacement_m": 0.013504051637981008,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.013497494488706787,
+              "first_120s_horizontal_speed_rms_m_s": 0.005512134150952812,
+              "first_120s_pitch_error_rms_deg": 4.001219992345224,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 1.9500000000000002
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 1,
+            "case_count": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.02307145394438717,
+              "first_30s_rms_xy_displacement_m": 0.013236832349973783,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.013727408402757584,
+              "first_30s_horizontal_speed_rms_m_s": 0.007828501411007266,
+              "first_30s_pitch_error_rms_deg": 4.035450485342648,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 1.8849999999999998,
+              "first_120s_max_xy_displacement_m": 0.02307145394438717,
+              "first_120s_rms_xy_displacement_m": 0.013598973018904024,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.013708009838392361,
+              "first_120s_horizontal_speed_rms_m_s": 0.003992927379882032,
+              "first_120s_pitch_error_rms_deg": 4.008428556539285,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 1.8849999999999998
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 2,
+            "case_count": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.03282188735534265,
+              "first_30s_rms_xy_displacement_m": 0.011731963606844666,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.011078865434088907,
+              "first_30s_horizontal_speed_rms_m_s": 0.009792487989976844,
+              "first_30s_pitch_error_rms_deg": 4.031282399839457,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 14.735,
+              "first_120s_max_xy_displacement_m": 0.03282188735534265,
+              "first_120s_rms_xy_displacement_m": 0.01127334888166346,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.011123555555738619,
+              "first_120s_horizontal_speed_rms_m_s": 0.00516136934254219,
+              "first_120s_pitch_error_rms_deg": 4.005998401403675,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 59.735
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.03086824024598336,
+            "min": 0.02307145394438717,
+            "max": 0.03282188735534265,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": 0.013236832349973783,
+            "min": 0.011731963606844666,
+            "max": 0.013568367081764008,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": 0.013476549071679365,
+            "min": 0.011078865434088907,
+            "max": 0.013727408402757584,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": 0.009792487989976844,
+            "min": 0.007828501411007266,
+            "max": 0.01040383935218461,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": 4.031282399839457,
+            "min": 4.027891145956199,
+            "max": 4.035450485342648,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 29.0,
+            "min": 29.0,
+            "max": 29.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 1.9500000000000002,
+            "min": 1.8849999999999998,
+            "max": 14.735,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.03086824024598336,
+            "min": 0.02307145394438717,
+            "max": 0.03282188735534265,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": 0.013504051637981008,
+            "min": 0.01127334888166346,
+            "max": 0.013598973018904024,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": 0.013497494488706787,
+            "min": 0.011123555555738619,
+            "max": 0.013708009838392361,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": 0.00516136934254219,
+            "min": 0.003992927379882032,
+            "max": 0.005512134150952812,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": 4.005998401403675,
+            "min": 4.001219992345224,
+            "max": 4.008428556539285,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 119.0,
+            "min": 119.0,
+            "max": 119.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 1.9500000000000002,
+            "min": 1.8849999999999998,
+            "max": 59.735,
+            "count": 3,
+            "missing_count": 0
+          }
+        }
+      }
+    },
+    "weak_wheel": {
+      "primary": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "case_count": 3,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.021590672196656863,
+              "first_30s_rms_xy_displacement_m": 0.007508980476107788,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.006524078099847875,
+              "first_30s_horizontal_speed_rms_m_s": 0.006613694099054954,
+              "first_30s_pitch_error_rms_deg": 4.057799071789952,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 27.28,
+              "first_120s_max_xy_displacement_m": 0.021590672196656863,
+              "first_120s_rms_xy_displacement_m": 0.006779007364216349,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.006498984568326729,
+              "first_120s_horizontal_speed_rms_m_s": 0.0034298578500146486,
+              "first_120s_pitch_error_rms_deg": 4.0400663812738316,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 117.28000000000002
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 1,
+            "case_count": 3,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.0174125371176886,
+              "first_30s_rms_xy_displacement_m": 0.005990179191091076,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.0053248318823477915,
+              "first_30s_horizontal_speed_rms_m_s": 0.00602906965276542,
+              "first_30s_pitch_error_rms_deg": 4.052956380183528,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 28.14,
+              "first_120s_max_xy_displacement_m": 0.0174125371176886,
+              "first_120s_rms_xy_displacement_m": 0.0054985237874481336,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.0053197152509204875,
+              "first_120s_horizontal_speed_rms_m_s": 0.0031112018907435307,
+              "first_120s_pitch_error_rms_deg": 4.035955850711257,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 118.14
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 2,
+            "case_count": 3,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.022119859735338383,
+              "first_30s_rms_xy_displacement_m": 0.010048633587181305,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.008804238947420193,
+              "first_30s_horizontal_speed_rms_m_s": 0.006484791466319029,
+              "first_30s_pitch_error_rms_deg": 4.062464417880711,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 20.13,
+              "first_120s_max_xy_displacement_m": 0.022119859735338383,
+              "first_120s_rms_xy_displacement_m": 0.009135676766331445,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.008807010074851317,
+              "first_120s_horizontal_speed_rms_m_s": 0.0033755282226189507,
+              "first_120s_pitch_error_rms_deg": 4.045851755123191,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 89.37999999999998
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.021590672196656863,
+            "min": 0.0174125371176886,
+            "max": 0.022119859735338383,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": 0.007508980476107788,
+            "min": 0.005990179191091076,
+            "max": 0.010048633587181305,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": 0.006524078099847875,
+            "min": 0.0053248318823477915,
+            "max": 0.008804238947420193,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": 0.006484791466319029,
+            "min": 0.00602906965276542,
+            "max": 0.006613694099054954,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": 4.057799071789952,
+            "min": 4.052956380183528,
+            "max": 4.062464417880711,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 29.0,
+            "min": 29.0,
+            "max": 29.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 27.28,
+            "min": 20.13,
+            "max": 28.14,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.021590672196656863,
+            "min": 0.0174125371176886,
+            "max": 0.022119859735338383,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": 0.006779007364216349,
+            "min": 0.0054985237874481336,
+            "max": 0.009135676766331445,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": 0.006498984568326729,
+            "min": 0.0053197152509204875,
+            "max": 0.008807010074851317,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": 0.0033755282226189507,
+            "min": 0.0031112018907435307,
+            "max": 0.0034298578500146486,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": 4.0400663812738316,
+            "min": 4.035955850711257,
+            "max": 4.045851755123191,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 119.0,
+            "min": 119.0,
+            "max": 119.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 117.28000000000002,
+            "min": 89.37999999999998,
+            "max": 118.14,
+            "count": 3,
+            "missing_count": 0
+          }
+        }
+      },
+      "heldout": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "case_count": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.02187021146022322,
+              "first_30s_rms_xy_displacement_m": 0.007753464909495008,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.006522420394903673,
+              "first_30s_horizontal_speed_rms_m_s": 0.006704484772047558,
+              "first_30s_pitch_error_rms_deg": 4.058727832104102,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 27.28,
+              "first_120s_max_xy_displacement_m": 0.02187021146022322,
+              "first_120s_rms_xy_displacement_m": 0.0068650525399979795,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.0064815731605640916,
+              "first_120s_horizontal_speed_rms_m_s": 0.003473637930019123,
+              "first_120s_pitch_error_rms_deg": 4.040158653180169,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 117.28
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 1,
+            "case_count": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.017009198468633167,
+              "first_30s_rms_xy_displacement_m": 0.0060949438355984275,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.005459628998628453,
+              "first_30s_horizontal_speed_rms_m_s": 0.00597648786361419,
+              "first_30s_pitch_error_rms_deg": 4.052717509055346,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 28.189999999999998,
+              "first_120s_max_xy_displacement_m": 0.017009198468633167,
+              "first_120s_rms_xy_displacement_m": 0.005630295068298943,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.0054607132909522075,
+              "first_120s_horizontal_speed_rms_m_s": 0.0030857151806327455,
+              "first_120s_pitch_error_rms_deg": 4.036306269483566,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 118.19
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          },
+          {
+            "seed": 2,
+            "case_count": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.02213890635775788,
+              "first_30s_rms_xy_displacement_m": 0.010174486292031494,
+              "first_30s_last_10s_mean_xy_displacement_m": 0.008805746572940852,
+              "first_30s_horizontal_speed_rms_m_s": 0.0065072177669173795,
+              "first_30s_pitch_error_rms_deg": 4.063156021252244,
+              "first_30s_in_band_seconds_after_settling": 29.0,
+              "first_30s_within_1cm_seconds_after_settling": 12.709999999999999,
+              "first_120s_max_xy_displacement_m": 0.02213890635775788,
+              "first_120s_rms_xy_displacement_m": 0.009187136502812117,
+              "first_120s_last_10s_mean_xy_displacement_m": 0.008808521586972018,
+              "first_120s_horizontal_speed_rms_m_s": 0.0033863542010251183,
+              "first_120s_pitch_error_rms_deg": 4.046026000748777,
+              "first_120s_in_band_seconds_after_settling": 119.0,
+              "first_120s_within_1cm_seconds_after_settling": 57.71
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "missing_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "ineligible_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            },
+            "missing_value_cases": {
+              "first_30s_max_xy_displacement_m": [],
+              "first_30s_rms_xy_displacement_m": [],
+              "first_30s_last_10s_mean_xy_displacement_m": [],
+              "first_30s_horizontal_speed_rms_m_s": [],
+              "first_30s_pitch_error_rms_deg": [],
+              "first_30s_in_band_seconds_after_settling": [],
+              "first_30s_within_1cm_seconds_after_settling": [],
+              "first_120s_max_xy_displacement_m": [],
+              "first_120s_rms_xy_displacement_m": [],
+              "first_120s_last_10s_mean_xy_displacement_m": [],
+              "first_120s_horizontal_speed_rms_m_s": [],
+              "first_120s_pitch_error_rms_deg": [],
+              "first_120s_in_band_seconds_after_settling": [],
+              "first_120s_within_1cm_seconds_after_settling": []
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.02187021146022322,
+            "min": 0.017009198468633167,
+            "max": 0.02213890635775788,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": 0.007753464909495008,
+            "min": 0.0060949438355984275,
+            "max": 0.010174486292031494,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": 0.006522420394903673,
+            "min": 0.005459628998628453,
+            "max": 0.008805746572940852,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": 0.0065072177669173795,
+            "min": 0.00597648786361419,
+            "max": 0.006704484772047558,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": 4.058727832104102,
+            "min": 4.052717509055346,
+            "max": 4.063156021252244,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 29.0,
+            "min": 29.0,
+            "max": 29.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 27.28,
+            "min": 12.709999999999999,
+            "max": 28.189999999999998,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.02187021146022322,
+            "min": 0.017009198468633167,
+            "max": 0.02213890635775788,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": 0.0068650525399979795,
+            "min": 0.005630295068298943,
+            "max": 0.009187136502812117,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": 0.0064815731605640916,
+            "min": 0.0054607132909522075,
+            "max": 0.008808521586972018,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": 0.0033863542010251183,
+            "min": 0.0030857151806327455,
+            "max": 0.003473637930019123,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": 4.040158653180169,
+            "min": 4.036306269483566,
+            "max": 4.046026000748777,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 119.0,
+            "min": 119.0,
+            "max": 119.0,
+            "count": 3,
+            "missing_count": 0
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 117.28,
+            "min": 57.71,
+            "max": 118.19,
+            "count": 3,
+            "missing_count": 0
+          }
+        }
+      }
+    }
+  },
+  "paired_results": {
+    "primary": [
+      {
+        "seed": 0,
+        "values": {
+          "first_30s_max_xy_displacement_m": -0.009972102893102158,
+          "first_30s_rms_xy_displacement_m": -0.006026752915195309,
+          "first_30s_last_10s_mean_xy_displacement_m": -0.0069403034209952,
+          "first_30s_horizontal_speed_rms_m_s": -0.0038198920860533668,
+          "first_30s_pitch_error_rms_deg": 0.03146642056343829,
+          "first_30s_in_band_seconds_after_settling": 0.0,
+          "first_30s_within_1cm_seconds_after_settling": 25.93,
+          "first_120s_max_xy_displacement_m": -0.009972102893102158,
+          "first_120s_rms_xy_displacement_m": -0.006713695056053606,
+          "first_120s_last_10s_mean_xy_displacement_m": -0.0070015008059086305,
+          "first_120s_horizontal_speed_rms_m_s": -0.002096661298722444,
+          "first_120s_pitch_error_rms_deg": 0.0392646019840468,
+          "first_120s_in_band_seconds_after_settling": 0.0,
+          "first_120s_within_1cm_seconds_after_settling": 115.93000000000002
+        },
+        "eligible": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": true,
+          "first_30s_in_band_seconds_after_settling": true,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": true,
+          "first_120s_in_band_seconds_after_settling": true,
+          "first_120s_within_1cm_seconds_after_settling": true
+        },
+        "improved": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": false,
+          "first_30s_in_band_seconds_after_settling": false,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": false,
+          "first_120s_in_band_seconds_after_settling": false,
+          "first_120s_within_1cm_seconds_after_settling": true
+        }
+      },
+      {
+        "seed": 1,
+        "values": {
+          "first_30s_max_xy_displacement_m": -0.005645203799948314,
+          "first_30s_rms_xy_displacement_m": -0.007166998035013993,
+          "first_30s_last_10s_mean_xy_displacement_m": -0.008388899454001009,
+          "first_30s_horizontal_speed_rms_m_s": -0.0017466959937023465,
+          "first_30s_pitch_error_rms_deg": 0.018647729803070945,
+          "first_30s_in_band_seconds_after_settling": 0.0,
+          "first_30s_within_1cm_seconds_after_settling": 26.14,
+          "first_120s_max_xy_displacement_m": -0.005645203799948314,
+          "first_120s_rms_xy_displacement_m": -0.008077932407688965,
+          "first_120s_last_10s_mean_xy_displacement_m": -0.008383786367293436,
+          "first_120s_horizontal_speed_rms_m_s": -0.0008557703109606904,
+          "first_120s_pitch_error_rms_deg": 0.02767946829012846,
+          "first_120s_in_band_seconds_after_settling": 0.0,
+          "first_120s_within_1cm_seconds_after_settling": 116.14
+        },
+        "eligible": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": true,
+          "first_30s_in_band_seconds_after_settling": true,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": true,
+          "first_120s_in_band_seconds_after_settling": true,
+          "first_120s_within_1cm_seconds_after_settling": true
+        },
+        "improved": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": false,
+          "first_30s_in_band_seconds_after_settling": false,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": false,
+          "first_120s_in_band_seconds_after_settling": false,
+          "first_120s_within_1cm_seconds_after_settling": true
+        }
+      },
+      {
+        "seed": 2,
+        "values": {
+          "first_30s_max_xy_displacement_m": -0.011330674261962149,
+          "first_30s_rms_xy_displacement_m": -0.00167701891368386,
+          "first_30s_last_10s_mean_xy_displacement_m": -0.002276656803761325,
+          "first_30s_horizontal_speed_rms_m_s": -0.0033893553585683175,
+          "first_30s_pitch_error_rms_deg": 0.03179924378078436,
+          "first_30s_in_band_seconds_after_settling": 0.0,
+          "first_30s_within_1cm_seconds_after_settling": 12.59,
+          "first_120s_max_xy_displacement_m": -0.011330674261962149,
+          "first_120s_rms_xy_displacement_m": -0.0021333633357870155,
+          "first_120s_last_10s_mean_xy_displacement_m": -0.002317156513412799,
+          "first_120s_horizontal_speed_rms_m_s": -0.001824632000019063,
+          "first_120s_pitch_error_rms_deg": 0.04006359896388556,
+          "first_120s_in_band_seconds_after_settling": 0.0,
+          "first_120s_within_1cm_seconds_after_settling": 63.45999999999998
+        },
+        "eligible": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": true,
+          "first_30s_in_band_seconds_after_settling": true,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": true,
+          "first_120s_in_band_seconds_after_settling": true,
+          "first_120s_within_1cm_seconds_after_settling": true
+        },
+        "improved": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": false,
+          "first_30s_in_band_seconds_after_settling": false,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": false,
+          "first_120s_in_band_seconds_after_settling": false,
+          "first_120s_within_1cm_seconds_after_settling": true
+        }
+      }
+    ],
+    "heldout": [
+      {
+        "seed": 0,
+        "values": {
+          "first_30s_max_xy_displacement_m": -0.00899802878576014,
+          "first_30s_rms_xy_displacement_m": -0.0058149021722690005,
+          "first_30s_last_10s_mean_xy_displacement_m": -0.0069541286767756914,
+          "first_30s_horizontal_speed_rms_m_s": -0.0036993545801370514,
+          "first_30s_pitch_error_rms_deg": 0.03083668614790369,
+          "first_30s_in_band_seconds_after_settling": 0.0,
+          "first_30s_within_1cm_seconds_after_settling": 25.330000000000002,
+          "first_120s_max_xy_displacement_m": -0.00899802878576014,
+          "first_120s_rms_xy_displacement_m": -0.006638999097983028,
+          "first_120s_last_10s_mean_xy_displacement_m": -0.007015921328142696,
+          "first_120s_horizontal_speed_rms_m_s": -0.002038496220933689,
+          "first_120s_pitch_error_rms_deg": 0.03893866083494579,
+          "first_120s_in_band_seconds_after_settling": 0.0,
+          "first_120s_within_1cm_seconds_after_settling": 115.33
+        },
+        "eligible": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": true,
+          "first_30s_in_band_seconds_after_settling": true,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": true,
+          "first_120s_in_band_seconds_after_settling": true,
+          "first_120s_within_1cm_seconds_after_settling": true
+        },
+        "improved": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": false,
+          "first_30s_in_band_seconds_after_settling": false,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": false,
+          "first_120s_in_band_seconds_after_settling": false,
+          "first_120s_within_1cm_seconds_after_settling": true
+        }
+      },
+      {
+        "seed": 1,
+        "values": {
+          "first_30s_max_xy_displacement_m": -0.006062255475754005,
+          "first_30s_rms_xy_displacement_m": -0.0071418885143753556,
+          "first_30s_last_10s_mean_xy_displacement_m": -0.008267779404129132,
+          "first_30s_horizontal_speed_rms_m_s": -0.0018520135473930766,
+          "first_30s_pitch_error_rms_deg": 0.01726702371269795,
+          "first_30s_in_band_seconds_after_settling": 0.0,
+          "first_30s_within_1cm_seconds_after_settling": 26.305,
+          "first_120s_max_xy_displacement_m": -0.006062255475754005,
+          "first_120s_rms_xy_displacement_m": -0.007968677950605081,
+          "first_120s_last_10s_mean_xy_displacement_m": -0.008247296547440153,
+          "first_120s_horizontal_speed_rms_m_s": -0.0009072121992492869,
+          "first_120s_pitch_error_rms_deg": 0.027877712944280653,
+          "first_120s_in_band_seconds_after_settling": 0.0,
+          "first_120s_within_1cm_seconds_after_settling": 116.30499999999999
+        },
+        "eligible": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": true,
+          "first_30s_in_band_seconds_after_settling": true,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": true,
+          "first_120s_in_band_seconds_after_settling": true,
+          "first_120s_within_1cm_seconds_after_settling": true
+        },
+        "improved": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": false,
+          "first_30s_in_band_seconds_after_settling": false,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": false,
+          "first_120s_in_band_seconds_after_settling": false,
+          "first_120s_within_1cm_seconds_after_settling": true
+        }
+      },
+      {
+        "seed": 2,
+        "values": {
+          "first_30s_max_xy_displacement_m": -0.010682980997584773,
+          "first_30s_rms_xy_displacement_m": -0.0015574773148131719,
+          "first_30s_last_10s_mean_xy_displacement_m": -0.002273118861148055,
+          "first_30s_horizontal_speed_rms_m_s": -0.003285270223059465,
+          "first_30s_pitch_error_rms_deg": 0.031873621412787045,
+          "first_30s_in_band_seconds_after_settling": 0.0,
+          "first_30s_within_1cm_seconds_after_settling": -2.0250000000000004,
+          "first_120s_max_xy_displacement_m": -0.010682980997584773,
+          "first_120s_rms_xy_displacement_m": -0.002086212378851343,
+          "first_120s_last_10s_mean_xy_displacement_m": -0.002315033968766601,
+          "first_120s_horizontal_speed_rms_m_s": -0.0017750151415170715,
+          "first_120s_pitch_error_rms_deg": 0.04002759934510269,
+          "first_120s_in_band_seconds_after_settling": 0.0,
+          "first_120s_within_1cm_seconds_after_settling": -2.0249999999999986
+        },
+        "eligible": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": true,
+          "first_30s_in_band_seconds_after_settling": true,
+          "first_30s_within_1cm_seconds_after_settling": true,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": true,
+          "first_120s_in_band_seconds_after_settling": true,
+          "first_120s_within_1cm_seconds_after_settling": true
+        },
+        "improved": {
+          "first_30s_max_xy_displacement_m": true,
+          "first_30s_rms_xy_displacement_m": true,
+          "first_30s_last_10s_mean_xy_displacement_m": true,
+          "first_30s_horizontal_speed_rms_m_s": true,
+          "first_30s_pitch_error_rms_deg": false,
+          "first_30s_in_band_seconds_after_settling": false,
+          "first_30s_within_1cm_seconds_after_settling": false,
+          "first_120s_max_xy_displacement_m": true,
+          "first_120s_rms_xy_displacement_m": true,
+          "first_120s_last_10s_mean_xy_displacement_m": true,
+          "first_120s_horizontal_speed_rms_m_s": true,
+          "first_120s_pitch_error_rms_deg": false,
+          "first_120s_in_band_seconds_after_settling": false,
+          "first_120s_within_1cm_seconds_after_settling": false
+        }
+      }
+    ]
+  },
+  "paired_summaries": {
+    "primary": {
+      "first_30s_max_xy_displacement_m": {
+        "median": -0.009972102893102158,
+        "min": -0.011330674261962149,
+        "max": -0.005645203799948314,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_rms_xy_displacement_m": {
+        "median": -0.006026752915195309,
+        "min": -0.007166998035013993,
+        "max": -0.00167701891368386,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_last_10s_mean_xy_displacement_m": {
+        "median": -0.0069403034209952,
+        "min": -0.008388899454001009,
+        "max": -0.002276656803761325,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_horizontal_speed_rms_m_s": {
+        "median": -0.0033893553585683175,
+        "min": -0.0038198920860533668,
+        "max": -0.0017466959937023465,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_pitch_error_rms_deg": {
+        "median": 0.03146642056343829,
+        "min": 0.018647729803070945,
+        "max": 0.03179924378078436,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 3,
+        "tied_seed_count": 0
+      },
+      "first_30s_in_band_seconds_after_settling": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 3
+      },
+      "first_30s_within_1cm_seconds_after_settling": {
+        "median": 25.93,
+        "min": 12.59,
+        "max": 26.14,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_max_xy_displacement_m": {
+        "median": -0.009972102893102158,
+        "min": -0.011330674261962149,
+        "max": -0.005645203799948314,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_rms_xy_displacement_m": {
+        "median": -0.006713695056053606,
+        "min": -0.008077932407688965,
+        "max": -0.0021333633357870155,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_last_10s_mean_xy_displacement_m": {
+        "median": -0.0070015008059086305,
+        "min": -0.008383786367293436,
+        "max": -0.002317156513412799,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_horizontal_speed_rms_m_s": {
+        "median": -0.001824632000019063,
+        "min": -0.002096661298722444,
+        "max": -0.0008557703109606904,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_pitch_error_rms_deg": {
+        "median": 0.0392646019840468,
+        "min": 0.02767946829012846,
+        "max": 0.04006359896388556,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 3,
+        "tied_seed_count": 0
+      },
+      "first_120s_in_band_seconds_after_settling": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 3
+      },
+      "first_120s_within_1cm_seconds_after_settling": {
+        "median": 115.93000000000002,
+        "min": 63.45999999999998,
+        "max": 116.14,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      }
+    },
+    "heldout": {
+      "first_30s_max_xy_displacement_m": {
+        "median": -0.00899802878576014,
+        "min": -0.010682980997584773,
+        "max": -0.006062255475754005,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_rms_xy_displacement_m": {
+        "median": -0.0058149021722690005,
+        "min": -0.0071418885143753556,
+        "max": -0.0015574773148131719,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_last_10s_mean_xy_displacement_m": {
+        "median": -0.0069541286767756914,
+        "min": -0.008267779404129132,
+        "max": -0.002273118861148055,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_horizontal_speed_rms_m_s": {
+        "median": -0.003285270223059465,
+        "min": -0.0036993545801370514,
+        "max": -0.0018520135473930766,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_30s_pitch_error_rms_deg": {
+        "median": 0.03083668614790369,
+        "min": 0.01726702371269795,
+        "max": 0.031873621412787045,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 3,
+        "tied_seed_count": 0
+      },
+      "first_30s_in_band_seconds_after_settling": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 3
+      },
+      "first_30s_within_1cm_seconds_after_settling": {
+        "median": 25.330000000000002,
+        "min": -2.0250000000000004,
+        "max": 26.305,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 2,
+        "degraded_seed_count": 1,
+        "tied_seed_count": 0
+      },
+      "first_120s_max_xy_displacement_m": {
+        "median": -0.00899802878576014,
+        "min": -0.010682980997584773,
+        "max": -0.006062255475754005,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_rms_xy_displacement_m": {
+        "median": -0.006638999097983028,
+        "min": -0.007968677950605081,
+        "max": -0.002086212378851343,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_last_10s_mean_xy_displacement_m": {
+        "median": -0.007015921328142696,
+        "min": -0.008247296547440153,
+        "max": -0.002315033968766601,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_horizontal_speed_rms_m_s": {
+        "median": -0.0017750151415170715,
+        "min": -0.002038496220933689,
+        "max": -0.0009072121992492869,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      },
+      "first_120s_pitch_error_rms_deg": {
+        "median": 0.03893866083494579,
+        "min": 0.027877712944280653,
+        "max": 0.04002759934510269,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 3,
+        "tied_seed_count": 0
+      },
+      "first_120s_in_band_seconds_after_settling": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 3
+      },
+      "first_120s_within_1cm_seconds_after_settling": {
+        "median": 115.33,
+        "min": -2.0249999999999986,
+        "max": 116.30499999999999,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 2,
+        "degraded_seed_count": 1,
+        "tied_seed_count": 0
+      }
+    }
+  },
+  "references": {
+    "primary": {
+      "case_count": 3,
+      "values": {
+        "first_30s_max_xy_displacement_m": 0.01946872984321874,
+        "first_30s_rms_xy_displacement_m": 0.016608653180123892,
+        "first_30s_last_10s_mean_xy_displacement_m": 0.017356041761353667,
+        "first_30s_horizontal_speed_rms_m_s": 0.0067791594332329815,
+        "first_30s_pitch_error_rms_deg": 4.039825718117094,
+        "first_30s_in_band_seconds_after_settling": 29.0,
+        "first_30s_within_1cm_seconds_after_settling": 1.8266666666666669,
+        "first_120s_max_xy_displacement_m": 0.01946872984321874,
+        "first_120s_rms_xy_displacement_m": 0.01718660638539123,
+        "first_120s_last_10s_mean_xy_displacement_m": 0.017388125599637688,
+        "first_120s_horizontal_speed_rms_m_s": 0.003636258293333791,
+        "first_120s_pitch_error_rms_deg": 4.02054434151389,
+        "first_120s_in_band_seconds_after_settling": 119.0,
+        "first_120s_within_1cm_seconds_after_settling": 1.8266666666666669
+      },
+      "eligible": {
+        "first_30s_max_xy_displacement_m": true,
+        "first_30s_rms_xy_displacement_m": true,
+        "first_30s_last_10s_mean_xy_displacement_m": true,
+        "first_30s_horizontal_speed_rms_m_s": true,
+        "first_30s_pitch_error_rms_deg": true,
+        "first_30s_in_band_seconds_after_settling": true,
+        "first_30s_within_1cm_seconds_after_settling": true,
+        "first_120s_max_xy_displacement_m": true,
+        "first_120s_rms_xy_displacement_m": true,
+        "first_120s_last_10s_mean_xy_displacement_m": true,
+        "first_120s_horizontal_speed_rms_m_s": true,
+        "first_120s_pitch_error_rms_deg": true,
+        "first_120s_in_band_seconds_after_settling": true,
+        "first_120s_within_1cm_seconds_after_settling": true
+      },
+      "missing_cases": {
+        "first_30s_max_xy_displacement_m": [],
+        "first_30s_rms_xy_displacement_m": [],
+        "first_30s_last_10s_mean_xy_displacement_m": [],
+        "first_30s_horizontal_speed_rms_m_s": [],
+        "first_30s_pitch_error_rms_deg": [],
+        "first_30s_in_band_seconds_after_settling": [],
+        "first_30s_within_1cm_seconds_after_settling": [],
+        "first_120s_max_xy_displacement_m": [],
+        "first_120s_rms_xy_displacement_m": [],
+        "first_120s_last_10s_mean_xy_displacement_m": [],
+        "first_120s_horizontal_speed_rms_m_s": [],
+        "first_120s_pitch_error_rms_deg": [],
+        "first_120s_in_band_seconds_after_settling": [],
+        "first_120s_within_1cm_seconds_after_settling": []
+      },
+      "ineligible_cases": {
+        "first_30s_max_xy_displacement_m": [],
+        "first_30s_rms_xy_displacement_m": [],
+        "first_30s_last_10s_mean_xy_displacement_m": [],
+        "first_30s_horizontal_speed_rms_m_s": [],
+        "first_30s_pitch_error_rms_deg": [],
+        "first_30s_in_band_seconds_after_settling": [],
+        "first_30s_within_1cm_seconds_after_settling": [],
+        "first_120s_max_xy_displacement_m": [],
+        "first_120s_rms_xy_displacement_m": [],
+        "first_120s_last_10s_mean_xy_displacement_m": [],
+        "first_120s_horizontal_speed_rms_m_s": [],
+        "first_120s_pitch_error_rms_deg": [],
+        "first_120s_in_band_seconds_after_settling": [],
+        "first_120s_within_1cm_seconds_after_settling": []
+      },
+      "missing_value_cases": {
+        "first_30s_max_xy_displacement_m": [],
+        "first_30s_rms_xy_displacement_m": [],
+        "first_30s_last_10s_mean_xy_displacement_m": [],
+        "first_30s_horizontal_speed_rms_m_s": [],
+        "first_30s_pitch_error_rms_deg": [],
+        "first_30s_in_band_seconds_after_settling": [],
+        "first_30s_within_1cm_seconds_after_settling": [],
+        "first_120s_max_xy_displacement_m": [],
+        "first_120s_rms_xy_displacement_m": [],
+        "first_120s_last_10s_mean_xy_displacement_m": [],
+        "first_120s_horizontal_speed_rms_m_s": [],
+        "first_120s_pitch_error_rms_deg": [],
+        "first_120s_in_band_seconds_after_settling": [],
+        "first_120s_within_1cm_seconds_after_settling": []
+      }
+    },
+    "heldout": {
+      "case_count": 2,
+      "values": {
+        "first_30s_max_xy_displacement_m": 0.020437761390673093,
+        "first_30s_rms_xy_displacement_m": 0.016625375312394497,
+        "first_30s_last_10s_mean_xy_displacement_m": 0.017377237329625882,
+        "first_30s_horizontal_speed_rms_m_s": 0.006770368767888603,
+        "first_30s_pitch_error_rms_deg": 4.040375137510578,
+        "first_30s_in_band_seconds_after_settling": 29.0,
+        "first_30s_within_1cm_seconds_after_settling": 1.87,
+        "first_120s_max_xy_displacement_m": 0.020437761390673093,
+        "first_120s_rms_xy_displacement_m": 0.01720291802189047,
+        "first_120s_last_10s_mean_xy_displacement_m": 0.017399468639728948,
+        "first_120s_horizontal_speed_rms_m_s": 0.0036323205038797666,
+        "first_120s_pitch_error_rms_deg": 4.020880013426221,
+        "first_120s_in_band_seconds_after_settling": 119.0,
+        "first_120s_within_1cm_seconds_after_settling": 1.87
+      },
+      "eligible": {
+        "first_30s_max_xy_displacement_m": true,
+        "first_30s_rms_xy_displacement_m": true,
+        "first_30s_last_10s_mean_xy_displacement_m": true,
+        "first_30s_horizontal_speed_rms_m_s": true,
+        "first_30s_pitch_error_rms_deg": true,
+        "first_30s_in_band_seconds_after_settling": true,
+        "first_30s_within_1cm_seconds_after_settling": true,
+        "first_120s_max_xy_displacement_m": true,
+        "first_120s_rms_xy_displacement_m": true,
+        "first_120s_last_10s_mean_xy_displacement_m": true,
+        "first_120s_horizontal_speed_rms_m_s": true,
+        "first_120s_pitch_error_rms_deg": true,
+        "first_120s_in_band_seconds_after_settling": true,
+        "first_120s_within_1cm_seconds_after_settling": true
+      },
+      "missing_cases": {
+        "first_30s_max_xy_displacement_m": [],
+        "first_30s_rms_xy_displacement_m": [],
+        "first_30s_last_10s_mean_xy_displacement_m": [],
+        "first_30s_horizontal_speed_rms_m_s": [],
+        "first_30s_pitch_error_rms_deg": [],
+        "first_30s_in_band_seconds_after_settling": [],
+        "first_30s_within_1cm_seconds_after_settling": [],
+        "first_120s_max_xy_displacement_m": [],
+        "first_120s_rms_xy_displacement_m": [],
+        "first_120s_last_10s_mean_xy_displacement_m": [],
+        "first_120s_horizontal_speed_rms_m_s": [],
+        "first_120s_pitch_error_rms_deg": [],
+        "first_120s_in_band_seconds_after_settling": [],
+        "first_120s_within_1cm_seconds_after_settling": []
+      },
+      "ineligible_cases": {
+        "first_30s_max_xy_displacement_m": [],
+        "first_30s_rms_xy_displacement_m": [],
+        "first_30s_last_10s_mean_xy_displacement_m": [],
+        "first_30s_horizontal_speed_rms_m_s": [],
+        "first_30s_pitch_error_rms_deg": [],
+        "first_30s_in_band_seconds_after_settling": [],
+        "first_30s_within_1cm_seconds_after_settling": [],
+        "first_120s_max_xy_displacement_m": [],
+        "first_120s_rms_xy_displacement_m": [],
+        "first_120s_last_10s_mean_xy_displacement_m": [],
+        "first_120s_horizontal_speed_rms_m_s": [],
+        "first_120s_pitch_error_rms_deg": [],
+        "first_120s_in_band_seconds_after_settling": [],
+        "first_120s_within_1cm_seconds_after_settling": []
+      },
+      "missing_value_cases": {
+        "first_30s_max_xy_displacement_m": [],
+        "first_30s_rms_xy_displacement_m": [],
+        "first_30s_last_10s_mean_xy_displacement_m": [],
+        "first_30s_horizontal_speed_rms_m_s": [],
+        "first_30s_pitch_error_rms_deg": [],
+        "first_30s_in_band_seconds_after_settling": [],
+        "first_30s_within_1cm_seconds_after_settling": [],
+        "first_120s_max_xy_displacement_m": [],
+        "first_120s_rms_xy_displacement_m": [],
+        "first_120s_last_10s_mean_xy_displacement_m": [],
+        "first_120s_horizontal_speed_rms_m_s": [],
+        "first_120s_pitch_error_rms_deg": [],
+        "first_120s_in_band_seconds_after_settling": [],
+        "first_120s_within_1cm_seconds_after_settling": []
+      }
+    }
+  },
+  "delta_from_reference": {
+    "original_wheel": {
+      "primary": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.012094045246540282,
+              "first_30s_rms_xy_displacement_m": -0.0030729197888207955,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.0038916602405105923,
+              "first_30s_horizontal_speed_rms_m_s": 0.0036544267518753394,
+              "first_30s_pitch_error_rms_deg": -0.013493066890580607,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": -0.47666666666666657,
+              "first_120s_max_xy_displacement_m": 0.012094045246540282,
+              "first_120s_rms_xy_displacement_m": -0.0036939039651212747,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.0038876402254023282,
+              "first_120s_horizontal_speed_rms_m_s": 0.0018902608554033015,
+              "first_120s_pitch_error_rms_deg": -0.01974256222410542,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": -0.47666666666666657
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": false,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": false,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": false,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": false
+            }
+          },
+          {
+            "seed": 1,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.003589011074418176,
+              "first_30s_rms_xy_displacement_m": -0.003451475954018823,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.0036423104250048657,
+              "first_30s_horizontal_speed_rms_m_s": 0.0009966062132347846,
+              "first_30s_pitch_error_rms_deg": -0.00551706773663696,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 0.17333333333333312,
+              "first_120s_max_xy_displacement_m": 0.003589011074418176,
+              "first_120s_rms_xy_displacement_m": -0.0036101501902541296,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.003684623981423765,
+              "first_120s_horizontal_speed_rms_m_s": 0.00033071390837042993,
+              "first_120s_pitch_error_rms_deg": -0.012267959092761238,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 0.17333333333333312
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": false,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": false,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          },
+          {
+            "seed": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.013981804154081793,
+              "first_30s_rms_xy_displacement_m": -0.004883000679258728,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.006275146010172148,
+              "first_30s_horizontal_speed_rms_m_s": 0.0030949873916543648,
+              "first_30s_pitch_error_rms_deg": -0.009160544017167815,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 5.713333333333332,
+              "first_120s_max_xy_displacement_m": 0.013981804154081793,
+              "first_120s_rms_xy_displacement_m": -0.005917566283272769,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.006263959011373572,
+              "first_120s_horizontal_speed_rms_m_s": 0.0015639019293042225,
+              "first_120s_pitch_error_rms_deg": -0.014756185354584339,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 24.093333333333337
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": false,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": false,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.012094045246540282,
+            "min": 0.003589011074418176,
+            "max": 0.013981804154081793,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": -0.003451475954018823,
+            "min": -0.004883000679258728,
+            "max": -0.0030729197888207955,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": -0.0038916602405105923,
+            "min": -0.006275146010172148,
+            "max": -0.0036423104250048657,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": 0.0030949873916543648,
+            "min": 0.0009966062132347846,
+            "max": 0.0036544267518753394,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": -0.009160544017167815,
+            "min": -0.013493066890580607,
+            "max": -0.00551706773663696,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 0.17333333333333312,
+            "min": -0.47666666666666657,
+            "max": 5.713333333333332,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 2,
+            "degraded_seed_count": 1,
+            "tied_seed_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.012094045246540282,
+            "min": 0.003589011074418176,
+            "max": 0.013981804154081793,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": -0.0036939039651212747,
+            "min": -0.005917566283272769,
+            "max": -0.0036101501902541296,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": -0.0038876402254023282,
+            "min": -0.006263959011373572,
+            "max": -0.003684623981423765,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": 0.0015639019293042225,
+            "min": 0.00033071390837042993,
+            "max": 0.0018902608554033015,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": -0.014756185354584339,
+            "min": -0.01974256222410542,
+            "max": -0.012267959092761238,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 0.17333333333333312,
+            "min": -0.47666666666666657,
+            "max": 24.093333333333337,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 2,
+            "degraded_seed_count": 1,
+            "tied_seed_count": 0
+          }
+        }
+      },
+      "heldout": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.010430478855310267,
+              "first_30s_rms_xy_displacement_m": -0.0030570082306304886,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.0039006882579465177,
+              "first_30s_horizontal_speed_rms_m_s": 0.0036334705842960063,
+              "first_30s_pitch_error_rms_deg": -0.012483991554379514,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 0.08000000000000007,
+              "first_120s_max_xy_displacement_m": 0.010430478855310267,
+              "first_120s_rms_xy_displacement_m": -0.003698866383909462,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.003901974151022161,
+              "first_120s_horizontal_speed_rms_m_s": 0.0018798136470730455,
+              "first_120s_pitch_error_rms_deg": -0.019660021080997403,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 0.08000000000000007
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": false,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": false,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          },
+          {
+            "seed": 1,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.002633692553714078,
+              "first_30s_rms_xy_displacement_m": -0.003388542962420714,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.003649828926868298,
+              "first_30s_horizontal_speed_rms_m_s": 0.0010581326431186632,
+              "first_30s_pitch_error_rms_deg": -0.004924652167930255,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 0.01499999999999968,
+              "first_120s_max_xy_displacement_m": 0.002633692553714078,
+              "first_120s_rms_xy_displacement_m": -0.003603945002986445,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.0036914588013365873,
+              "first_120s_horizontal_speed_rms_m_s": 0.0003606068760022658,
+              "first_120s_pitch_error_rms_deg": -0.01245145688693583,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 0.01499999999999968
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": false,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": false,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          },
+          {
+            "seed": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.012384125964669559,
+              "first_30s_rms_xy_displacement_m": -0.004893411705549831,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.006298371895536975,
+              "first_30s_horizontal_speed_rms_m_s": 0.0030221192220882412,
+              "first_30s_pitch_error_rms_deg": -0.009092737671121398,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 12.864999999999998,
+              "first_120s_max_xy_displacement_m": 0.012384125964669559,
+              "first_120s_rms_xy_displacement_m": -0.00592956914022701,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.00627591308399033,
+              "first_120s_horizontal_speed_rms_m_s": 0.0015290488386624232,
+              "first_120s_pitch_error_rms_deg": -0.014881612022546342,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 57.865
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": false,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": false,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.010430478855310267,
+            "min": 0.002633692553714078,
+            "max": 0.012384125964669559,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": -0.003388542962420714,
+            "min": -0.004893411705549831,
+            "max": -0.0030570082306304886,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": -0.0039006882579465177,
+            "min": -0.006298371895536975,
+            "max": -0.003649828926868298,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": 0.0030221192220882412,
+            "min": 0.0010581326431186632,
+            "max": 0.0036334705842960063,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": -0.009092737671121398,
+            "min": -0.012483991554379514,
+            "max": -0.004924652167930255,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 0.08000000000000007,
+            "min": 0.01499999999999968,
+            "max": 12.864999999999998,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.010430478855310267,
+            "min": 0.002633692553714078,
+            "max": 0.012384125964669559,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": -0.003698866383909462,
+            "min": -0.00592956914022701,
+            "max": -0.003603945002986445,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": -0.003901974151022161,
+            "min": -0.00627591308399033,
+            "max": -0.0036914588013365873,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": 0.0015290488386624232,
+            "min": 0.0003606068760022658,
+            "max": 0.0018798136470730455,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": -0.014881612022546342,
+            "min": -0.019660021080997403,
+            "max": -0.01245145688693583,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 0.08000000000000007,
+            "min": 0.01499999999999968,
+            "max": 57.865,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          }
+        }
+      }
+    },
+    "weak_wheel": {
+      "primary": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.002121942353438124,
+              "first_30s_rms_xy_displacement_m": -0.009099672704016105,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.010831963661505791,
+              "first_30s_horizontal_speed_rms_m_s": -0.00016546533417802732,
+              "first_30s_pitch_error_rms_deg": 0.017973353672857684,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 25.453333333333333,
+              "first_120s_max_xy_displacement_m": 0.002121942353438124,
+              "first_120s_rms_xy_displacement_m": -0.010407599021174881,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.010889141031310959,
+              "first_120s_horizontal_speed_rms_m_s": -0.0002064004433191425,
+              "first_120s_pitch_error_rms_deg": 0.01952203975994138,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 115.45333333333335
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": false,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": false,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          },
+          {
+            "seed": 1,
+            "values": {
+              "first_30s_max_xy_displacement_m": -0.002056192725530138,
+              "first_30s_rms_xy_displacement_m": -0.010618473989032817,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.012031209879005876,
+              "first_30s_horizontal_speed_rms_m_s": -0.0007500897804675619,
+              "first_30s_pitch_error_rms_deg": 0.013130662066433985,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 26.313333333333333,
+              "first_120s_max_xy_displacement_m": -0.002056192725530138,
+              "first_120s_rms_xy_displacement_m": -0.011688082597943097,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.012068410348717199,
+              "first_120s_horizontal_speed_rms_m_s": -0.0005250564025902605,
+              "first_120s_pitch_error_rms_deg": 0.015411509197367224,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 116.31333333333333
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": false,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": false,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          },
+          {
+            "seed": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.002651129892119644,
+              "first_30s_rms_xy_displacement_m": -0.006560019592942588,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.008551802813933473,
+              "first_30s_horizontal_speed_rms_m_s": -0.0002943679669139528,
+              "first_30s_pitch_error_rms_deg": 0.022638699763616543,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 18.30333333333333,
+              "first_120s_max_xy_displacement_m": 0.002651129892119644,
+              "first_120s_rms_xy_displacement_m": -0.008050929619059784,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.008581115524786371,
+              "first_120s_horizontal_speed_rms_m_s": -0.0002607300707148405,
+              "first_120s_pitch_error_rms_deg": 0.02530741360930122,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 87.55333333333331
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": false,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": false,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.002121942353438124,
+            "min": -0.002056192725530138,
+            "max": 0.002651129892119644,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 1,
+            "degraded_seed_count": 2,
+            "tied_seed_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": -0.009099672704016105,
+            "min": -0.010618473989032817,
+            "max": -0.006560019592942588,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": -0.010831963661505791,
+            "min": -0.012031209879005876,
+            "max": -0.008551802813933473,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": -0.0002943679669139528,
+            "min": -0.0007500897804675619,
+            "max": -0.00016546533417802732,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": 0.017973353672857684,
+            "min": 0.013130662066433985,
+            "max": 0.022638699763616543,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 25.453333333333333,
+            "min": 18.30333333333333,
+            "max": 26.313333333333333,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.002121942353438124,
+            "min": -0.002056192725530138,
+            "max": 0.002651129892119644,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 1,
+            "degraded_seed_count": 2,
+            "tied_seed_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": -0.010407599021174881,
+            "min": -0.011688082597943097,
+            "max": -0.008050929619059784,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": -0.010889141031310959,
+            "min": -0.012068410348717199,
+            "max": -0.008581115524786371,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": -0.0002607300707148405,
+            "min": -0.0005250564025902605,
+            "max": -0.0002064004433191425,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": 0.01952203975994138,
+            "min": 0.015411509197367224,
+            "max": 0.02530741360930122,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 115.45333333333335,
+            "min": 87.55333333333331,
+            "max": 116.31333333333333,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          }
+        }
+      },
+      "heldout": {
+        "seed_results": [
+          {
+            "seed": 0,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.0014324500695501279,
+              "first_30s_rms_xy_displacement_m": -0.008871910402899488,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.010854816934722209,
+              "first_30s_horizontal_speed_rms_m_s": -6.588399584104513e-05,
+              "first_30s_pitch_error_rms_deg": 0.018352694593524177,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 25.41,
+              "first_120s_max_xy_displacement_m": 0.0014324500695501279,
+              "first_120s_rms_xy_displacement_m": -0.01033786548189249,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.010917895479164857,
+              "first_120s_horizontal_speed_rms_m_s": -0.00015868257386064373,
+              "first_120s_pitch_error_rms_deg": 0.01927863975394839,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 115.41
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": false,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": false,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          },
+          {
+            "seed": 1,
+            "values": {
+              "first_30s_max_xy_displacement_m": -0.0034285629220399266,
+              "first_30s_rms_xy_displacement_m": -0.01053043147679607,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.01191760833099743,
+              "first_30s_horizontal_speed_rms_m_s": -0.0007938809042744134,
+              "first_30s_pitch_error_rms_deg": 0.012342371544767694,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 26.319999999999997,
+              "first_120s_max_xy_displacement_m": -0.0034285629220399266,
+              "first_120s_rms_xy_displacement_m": -0.011572622953591526,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.01193875534877674,
+              "first_120s_horizontal_speed_rms_m_s": -0.0005466053232470211,
+              "first_120s_pitch_error_rms_deg": 0.015426256057344823,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 116.32
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": false,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": false,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          },
+          {
+            "seed": 2,
+            "values": {
+              "first_30s_max_xy_displacement_m": 0.0017011449670847854,
+              "first_30s_rms_xy_displacement_m": -0.0064508890203630025,
+              "first_30s_last_10s_mean_xy_displacement_m": -0.00857149075668503,
+              "first_30s_horizontal_speed_rms_m_s": -0.00026315100097122363,
+              "first_30s_pitch_error_rms_deg": 0.022780883741665647,
+              "first_30s_in_band_seconds_after_settling": 0.0,
+              "first_30s_within_1cm_seconds_after_settling": 10.84,
+              "first_120s_max_xy_displacement_m": 0.0017011449670847854,
+              "first_120s_rms_xy_displacement_m": -0.008015781519078353,
+              "first_120s_last_10s_mean_xy_displacement_m": -0.00859094705275693,
+              "first_120s_horizontal_speed_rms_m_s": -0.0002459663028546483,
+              "first_120s_pitch_error_rms_deg": 0.02514598732255635,
+              "first_120s_in_band_seconds_after_settling": 0.0,
+              "first_120s_within_1cm_seconds_after_settling": 55.84
+            },
+            "eligible": {
+              "first_30s_max_xy_displacement_m": true,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": true,
+              "first_30s_in_band_seconds_after_settling": true,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": true,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": true,
+              "first_120s_in_band_seconds_after_settling": true,
+              "first_120s_within_1cm_seconds_after_settling": true
+            },
+            "improved": {
+              "first_30s_max_xy_displacement_m": false,
+              "first_30s_rms_xy_displacement_m": true,
+              "first_30s_last_10s_mean_xy_displacement_m": true,
+              "first_30s_horizontal_speed_rms_m_s": true,
+              "first_30s_pitch_error_rms_deg": false,
+              "first_30s_in_band_seconds_after_settling": false,
+              "first_30s_within_1cm_seconds_after_settling": true,
+              "first_120s_max_xy_displacement_m": false,
+              "first_120s_rms_xy_displacement_m": true,
+              "first_120s_last_10s_mean_xy_displacement_m": true,
+              "first_120s_horizontal_speed_rms_m_s": true,
+              "first_120s_pitch_error_rms_deg": false,
+              "first_120s_in_band_seconds_after_settling": false,
+              "first_120s_within_1cm_seconds_after_settling": true
+            }
+          }
+        ],
+        "metrics": {
+          "first_30s_max_xy_displacement_m": {
+            "median": 0.0014324500695501279,
+            "min": -0.0034285629220399266,
+            "max": 0.0017011449670847854,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 1,
+            "degraded_seed_count": 2,
+            "tied_seed_count": 0
+          },
+          "first_30s_rms_xy_displacement_m": {
+            "median": -0.008871910402899488,
+            "min": -0.01053043147679607,
+            "max": -0.0064508890203630025,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_last_10s_mean_xy_displacement_m": {
+            "median": -0.010854816934722209,
+            "min": -0.01191760833099743,
+            "max": -0.00857149075668503,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_horizontal_speed_rms_m_s": {
+            "median": -0.00026315100097122363,
+            "min": -0.0007938809042744134,
+            "max": -6.588399584104513e-05,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_30s_pitch_error_rms_deg": {
+            "median": 0.018352694593524177,
+            "min": 0.012342371544767694,
+            "max": 0.022780883741665647,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_30s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_30s_within_1cm_seconds_after_settling": {
+            "median": 25.41,
+            "min": 10.84,
+            "max": 26.319999999999997,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_max_xy_displacement_m": {
+            "median": 0.0014324500695501279,
+            "min": -0.0034285629220399266,
+            "max": 0.0017011449670847854,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 1,
+            "degraded_seed_count": 2,
+            "tied_seed_count": 0
+          },
+          "first_120s_rms_xy_displacement_m": {
+            "median": -0.01033786548189249,
+            "min": -0.011572622953591526,
+            "max": -0.008015781519078353,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_last_10s_mean_xy_displacement_m": {
+            "median": -0.010917895479164857,
+            "min": -0.01193875534877674,
+            "max": -0.00859094705275693,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_horizontal_speed_rms_m_s": {
+            "median": -0.0002459663028546483,
+            "min": -0.0005466053232470211,
+            "max": -0.00015868257386064373,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          },
+          "first_120s_pitch_error_rms_deg": {
+            "median": 0.01927863975394839,
+            "min": 0.015426256057344823,
+            "max": 0.02514598732255635,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 3,
+            "tied_seed_count": 0
+          },
+          "first_120s_in_band_seconds_after_settling": {
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 0,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 3
+          },
+          "first_120s_within_1cm_seconds_after_settling": {
+            "median": 115.41,
+            "min": 55.84,
+            "max": 116.32,
+            "count": 3,
+            "missing_count": 0,
+            "improved_seed_count": 3,
+            "degraded_seed_count": 0,
+            "tied_seed_count": 0
+          }
+        }
+      }
+    }
+  },
+  "counts": {
+    "conditions": 2,
+    "seeds": 3,
+    "cases": 5,
+    "records": 30,
+    "reference_records": 5
+  },
+  "aggregation": "Equal-weight all declared cases within each seed and partition, then pair seeds; fixed cases are not independent training repetitions.",
+  "difference": "Treatment minus baseline; relative-to-reference differences use condition minus the fixed reference.",
+  "unknown_policy": "Any missing value or ineligible case invalidates that seed/partition/metric mean. Unknown values are never zero-filled.",
+  "scope": "Descriptive seed-level statistics and sign counts; no significance, convergence or causal claim is inferred."
+}

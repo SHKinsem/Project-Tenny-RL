@@ -1,0 +1,40 @@
+{
+  "phase": "verified",
+  "cases": 5,
+  "all_completed_120s": true,
+  "descriptor_sha256": "106c6060f50064e70ac120478998d434887e1ba794a5179ed1cec681f97ad9a1",
+  "independent_xy_max_abs_error": 4.336808689942018e-19,
+  "measurements": [
+    {
+      "initial_state_id": "nominal",
+      "rms_xy_m": 0.0027757744024542947,
+      "last10_xy_m": 0.0019022096903731135,
+      "heading_change_at_120s_deg": 8.222533404027798
+    },
+    {
+      "initial_state_id": "pitch-plus",
+      "rms_xy_m": 0.003070178074941002,
+      "last10_xy_m": 0.00220988973631829,
+      "heading_change_at_120s_deg": 8.48848370514566
+    },
+    {
+      "initial_state_id": "pitch-minus",
+      "rms_xy_m": 0.0030010062881911724,
+      "last10_xy_m": 0.0023712312965959957,
+      "heading_change_at_120s_deg": 8.495859186037492
+    },
+    {
+      "initial_state_id": "heldout-plus",
+      "rms_xy_m": 0.00379130232896937,
+      "last10_xy_m": 0.0030711331389960536,
+      "heading_change_at_120s_deg": 8.496515176629376
+    },
+    {
+      "initial_state_id": "heldout-minus",
+      "rms_xy_m": 0.00368800243785424,
+      "last10_xy_m": 0.003291775432619254,
+      "heading_change_at_120s_deg": 8.41512439378275
+    }
+  ],
+  "scope": "Exploratory saved-stage selection; independent XY remeasurement does not convert it into a paired training replicate or a full resume checkpoint."
+}

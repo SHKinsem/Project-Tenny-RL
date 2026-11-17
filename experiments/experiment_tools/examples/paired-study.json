@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "paired_study",
+  "conditions": [{"id": "baseline", "label": "Original"}, {"id": "changed", "label": "One change"}],
+  "comparison": {"baseline": "baseline", "treatment": "changed"},
+  "seeds": [0, 1],
+  "partitions": {"primary": ["nominal"], "heldout": ["perturbed"]},
+  "metrics": [{"id": "rms_xy_m", "unit": "m", "direction": "min"}],
+  "records": [
+    {"condition": "baseline", "seed": 0, "case_id": "nominal", "values": {"rms_xy_m": 0.02}, "eligible": {"rms_xy_m": true}},
+    {"condition": "baseline", "seed": 0, "case_id": "perturbed", "values": {"rms_xy_m": 0.03}, "eligible": {"rms_xy_m": true}},
+    {"condition": "baseline", "seed": 1, "case_id": "nominal", "values": {"rms_xy_m": 0.025}, "eligible": {"rms_xy_m": true}},
+    {"condition": "baseline", "seed": 1, "case_id": "perturbed", "values": {"rms_xy_m": 0.035}, "eligible": {"rms_xy_m": true}},
+    {"condition": "changed", "seed": 0, "case_id": "nominal", "values": {"rms_xy_m": 0.01}, "eligible": {"rms_xy_m": true}},
+    {"condition": "changed", "seed": 0, "case_id": "perturbed", "values": {"rms_xy_m": 0.02}, "eligible": {"rms_xy_m": true}},
+    {"condition": "changed", "seed": 1, "case_id": "nominal", "values": {"rms_xy_m": 0.015}, "eligible": {"rms_xy_m": true}},
+    {"condition": "changed", "seed": 1, "case_id": "perturbed", "values": {"rms_xy_m": null}, "eligible": {"rms_xy_m": false}}
+  ],
+  "reference_records": [
+    {"case_id": "nominal", "values": {"rms_xy_m": 0.022}, "eligible": {"rms_xy_m": true}},
+    {"case_id": "perturbed", "values": {"rms_xy_m": 0.032}, "eligible": {"rms_xy_m": true}}
+  ],
+  "snapshots": [
+    {"id": "early-fall", "condition": "changed", "seed": 0, "step": 100, "partition": "primary", "values": {"rms_xy_m": 0.001}, "eligible": {"rms_xy_m": false}, "artifacts": {}},
+    {"id": "complete-window", "condition": "changed", "seed": 0, "step": 200, "partition": "primary", "values": {"rms_xy_m": 0.01}, "eligible": {"rms_xy_m": true}, "artifacts": {}}
+  ]
+}

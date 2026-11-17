@@ -1,0 +1,114 @@
+{
+  "smoke": {
+    "phase": "completed",
+    "steps": 8192,
+    "elapsed_seconds": 55.49559604297974,
+    "requested_learning_rate": 3e-06,
+    "observed_learning_rates": [
+      3.000000106112566e-06
+    ],
+    "checkpoint_reload_exact": true
+  },
+  "matrix": {
+    "phase": "training",
+    "current_condition": "low_lr",
+    "current_seed": 2,
+    "elapsed_seconds": 617.7990204389789,
+    "total_steps": null,
+    "error": null,
+    "completed": [
+      {
+        "condition": "high_lr",
+        "seed": 0,
+        "steps": 2097152,
+        "seconds": 127.34643582699937
+      },
+      {
+        "condition": "low_lr",
+        "seed": 0,
+        "steps": 2097152,
+        "seconds": 134.95469179801876
+      },
+      {
+        "condition": "low_lr",
+        "seed": 1,
+        "steps": 2097152,
+        "seconds": 121.74892653498682
+      },
+      {
+        "condition": "high_lr",
+        "seed": 1,
+        "steps": 2097152,
+        "seconds": 108.58067615999607
+      },
+      {
+        "condition": "high_lr",
+        "seed": 2,
+        "steps": 2097152,
+        "seconds": 101.81598059501266
+      }
+    ]
+  },
+  "completed_metrics": [
+    {
+      "condition": "high_lr",
+      "seed": 0,
+      "primary_lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "primary_mean_rms_xy": 0.013535733391303097,
+      "primary_mean_last10_xy": 0.013464381520843074,
+      "primary_mean_objective": 51281.81554904213
+    },
+    {
+      "condition": "low_lr",
+      "seed": 0,
+      "primary_lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "primary_mean_rms_xy": 0.021906600208622482,
+      "primary_mean_last10_xy": 0.022776377912167387,
+      "primary_mean_objective": 42241.688077820894
+    },
+    {
+      "condition": "low_lr",
+      "seed": 1,
+      "primary_lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "primary_mean_rms_xy": 0.023665068509719236,
+      "primary_mean_last10_xy": 0.024579374463771397,
+      "primary_mean_objective": 41097.917548261416
+    },
+    {
+      "condition": "high_lr",
+      "seed": 1,
+      "primary_lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "primary_mean_rms_xy": 0.01315717722610507,
+      "primary_mean_last10_xy": 0.013713731336348801,
+      "primary_mean_objective": 35453.900061982335
+    },
+    {
+      "condition": "high_lr",
+      "seed": 2,
+      "primary_lengths": [
+        30.0,
+        30.0,
+        30.0
+      ],
+      "primary_mean_rms_xy": 0.011725652500865165,
+      "primary_mean_last10_xy": 0.011080895751181518,
+      "primary_mean_objective": 58527.55281687853
+    }
+  ]
+}

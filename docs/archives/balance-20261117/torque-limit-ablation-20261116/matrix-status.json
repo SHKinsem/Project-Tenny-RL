@@ -1,0 +1,67 @@
+{
+  "phase": "completed",
+  "completed": [
+    {
+      "phase": "completed",
+      "arm": "baseline",
+      "seed": 0,
+      "steps": 2097152,
+      "elapsed_seconds": 151.91712294399622,
+      "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "final_array_digest": "06931981f72f2f176a097982d753d8f603729954a968432f9b4965e5cafd178b",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "5c949d24e68f8c39d68b7a0cea02ae1a155eeb853d5a2544a567be2a5e886081",
+      "devices": [
+        "cuda:0"
+      ],
+      "checkpoint_reload_exact": true
+    },
+    {
+      "phase": "completed",
+      "arm": "baseline",
+      "seed": 1,
+      "steps": 2097152,
+      "elapsed_seconds": 130.42368037599954,
+      "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "final_array_digest": "ddbe12fe930e459529d26bd0c256a8c0f7f193ea77857cf1a7ff99c5d486cedf",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "7beb4d4c4ec770e781c7091c9c18d73464b576411f87d0a69ba49aa65d019d0c",
+      "devices": [
+        "cuda:0"
+      ],
+      "checkpoint_reload_exact": true
+    },
+    {
+      "phase": "completed",
+      "arm": "baseline",
+      "seed": 2,
+      "steps": 2097152,
+      "elapsed_seconds": 124.85066875000484,
+      "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+      "final_array_digest": "b5f715d05ac781b30aef3d6037eff36fe4a8de8a07c463f0806ebcf802b3a742",
+      "actor_changed": true,
+      "normalizer_drift": 0.0,
+      "descriptor_sha256": "6900ce26b9889758bf3c1261a6360e54cccb0c00175d447062923bf191540f31",
+      "devices": [
+        "cuda:0"
+      ],
+      "checkpoint_reload_exact": true
+    }
+  ],
+  "total_runs": 3,
+  "elapsed_seconds": 420.535972926009,
+  "manifest_sha256": "f4a0fe38f7f9a45d7958da84b4d4eeedb0e88d921db69405094fa93fa3de9d78",
+  "code_sha256": {
+    "__init__.py": "e8f231d51cfc582fdd738f2bcecd0f00ba881a3680da3da073d05a1ed23bf484",
+    "__main__.py": "b1b69ebf6f16d5e57122f48b3818fc5c876cc431bb3f332805092642d2d3e05e",
+    "matrix.py": "55367353c22d6fa5c609b0b8562e9a12790f3358aa4af9ffb16e0728510088ac",
+    "train.py": "58f06d9f551e2cd71ba5f89ae57d1175df3ad4a96480012426e0e6cbe7ccfecd",
+    "legwheel_env.py": "2a1640c434b10f2025d3252bf83a98ff08da6165c2d4a12606e5b01e7f1653fd",
+    "rewards.py": "8e35c3551204957dfeb09d09c617d3fc13a9956c02f0e7e6c9311c7fe67c2f12"
+  }
+}

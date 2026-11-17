@@ -1,0 +1,136 @@
+{
+  "prepared": true,
+  "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "matched_ppo_helpers": true,
+  "baseline_runs": [
+    {
+      "seed": 0,
+      "run_dir": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr",
+      "descriptor": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/descriptor.json",
+      "checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/checkpoint",
+      "checkpoint_sha256": "3ddb0397b151c5a5bc42c583b9afe432c4800061ec00f244f5fd9c79bf968e2e",
+      "status": {
+        "phase": "completed",
+        "condition": "original_wheel",
+        "seed": 0,
+        "steps": 2097152,
+        "elapsed_seconds": 127.34643582699937,
+        "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "final_array_digest": "1b0da5ea32fcd1d650777adf1249cd1776f4741cb2793262c94bce875f736c9c",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "6a57d6bf61953f1a6057ce7c9a9992fe02cbb241aaee07d8b2f95d912e5a4020",
+        "checkpoint_reload_exact": true,
+        "requested_learning_rate": 3e-05,
+        "observed_learning_rates": [
+          2.9999999242136255e-05
+        ],
+        "optimizer_learning_rate_verified": true,
+        "callback_steps": [
+          0,
+          262144,
+          524288,
+          786432,
+          1048576,
+          1310720,
+          1572864,
+          1835008,
+          2097152
+        ],
+        "devices": [
+          "cuda:0"
+        ],
+        "reused": true,
+        "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr"
+      }
+    },
+    {
+      "seed": 1,
+      "run_dir": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr",
+      "descriptor": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/descriptor.json",
+      "checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/checkpoint",
+      "checkpoint_sha256": "7e34484d834191bed4bd0a463a884a46ae1930e6ac49acd0226299ecfc2079cd",
+      "status": {
+        "phase": "completed",
+        "condition": "original_wheel",
+        "seed": 1,
+        "steps": 2097152,
+        "elapsed_seconds": 108.58067615999607,
+        "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "final_array_digest": "c512530d9b75f1fe8716f8c11e72d4edae5d645d2ac2854168d93f8f9fee309a",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "042d7124bfbcf845da200c18cdf3b6de8890cafa64aa5832b9929cb9c045d005",
+        "checkpoint_reload_exact": true,
+        "requested_learning_rate": 3e-05,
+        "observed_learning_rates": [
+          2.9999999242136255e-05
+        ],
+        "optimizer_learning_rate_verified": true,
+        "callback_steps": [
+          0,
+          262144,
+          524288,
+          786432,
+          1048576,
+          1310720,
+          1572864,
+          1835008,
+          2097152
+        ],
+        "devices": [
+          "cuda:0"
+        ],
+        "reused": true,
+        "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr"
+      }
+    },
+    {
+      "seed": 2,
+      "run_dir": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr",
+      "descriptor": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/descriptor.json",
+      "checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/checkpoint",
+      "checkpoint_sha256": "2cb3953658a80adb9f304d29ee6f07cfa622cf9569cc71dab2873d2fe1b924fa",
+      "status": {
+        "phase": "completed",
+        "condition": "original_wheel",
+        "seed": 2,
+        "steps": 2097152,
+        "elapsed_seconds": 101.81598059501266,
+        "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+        "final_array_digest": "b9fd7617fbcf169d98fcf51c4a1d653d86cbc7a918e76799190e0c342f82ab6d",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "c7feb62caf7c7d1c362bbbd41591f1c80f39c04d1557c644e7765943556b9911",
+        "checkpoint_reload_exact": true,
+        "requested_learning_rate": 3e-05,
+        "observed_learning_rates": [
+          2.9999999242136255e-05
+        ],
+        "optimizer_learning_rate_verified": true,
+        "callback_steps": [
+          0,
+          262144,
+          524288,
+          786432,
+          1048576,
+          1310720,
+          1572864,
+          1835008,
+          2097152
+        ],
+        "devices": [
+          "cuda:0"
+        ],
+        "reused": true,
+        "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr"
+      }
+    }
+  ],
+  "source_archive_sha256": "79f9c1cce1c156e9663fc433f1bd7b891ca2b948c03f04b800591be4b137773e",
+  "matching_processes": [],
+  "runtime_files": 30
+}

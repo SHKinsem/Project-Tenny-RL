@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "device": [
+    "cuda:0"
+  ],
+  "rows": [
+    {
+      "arm": "baseline",
+      "max_errors": {
+        "qpos": 8.058087530571356e-11,
+        "qvel": 3.098557499470189e-08,
+        "observation": 2.037850208580494e-07,
+        "done": 0.0
+      },
+      "reward_delta": 0.0,
+      "expected_delta": 0.0
+    },
+    {
+      "arm": "posture",
+      "max_errors": {
+        "qpos": 1.9385382188374933e-11,
+        "qvel": 1.55077941599302e-08,
+        "observation": 2.0506558939814568e-07,
+        "done": 0.0
+      },
+      "reward_delta": 0.0,
+      "expected_delta": -3.1027629556173886e-08
+    },
+    {
+      "arm": "position",
+      "max_errors": {
+        "qpos": 1.9539925233402755e-14,
+        "qvel": 7.958078640513122e-12,
+        "observation": 1.4551915228366852e-11,
+        "done": 0.0
+      },
+      "reward_delta": 0.0,
+      "expected_delta": -3.120592185937875e-10
+    },
+    {
+      "arm": "both",
+      "max_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "observation": 0.0,
+        "done": 0.0
+      },
+      "reward_delta": 0.0,
+      "expected_delta": -3.133968143153518e-08
+    }
+  ],
+  "auto_reset_fixed_anchors": true,
+  "seconds": 128.36589707100939
+}

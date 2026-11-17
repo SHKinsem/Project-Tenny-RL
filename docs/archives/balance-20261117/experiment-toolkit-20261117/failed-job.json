@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "kind": "experiment_jobs",
+  "max_total_seconds": 3,
+  "jobs": [
+    {
+      "id": "exit-seven",
+      "command": [
+        "{python}",
+        "-c",
+        "raise SystemExit(7)"
+      ],
+      "timeout_seconds": 2
+    }
+  ]
+}

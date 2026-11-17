@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "kind": "paired_aligned_torque_limit_summary",
+  "matrix": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "runs": 6,
+    "steps_per_run": 2097152,
+    "statuses_verified": true,
+    "initial_states_sha256": "8fa2b08dfd9b14c7dc9e3bc2d1b5da1ea5339e3f9b6bf806f3f7c02956d6e2ad",
+    "reused_runs": 0,
+    "new_runs": 6,
+    "training_episode_seconds": 30,
+    "policy_hz": 100,
+    "physics_hz": 400,
+    "torque_normalization_scales": [
+      1.0,
+      1.0,
+      0.0295,
+      0.0295
+    ],
+    "alignment_validation": {
+      "deterministic_pair_max_abs_errors": {
+        "observation": 0.0,
+        "action": 0.0,
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "ctrl": 0.0,
+        "reward": 0.0
+      },
+      "common_request_max_abs_error": 0.0,
+      "tolerance": 1e-07,
+      "scope": "Deterministic zero-step physical trajectories align. With equal state and random draw, the pre-cap request is shared; clipping above the low capacity is the treatment."
+    },
+    "initialization_alignment": "common_Fs2_request_with_frozen_BC_mean_anchor_v1",
+    "sole_planned_variable": "Common policy reference force scale Fs2; only leg force capacity Fs1/Fs2 and motor limits ±1/±2 N m differ.",
+    "initializer_note": "Both newly trained arms share complete BC parameter arrays and a common frozen BC-anchor mean-compensation head; deterministic zero-step physical behavior is checked."
+  },
+  "initial": {
+    "limit1": {
+      "policy_id": "initial-limit1",
+      "primary": {
+        "mean_in_band_seconds": 3.97,
+        "mean_longest_in_band_seconds": 3.9033333333333338,
+        "mean_survival_seconds": 5.886666666666667,
+        "mean_max_displacement_m": 0.16535566219132242,
+        "mean_pitch_error_rms_deg": 8.943015696261961,
+        "reached_horizon_count": 0,
+        "evaluation_conditions": 3
+      },
+      "heldout": {
+        "mean_in_band_seconds": 3.6999999999999997,
+        "mean_longest_in_band_seconds": 3.68,
+        "mean_survival_seconds": 7.345,
+        "mean_max_displacement_m": 0.22266052552775506,
+        "mean_pitch_error_rms_deg": 15.28327945287926,
+        "reached_horizon_count": 0,
+        "evaluation_conditions": 2
+      }
+    },
+    "limit2": {
+      "policy_id": "initial-limit2",
+      "primary": {
+        "mean_in_band_seconds": 3.97,
+        "mean_longest_in_band_seconds": 3.9033333333333338,
+        "mean_survival_seconds": 5.886666666666667,
+        "mean_max_displacement_m": 0.16535566219132242,
+        "mean_pitch_error_rms_deg": 8.943015696261961,
+        "reached_horizon_count": 0,
+        "evaluation_conditions": 3
+      },
+      "heldout": {
+        "mean_in_band_seconds": 3.6999999999999997,
+        "mean_longest_in_band_seconds": 3.68,
+        "mean_survival_seconds": 7.345,
+        "mean_max_displacement_m": 0.22266052552775506,
+        "mean_pitch_error_rms_deg": 15.28327945287926,
+        "reached_horizon_count": 0,
+        "evaluation_conditions": 2
+      }
+    }
+  },
+  "alignment_validation": {
+    "deterministic_pair_max_abs_errors": {
+      "observation": 0.0,
+      "action": 0.0,
+      "qpos": 0.0,
+      "qvel": 0.0,
+      "ctrl": 0.0,
+      "reward": 0.0
+    },
+    "common_request_max_abs_error": 0.0,
+    "tolerance": 1e-07,
+    "scope": "Deterministic zero-step physical trajectories align. With equal state and random draw, the pre-cap request is shared; clipping above the low capacity is the treatment."
+  },
+  "zero_step_trace_max_abs_errors": {
+    "t_s": 0.0,
+    "base_position_m": 0.0,
+    "base_velocity_m_s": 0.0,
+    "pitch_rad": 0.0,
+    "actuator_command_nm": 0.0,
+    "roll_rad": 0.0,
+    "pitch_rate_rad_s": 0.0,
+    "reference_pitch_rad": 0.0
+  },
+  "primary_states": [
+    "nominal",
+    "pitch-plus",
+    "pitch-minus"
+  ],
+  "heldout_states": [
+    "heldout-plus",
+    "heldout-minus"
+  ],
+  "conditions": {
+    "limit1": {
+      "label": "±1 N·m（本轮新训练）",
+      "leg_limit_nm": 1,
+      "reused": false,
+      "seed_results": [
+        {
+          "seed": 0,
+          "primary": {
+            "mean_in_band_seconds": 2.973333333333333,
+            "mean_longest_in_band_seconds": 2.9499999999999997,
+            "mean_survival_seconds": 5.460000000000001,
+            "mean_max_displacement_m": 0.256500580570615,
+            "mean_pitch_error_rms_deg": 12.557153301765597,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.11,
+            "mean_longest_in_band_seconds": 3.11,
+            "mean_survival_seconds": 8.455,
+            "mean_max_displacement_m": 0.22714323081029147,
+            "mean_pitch_error_rms_deg": 18.754062210168662,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          },
+          "delta_from_initial": {
+            "mean_in_band_seconds": -0.996666666666667,
+            "mean_longest_in_band_seconds": -0.953333333333334,
+            "mean_survival_seconds": -0.42666666666666586
+          }
+        },
+        {
+          "seed": 1,
+          "primary": {
+            "mean_in_band_seconds": 3.453333333333333,
+            "mean_longest_in_band_seconds": 3.41,
+            "mean_survival_seconds": 5.580000000000001,
+            "mean_max_displacement_m": 0.17236453795976278,
+            "mean_pitch_error_rms_deg": 10.797085127610742,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.51,
+            "mean_longest_in_band_seconds": 3.41,
+            "mean_survival_seconds": 5.73,
+            "mean_max_displacement_m": 0.1886816347728063,
+            "mean_pitch_error_rms_deg": 11.669792859848716,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          },
+          "delta_from_initial": {
+            "mean_in_band_seconds": -0.516666666666667,
+            "mean_longest_in_band_seconds": -0.4933333333333336,
+            "mean_survival_seconds": -0.30666666666666575
+          }
+        },
+        {
+          "seed": 2,
+          "primary": {
+            "mean_in_band_seconds": 3.616666666666667,
+            "mean_longest_in_band_seconds": 3.5233333333333334,
+            "mean_survival_seconds": 8.076666666666666,
+            "mean_max_displacement_m": 0.36740243199858363,
+            "mean_pitch_error_rms_deg": 20.88630197242114,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.58,
+            "mean_longest_in_band_seconds": 3.555,
+            "mean_survival_seconds": 6.825000000000001,
+            "mean_max_displacement_m": 0.27336617530149315,
+            "mean_pitch_error_rms_deg": 15.595359569667869,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          },
+          "delta_from_initial": {
+            "mean_in_band_seconds": -0.35333333333333306,
+            "mean_longest_in_band_seconds": -0.38000000000000034,
+            "mean_survival_seconds": 2.1899999999999995
+          }
+        }
+      ],
+      "primary_in_band_seconds": {
+        "median": 3.453333333333333,
+        "min": 2.973333333333333,
+        "max": 3.616666666666667
+      },
+      "primary_longest_in_band_seconds": {
+        "median": 3.41,
+        "min": 2.9499999999999997,
+        "max": 3.5233333333333334
+      },
+      "primary_survival_seconds": {
+        "median": 5.580000000000001,
+        "min": 5.460000000000001,
+        "max": 8.076666666666666
+      },
+      "heldout_in_band_seconds": {
+        "median": 3.51,
+        "min": 3.11,
+        "max": 3.58
+      },
+      "delta_from_initial_in_band_seconds": {
+        "median": -0.516666666666667,
+        "min": -0.996666666666667,
+        "max": -0.35333333333333306
+      }
+    },
+    "limit2": {
+      "label": "±2 N·m（本轮新训练）",
+      "leg_limit_nm": 2,
+      "reused": false,
+      "seed_results": [
+        {
+          "seed": 0,
+          "primary": {
+            "mean_in_band_seconds": 3.1366666666666667,
+            "mean_longest_in_band_seconds": 3.103333333333333,
+            "mean_survival_seconds": 5.256666666666667,
+            "mean_max_displacement_m": 0.33811356747857335,
+            "mean_pitch_error_rms_deg": 9.169419120224312,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.1399999999999997,
+            "mean_longest_in_band_seconds": 3.0999999999999996,
+            "mean_survival_seconds": 6.84,
+            "mean_max_displacement_m": 0.35414599927914386,
+            "mean_pitch_error_rms_deg": 16.60837416071598,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          },
+          "delta_from_initial": {
+            "mean_in_band_seconds": -0.8333333333333335,
+            "mean_longest_in_band_seconds": -0.8000000000000007,
+            "mean_survival_seconds": -0.6299999999999999
+          }
+        },
+        {
+          "seed": 1,
+          "primary": {
+            "mean_in_band_seconds": 3.266666666666667,
+            "mean_longest_in_band_seconds": 3.223333333333334,
+            "mean_survival_seconds": 7.833333333333333,
+            "mean_max_displacement_m": 0.3739921617473705,
+            "mean_pitch_error_rms_deg": 21.849122170144085,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.295,
+            "mean_longest_in_band_seconds": 3.245,
+            "mean_survival_seconds": 5.220000000000001,
+            "mean_max_displacement_m": 0.3064373445738774,
+            "mean_pitch_error_rms_deg": 7.94630623209104,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          },
+          "delta_from_initial": {
+            "mean_in_band_seconds": -0.7033333333333331,
+            "mean_longest_in_band_seconds": -0.6799999999999997,
+            "mean_survival_seconds": 1.9466666666666663
+          }
+        },
+        {
+          "seed": 2,
+          "primary": {
+            "mean_in_band_seconds": 2.5433333333333334,
+            "mean_longest_in_band_seconds": 2.0500000000000003,
+            "mean_survival_seconds": 5.6066666666666665,
+            "mean_max_displacement_m": 0.24197012715159696,
+            "mean_pitch_error_rms_deg": 14.88600515839395,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 2.8400000000000003,
+            "mean_longest_in_band_seconds": 2.465,
+            "mean_survival_seconds": 5.995,
+            "mean_max_displacement_m": 0.2723947351532278,
+            "mean_pitch_error_rms_deg": 15.72422939683965,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          },
+          "delta_from_initial": {
+            "mean_in_band_seconds": -1.4266666666666667,
+            "mean_longest_in_band_seconds": -1.8533333333333335,
+            "mean_survival_seconds": -0.28000000000000025
+          }
+        }
+      ],
+      "primary_in_band_seconds": {
+        "median": 3.1366666666666667,
+        "min": 2.5433333333333334,
+        "max": 3.266666666666667
+      },
+      "primary_longest_in_band_seconds": {
+        "median": 3.103333333333333,
+        "min": 2.0500000000000003,
+        "max": 3.223333333333334
+      },
+      "primary_survival_seconds": {
+        "median": 5.6066666666666665,
+        "min": 5.256666666666667,
+        "max": 7.833333333333333
+      },
+      "heldout_in_band_seconds": {
+        "median": 3.1399999999999997,
+        "min": 2.8400000000000003,
+        "max": 3.295
+      },
+      "delta_from_initial_in_band_seconds": {
+        "median": -0.8333333333333335,
+        "min": -1.4266666666666667,
+        "max": -0.7033333333333331
+      }
+    }
+  },
+  "paired_results": [
+    {
+      "seed": 0,
+      "delta_in_band_seconds": 0.16333333333333355,
+      "delta_longest_in_band_seconds": 0.15333333333333332,
+      "delta_survival_seconds": -0.20333333333333403,
+      "limit1_delta_from_initial_in_band_seconds": -0.996666666666667,
+      "limit2_delta_from_initial_in_band_seconds": -0.8333333333333335,
+      "delta_training_gain_in_band_seconds": 0.16333333333333355,
+      "delta_heldout_in_band_seconds": 0.029999999999999805
+    },
+    {
+      "seed": 1,
+      "delta_in_band_seconds": -0.1866666666666661,
+      "delta_longest_in_band_seconds": -0.1866666666666661,
+      "delta_survival_seconds": 2.253333333333332,
+      "limit1_delta_from_initial_in_band_seconds": -0.516666666666667,
+      "limit2_delta_from_initial_in_band_seconds": -0.7033333333333331,
+      "delta_training_gain_in_band_seconds": -0.1866666666666661,
+      "delta_heldout_in_band_seconds": -0.21499999999999986
+    },
+    {
+      "seed": 2,
+      "delta_in_band_seconds": -1.0733333333333337,
+      "delta_longest_in_band_seconds": -1.4733333333333332,
+      "delta_survival_seconds": -2.4699999999999998,
+      "limit1_delta_from_initial_in_band_seconds": -0.35333333333333306,
+      "limit2_delta_from_initial_in_band_seconds": -1.4266666666666667,
+      "delta_training_gain_in_band_seconds": -1.0733333333333337,
+      "delta_heldout_in_band_seconds": -0.7399999999999998
+    }
+  ],
+  "paired_delta_in_band_seconds": {
+    "median": -0.1866666666666661,
+    "min": -1.0733333333333337,
+    "max": 0.16333333333333355
+  },
+  "paired_delta_longest_in_band_seconds": {
+    "median": -0.1866666666666661,
+    "min": -1.4733333333333332,
+    "max": 0.15333333333333332
+  },
+  "paired_delta_survival_seconds": {
+    "median": -0.20333333333333403,
+    "min": -2.4699999999999998,
+    "max": 2.253333333333332
+  },
+  "paired_delta_training_gain_in_band_seconds": {
+    "median": -0.1866666666666661,
+    "min": -1.0733333333333337,
+    "max": 0.16333333333333355
+  },
+  "improved_seed_counts": {
+    "cumulative": 1,
+    "longest": 1,
+    "survival": 1,
+    "own_initial_gain": 1
+  },
+  "interpretation": "物理初始化已对齐，两组均为本轮新训练。最终累计合格时间的配对中位差为负，本轮未显示2 N·m组最终累计合格时间的优势。同时保留相对各自对齐0步参考的变化；三种子短训不证明长期收敛或实机能力。",
+  "scope": "Three paired training seeds; five fixed initial states are conditions within a seed, not independent training repetitions.",
+  "limitations": [
+    "Deterministic zero-step physical alignment is checked; stochastic training need not produce identical applied torques once the low-capacity arm clips a common request.",
+    "Differences between gains from each own zero-step reference are descriptive, not a causal decomposition.",
+    "All six runs are newly trained under the same aligned initialization; historical runs are not included as repeat units.",
+    "Both arms use the common Fs2 policy reference; force-capacity clipping and motor limits are the treatment.",
+    "Reward and previous-torque observation normalization remain at the original physical scales.",
+    "Survival, cumulative in-band time and longest continuous interval are distinct outcomes.",
+    "Three fixed seeds and fixed evaluation states do not establish significance, convergence or hardware robustness."
+  ]
+}

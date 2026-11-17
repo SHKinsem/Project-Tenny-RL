@@ -54,6 +54,8 @@ python tenny.py run web mode=hybrid_virtual_leg_force_100
 
 ## 目录
 
+最近一轮原地平衡诊断、单因素对照、成熟模型微调与实际改进，见[实验综述与结论](docs/reports/2026-11-balance-experiments.md)和[公开证据归档](docs/archives/balance-20261117/README.md)。通用工具见[实验工具包](experiments/experiment_tools/README.md)；后续网页接入已记录在[会话交接](tasks/experiment-web-handoff.md)，尚未部署这些实验功能。
+
 | 路径 | 说明 |
 |---|---|
 | `tenny.py`、`tenny/` | 统一入口（网页控制台 + CLI）与任务清单 `tenny/tasks.toml` |
@@ -77,7 +79,7 @@ python tenny.py run web mode=hybrid_virtual_leg_force_100
 ## 已知限制
 
 - 训练依赖 GPU + JAX，只能在 Linux/WSL 中运行。
-- 训练输出（`experiments/torque200/results/`、`tasks/results/`）不入库，只保存在本地。
+- 原始训练输出（`experiments/torque200/results/`、`tasks/results/`）不入库；脱敏后的结论、小型统计和关键图单独归档在 `docs/archives/`，不含完整模型或大轨迹。
 - 训练所需的 WSL 环境（`~/projects/tenny-reference` 等）需按 `tasks/REPRODUCTION.md` 自行搭建。
 
 ## 参考项目

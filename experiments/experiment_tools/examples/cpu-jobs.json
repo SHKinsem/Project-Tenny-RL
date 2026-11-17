@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "kind": "experiment_jobs",
+  "max_total_seconds": 5,
+  "jobs": [
+    {
+      "id": "cpu-example",
+      "command": ["{python}", "-X", "utf8", "-c", "import json; from pathlib import Path; Path('status.json').write_text(json.dumps({'phase':'completed','steps':8}),encoding='utf-8'); print('CPU example completed')"],
+      "timeout_seconds": 3,
+      "expected_result": {"path": "status.json", "checks": {"phase": "completed", "steps": 8}}
+    }
+  ]
+}

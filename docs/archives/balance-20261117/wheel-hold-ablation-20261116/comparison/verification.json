@@ -1,0 +1,815 @@
+{
+  "phase": "verified",
+  "kind": "wheel_hold_ablation_verification_v1",
+  "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "protected_inputs": {
+    "files_verified": 56,
+    "checkpoint_trees_verified": 4
+  },
+  "frozen_runtime_files": 30,
+  "reused_original_frozen_files": 25,
+  "source_archive_sha256": "79f9c1cce1c156e9663fc433f1bd7b891ca2b948c03f04b800591be4b137773e",
+  "unchanged_ppo_helper_ASTs": true,
+  "reward_gate": {
+    "phase": "passed",
+    "scope": "Identical inherited dynamics/observation methods; real saved post-state reward calls on shared data. No claim that this is a full JAX/native trajectory equivalence test.",
+    "reset_physics_and_actor_observation_exact": true,
+    "sampled_states": 16,
+    "nonzero_wheel_scores": 16,
+    "weight10_all_reward_terms_max_abs_error": 0.0,
+    "weight1_other_terms_max_abs_error": 0.0,
+    "weight1_single_wheel_adjustment_max_abs_error": 0.0,
+    "shared_zero_keep_scale": 10.0,
+    "yaw_weight": 10.0,
+    "actor_uses_world_xy": false,
+    "actor_uses_body_local_linear_velocity": false,
+    "wall_seconds": 4.938302319002105
+  },
+  "reused_baseline_runs": [
+    {
+      "seed": 0,
+      "reused": true,
+      "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr",
+      "source_checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-0/high_lr/checkpoint",
+      "initializer": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "1b0da5ea32fcd1d650777adf1249cd1776f4741cb2793262c94bce875f736c9c",
+      "native_export_max_abs_error": 0.0,
+      "actual_objective": "Original base10 plus true XY; wheel adjustment zero."
+    },
+    {
+      "seed": 1,
+      "reused": true,
+      "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr",
+      "source_checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-1/high_lr/checkpoint",
+      "initializer": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "c512530d9b75f1fe8716f8c11e72d4edae5d645d2ac2854168d93f8f9fee309a",
+      "native_export_max_abs_error": 0.0,
+      "actual_objective": "Original base10 plus true XY; wheel adjustment zero."
+    },
+    {
+      "seed": 2,
+      "reused": true,
+      "source_run": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr",
+      "source_checkpoint": "$HOME/projects/tenny-mature-finetune-20261116/matrix/seed-2/high_lr/checkpoint",
+      "initializer": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "final_array_digest": "b9fd7617fbcf169d98fcf51c4a1d653d86cbc7a918e76799190e0c342f82ab6d",
+      "native_export_max_abs_error": 0.0,
+      "actual_objective": "Original base10 plus true XY; wheel adjustment zero."
+    }
+  ],
+  "runs": [
+    {
+      "seed": 0,
+      "reused": false,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "observed_learning_rates": [
+        2.9999999242136255e-05
+      ],
+      "checkpoint_snapshots": [
+        {
+          "steps": 0,
+          "complete_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "e8696f487043e75ed53f0d4ddbfbe4c0ac01549764d47a6bc63ff957bd7075d0",
+          "native_export_max_abs_error": 0.0
+        },
+        {
+          "steps": 262144,
+          "complete_array_digest": "8c1c75b43fce55c6f34691e6ea721fde756114e3e6ea673a2a2209a9317dedbf",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "44f58a2cb853b349c1b6ddcc63bc33a7d83cb5772b1e349b476aa57f80afa778",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 524288,
+          "complete_array_digest": "7ec825a7b688579061ee8713012337547faecac5aaf6099754ebf9685ef25a1a",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "f1d5cc9dc8012f1ee902afeeb425fe4f055035b44d5deb01cc9407555fdca74a",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 786432,
+          "complete_array_digest": "1604d539c59233270c8c21fde4049365a12f9ec602385deb5154cef0a7ab73f6",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "50fad8920bdc31a4127c23e3d282defea6efbe62d947200361c2a5c129c6fd26",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1048576,
+          "complete_array_digest": "a273031036755833bfbac7969a6779afbbcd5b29f9fcfcd011abbb043a3aec3d",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "57d308ce089a379a23d212b2ccdedc5dc451fa383499dc8ab257cae6148c4c39",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1310720,
+          "complete_array_digest": "1114e2e818fbb35f484f7d7f7ffb76a3d47145b77bc4d6d6f1d88c059b480237",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "5e4b54b42badd4f337094e1762e9fc91ff3b1a6684f849450eeaa9f6a9202552",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1572864,
+          "complete_array_digest": "5d29cc67c8cea652220313e9b9ad7c10923e2cf164e7b35822c39580075ac869",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "d038315f76d3df5a737f50ec67c3c217db0a1cec1615a30fad3c8834e438c224",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1835008,
+          "complete_array_digest": "b3377b9f592002eb481d5ffc337239e5ac0d425e67ea3bd9cd03fc7fac9985c6",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "8a28c54fe1baa16bf7b616ffb61236e8e8784fff6490381e9417a1df2c99598e",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 2097152,
+          "complete_array_digest": "71a1cfded874c82b69fe7c90fe44f79d52deefef2194e506f973da85102be620",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "ac5d004a49aadb01f4805d79e4520124a62db8891989d3783c0750d2b5569cdf",
+          "native_export_max_abs_error": 0.0
+        }
+      ],
+      "zero_step_trajectory": {
+        "max_abs_error": 0.0,
+        "array_fields": 35,
+        "expected_time_limit_marker_differences": [
+          {
+            "world": 0,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 1,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 2,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 3,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 4,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          }
+        ]
+      },
+      "final_array_digest": "71a1cfded874c82b69fe7c90fe44f79d52deefef2194e506f973da85102be620",
+      "final_native_export_max_abs_error": 0.0
+    },
+    {
+      "seed": 1,
+      "reused": false,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "observed_learning_rates": [
+        2.9999999242136255e-05
+      ],
+      "checkpoint_snapshots": [
+        {
+          "steps": 0,
+          "complete_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "3dd19e42124deb755facc16370dc3df0e8dcccdfab07b29c573ce667734c6909",
+          "native_export_max_abs_error": 0.0
+        },
+        {
+          "steps": 262144,
+          "complete_array_digest": "74783b2b8f05d725d45b74013d5a27799a1527459138d00689bebcc2bd051aad",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "c8148720fb0eee6eba6558166549f3284448260f73ca3894ea7da48742dadc4f",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 524288,
+          "complete_array_digest": "13fa885e3b46a39a04c7d1413ee3d9a088f1ec8d88735821e28a8b5d16835d91",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "1d0c45b1233f033ec58d443993d42f00599e85a82e9715383ca97356ed119fbe",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 786432,
+          "complete_array_digest": "5fa63edeccc3d582ca5d88677f98bd6423f0e9d919df6f29791a712255d85d4b",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "d5fe3fa580970b18da2629f5eb0b5c43fc5b5bed5f10a22b597c76b74bb6f37a",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1048576,
+          "complete_array_digest": "41eaed434f77be8a4a28f48c1130ba148e531e266221c628776cec159897a811",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "11a9e4923ceb2961af8f1f1c64a4096d49d5cb25f0a6d14f2352a56f08e5b326",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1310720,
+          "complete_array_digest": "992f577d3aa98d2e4e436a07d3a14900413390acf0ae0bd44ef98f2c744b551e",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "f141c974bc62844853e6da028f45ab3488cdc8a5464d0833aa28ca9bedc91989",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1572864,
+          "complete_array_digest": "b3d4f385993437b1fce15d7f5702e12f9e7911e06245a8059806784cc6e3dcdf",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "bcc244ad55df2302d4e852d5ee4ac739c500bdd8c057f84922e08c6970e9f84b",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1835008,
+          "complete_array_digest": "6473b86709ded30676b9691d77bff400676f3cc8e0af9d455b12a9ee44dbbe6b",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "d1b985881cca74d8675d45d13d5d75b83d6573176cdb6eaeba3f915f6774a475",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 2097152,
+          "complete_array_digest": "8a22ec9cda2c8d491dda70047af7a28fcd9008f24b54e72168804e12df51d517",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "2f5dcf7e42db9b76b201669d753bb32593c141ff4f63f6f38a09bdcac58b2c99",
+          "native_export_max_abs_error": 0.0
+        }
+      ],
+      "zero_step_trajectory": {
+        "max_abs_error": 0.0,
+        "array_fields": 35,
+        "expected_time_limit_marker_differences": [
+          {
+            "world": 0,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 1,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 2,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 3,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 4,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          }
+        ]
+      },
+      "final_array_digest": "8a22ec9cda2c8d491dda70047af7a28fcd9008f24b54e72168804e12df51d517",
+      "final_native_export_max_abs_error": 0.0
+    },
+    {
+      "seed": 2,
+      "reused": false,
+      "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+      "observed_learning_rates": [
+        2.9999999242136255e-05
+      ],
+      "checkpoint_snapshots": [
+        {
+          "steps": 0,
+          "complete_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "d4e894ca3b8bd139322a573fb5438ab6999df685082763bd2dd0216367f4858e",
+          "native_export_max_abs_error": 0.0
+        },
+        {
+          "steps": 262144,
+          "complete_array_digest": "0ffec89de38105bef7b8103b4abead21e59534a62cd3d60ebf52276ffa8b8342",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "d0905d9e1dc1ef49947ce895bc248fe275bbca045bcbfae7b105213699028dd8",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 524288,
+          "complete_array_digest": "f18bf9b89384b3780df73a9f0ec7e90b21bd7c6814ec1425d0abf94846767195",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "24a4338b9b377d18a5ae77fcc08c931ce42a780fd620e44671823576fefc9942",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 786432,
+          "complete_array_digest": "a69f5c34ef18cd62e4f45562f48771c996ac2b7787f3b8212d1f162beb301de5",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "032f26fb4ff68781dca81e7a8ce6a1650e3b4b4d799daac42bc2fd6760d966f2",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1048576,
+          "complete_array_digest": "e1fb0aa2bbd735a9575bca9127a3d74f01e2e22c0218447f8813a317118a8177",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "8476c85b8320a092f3236b36db58160012cf6285435da44f728524026e978c1d",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1310720,
+          "complete_array_digest": "e2e370d4f0d104c7af0afcef0011a033dd5d534b1c98773f381e45b4a65d3f1d",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "901de36eb8defac11f5a517f234ed08f20c9a872568f96dacc9ab091204e36c2",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1572864,
+          "complete_array_digest": "c8495586ea1546a248b30035e50addbcb712330582ab00a1e70a0b1a51d7655e",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "e7b504f9682eefa91829e464084b0c5fa3c69db946a9edb9c02bfe77936d1cf1",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 1835008,
+          "complete_array_digest": "a734e6623d0a062a9de72eed8eeb25b32b74d24c791526c62bc566fc4dd6ee57",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "d283ddc303753c2ef95c6cfd051f6712bb52afd6ef81743042cac295a4ef6d59",
+          "native_export_max_abs_error": null
+        },
+        {
+          "steps": 2097152,
+          "complete_array_digest": "495b77d71e20ff1fe287d76a89bb15d84abee4caf243820b0f8c7227e587b8e6",
+          "reload_exact": true,
+          "normalizer_drift": 0,
+          "checkpoint_sha256": "81a400659e578b93a980ce890401b6985b59f85bcebbd8abeea418f1bd56a0f6",
+          "native_export_max_abs_error": 0.0
+        }
+      ],
+      "zero_step_trajectory": {
+        "max_abs_error": 0.0,
+        "array_fields": 35,
+        "expected_time_limit_marker_differences": [
+          {
+            "world": 0,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 1,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 2,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 3,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          },
+          {
+            "world": 4,
+            "step": 3000,
+            "stage_done": true,
+            "old_120s_prefix_done": false
+          }
+        ]
+      },
+      "final_array_digest": "495b77d71e20ff1fe287d76a89bb15d84abee4caf243820b0f8c7227e587b8e6",
+      "final_native_export_max_abs_error": 0.0
+    }
+  ],
+  "same_120s_raw_reuse_checks": [
+    {
+      "policy_id": "initial",
+      "new": "$HOME/projects/tenny-wheel-hold-ablation-20261116/evaluation/policy-0-long.npz",
+      "old": "$HOME/projects/tenny-mature-finetune-20261116/evaluation/policy-0-long.npz",
+      "array_fields": 45,
+      "max_abs_error": 0.0
+    },
+    {
+      "policy_id": "original_wheel-seed-0",
+      "new": "$HOME/projects/tenny-wheel-hold-ablation-20261116/evaluation/policy-1-long.npz",
+      "old": "$HOME/projects/tenny-mature-finetune-20261116/evaluation/policy-1-long.npz",
+      "array_fields": 45,
+      "max_abs_error": 0.0
+    },
+    {
+      "policy_id": "original_wheel-seed-1",
+      "new": "$HOME/projects/tenny-wheel-hold-ablation-20261116/evaluation/policy-2-long.npz",
+      "old": "$HOME/projects/tenny-mature-finetune-20261116/evaluation/policy-2-long.npz",
+      "array_fields": 45,
+      "max_abs_error": 0.0
+    },
+    {
+      "policy_id": "original_wheel-seed-2",
+      "new": "$HOME/projects/tenny-wheel-hold-ablation-20261116/evaluation/policy-3-long.npz",
+      "old": "$HOME/projects/tenny-mature-finetune-20261116/evaluation/policy-3-long.npz",
+      "array_fields": 45,
+      "max_abs_error": 0.0
+    }
+  ],
+  "raw_reused_baseline_cases_exact": 15,
+  "raw_unchanged_reference_cases_exact": 5,
+  "cases_independently_recomputed": 35,
+  "case_objective_checks": [
+    {
+      "policy_id": "initial",
+      "initial_state_id": "nominal",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 197566.7086778995,
+      "common_xy_objective_return": 184206.80429874198,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 184206.80429874198
+    },
+    {
+      "policy_id": "initial",
+      "initial_state_id": "pitch-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 197627.26502612955,
+      "common_xy_objective_return": 186086.6279271066,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 186086.6279271066
+    },
+    {
+      "policy_id": "initial",
+      "initial_state_id": "pitch-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 197493.43277369536,
+      "common_xy_objective_return": 182216.4926146681,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 182216.4926146681
+    },
+    {
+      "policy_id": "initial",
+      "initial_state_id": "heldout-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 197685.55458962044,
+      "common_xy_objective_return": 187792.29766656418,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 187792.29766656418
+    },
+    {
+      "policy_id": "initial",
+      "initial_state_id": "heldout-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 197448.41037722785,
+      "common_xy_objective_return": 180167.92612598906,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 180167.92612598906
+    },
+    {
+      "policy_id": "original_wheel-seed-0",
+      "initial_state_id": "nominal",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 214094.68692094524,
+      "common_xy_objective_return": 205691.22862614907,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 205691.22862614907
+    },
+    {
+      "policy_id": "original_wheel-seed-0",
+      "initial_state_id": "pitch-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 214114.06013967772,
+      "common_xy_objective_return": 207152.66276325056,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 207152.66276325056
+    },
+    {
+      "policy_id": "original_wheel-seed-0",
+      "initial_state_id": "pitch-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 214082.29747424586,
+      "common_xy_objective_return": 204115.24640037524,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 204115.24640037524
+    },
+    {
+      "policy_id": "original_wheel-seed-0",
+      "initial_state_id": "heldout-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 214133.51884589903,
+      "common_xy_objective_return": 208489.5854856416,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 208489.5854856416
+    },
+    {
+      "policy_id": "original_wheel-seed-0",
+      "initial_state_id": "heldout-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 213987.65922049514,
+      "common_xy_objective_return": 202316.15523774188,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 202316.15523774188
+    },
+    {
+      "policy_id": "original_wheel-seed-1",
+      "initial_state_id": "nominal",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 144861.25578051107,
+      "common_xy_objective_return": 136370.31820863058,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 136370.31820863058
+    },
+    {
+      "policy_id": "original_wheel-seed-1",
+      "initial_state_id": "pitch-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 145064.8501134763,
+      "common_xy_objective_return": 134972.88217263963,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 134972.88217263963
+    },
+    {
+      "policy_id": "original_wheel-seed-1",
+      "initial_state_id": "pitch-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 144566.58345114626,
+      "common_xy_objective_return": 137471.4787025421,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 137471.4787025421
+    },
+    {
+      "policy_id": "original_wheel-seed-1",
+      "initial_state_id": "heldout-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 145243.3513511714,
+      "common_xy_objective_return": 133495.72260927458,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 133495.72260927458
+    },
+    {
+      "policy_id": "original_wheel-seed-1",
+      "initial_state_id": "heldout-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 144453.03640827336,
+      "common_xy_objective_return": 138648.38315683792,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 138648.38315683792
+    },
+    {
+      "policy_id": "original_wheel-seed-2",
+      "initial_state_id": "nominal",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 243521.3086889016,
+      "common_xy_objective_return": 237614.2853371253,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 237614.2853371253
+    },
+    {
+      "policy_id": "original_wheel-seed-2",
+      "initial_state_id": "pitch-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 243569.27868304407,
+      "common_xy_objective_return": 238853.76403249253,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 238853.76403249253
+    },
+    {
+      "policy_id": "original_wheel-seed-2",
+      "initial_state_id": "pitch-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 243482.0961520442,
+      "common_xy_objective_return": 236258.93966349924,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 236258.93966349924
+    },
+    {
+      "policy_id": "original_wheel-seed-2",
+      "initial_state_id": "heldout-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 243616.11542862386,
+      "common_xy_objective_return": 239957.98862117494,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 239957.98862117494
+    },
+    {
+      "policy_id": "original_wheel-seed-2",
+      "initial_state_id": "heldout-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 10.0,
+      "base10_return": 243454.0596500233,
+      "common_xy_objective_return": 234802.12746088076,
+      "wheel_position_adjustment_return": 0.0,
+      "training_objective_return": 234802.12746088076
+    },
+    {
+      "policy_id": "weak_wheel-seed-0",
+      "initial_state_id": "nominal",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 231170.1533973163,
+      "common_xy_objective_return": 229001.21467134988,
+      "wheel_position_adjustment_return": -83370.48685925691,
+      "training_objective_return": 145630.72781209298
+    },
+    {
+      "policy_id": "weak_wheel-seed-0",
+      "initial_state_id": "pitch-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 231151.364273014,
+      "common_xy_objective_return": 229673.10400153243,
+      "wheel_position_adjustment_return": -83301.0236610504,
+      "training_objective_return": 146372.080340482
+    },
+    {
+      "policy_id": "weak_wheel-seed-0",
+      "initial_state_id": "pitch-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 231168.6691369817,
+      "common_xy_objective_return": 228155.63009421088,
+      "wheel_position_adjustment_return": -83419.3401596467,
+      "training_objective_return": 144736.28993456418
+    },
+    {
+      "policy_id": "weak_wheel-seed-0",
+      "initial_state_id": "heldout-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 231024.47781195567,
+      "common_xy_objective_return": 230058.65263274772,
+      "wheel_position_adjustment_return": -83130.18590857703,
+      "training_objective_return": 146928.4667241707
+    },
+    {
+      "policy_id": "weak_wheel-seed-0",
+      "initial_state_id": "heldout-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 231181.84504071902,
+      "common_xy_objective_return": 227193.6175522574,
+      "wheel_position_adjustment_return": -83485.66862379684,
+      "training_objective_return": 143707.94892846057
+    },
+    {
+      "policy_id": "weak_wheel-seed-1",
+      "initial_state_id": "nominal",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 163435.31798755977,
+      "common_xy_objective_return": 162010.75211005303,
+      "wheel_position_adjustment_return": -26876.324017481453,
+      "training_objective_return": 135134.4280925716
+    },
+    {
+      "policy_id": "weak_wheel-seed-1",
+      "initial_state_id": "pitch-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 163545.4603629781,
+      "common_xy_objective_return": 161466.2710665713,
+      "wheel_position_adjustment_return": -26922.1860736541,
+      "training_objective_return": 134544.0849929172
+    },
+    {
+      "policy_id": "weak_wheel-seed-1",
+      "initial_state_id": "pitch-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 163284.76750697347,
+      "common_xy_objective_return": 162358.34532659507,
+      "wheel_position_adjustment_return": -26792.575685545416,
+      "training_objective_return": 135565.76964104964
+    },
+    {
+      "policy_id": "weak_wheel-seed-1",
+      "initial_state_id": "heldout-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 163634.35804022956,
+      "common_xy_objective_return": 160751.64042748502,
+      "wheel_position_adjustment_return": -26938.589946260203,
+      "training_objective_return": 133813.0504812248
+    },
+    {
+      "policy_id": "weak_wheel-seed-1",
+      "initial_state_id": "heldout-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 163008.41852609196,
+      "common_xy_objective_return": 162437.780361252,
+      "wheel_position_adjustment_return": -26605.601273758402,
+      "training_objective_return": 135832.1790874936
+    },
+    {
+      "policy_id": "weak_wheel-seed-2",
+      "initial_state_id": "nominal",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 261993.18968217843,
+      "common_xy_objective_return": 258071.6310503698,
+      "wheel_position_adjustment_return": -102861.4496788193,
+      "training_objective_return": 155210.18137155048
+    },
+    {
+      "policy_id": "weak_wheel-seed-2",
+      "initial_state_id": "pitch-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 261830.3781820783,
+      "common_xy_objective_return": 258852.38189736404,
+      "wheel_position_adjustment_return": -102648.64401842005,
+      "training_objective_return": 156203.737878944
+    },
+    {
+      "policy_id": "weak_wheel-seed-2",
+      "initial_state_id": "pitch-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 262196.1513838569,
+      "common_xy_objective_return": 257193.73095765832,
+      "wheel_position_adjustment_return": -103111.06486744437,
+      "training_objective_return": 154082.66609021396
+    },
+    {
+      "policy_id": "weak_wheel-seed-2",
+      "initial_state_id": "heldout-plus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 261615.2945147475,
+      "common_xy_objective_return": 259390.9142985927,
+      "wheel_position_adjustment_return": -102376.49152823997,
+      "training_objective_return": 157014.4227703527
+    },
+    {
+      "policy_id": "weak_wheel-seed-2",
+      "initial_state_id": "heldout-minus",
+      "raw_steps": 12000,
+      "wheel_position_weight": 1.0,
+      "base10_return": 262580.8594620354,
+      "common_xy_objective_return": 256406.2809297976,
+      "wheel_position_adjustment_return": -103534.99533438627,
+      "training_objective_return": 152871.28559541132
+    }
+  ],
+  "measurement_max_abs_error": 8.731149137020111e-10,
+  "objective_accounting": "Native base remains wheel/yaw10. Common XY = base10 + true XY; actual = common XY + (wheel_weight-10)*native preweight wheel score*control_dt/reference_dt. No PPO reward scaling or duplicated XY is included.",
+  "checkpoint_scope": "All nine parameter checkpoints contain normalizer, actor and critic. Adam state is absent; later continuation starts new optimizer state.",
+  "initial_prefix_boundary": "30s stage and 120s old initial physical/reward arrays match exactly; only the final 30s timeout done marker differs as expected.",
+  "devices": [
+    "TFRT_CPU_0"
+  ],
+  "wall_seconds": 12.622834820998833
+}

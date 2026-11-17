@@ -1,0 +1,813 @@
+{
+  "schema_version": 1,
+  "kind": "torque_limit_ablation_v1",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "steps_per_run": 2097152,
+  "ppo": {
+    "seed": 0,
+    "num_timesteps": 2097152,
+    "num_evals": 5,
+    "reward_scaling": 0.1,
+    "episode_length": 3000,
+    "normalize_observations": true,
+    "action_repeat": 1,
+    "unroll_length": 16,
+    "num_minibatches": 1,
+    "num_updates_per_batch": 1,
+    "discounting": 0.9862327044933592,
+    "learning_rate": 3e-05,
+    "entropy_cost": 0.001,
+    "num_envs": 512,
+    "batch_size": 512,
+    "max_grad_norm": 1.0,
+    "network_factory": {
+      "policy_hidden_layer_sizes": [
+        64,
+        64
+      ],
+      "value_hidden_layer_sizes": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "policy_obs_key": "state",
+      "value_obs_key": "privileged_state"
+    },
+    "save_checkpoint_path": null,
+    "gae_lambda": 0.9025,
+    "num_eval_envs": 8,
+    "normalize_observations_mode": "ema",
+    "normalize_observations_std_eps": 0.0,
+    "normalize_until_count": 0,
+    "deterministic_eval": true,
+    "run_evals": false,
+    "clipping_epsilon": 0.3,
+    "num_resets_per_eval": 0
+  },
+  "env_config": {
+    "_XML_PATH": "unserializable object: $HOME/projects/tenny-torque200/src/assets/legwheel_robot2_stl_nolinkage6_terrain.xml",
+    "episode_time": 6.0,
+    "ctrl_dt": 0.01,
+    "sim_dt": 0.0025,
+    "cmd_start_delay_s": 0.2,
+    "episode_length": 600,
+    "action_repeat": 1,
+    "action_delay_steps": 0,
+    "obs_history_len": 1,
+    "wheel_radius": 0.0195,
+    "torque_control": {
+      "scales": [
+        1.0,
+        1.0,
+        0.0295,
+        0.0295
+      ]
+    },
+    "cmd_lin_vel_x_zero_margin": 0.000195,
+    "cmd_ang_vel_zero_margin": 0.01,
+    "sinpitch_zero": true,
+    "wheel_sin_scale": 0.1,
+    "wheel_sinpos_start": true,
+    "wheel_pos_nosin": false,
+    "sinyaw": true,
+    "sinyaw_scale": 0.5,
+    "hold_error_clip": {
+      "enable": false,
+      "wheel_sinpos": 5.0,
+      "sinyaw": 1.0
+    },
+    "last_act_obs": false,
+    "action_range": {
+      "thigh": [
+        -0.5,
+        0.0
+      ]
+    },
+    "noise_config": {
+      "level": 0.0,
+      "scales": {
+        "joint_pos": 0.02,
+        "joint_vel": 1.0,
+        "linvel": 0.01,
+        "gyro": 0.02,
+        "pitch": 0.02,
+        "roll": 0.02
+      }
+    },
+    "reward_config": {
+      "reference_dt": 0.01,
+      "do_deconflict": false,
+      "height_scale": 2.0,
+      "vel_scale": 2.0,
+      "roll_scale": 4.0,
+      "base_scale": 1.0,
+      "pitch_scale": 0.0,
+      "posture_scale": 1.0,
+      "zero_keep_scale": 10.0,
+      "energy_scale": -1.0,
+      "action_rate_scale": -0.5,
+      "pitch_velocity_penalty_scale": -0.5,
+      "termination_penalty_enable": false,
+      "termination_penalty_value": -10.0,
+      "sigma": 0.5,
+      "sigma_wheel": 0.5,
+      "height_feasible_projection": true,
+      "roll_thigh_coupling": 0.433
+    },
+    "push_config": {
+      "enable": false,
+      "interval_range": [
+        1.0,
+        5.0
+      ],
+      "magnitude_range": [
+        0.0,
+        0.5
+      ],
+      "magnitude_pow": 1.0,
+      "burst_prob": 0.0,
+      "burst_interval_range": [
+        0.3,
+        0.8
+      ]
+    },
+    "cmd_config": {
+      "command_change_interval": 299,
+      "cmd_prob": 0.0,
+      "lin_vel_x": [
+        -0.2,
+        0.2
+      ],
+      "ang_vel_yaw": [
+        -1.5,
+        1.5
+      ],
+      "height_value": [
+        -0.5,
+        0.0
+      ],
+      "roll_value": [
+        -0.2,
+        0.2
+      ],
+      "enable": {
+        "lin_vel_x": true,
+        "ang_vel_yaw": true,
+        "height_value": true,
+        "roll_value": true
+      }
+    },
+    "obs_normalize": {
+      "state_mean": null,
+      "state_std": null,
+      "privileged_state_mean": null,
+      "privileged_state_std": null
+    },
+    "control_hz": 100,
+    "action_delay_ms": 0.0
+  },
+  "arms": {
+    "baseline": {
+      "posture_weight": 0.0,
+      "position_weight": 0.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    },
+    "posture": {
+      "posture_weight": 4.0,
+      "position_weight": 0.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    },
+    "position": {
+      "posture_weight": 0.0,
+      "position_weight": 10.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    },
+    "both": {
+      "posture_weight": 4.0,
+      "position_weight": 10.0,
+      "pitch_scale_rad": 0.17453292519943295,
+      "position_scale_m": 0.05
+    }
+  },
+  "initial_checkpoint": "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/verification-ee717d86609f44afa0800e0e2b79270d/checkpoint",
+  "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+  "initial_checkpoint_sha256": "e3ffb1bc44a44aa2f15aadff2086d2cbba506cbbca34ac1a2511578a80b5a639",
+  "initialization_canonicalization": "Only zero std_eps scalar is cast float64 to float32, matching Brax; all values and actor/critic/statistics are unchanged.",
+  "base_descriptor": "$HOME/projects/tenny-torque-limit-ablation-20261116/inputs/initial-limit2.json",
+  "policy_metadata": {
+    "schema": "wheel-center-axial-v1",
+    "action_mode": "virtual_leg_force",
+    "action_order": [
+      "left_leg",
+      "right_leg",
+      "left_wheel",
+      "right_wheel"
+    ],
+    "observation_version": "torque24-mean-sent-v1",
+    "actor_dim": 24,
+    "critic_dim": 51,
+    "timing_schema": "hybrid-timing-v1",
+    "control_hz": 100,
+    "physics_hz": 400,
+    "ctrl_dt": 0.01,
+    "sim_dt": 0.0025,
+    "n_substeps": 4,
+    "episode_seconds": 6.0,
+    "episode_length": 600,
+    "command_period_seconds": 3.0,
+    "command_period_steps": 300,
+    "command_start_seconds": 0.2,
+    "command_start_steps": 20,
+    "action_repeat": 1,
+    "action_delay_ms": 0.0,
+    "action_delay_steps": 0,
+    "reward_reference_dt": 0.01,
+    "discount_half_life_seconds": 0.5,
+    "discounting": 0.9862327044933592,
+    "gae_lambda": 0.9025,
+    "force_bias_n": [
+      0.0,
+      0.0
+    ],
+    "force_scales_n": [
+      17.743066357556224,
+      17.74303754355311
+    ],
+    "torque_limits_nm": [
+      2.0,
+      2.0,
+      0.0295,
+      0.0295
+    ],
+    "hip_range": [
+      -0.5,
+      0.05
+    ],
+    "validity": {
+      "equality_position_rad": 0.01,
+      "length_velocity_m_s": 0.05,
+      "minimum_jacobian_ratio": 0.05
+    },
+    "source_fingerprint": "4271ee39e8767bebb9c4ec42413958cc20622393ea382fcf976fdcbb49ada9b0",
+    "mode": "leg_force_bc",
+    "teacher_schema": "leg-force-reachable-teacher-bc-v3",
+    "force_source_fingerprint": "234757fe38df11388b3303f3a6686f9e4877727769b0ca762968a979f1a94487",
+    "teacher_checkpoint": "ckpts/newobs-norecovery/000403660800",
+    "teacher_sha256": "02130fb6dd2e73a3157ec478a66c0093eb629f4412e50fb72132608fe4357122",
+    "teacher_label_semantics": "projected reachable oracle on true motor student states; 100 Hz held axial force and wheel torque; 400 Hz Jacobian refresh",
+    "unreachable_label_policy": "explicit force projection with saturation/error reporting; retain reachable executed student trajectories",
+    "teacher_information": "author 26D policy and private wheel-target memory; student observes only deployable 24D state",
+    "teacher_collection_version": 2,
+    "training_profile": "standing_v2",
+    "evaluation_policy": "deterministic",
+    "normalization_policy": "fixed_bc",
+    "policy_head": "wheel_logit_residual_v1",
+    "wheel_residual_scale": 0.05,
+    "previous_torque_clip": 1e-05,
+    "export_float_precision": "float32-roundtrip-10sig",
+    "export_sha256": "ac7baea7556bdf35957f67072535c687349b4700861e20de6ee845c2c35f261b",
+    "base_source_fingerprint": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+    "experimental_only": true,
+    "torque_normalization_scales": [
+      1.0,
+      1.0,
+      0.0295,
+      0.0295
+    ]
+  },
+  "initial_states": [
+    {
+      "id": "nominal",
+      "label": "标称重置",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "pitch-plus",
+      "label": "固定俯仰扰动 +0.01 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999875000260416,
+          0.0,
+          0.004999979166692708,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "pitch-minus",
+      "label": "固定俯仰扰动 -0.01 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999875000260416,
+          0.0,
+          -0.004999979166692708,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "heldout-plus",
+      "label": "预留俯仰扰动 +0.02 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999500004166653,
+          0.0,
+          0.009999833334166664,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "heldout-minus",
+      "label": "预留俯仰扰动 -0.02 rad",
+      "state": {
+        "qpos": [
+          -0.0,
+          0.0,
+          0.09000000357627869,
+          0.9999500004166653,
+          0.0,
+          -0.009999833334166664,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "qvel": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "command": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra": {
+          "position_start": [
+            0.0
+          ],
+          "sinyaw_start": [
+            0.0
+          ],
+          "sin_balance_zero": [
+            0.0
+          ]
+        }
+      }
+    }
+  ],
+  "conditions": {
+    "command": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "noise": false,
+    "pushes": false,
+    "domain_randomization": false,
+    "physics_hz": 400,
+    "control_hz": 100,
+    "time_limit_override": "Evaluation only; task and source unchanged.",
+    "training_episode_seconds": 30
+  },
+  "protected_inputs": {
+    "files": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/env_config.json": "e0794635e38237a972ea91a758c91e663697f7025e00786cd06d92d936d94ca7",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/ppo_config.json": "c71eabbc814ba23e8dc85b8df4c084cfeceb586041b001425ab3fed934acc78c",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/policy_metadata.json": "9ab81e4a0938f99931fbf6ff3447812eaf6fc6b5c258a60d449d730bd202e145",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/policy.cpp.txt": "ac7baea7556bdf35957f67072535c687349b4700861e20de6ee845c2c35f261b",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/report.json": "3171bcc0f407dd24bc39c6aa44bab979f380955ddf79549eba93c1732c607af6",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/params.msgpack": "b22f3f27195c6d60c5c9ae2a96c60a03c7d271a865dd03ab04c9e79b5a0e620a",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/policy.cpp.txt": "a7d5c33290cebec4466546d9ae75180e3d11b310a0877f041bfb4e7b5f8b7497",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/policy_metadata.json": "0881a9a88869169ed9eb90ec52265e391f02021d60efb81a1db6c66011f56cea",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/verified.json": "5dc3e7e48b976abc7420885bff5763b30f14f2dcb723d949b196e8340fdbe1d7",
+      "$HOME/projects/tenny-torque200/src/force_teacher/env.py": "537023bbb3dc9246cc54dc8a96a33fcb88873fca5c6be95cbac51fab94b849cf",
+      "$HOME/projects/tenny-torque200/src/force_teacher/ppo.py": "55ddc1ea05c9c5ed08cd479f6a9481b146a601297dd5630b98a102da42151b57",
+      "$HOME/projects/tenny-torque200/src/force_teacher/networks.py": "804c8103571bb926de26417b6642b6447161360b07ef6aa59b6db50f26a0044a",
+      "$HOME/projects/tenny-torque200/src/legwheel/env.py": "2e2d883fd00c1898113eb2a5406c89e0d7b762e07dcad05c89aaf1e6fa867c4c",
+      "$HOME/projects/tenny-torque200/src/legwheel/rewards.py": "f415a3f39b388117b7d79426b4df7445d6373ce862197b0860ddbf82388a3417",
+      "$HOME/projects/tenny-torque200/src/hybrid/env.py": "c27e78890b9a528167313e33320001e9abef5dec611b3dfdfc3dcfaf76115332",
+      "$HOME/projects/tenny-reference/.venv-gpu/lib/python3.12/site-packages/brax/training/agents/ppo/train.py": "32ed2754f3f9b545c7f381aba9953d1160ca82cc0d01deb59d1f5847872eea32"
+    },
+    "checkpoint_trees": {
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000003768320": "f903ebdb6c9450aa8b17d1bcf96d77c82a20d61443d990faa734d9dc7425691a",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000006799360": "033fe5c448488a6d7cb737d6ebbe182a6e2083eea4b5c6cd6ae781e56330f6c8",
+      "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T172533.823984Z_0a516875/checkpoints/000007954432": "4d345e3a2d38ef7deaa25a0c892b3116e8c24e8956aa4f3cdfd74f6ed28d8c23",
+      "$HOME/projects/tenny-torque200/artifacts/force-teacher-pretrain/verified-bootstrap/d9772a5a5cf30d5c8850b13226fe075f0c494c1017138a745b6936a882227990/verification-ee717d86609f44afa0800e0e2b79270d/checkpoint": "e3ffb1bc44a44aa2f15aadff2086d2cbba506cbbca34ac1a2511578a80b5a639"
+    }
+  },
+  "order_by_seed": {
+    "0": [
+      "baseline"
+    ],
+    "1": [
+      "baseline"
+    ],
+    "2": [
+      "baseline"
+    ]
+  },
+  "comparison_scope": "Three paired training seeds; fixed final step budget; five deterministic physical initial conditions; no production deployment.",
+  "training_episode_seconds": 30,
+  "wrapper_verification": {
+    "600": [
+      {
+        "type": "BraxAutoResetWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "EpisodeWrapper",
+        "episode_length": 600
+      },
+      {
+        "type": "VmapWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "RewardExperimentEnv",
+        "episode_length": null
+      }
+    ],
+    "3000": [
+      {
+        "type": "BraxAutoResetWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "EpisodeWrapper",
+        "episode_length": 3000
+      },
+      {
+        "type": "VmapWrapper",
+        "episode_length": null
+      },
+      {
+        "type": "RewardExperimentEnv",
+        "episode_length": null
+      }
+    ]
+  },
+  "source_reference_audit": {
+    "legwheel/env.py": [
+      {
+        "line": 270,
+        "text": "# Episode 步数计数（用于区分：提前终止 vs 正常跑满 episode_length）"
+      },
+      {
+        "line": 379,
+        "text": "# 非正常终止惩罚：正常跑满 episode_length 不惩罚；提前终止(done=True 且 step < episode_length)才惩罚。"
+      },
+      {
+        "line": 382,
+        "text": "early_termination = done & (state.info[\"episode_step\"] < jp.array(self._config.episode_length, dtype=jp.int32))"
+      }
+    ],
+    "hybrid/env.py": [],
+    "hybrid/timing.py": [
+      {
+        "line": 60,
+        "text": "episode_length=self.steps(EPISODE_SECONDS),"
+      },
+      {
+        "line": 78,
+        "text": "cfg.episode_time, cfg.episode_length = EPISODE_SECONDS, values[\"episode_length\"]"
+      },
+      {
+        "line": 95,
+        "text": "(cfg.episode_time, EPISODE_SECONDS), (cfg.episode_length, values[\"episode_length\"]),"
+      }
+    ],
+    "force_teacher/env.py": [],
+    "force_teacher/ppo.py": [],
+    "brax/train.py": [
+      {
+        "line": 111,
+        "text": "episode_length=episode_length,"
+      },
+      {
+        "line": 775,
+        "text": "episode_length=episode_length,"
+      }
+    ]
+  },
+  "frozen_source_sha256": {
+    "__init__.py": "e8f231d51cfc582fdd738f2bcecd0f00ba881a3680da3da073d05a1ed23bf484",
+    "__main__.py": "b1b69ebf6f16d5e57122f48b3818fc5c876cc431bb3f332805092642d2d3e05e",
+    "matrix.py": "55367353c22d6fa5c609b0b8562e9a12790f3358aa4af9ffb16e0728510088ac",
+    "train.py": "58f06d9f551e2cd71ba5f89ae57d1175df3ad4a96480012426e0e6cbe7ccfecd",
+    "legwheel_env.py": "2a1640c434b10f2025d3252bf83a98ff08da6165c2d4a12606e5b01e7f1653fd",
+    "rewards.py": "8e35c3551204957dfeb09d09c617d3fc13a9956c02f0e7e6c9311c7fe67c2f12"
+  },
+  "training_time_limit_note": "Only outer Brax EpisodeWrapper changes to 3000; base 600-step field is retained and its terminal penalty branch is disabled.",
+  "leg_limit_nm": 2.0,
+  "torque_normalization_scales": [
+    1.0,
+    1.0,
+    0.0295,
+    0.0295
+  ],
+  "actuator_contract": {
+    "leg_limit_nm": 2.0,
+    "torque_limits_nm": [
+      2.0,
+      2.0,
+      0.0295,
+      0.0295
+    ],
+    "torque_normalization_scales": [
+      1.0,
+      1.0,
+      0.0295,
+      0.0295
+    ],
+    "force_scales_n": [
+      17.743066357556224,
+      17.74303754355311
+    ],
+    "formula": "Fs = 0.9 * execution_limit / frozen_Jmax",
+    "normalization": "Original physical torque units for reward, rate history, and previous-torque observation."
+  },
+  "source_identity": {
+    "base": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+    "experiment_files": {
+      "experiments/torque_limit_ablation/contract.py": "76af14805efaab2a9aad6d5f71450ff8d6414de082f68f0f7907631629c75052",
+      "experiments/torque_limit_ablation/native_patch.py": "4a70c62405b8fa4485f997cae84fbc394a736c975e6d97ddc0b4db901341aa20",
+      "experiments/torque_limit_ablation/__init__.py": "0a56e9d1bc8ddbcc11a6768bffe41a3f469337a8c07e2073fc7457dbc6c989f5",
+      "experiments/torque_limit_ablation/report.py": "a5e6fc0064709471d7661611a83a9c578f20ec5fe65434b2128ab77b5f1e2e6d",
+      "experiments/torque_limit_ablation/env.py": "6856cfddacbf85653f3844522bbe9fd05ee9d76b09e71737a3d72b69b0e50380"
+    },
+    "native_original_sha256": "03c864594f315847ca48b466c933fc6e3f803ef879a2a4d238454970eb1ee906",
+    "native_patched_sha256": "7e6105cb2c977616ecf5077a571e0f7046d9c6c7519a9a4242cea8123c3c353f",
+    "modified_xml_sha256": "f4c4de0904934def64ec2b18fec47f22a7353954ba0e72a1c71a58b3389367d5",
+    "trainer_original_sha256": "57a07025cdf0f6452860a894826d6642f4dd4e03ac1fe2e4c729b4ac8396f070",
+    "trainer_patched_sha256": "58f06d9f551e2cd71ba5f89ae57d1175df3ad4a96480012426e0e6cbe7ccfecd"
+  },
+  "experimental_source_fingerprint": "4271ee39e8767bebb9c4ec42413958cc20622393ea382fcf976fdcbb49ada9b0",
+  "reuse_limit1": [
+    {
+      "condition": "limit1",
+      "seed": 0,
+      "reused": true,
+      "source_run": "$HOME/projects/tenny-horizon-ablation-20261116/matrix30/seed-0/baseline",
+      "status": {
+        "phase": "completed",
+        "arm": "baseline",
+        "seed": 0,
+        "steps": 2097152,
+        "elapsed_seconds": 160.55607395400875,
+        "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+        "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+        "final_array_digest": "3d15a714df0dd9666c9650aa41f823c68e5f51f1c91d380b65a7d94562914e1a",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "2147bafaf4ee585118aff4b03e543f743a1022c171758adfe25d6f47ab06daa3",
+        "devices": [
+          "cuda:0"
+        ],
+        "checkpoint_reload_exact": true
+      },
+      "descriptor_sha256": "2147bafaf4ee585118aff4b03e543f743a1022c171758adfe25d6f47ab06daa3",
+      "checkpoint_sha256": "f1830b6ac806249d1d89ef8e0bc4ddeb99097e8959e15fce3a43935be02e9ac1"
+    },
+    {
+      "condition": "limit1",
+      "seed": 1,
+      "reused": true,
+      "source_run": "$HOME/projects/tenny-horizon-ablation-20261116/matrix30/seed-1/baseline",
+      "status": {
+        "phase": "completed",
+        "arm": "baseline",
+        "seed": 1,
+        "steps": 2097152,
+        "elapsed_seconds": 161.61860579099448,
+        "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+        "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+        "final_array_digest": "1bcbd9ebbf1b0c4b554372bf2b855e93cf9b9787dc69cb9b830344140bf0b211",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "8472dbc0f087adffd5d36be9ac2b4323eab1fd520b6e492b59fa1b79160469ea",
+        "devices": [
+          "cuda:0"
+        ],
+        "checkpoint_reload_exact": true
+      },
+      "descriptor_sha256": "8472dbc0f087adffd5d36be9ac2b4323eab1fd520b6e492b59fa1b79160469ea",
+      "checkpoint_sha256": "cee56947b15d4d0ff963128eebe876683a7b9885801421e1a6f3b79dcaed1733"
+    },
+    {
+      "condition": "limit1",
+      "seed": 2,
+      "reused": true,
+      "source_run": "$HOME/projects/tenny-horizon-ablation-20261116/matrix30/seed-2/baseline",
+      "status": {
+        "phase": "completed",
+        "arm": "baseline",
+        "seed": 2,
+        "steps": 2097152,
+        "elapsed_seconds": 178.83000955200987,
+        "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+        "ppo_initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+        "final_array_digest": "0d00063ad5d2f444becf292f651b116f3857bfd4afde9e8a857949a6fceb2ee7",
+        "actor_changed": true,
+        "normalizer_drift": 0.0,
+        "descriptor_sha256": "372b3c36fa03808ffcdb2d66ac166640feea203f6fb7205f2f99383687690dbd",
+        "devices": [
+          "cuda:0"
+        ],
+        "checkpoint_reload_exact": true
+      },
+      "descriptor_sha256": "372b3c36fa03808ffcdb2d66ac166640feea203f6fb7205f2f99383687690dbd",
+      "checkpoint_sha256": "df16ce209dc5fccd98e1244369823f92b1a5df06eaf9093ba053d3f166505ff8"
+    }
+  ]
+}

@@ -1,0 +1,513 @@
+{
+  "schema_version": 1,
+  "kind": "paired_reward_ablation_summary",
+  "matrix": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "runs": 12,
+    "steps_per_run": 2097152,
+    "statuses_verified": true
+  },
+  "primary_states": [
+    "nominal",
+    "pitch-plus",
+    "pitch-minus"
+  ],
+  "heldout_states": [
+    "heldout-plus",
+    "heldout-minus"
+  ],
+  "initial": {
+    "primary": {
+      "mean_in_band_seconds": 3.97,
+      "mean_longest_in_band_seconds": 3.9033333333333338,
+      "mean_survival_seconds": 5.886666666666667,
+      "mean_max_displacement_m": 0.16533404588264963,
+      "mean_pitch_error_rms_deg": 8.94295931929558,
+      "reached_horizon_count": 0,
+      "evaluation_conditions": 3
+    },
+    "heldout": {
+      "mean_in_band_seconds": 3.6999999999999997,
+      "mean_longest_in_band_seconds": 3.68,
+      "mean_survival_seconds": 7.3500000000000005,
+      "mean_max_displacement_m": 0.2183203453439857,
+      "mean_pitch_error_rms_deg": 15.319264490140844,
+      "reached_horizon_count": 0,
+      "evaluation_conditions": 2
+    }
+  },
+  "arms": {
+    "baseline": {
+      "label": "原奖励",
+      "seed_results": [
+        {
+          "seed": 0,
+          "primary": {
+            "mean_in_band_seconds": 3.130000000000001,
+            "mean_longest_in_band_seconds": 2.9933333333333336,
+            "mean_survival_seconds": 6.966666666666668,
+            "mean_max_displacement_m": 0.3093522903446209,
+            "mean_pitch_error_rms_deg": 18.5957471337772,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.1799999999999997,
+            "mean_longest_in_band_seconds": 3.035,
+            "mean_survival_seconds": 7.074999999999999,
+            "mean_max_displacement_m": 0.31811269513650725,
+            "mean_pitch_error_rms_deg": 17.054735588506293,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 1,
+          "primary": {
+            "mean_in_band_seconds": 3.06,
+            "mean_longest_in_band_seconds": 3.0400000000000005,
+            "mean_survival_seconds": 4.953333333333333,
+            "mean_max_displacement_m": 0.11517746469164154,
+            "mean_pitch_error_rms_deg": 7.923630664576521,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.1249999999999996,
+            "mean_longest_in_band_seconds": 3.105,
+            "mean_survival_seconds": 4.92,
+            "mean_max_displacement_m": 0.04517274364992001,
+            "mean_pitch_error_rms_deg": 8.002174320907411,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 2,
+          "primary": {
+            "mean_in_band_seconds": 2.7933333333333334,
+            "mean_longest_in_band_seconds": 2.546666666666667,
+            "mean_survival_seconds": 4.483333333333333,
+            "mean_max_displacement_m": 0.1405043818027051,
+            "mean_pitch_error_rms_deg": 9.00198585575045,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 2.79,
+            "mean_longest_in_band_seconds": 2.545,
+            "mean_survival_seconds": 4.52,
+            "mean_max_displacement_m": 0.1477636478670273,
+            "mean_pitch_error_rms_deg": 9.808985208596475,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        }
+      ],
+      "paired_results": [
+        {
+          "seed": 0,
+          "delta_in_band_seconds": 0.0,
+          "delta_survival_seconds": 0.0,
+          "delta_to_initial_in_band_seconds": -0.8399999999999994
+        },
+        {
+          "seed": 1,
+          "delta_in_band_seconds": 0.0,
+          "delta_survival_seconds": 0.0,
+          "delta_to_initial_in_band_seconds": -0.9100000000000001
+        },
+        {
+          "seed": 2,
+          "delta_in_band_seconds": 0.0,
+          "delta_survival_seconds": 0.0,
+          "delta_to_initial_in_band_seconds": -1.1766666666666667
+        }
+      ],
+      "primary_in_band_seconds": {
+        "median": 3.06,
+        "min": 2.7933333333333334,
+        "max": 3.130000000000001
+      },
+      "primary_longest_in_band_seconds": {
+        "median": 2.9933333333333336,
+        "min": 2.546666666666667,
+        "max": 3.0400000000000005
+      },
+      "primary_survival_seconds": {
+        "median": 4.953333333333333,
+        "min": 4.483333333333333,
+        "max": 6.966666666666668
+      },
+      "heldout_in_band_seconds": {
+        "median": 3.1249999999999996,
+        "min": 2.79,
+        "max": 3.1799999999999997
+      },
+      "paired_delta_in_band_seconds": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "paired_improved_seed_count": 0,
+      "interpretation": "同预算原奖励参照；同时与未继续训练的BC比较，以识别PPO退化。"
+    },
+    "posture": {
+      "label": "只加俯仰",
+      "seed_results": [
+        {
+          "seed": 0,
+          "primary": {
+            "mean_in_band_seconds": 2.936666666666667,
+            "mean_longest_in_band_seconds": 2.9166666666666665,
+            "mean_survival_seconds": 6.176666666666667,
+            "mean_max_displacement_m": 0.2564398111704881,
+            "mean_pitch_error_rms_deg": 13.844292612707804,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 2.95,
+            "mean_longest_in_band_seconds": 2.925,
+            "mean_survival_seconds": 6.57,
+            "mean_max_displacement_m": 0.22064423887417906,
+            "mean_pitch_error_rms_deg": 15.636695407731786,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 1,
+          "primary": {
+            "mean_in_band_seconds": 3.0533333333333332,
+            "mean_longest_in_band_seconds": 3.02,
+            "mean_survival_seconds": 8.143333333333333,
+            "mean_max_displacement_m": 0.39973471198242655,
+            "mean_pitch_error_rms_deg": 19.73459112954371,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 2.9699999999999998,
+            "mean_longest_in_band_seconds": 2.835,
+            "mean_survival_seconds": 8.275,
+            "mean_max_displacement_m": 0.28479521343596,
+            "mean_pitch_error_rms_deg": 20.52098864744992,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 2,
+          "primary": {
+            "mean_in_band_seconds": 3.0700000000000003,
+            "mean_longest_in_band_seconds": 2.9466666666666668,
+            "mean_survival_seconds": 10.236666666666666,
+            "mean_max_displacement_m": 0.26934614021786024,
+            "mean_pitch_error_rms_deg": 15.615067194922604,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 2.965,
+            "mean_longest_in_band_seconds": 2.875,
+            "mean_survival_seconds": 4.845,
+            "mean_max_displacement_m": 0.15672649081467055,
+            "mean_pitch_error_rms_deg": 8.757708911090008,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        }
+      ],
+      "paired_results": [
+        {
+          "seed": 0,
+          "delta_in_band_seconds": -0.1933333333333338,
+          "delta_survival_seconds": -0.7900000000000009,
+          "delta_to_initial_in_band_seconds": -1.0333333333333332
+        },
+        {
+          "seed": 1,
+          "delta_in_band_seconds": -0.006666666666666821,
+          "delta_survival_seconds": 3.1899999999999995,
+          "delta_to_initial_in_band_seconds": -0.916666666666667
+        },
+        {
+          "seed": 2,
+          "delta_in_band_seconds": 0.27666666666666684,
+          "delta_survival_seconds": 5.753333333333333,
+          "delta_to_initial_in_band_seconds": -0.8999999999999999
+        }
+      ],
+      "primary_in_band_seconds": {
+        "median": 3.0533333333333332,
+        "min": 2.936666666666667,
+        "max": 3.0700000000000003
+      },
+      "primary_longest_in_band_seconds": {
+        "median": 2.9466666666666668,
+        "min": 2.9166666666666665,
+        "max": 3.02
+      },
+      "primary_survival_seconds": {
+        "median": 8.143333333333333,
+        "min": 6.176666666666667,
+        "max": 10.236666666666666
+      },
+      "heldout_in_band_seconds": {
+        "median": 2.965,
+        "min": 2.95,
+        "max": 2.9699999999999998
+      },
+      "paired_delta_in_band_seconds": {
+        "median": -0.006666666666666821,
+        "min": -0.1933333333333338,
+        "max": 0.27666666666666684
+      },
+      "paired_improved_seed_count": 1,
+      "interpretation": "本轮有效站立时间的配对中位差为负，未优于同预算原奖励组。"
+    },
+    "position": {
+      "label": "只加真实位移",
+      "seed_results": [
+        {
+          "seed": 0,
+          "primary": {
+            "mean_in_band_seconds": 2.94,
+            "mean_longest_in_band_seconds": 2.8366666666666664,
+            "mean_survival_seconds": 5.033333333333334,
+            "mean_max_displacement_m": 0.1433699456196347,
+            "mean_pitch_error_rms_deg": 8.80137800147755,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 2.92,
+            "mean_longest_in_band_seconds": 2.7800000000000002,
+            "mean_survival_seconds": 7.82,
+            "mean_max_displacement_m": 0.23713688649211534,
+            "mean_pitch_error_rms_deg": 17.44567312524451,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 1,
+          "primary": {
+            "mean_in_band_seconds": 3.0533333333333332,
+            "mean_longest_in_band_seconds": 3.03,
+            "mean_survival_seconds": 12.466666666666667,
+            "mean_max_displacement_m": 0.3613044501118186,
+            "mean_pitch_error_rms_deg": 22.20840245297376,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.1500000000000004,
+            "mean_longest_in_band_seconds": 3.115,
+            "mean_survival_seconds": 7.365,
+            "mean_max_displacement_m": 0.22131946355559606,
+            "mean_pitch_error_rms_deg": 16.32400039415299,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 2,
+          "primary": {
+            "mean_in_band_seconds": 2.9666666666666663,
+            "mean_longest_in_band_seconds": 2.8966666666666665,
+            "mean_survival_seconds": 5.81,
+            "mean_max_displacement_m": 0.25745587647763596,
+            "mean_pitch_error_rms_deg": 12.832200732078208,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.245,
+            "mean_longest_in_band_seconds": 3.145,
+            "mean_survival_seconds": 5.82,
+            "mean_max_displacement_m": 0.3236228080991114,
+            "mean_pitch_error_rms_deg": 14.665353850154753,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        }
+      ],
+      "paired_results": [
+        {
+          "seed": 0,
+          "delta_in_band_seconds": -0.19000000000000083,
+          "delta_survival_seconds": -1.9333333333333336,
+          "delta_to_initial_in_band_seconds": -1.0300000000000002
+        },
+        {
+          "seed": 1,
+          "delta_in_band_seconds": -0.006666666666666821,
+          "delta_survival_seconds": 7.513333333333334,
+          "delta_to_initial_in_band_seconds": -0.916666666666667
+        },
+        {
+          "seed": 2,
+          "delta_in_band_seconds": 0.1733333333333329,
+          "delta_survival_seconds": 1.3266666666666662,
+          "delta_to_initial_in_band_seconds": -1.0033333333333339
+        }
+      ],
+      "primary_in_band_seconds": {
+        "median": 2.9666666666666663,
+        "min": 2.94,
+        "max": 3.0533333333333332
+      },
+      "primary_longest_in_band_seconds": {
+        "median": 2.8966666666666665,
+        "min": 2.8366666666666664,
+        "max": 3.03
+      },
+      "primary_survival_seconds": {
+        "median": 5.81,
+        "min": 5.033333333333334,
+        "max": 12.466666666666667
+      },
+      "heldout_in_band_seconds": {
+        "median": 3.1500000000000004,
+        "min": 2.92,
+        "max": 3.245
+      },
+      "paired_delta_in_band_seconds": {
+        "median": -0.006666666666666821,
+        "min": -0.19000000000000083,
+        "max": 0.1733333333333329
+      },
+      "paired_improved_seed_count": 1,
+      "interpretation": "本轮有效站立时间的配对中位差为负，未优于同预算原奖励组。"
+    },
+    "both": {
+      "label": "两项同时加入",
+      "seed_results": [
+        {
+          "seed": 0,
+          "primary": {
+            "mean_in_band_seconds": 3.09,
+            "mean_longest_in_band_seconds": 3.0733333333333337,
+            "mean_survival_seconds": 5.010000000000001,
+            "mean_max_displacement_m": 0.10868251987712152,
+            "mean_pitch_error_rms_deg": 8.050838936798053,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.1350000000000002,
+            "mean_longest_in_band_seconds": 3.12,
+            "mean_survival_seconds": 5.0600000000000005,
+            "mean_max_displacement_m": 0.13482182947779658,
+            "mean_pitch_error_rms_deg": 8.525994036632111,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 1,
+          "primary": {
+            "mean_in_band_seconds": 3.0066666666666664,
+            "mean_longest_in_band_seconds": 2.9933333333333336,
+            "mean_survival_seconds": 10.94,
+            "mean_max_displacement_m": 0.38136530626923015,
+            "mean_pitch_error_rms_deg": 26.207318470598818,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 2.995,
+            "mean_longest_in_band_seconds": 2.95,
+            "mean_survival_seconds": 8.68,
+            "mean_max_displacement_m": 0.3864689562243442,
+            "mean_pitch_error_rms_deg": 23.84797607956672,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        },
+        {
+          "seed": 2,
+          "primary": {
+            "mean_in_band_seconds": 3.0999999999999996,
+            "mean_longest_in_band_seconds": 3.07,
+            "mean_survival_seconds": 7.093333333333334,
+            "mean_max_displacement_m": 0.3394584932729405,
+            "mean_pitch_error_rms_deg": 19.07939197121839,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 3
+          },
+          "heldout": {
+            "mean_in_band_seconds": 3.25,
+            "mean_longest_in_band_seconds": 3.1450000000000005,
+            "mean_survival_seconds": 7.130000000000001,
+            "mean_max_displacement_m": 0.30664021852058876,
+            "mean_pitch_error_rms_deg": 14.782131172728736,
+            "reached_horizon_count": 0,
+            "evaluation_conditions": 2
+          }
+        }
+      ],
+      "paired_results": [
+        {
+          "seed": 0,
+          "delta_in_band_seconds": -0.040000000000000924,
+          "delta_survival_seconds": -1.956666666666667,
+          "delta_to_initial_in_band_seconds": -0.8800000000000003
+        },
+        {
+          "seed": 1,
+          "delta_in_band_seconds": -0.05333333333333368,
+          "delta_survival_seconds": 5.986666666666666,
+          "delta_to_initial_in_band_seconds": -0.9633333333333338
+        },
+        {
+          "seed": 2,
+          "delta_in_band_seconds": 0.3066666666666662,
+          "delta_survival_seconds": 2.6100000000000003,
+          "delta_to_initial_in_band_seconds": -0.8700000000000006
+        }
+      ],
+      "primary_in_band_seconds": {
+        "median": 3.09,
+        "min": 3.0066666666666664,
+        "max": 3.0999999999999996
+      },
+      "primary_longest_in_band_seconds": {
+        "median": 3.07,
+        "min": 2.9933333333333336,
+        "max": 3.0733333333333337
+      },
+      "primary_survival_seconds": {
+        "median": 7.093333333333334,
+        "min": 5.010000000000001,
+        "max": 10.94
+      },
+      "heldout_in_band_seconds": {
+        "median": 3.1350000000000002,
+        "min": 2.995,
+        "max": 3.25
+      },
+      "paired_delta_in_band_seconds": {
+        "median": -0.040000000000000924,
+        "min": -0.05333333333333368,
+        "max": 0.3066666666666662
+      },
+      "paired_improved_seed_count": 1,
+      "interpretation": "本轮有效站立时间的配对中位差为负，未优于同预算原奖励组。"
+    }
+  },
+  "primary_measure": "Mean observed in-band time after 1-second settling, averaged within each training seed over the three primary fixed conditions.",
+  "scope": "Three paired training seeds only; fixed evaluation conditions are not independent training repetitions. Descriptive medians/ranges, no significance claim.",
+  "limitations": [
+    "Earlier death cannot be ranked better because its displacement is smaller.",
+    "Training rewards and full-episode reward rates are not cross-arm ranking scores.",
+    "Reaching 30 seconds means censoring, not proven convergence.",
+    "Fixed held-out pitch conditions do not prove random or real-world robustness."
+  ]
+}

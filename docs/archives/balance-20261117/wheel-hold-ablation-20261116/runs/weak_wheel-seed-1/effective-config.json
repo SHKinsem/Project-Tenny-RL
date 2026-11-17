@@ -1,0 +1,284 @@
+{
+  "condition": "weak_wheel",
+  "seed": 1,
+  "ppo": {
+    "seed": 1,
+    "num_timesteps": 2097152,
+    "num_evals": 9,
+    "reward_scaling": 0.1,
+    "episode_length": 3000,
+    "normalize_observations": true,
+    "action_repeat": 1,
+    "unroll_length": 16,
+    "num_minibatches": 1,
+    "num_updates_per_batch": 1,
+    "discounting": 0.9862327044933592,
+    "learning_rate": 3e-05,
+    "entropy_cost": 0.001,
+    "num_envs": 512,
+    "batch_size": 512,
+    "max_grad_norm": 1.0,
+    "network_factory": {
+      "policy_hidden_layer_sizes": [
+        64,
+        64
+      ],
+      "value_hidden_layer_sizes": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "policy_obs_key": "state",
+      "value_obs_key": "privileged_state"
+    },
+    "save_checkpoint_path": null,
+    "gae_lambda": 0.9025,
+    "num_eval_envs": 8,
+    "normalize_observations_mode": "ema",
+    "normalize_observations_std_eps": 0.0,
+    "normalize_until_count": 0,
+    "deterministic_eval": true,
+    "run_evals": false,
+    "clipping_epsilon": 0.3,
+    "num_resets_per_eval": 0
+  },
+  "env": {
+    "_XML_PATH": "unserializable object: $HOME/projects/tenny-torque200/src/assets/legwheel_robot2_stl_nolinkage6_terrain.xml",
+    "episode_time": 6.0,
+    "ctrl_dt": 0.01,
+    "sim_dt": 0.0025,
+    "cmd_start_delay_s": 0.2,
+    "episode_length": 600,
+    "action_repeat": 1,
+    "action_delay_steps": 0,
+    "obs_history_len": 1,
+    "wheel_radius": 0.0195,
+    "torque_control": {
+      "scales": [
+        1.0,
+        1.0,
+        0.0295,
+        0.0295
+      ]
+    },
+    "cmd_lin_vel_x_zero_margin": 0.000195,
+    "cmd_ang_vel_zero_margin": 0.01,
+    "sinpitch_zero": true,
+    "wheel_sin_scale": 0.1,
+    "wheel_sinpos_start": true,
+    "wheel_pos_nosin": false,
+    "sinyaw": true,
+    "sinyaw_scale": 0.5,
+    "hold_error_clip": {
+      "enable": false,
+      "wheel_sinpos": 5.0,
+      "sinyaw": 1.0
+    },
+    "last_act_obs": false,
+    "action_range": {
+      "thigh": [
+        -0.5,
+        0.0
+      ]
+    },
+    "noise_config": {
+      "level": 0.0,
+      "scales": {
+        "joint_pos": 0.02,
+        "joint_vel": 1.0,
+        "linvel": 0.01,
+        "gyro": 0.02,
+        "pitch": 0.02,
+        "roll": 0.02
+      }
+    },
+    "reward_config": {
+      "reference_dt": 0.01,
+      "do_deconflict": false,
+      "height_scale": 2.0,
+      "vel_scale": 2.0,
+      "roll_scale": 4.0,
+      "base_scale": 1.0,
+      "pitch_scale": 0.0,
+      "posture_scale": 1.0,
+      "zero_keep_scale": 10.0,
+      "energy_scale": -1.0,
+      "action_rate_scale": -0.5,
+      "pitch_velocity_penalty_scale": -0.5,
+      "termination_penalty_enable": false,
+      "termination_penalty_value": -10.0,
+      "sigma": 0.5,
+      "sigma_wheel": 0.5,
+      "height_feasible_projection": true,
+      "roll_thigh_coupling": 0.433
+    },
+    "push_config": {
+      "enable": false,
+      "interval_range": [
+        1.0,
+        5.0
+      ],
+      "magnitude_range": [
+        0.0,
+        0.5
+      ],
+      "magnitude_pow": 1.0,
+      "burst_prob": 0.0,
+      "burst_interval_range": [
+        0.3,
+        0.8
+      ]
+    },
+    "cmd_config": {
+      "command_change_interval": 299,
+      "cmd_prob": 0.0,
+      "lin_vel_x": [
+        -0.2,
+        0.2
+      ],
+      "ang_vel_yaw": [
+        -1.5,
+        1.5
+      ],
+      "height_value": [
+        -0.5,
+        0.0
+      ],
+      "roll_value": [
+        -0.2,
+        0.2
+      ],
+      "enable": {
+        "lin_vel_x": true,
+        "ang_vel_yaw": true,
+        "height_value": true,
+        "roll_value": true
+      }
+    },
+    "obs_normalize": {
+      "state_mean": null,
+      "state_std": null,
+      "privileged_state_mean": null,
+      "privileged_state_std": null
+    },
+    "control_hz": 100,
+    "action_delay_ms": 0.0
+  },
+  "reward": {
+    "posture_weight": 0.0,
+    "position_weight": 10.0,
+    "pitch_scale_rad": 0.17453292519943295,
+    "position_scale_m": 0.05
+  },
+  "wheel_hold": {
+    "original_weight": 10.0,
+    "training_weight": 1.0,
+    "metric": "reward/tracking_wheels_sinposition"
+  },
+  "model_origin": {
+    "run_dir": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40",
+    "checkpoint": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T081557.290279Z_bd32fd40/checkpoints/000002801664",
+    "checkpoint_sha256": "b177fb73cd6566e96fcaefcb5c8ecd2324de53f8318fa82cf74684476803aa5d",
+    "restored_from": "$HOME/projects/tenny-torque200/artifacts/console/leg_force_bc/20261115T053612.022810Z_47e4b501/checkpoints/000001171456",
+    "learning_rate": 3e-05,
+    "episode_length": 600,
+    "original_action_mode": "virtual_leg_force"
+  },
+  "original_policy_metadata": {
+    "schema": "wheel-center-axial-v1",
+    "action_mode": "virtual_leg_force",
+    "action_order": [
+      "left_leg",
+      "right_leg",
+      "left_wheel",
+      "right_wheel"
+    ],
+    "observation_version": "torque24-mean-sent-v1",
+    "actor_dim": 24,
+    "critic_dim": 51,
+    "timing_schema": "hybrid-timing-v1",
+    "control_hz": 100,
+    "physics_hz": 400,
+    "ctrl_dt": 0.01,
+    "sim_dt": 0.0025,
+    "n_substeps": 4,
+    "episode_seconds": 6.0,
+    "episode_length": 600,
+    "command_period_seconds": 3.0,
+    "command_period_steps": 300,
+    "command_start_seconds": 0.2,
+    "command_start_steps": 20,
+    "action_repeat": 1,
+    "action_delay_ms": 0.0,
+    "action_delay_steps": 0,
+    "reward_reference_dt": 0.01,
+    "discount_half_life_seconds": 0.5,
+    "discounting": 0.9862327044933592,
+    "gae_lambda": 0.9025,
+    "force_bias_n": [
+      0.0,
+      0.0
+    ],
+    "force_scales_n": [
+      8.871533178778112,
+      8.871518771776556
+    ],
+    "torque_limits_nm": [
+      1.0,
+      1.0,
+      0.0295,
+      0.0295
+    ],
+    "hip_range": [
+      -0.5,
+      0.05
+    ],
+    "validity": {
+      "equality_position_rad": 0.01,
+      "length_velocity_m_s": 0.05,
+      "minimum_jacobian_ratio": 0.05
+    },
+    "source_fingerprint": "4ca2bc7387038679a16eaedde390b4f4db7b6e678007d83fba268ccc9137960a",
+    "mode": "leg_force_bc",
+    "teacher_schema": "leg-force-reachable-teacher-bc-v3",
+    "force_source_fingerprint": "234757fe38df11388b3303f3a6686f9e4877727769b0ca762968a979f1a94487",
+    "teacher_checkpoint": "ckpts/newobs-norecovery/000403660800",
+    "teacher_sha256": "02130fb6dd2e73a3157ec478a66c0093eb629f4412e50fb72132608fe4357122",
+    "teacher_label_semantics": "projected reachable oracle on true motor student states; 100 Hz held axial force and wheel torque; 400 Hz Jacobian refresh",
+    "unreachable_label_policy": "explicit force projection with saturation/error reporting; retain reachable executed student trajectories",
+    "teacher_information": "author 26D policy and private wheel-target memory; student observes only deployable 24D state",
+    "teacher_collection_version": 2,
+    "training_profile": "standing_v2",
+    "evaluation_policy": "deterministic",
+    "normalization_policy": "fixed_bc",
+    "policy_head": "wheel_logit_residual_v1",
+    "wheel_residual_scale": 0.05,
+    "previous_torque_clip": 1e-05,
+    "export_float_precision": "float32-roundtrip-10sig",
+    "export_sha256": "5495abd4c8c39cf42fb5c9e4d2a0a1936c030367231ed5fe0b6bc8e2f9dcd681"
+  },
+  "original_descriptor_sha256": "e640b8381bd458dcd4de4005b843425b392d6f7eebacefc171a7a9c50812a7da",
+  "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "initial_states_sha256": "8fa2b08dfd9b14c7dc9e3bc2d1b5da1ea5339e3f9b6bf806f3f7c02956d6e2ad",
+  "brax_learning_rate": 3e-05,
+  "observed_learning_rates": [
+    2.9999999242136255e-05
+  ],
+  "optimizer_learning_rate_verified": true,
+  "brax_driver": "Direct Brax train.train; original force factory and fixed-normalizer restoration; no learning-rate override.",
+  "callback_steps": [
+    0,
+    262144,
+    524288,
+    786432,
+    1048576,
+    1310720,
+    1572864,
+    1835008,
+    2097152
+  ],
+  "callback_evaluation_seconds": 30.0,
+  "evaluation_reward": "Native trace.reward retains the common original base with wheel/yaw weights ten; true XY and the wheel-only weight adjustment are added offline using raw first-episode native metrics.",
+  "snapshot_checkpoint_contents": "Complete normalizer, actor and critic parameters at all callbacks; Adam state is not saved."
+}

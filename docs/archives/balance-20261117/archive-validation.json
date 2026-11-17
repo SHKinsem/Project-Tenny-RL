@@ -1,0 +1,9 @@
+{
+  "phase": "verified",
+  "archive_files": 427,
+  "archive_payload_bytes": 15177222,
+  "preserved_numeric_boolean_null_scalars": 88666,
+  "archive_and_source_sha_verified": true,
+  "public_content_scan": "passed",
+  "elapsed_seconds": 1.6789667999837548
+}

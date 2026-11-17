@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "backend": "JAX CPU jitted array reward vs standard-library scalar reference",
+  "max_abs_errors": {
+    "baseline": 0.0,
+    "posture": 1.1251034459647258e-07,
+    "position": 4.0076589691295794e-07,
+    "both": 4.0076589691295794e-07
+  }
+}

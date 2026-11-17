@@ -1,0 +1,176 @@
+{
+  "arm": "both",
+  "seed": 1,
+  "ppo": {
+    "seed": 1,
+    "num_timesteps": 2097152,
+    "num_evals": 5,
+    "reward_scaling": 0.1,
+    "episode_length": 600,
+    "normalize_observations": true,
+    "action_repeat": 1,
+    "unroll_length": 16,
+    "num_minibatches": 1,
+    "num_updates_per_batch": 1,
+    "discounting": 0.9862327044933592,
+    "learning_rate": 3e-05,
+    "entropy_cost": 0.001,
+    "num_envs": 512,
+    "batch_size": 512,
+    "max_grad_norm": 1.0,
+    "network_factory": {
+      "policy_hidden_layer_sizes": [
+        64,
+        64
+      ],
+      "value_hidden_layer_sizes": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "policy_obs_key": "state",
+      "value_obs_key": "privileged_state"
+    },
+    "save_checkpoint_path": null,
+    "gae_lambda": 0.9025,
+    "num_eval_envs": 8,
+    "normalize_observations_mode": "ema",
+    "normalize_observations_std_eps": 0.0,
+    "normalize_until_count": 0,
+    "deterministic_eval": true,
+    "run_evals": false,
+    "clipping_epsilon": 0.3,
+    "num_resets_per_eval": 0
+  },
+  "env": {
+    "_XML_PATH": "unserializable object: $HOME/projects/tenny-torque200/src/assets/legwheel_robot2_stl_nolinkage6_terrain.xml",
+    "episode_time": 6.0,
+    "ctrl_dt": 0.01,
+    "sim_dt": 0.0025,
+    "cmd_start_delay_s": 0.2,
+    "episode_length": 600,
+    "action_repeat": 1,
+    "action_delay_steps": 0,
+    "obs_history_len": 1,
+    "wheel_radius": 0.0195,
+    "torque_control": {
+      "scales": [
+        1.0,
+        1.0,
+        0.0295,
+        0.0295
+      ]
+    },
+    "cmd_lin_vel_x_zero_margin": 0.000195,
+    "cmd_ang_vel_zero_margin": 0.01,
+    "sinpitch_zero": true,
+    "wheel_sin_scale": 0.1,
+    "wheel_sinpos_start": true,
+    "wheel_pos_nosin": false,
+    "sinyaw": true,
+    "sinyaw_scale": 0.5,
+    "hold_error_clip": {
+      "enable": false,
+      "wheel_sinpos": 5.0,
+      "sinyaw": 1.0
+    },
+    "last_act_obs": false,
+    "action_range": {
+      "thigh": [
+        -0.5,
+        0.0
+      ]
+    },
+    "noise_config": {
+      "level": 0.0,
+      "scales": {
+        "joint_pos": 0.02,
+        "joint_vel": 1.0,
+        "linvel": 0.01,
+        "gyro": 0.02,
+        "pitch": 0.02,
+        "roll": 0.02
+      }
+    },
+    "reward_config": {
+      "reference_dt": 0.01,
+      "do_deconflict": false,
+      "height_scale": 2.0,
+      "vel_scale": 2.0,
+      "roll_scale": 4.0,
+      "base_scale": 1.0,
+      "pitch_scale": 0.0,
+      "posture_scale": 1.0,
+      "zero_keep_scale": 10.0,
+      "energy_scale": -1.0,
+      "action_rate_scale": -0.5,
+      "pitch_velocity_penalty_scale": -0.5,
+      "termination_penalty_enable": false,
+      "termination_penalty_value": -10.0,
+      "sigma": 0.5,
+      "sigma_wheel": 0.5,
+      "height_feasible_projection": true,
+      "roll_thigh_coupling": 0.433
+    },
+    "push_config": {
+      "enable": false,
+      "interval_range": [
+        1.0,
+        5.0
+      ],
+      "magnitude_range": [
+        0.0,
+        0.5
+      ],
+      "magnitude_pow": 1.0,
+      "burst_prob": 0.0,
+      "burst_interval_range": [
+        0.3,
+        0.8
+      ]
+    },
+    "cmd_config": {
+      "command_change_interval": 299,
+      "cmd_prob": 0.0,
+      "lin_vel_x": [
+        -0.2,
+        0.2
+      ],
+      "ang_vel_yaw": [
+        -1.5,
+        1.5
+      ],
+      "height_value": [
+        -0.5,
+        0.0
+      ],
+      "roll_value": [
+        -0.2,
+        0.2
+      ],
+      "enable": {
+        "lin_vel_x": true,
+        "ang_vel_yaw": true,
+        "height_value": true,
+        "roll_value": true
+      }
+    },
+    "obs_normalize": {
+      "state_mean": null,
+      "state_std": null,
+      "privileged_state_mean": null,
+      "privileged_state_std": null
+    },
+    "control_hz": 100,
+    "action_delay_ms": 0.0
+  },
+  "initial_array_digest": "a983df4f3e27d12b10e022303e1c7fad0c6c6f97de13d5adde0257321096d393",
+  "reward": {
+    "posture_weight": 4.0,
+    "position_weight": 10.0,
+    "pitch_scale_rad": 0.17453292519943295,
+    "position_scale_m": 0.05
+  },
+  "run_evaluation_reward": "Common unchanged base task; not training objective"
+}

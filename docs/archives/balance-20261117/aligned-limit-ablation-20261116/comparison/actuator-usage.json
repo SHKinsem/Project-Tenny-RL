@@ -1,0 +1,1365 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 1,
+      "control_steps": 620,
+      "physics_steps": 2480,
+      "qualified_seconds": 4.45,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8395395308809844,
+        0.8851943962458292
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 582,
+      "physics_steps": 2328,
+      "qualified_seconds": 3.91,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8752979617729971,
+        0.8850870445538552
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 564,
+      "physics_steps": 2256,
+      "qualified_seconds": 3.55,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.7495880314634771,
+        0.8852345668470579
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 566,
+      "physics_steps": 2264,
+      "qualified_seconds": 3.8899999999999997,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8539555378219135,
+        0.8850329482501254
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit1",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 903,
+      "physics_steps": 3612,
+      "qualified_seconds": 3.51,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8850911423849344,
+        0.8864085933271387
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 2,
+      "control_steps": 620,
+      "physics_steps": 2480,
+      "qualified_seconds": 4.45,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8395395308809844,
+        0.8851943962458292
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 582,
+      "physics_steps": 2328,
+      "qualified_seconds": 3.91,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8752979617729971,
+        0.8850870445538552
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 564,
+      "physics_steps": 2256,
+      "qualified_seconds": 3.55,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.7495880314634771,
+        0.8852345668470579
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 566,
+      "physics_steps": 2264,
+      "qualified_seconds": 3.8899999999999997,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8539555378219135,
+        0.8850329482501254
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "initial-limit2",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 903,
+      "physics_steps": 3612,
+      "qualified_seconds": 3.51,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8850911423849344,
+        0.8864085933271387
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 1,
+      "control_steps": 503,
+      "physics_steps": 2012,
+      "qualified_seconds": 2.8200000000000003,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.6737639528326376,
+        0.8850976090151602
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.02584493041749503
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.02584493041749503
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 550,
+      "physics_steps": 2200,
+      "qualified_seconds": 3.24,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.6333730692395981,
+        0.8850605834485235
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.04
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.04
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 585,
+      "physics_steps": 2340,
+      "qualified_seconds": 2.86,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8851511437938144,
+        0.887080441290416
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0547008547008547,
+        0.08376068376068375
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0547008547008547,
+        0.08376068376068375
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.017482517482517265
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 581,
+      "physics_steps": 2324,
+      "qualified_seconds": 3.38,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8858236894869952,
+        0.8850741661231719
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0034423407917383822,
+        0.12392426850258176
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0034423407917383822,
+        0.12392426850258176
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-0",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 1110,
+      "physics_steps": 4440,
+      "qualified_seconds": 2.84,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8851377097027072,
+        0.8870981032454197
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.03873873873873874,
+        0.04594594594594595
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.03873873873873874,
+        0.04594594594594595
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.021126760563380614
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 2,
+      "control_steps": 518,
+      "physics_steps": 2072,
+      "qualified_seconds": 3.13,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.9200115835856021,
+        0.8770741589547011
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.011583011583011582,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 516,
+      "physics_steps": 2064,
+      "qualified_seconds": 3.1400000000000006,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.9043511485989892,
+        0.8791900524691828
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.009689922480620155,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 543,
+      "physics_steps": 2172,
+      "qualified_seconds": 3.1399999999999997,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.9352285483506715,
+        0.880981314934217
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.009208103130755065,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 844,
+      "physics_steps": 3376,
+      "qualified_seconds": 3.1399999999999997,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.9730015988558123,
+        0.9055200942020353
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.027251184834123223,
+        0.02843601895734597
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-0",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 524,
+      "physics_steps": 2096,
+      "qualified_seconds": 3.1399999999999997,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.9200072403746089,
+        0.8762783827895559
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.007633587786259542,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 2,
+      "control_steps": 761,
+      "physics_steps": 3044,
+      "qualified_seconds": 3.2800000000000002,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.0642805626242,
+        1.0032256513538211
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.09855453350854139,
+        0.03942181340341656
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.02102496714848883,
+        0.001314060446780552
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.03048780487804894
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 804,
+      "physics_steps": 3216,
+      "qualified_seconds": 3.3,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.0466852888771347,
+        0.938187272985168
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0472636815920398,
+        0.024875621890547265
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.008706467661691543,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.02727272727272723
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 785,
+      "physics_steps": 3140,
+      "qualified_seconds": 3.2199999999999998,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.0443554005646447,
+        0.9457184877861631
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0840764331210191,
+        0.025477707006369428
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.012738853503184714,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.02795031055900617
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 533,
+      "physics_steps": 2132,
+      "qualified_seconds": 3.3099999999999996,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.934943892523328,
+        0.923932219631865
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.01125703564727955,
+        0.03377110694183865
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.039274924471299065
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-1",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 511,
+      "physics_steps": 2044,
+      "qualified_seconds": 3.2800000000000002,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.9124464200427774,
+        0.9555433283018437
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.003913894324853229,
+        0.0410958904109589
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.04268292682926846
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 1,
+      "control_steps": 549,
+      "physics_steps": 2196,
+      "qualified_seconds": 3.4399999999999995,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.833112481323696,
+        0.8851765999368737
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.10200364298724955
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.10200364298724955
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.03197674418604661
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 560,
+      "physics_steps": 2240,
+      "qualified_seconds": 3.4400000000000004,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8855037431066076,
+        0.8851819682369512
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.014285714285714285,
+        0.075
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.014285714285714285,
+        0.075
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0319767441860466
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 565,
+      "physics_steps": 2260,
+      "qualified_seconds": 3.4799999999999995,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8855703750856031,
+        0.8851734839022142
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.019469026548672566,
+        0.12212389380530973
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.019469026548672566,
+        0.12212389380530973
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.03448275862068943
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 590,
+      "physics_steps": 2360,
+      "qualified_seconds": 3.5599999999999996,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8853469228500254,
+        0.8849768666023305
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.00847457627118644,
+        0.08644067796610169
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.00847457627118644,
+        0.08644067796610169
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-1",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 556,
+      "physics_steps": 2224,
+      "qualified_seconds": 3.46,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8734651418850108,
+        0.885176477039509
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.12050359712230216
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.12050359712230216
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.03757225433526008
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 1,
+      "control_steps": 791,
+      "physics_steps": 3164,
+      "qualified_seconds": 3.55,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8850615009283028,
+        0.8861740395783063
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.07332490518331226,
+        0.17572692793931732
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.07332490518331226,
+        0.17572692793931732
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 867,
+      "physics_steps": 3468,
+      "qualified_seconds": 3.62,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.885136070798453,
+        0.8863593225680775
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.058823529411764705,
+        0.1845444059976932
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.058823529411764705,
+        0.1845444059976932
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 765,
+      "physics_steps": 3060,
+      "qualified_seconds": 3.6800000000000006,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8856003874770597,
+        0.886050331631191
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.05620915032679739,
+        0.18823529411764706
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.05620915032679739,
+        0.18823529411764706
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 1,
+      "control_steps": 527,
+      "physics_steps": 2108,
+      "qualified_seconds": 3.7300000000000004,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.7996555420395406,
+        0.8852820937216302
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.026565464895635674
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.026565464895635674
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit1-seed-2",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 1,
+      "control_steps": 838,
+      "physics_steps": 3352,
+      "qualified_seconds": 3.4299999999999997,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.8851317840458127,
+        0.886549071688124
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.059665871121718374,
+        0.18615751789976134
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.059665871121718374,
+        0.18615751789976134
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "nominal",
+      "leg_limit_nm": 2,
+      "control_steps": 689,
+      "physics_steps": 2756,
+      "qualified_seconds": 2.4400000000000004,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.0428538384802417,
+        1.3036859650188901
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.03918722786647315,
+        0.2365747460087083
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.00725689404934688,
+        0.18577648766328012
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "pitch-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 521,
+      "physics_steps": 2084,
+      "qualified_seconds": 2.62,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.7966843024644001,
+        0.9454060847116815
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.08061420345489444
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.007633587786259549
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "pitch-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 472,
+      "physics_steps": 1888,
+      "qualified_seconds": 2.57,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.6723293368291199,
+        0.9493512071623584
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.04025423728813559
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "heldout-plus",
+      "leg_limit_nm": 2,
+      "control_steps": 484,
+      "physics_steps": 1936,
+      "qualified_seconds": 3.0700000000000003,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        0.6148029369037894,
+        0.8844181419401442
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.0,
+        0.0
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    },
+    {
+      "policy_id": "limit2-seed-2",
+      "initial_state_id": "heldout-minus",
+      "leg_limit_nm": 2,
+      "control_steps": 715,
+      "physics_steps": 2860,
+      "qualified_seconds": 2.6100000000000003,
+      "native_raw_clipping_metric_sum": 0.0,
+      "max_abs_leg_command_nm": [
+        1.102678522940587,
+        1.2233114502871016
+      ],
+      "request_over_low_Fs1_fraction": [
+        0.06573426573426573,
+        0.2041958041958042
+      ],
+      "request_over_own_force_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "sampled_command_over_1nm_fraction": [
+        0.023776223776223775,
+        0.14405594405594405
+      ],
+      "qualified_request_over_low_capacity_fraction": [
+        0.0,
+        0.0
+      ],
+      "qualified_sampled_command_over_1nm_fraction": [
+        0.0,
+        0.0
+      ],
+      "scope": "Actions are common Fs2 pre-cap requests held for 10ms. Command magnitudes are last physics-substep samples, not full-400Hz amplitudes. Native clipping is a max-over-substeps sum, not a duty ratio."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "phase": "completed",
+  "condition": "high_lr",
+  "seed": 0,
+  "steps": 2097152,
+  "elapsed_seconds": 127.34643582699937,
+  "initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "ppo_initial_array_digest": "7d7a680147538e923c2df91e47886a04202856af9e3c08aa5d9f72dac3f1a28a",
+  "final_array_digest": "1b0da5ea32fcd1d650777adf1249cd1776f4741cb2793262c94bce875f736c9c",
+  "actor_changed": true,
+  "normalizer_drift": 0.0,
+  "descriptor_sha256": "6a57d6bf61953f1a6057ce7c9a9992fe02cbb241aaee07d8b2f95d912e5a4020",
+  "checkpoint_reload_exact": true,
+  "requested_learning_rate": 3e-05,
+  "observed_learning_rates": [
+    2.9999999242136255e-05
+  ],
+  "optimizer_learning_rate_verified": true,
+  "callback_steps": [
+    0,
+    262144,
+    524288,
+    786432,
+    1048576,
+    1310720,
+    1572864,
+    1835008,
+    2097152
+  ],
+  "devices": [
+    "cuda:0"
+  ]
+}

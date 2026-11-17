@@ -1,0 +1,19 @@
+{
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/torque_limit_ablation/contract.py": "76af14805efaab2a9aad6d5f71450ff8d6414de082f68f0f7907631629c75052",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/torque_limit_ablation/native_patch.py": "4a70c62405b8fa4485f997cae84fbc394a736c975e6d97ddc0b4db901341aa20",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/torque_limit_ablation/__init__.py": "0a56e9d1bc8ddbcc11a6768bffe41a3f469337a8c07e2073fc7457dbc6c989f5",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/torque_limit_ablation/report.py": "a5e6fc0064709471d7661611a83a9c578f20ec5fe65434b2128ab77b5f1e2e6d",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/torque_limit_ablation/env.py": "6856cfddacbf85653f3844522bbe9fd05ee9d76b09e71737a3d72b69b0e50380",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/rewards.py": "8e35c3551204957dfeb09d09c617d3fc13a9956c02f0e7e6c9311c7fe67c2f12",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/__main__.py": "b1b69ebf6f16d5e57122f48b3818fc5c876cc431bb3f332805092642d2d3e05e",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/evaluation.py": "a3f920828dc24541f5abd6b88ef36913feac9040ab697cef3076fff4c67e4231",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/__init__.py": "e8f231d51cfc582fdd738f2bcecd0f00ba881a3680da3da073d05a1ed23bf484",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/report.py": "fd3691c297d18e364cc3cfe77365142733dea051af868a59b7d22be51139ab0a",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/train.py": "58f06d9f551e2cd71ba5f89ae57d1175df3ad4a96480012426e0e6cbe7ccfecd",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/matrix.py": "55367353c22d6fa5c609b0b8562e9a12790f3358aa4af9ffb16e0728510088ac",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/experiments/reward_ablation/legwheel_env.py": "2a1640c434b10f2025d3252bf83a98ff08da6165c2d4a12606e5b01e7f1653fd",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/cpp/legwheel_task.cpp": "7e6105cb2c977616ecf5077a571e0f7046d9c6c7519a9a4242cea8123c3c353f",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/native/src/CMakeLists.txt": "967cb1619a5ae2a63ee23ecf141b2a2908c5152b6ad02fe881ca87ebf3534223",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/native/python/native_eval/_native.cpython-312-x86_64-linux-gnu.so": "c616d9c790a915736e573073790722b608cebc58c169e4c663a1760994cab08d",
+  "$HOME/projects/tenny-torque-limit-ablation-20261116/assets/torque-limit-2.xml": "f4c4de0904934def64ec2b18fec47f22a7353954ba0e72a1c71a58b3389367d5"
+}

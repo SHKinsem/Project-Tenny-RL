@@ -1,0 +1,10 @@
+{
+  "phase": "verified",
+  "checkpoint_sha256": "50fad8920bdc31a4127c23e3d282defea6efbe62d947200361c2a5c129c6fd26",
+  "all_parameter_leaves_finite": true,
+  "complete_parameter_digest": "1604d539c59233270c8c21fde4049365a12f9ec602385deb5154cef0a7ab73f6",
+  "checkpoint_to_saved_policy_action_max_abs_error": 0.0,
+  "independent_120s_last10_max_abs_error": 4.336808689942018e-19,
+  "all_five_completed_120s": true,
+  "resume_scope": "Full normalizer/actor/critic retained, fixed observation scales and original wheel-force action head. Adam state restarts on continuation."
+}

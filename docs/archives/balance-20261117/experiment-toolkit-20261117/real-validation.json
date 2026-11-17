@@ -1,0 +1,64 @@
+{
+  "phase": "verified",
+  "scalar_comparisons": 1736,
+  "max_abs_error": 0.0,
+  "input_verification": {
+    "schema_version": 1,
+    "kind": "input_sha256_verification",
+    "phase": "verified",
+    "verified": true,
+    "hash_algorithm": "sha256",
+    "tree_hash_format": "relative-path-kind-size-sha256-canonical-json-v1",
+    "roots_verified": 8,
+    "files_verified": 8,
+    "trees_verified": 0
+  },
+  "reports": [
+    {
+      "source": "mature-balance-finetune-20261116",
+      "counts": {
+        "conditions": 2,
+        "seeds": 3,
+        "cases": 5,
+        "records": 30,
+        "reference_records": 5
+      },
+      "selected": "high_lr-seed-1@1048576",
+      "capability": "descriptor_only",
+      "primary_last10_paired": {
+        "median": 0.01088414680662129,
+        "min": 0.009269600132763052,
+        "max": 0.012597431042105124,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 0,
+        "degraded_seed_count": 3,
+        "tied_seed_count": 0
+      }
+    },
+    {
+      "source": "wheel-hold-ablation-20261116",
+      "counts": {
+        "conditions": 2,
+        "seeds": 3,
+        "cases": 5,
+        "records": 30,
+        "reference_records": 5
+      },
+      "selected": "weak_wheel-seed-0@786432",
+      "capability": "full_parameters_verified_at_run",
+      "primary_last10_paired": {
+        "median": -0.0070015008059086305,
+        "min": -0.008383786367293436,
+        "max": -0.002317156513412799,
+        "count": 3,
+        "missing_count": 0,
+        "improved_seed_count": 3,
+        "degraded_seed_count": 0,
+        "tied_seed_count": 0
+      }
+    }
+  ],
+  "elapsed_seconds": 0.08398969995323569,
+  "scope": "Read-only comparison of small historical summaries and recorded evidence; no simulator or training."
+}

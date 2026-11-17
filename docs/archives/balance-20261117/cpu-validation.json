@@ -1,0 +1,55 @@
+{
+  "phase": "verified",
+  "groups": [
+    {
+      "pattern": "test_balance_diagnostics_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 0.5212629000307061,
+      "output": ".........................\n----------------------------------------------------------------------\nRan 25 tests in 0.021s\n\nOK\n"
+    },
+    {
+      "pattern": "test_reward_ablation_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 0.44337069999892265,
+      "output": "............................\n----------------------------------------------------------------------\nRan 28 tests in 0.018s\n\nOK\n"
+    },
+    {
+      "pattern": "test_horizon_ablation_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 0.3474372999626212,
+      "output": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.020s\n\nOK\n"
+    },
+    {
+      "pattern": "test_torque_limit_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 0.4441653999965638,
+      "output": "...............\n----------------------------------------------------------------------\nRan 15 tests in 0.022s\n\nOK\n"
+    },
+    {
+      "pattern": "test_aligned_limit_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 0.42290890001459047,
+      "output": ".................\n----------------------------------------------------------------------\nRan 17 tests in 0.029s\n\nOK\n"
+    },
+    {
+      "pattern": "test_mature_finetune_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 0.43272690003504977,
+      "output": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.102s\n\nOK\n"
+    },
+    {
+      "pattern": "test_wheel_hold_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 0.7715853999834508,
+      "output": "................\n----------------------------------------------------------------------\nRan 16 tests in 0.419s\n\nOK\n"
+    },
+    {
+      "pattern": "test_experiment_tools_*.py",
+      "returncode": 0,
+      "elapsed_seconds": 1.5999092999845743,
+      "output": "..................................\n----------------------------------------------------------------------\nRan 34 tests in 1.368s\n\nOK\n"
+    }
+  ],
+  "elapsed_seconds": 4.983731600048486,
+  "scope": "Related offline CPU modules only; no simulator, WSL, network, or training."
+}

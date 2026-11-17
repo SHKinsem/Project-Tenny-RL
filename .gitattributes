@@ -11,3 +11,6 @@ experiments/torque200/control_modes.py -text whitespace=cr-at-eol
 experiments/torque200/preview_sync.py -text whitespace=cr-at-eol
 experiments/torque200/verify_artifacts.py -text whitespace=cr-at-eol
 experiments/torque200/runtime_defaults.py text eol=lf
+
+# Public evidence manifests hash exact archived bytes. Archived .sh are already LF.
+docs/archives/balance-20261117/** -text
